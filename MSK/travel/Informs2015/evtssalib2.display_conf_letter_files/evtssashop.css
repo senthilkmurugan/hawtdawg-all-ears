@@ -1,0 +1,25 @@
+@charset "UTF-8";
+/* CSS Document */
+
+/*--------------------  Tabular Table CSS  --------------------*/
+
+#evt_locator_results_table td,
+#evt_locator_results_table th{padding: 15px 10px;}
+
+#aaContentBlockEvtSsaShopLocator .aaFormField label {
+    display: inline-block;
+    float: left;
+    margin-right: 8px;
+	margin-top: 5px;
+    text-align: right;
+    width: 40%;
+}
+
+.aaSectionBlock {
+    float: left;
+    margin-top: 10px;
+    overflow: visible;
+    width: 100%;
+}
+.aaFormField{margin-top: 10px;}
+ul.aaSubmission{margin-left:0px;}

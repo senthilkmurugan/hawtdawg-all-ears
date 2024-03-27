@@ -1,0 +1,802 @@
+@CHARSET "ISO-8859-1";
+
+/* styles for eLion Header */
+#eLionHeader {
+	background-color: #004989;
+	margin: 0;
+	padding: 0;
+	/*color: #fff;*/
+	border-bottom: 1px solid #004989;
+}
+
+#upperNavDiv {
+	color: #fff;
+}
+
+#upperNavDiv li a {
+	color: #fff;
+}
+
+#upperNavDiv li a:hover {
+	color: #0088cc;
+}
+
+#headerWelcomeMessage {
+	font-style: italic;
+	font-size: smaller;
+	color: #fff;
+}
+
+#currentPersonName {
+	font-weight: bold;
+	color: #fff;
+}
+
+#logo {
+	background: transparent url(/eLionStudent/javax.faces.resource/img/elionlogosmall.png.seam) no-repeat;
+	width: 150px;
+	height: 37px;
+	margin: 5px 0 0 5px;
+	text-indent: -9999px;
+}
+
+#logo a {
+	color: #fff;
+}
+
+#psu_link {
+	width: 75px;
+	height: 37px;
+	left: 0;
+	top: 0;
+	color: #fff;
+}
+
+#elion_link {
+	width: 75px;
+	height: 37px;
+	left: 0;
+	top: 0;
+	color: #fff;
+}
+
+/* end styles for eLion Header */
+.padded-text {
+	padding: 8px 2px 8px 2px;
+	margin: 2px;
+}
+
+/* Sticky footer styles
+      -------------------------------------------------- */
+html,body {
+	height: 100%;
+	min-height: 100%;
+	/* The html and body elements cannot have any padding or margin. */
+}
+
+/* Wrapper for page content to push down footer */
+#wrap {
+	min-height: 100%;
+	height: auto !important;
+	height: 100%;
+	/* Negative indent footer by it's height */
+	margin: 0 auto -31px;
+}
+
+/* Set the fixed height of the footer here */
+#push,#footer {
+	height: 30px;
+}
+
+#footer {
+	border-top: solid thin #DDDDDD;
+}
+
+/* Lastly, apply responsive CSS fixes as necessary */
+@media ( max-width : 767px) {
+	#footer {
+		margin-left: -20px;
+		margin-right: -20px;
+		padding-left: 20px;
+		padding-right: 20px;
+	}
+}
+
+.container .credit {
+	margin: 5px 0 5px 0;
+	font-size: smaller;
+}
+
+.credit p,.credit ul,.credit li {
+	display: inline;
+}
+
+.credit li {
+	border-right: 1px solid #ccc;
+	margin-right: 4px;
+	padding-right: 6px;
+}
+
+.credit li.last-child {
+	border-right: none;
+}
+/* end Sticky footer styles */
+
+/*panels*/
+.panel {
+	padding: 15px;
+	margin-bottom: 20px;
+	background-color: #f5f5f5;
+	border: 1px solid #dddddd;
+	border-radius: 4px;
+	-webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading {
+	padding: 10px 15px;
+	margin: -15px -15px 15px;
+	background-color: #004989;
+	color: white;
+	border-bottom: 1px solid #dddddd;
+	border-top-right-radius: 3px;
+	border-top-left-radius: 3px;
+	color: white;
+}
+
+.panel h1,.panel h2,.panel h3,.panel h4,.panel h5 {
+	display: inline;
+	line-height: 20px;
+	font-size: 1.1em;
+	font-weight: bolder;
+}
+
+.panel-heading a {
+	color: white !important;
+	text-decoration: none;
+}
+
+.panel-footer {
+	padding: 10px 15px;
+	margin: 15px -15px -15px;
+	background-color: #f5f5f5;
+	border-top: 1px solid #dddddd;
+	border-bottom-right-radius: 3px;
+	border-bottom-left-radius: 3px;
+}
+/*end panel styles */
+
+/*list styles */
+ul.list-striped {
+	list-style: none;
+	margin: 1em 0;
+	padding: 0;
+}
+
+ul.list-striped li {
+	border-bottom: thin solid #DDDDDD;
+	padding-left: 1em;
+}
+
+ul.list-striped li:nth-child(odd) {
+	background-color: #F9F9F9;
+}
+
+ul.list-bordered {
+	list-style: none;
+	margin: 1em 0;
+	padding: 0;
+}
+
+ul.list-bordered li {
+	border-bottom: thin solid #BAC5CC;
+}
+
+/* ------------utility styles------------ */
+.tight {
+	margin: 0;
+	padding: 0;
+}
+
+.spacer {
+	min-height: 20px;
+	height: auto !important;
+	height: 20px;
+}
+
+.nudgeUp {
+	margin-top: -20px;
+}
+
+.bold {
+	font-weight: bolder;
+}
+
+.elionHeading {
+	font-size: 1.1em;
+	color: #004989;
+	line-height: 20px;
+	margin: 10px 0 5px 0;
+	display: inline;
+}
+
+.hidden {
+	display: none;
+}
+
+.spacedLink {
+	font-size: smaller;
+	padding: 0 2px;
+}
+
+.addSideSpace {
+	margin: 0 2px;
+}
+
+.displayInline {
+	display: inline-block;
+}
+
+.small {
+	font-size: small;
+}
+
+.smaller {
+	font-size: x-small;
+}
+
+.large {
+	font-size: large;
+}
+
+.larger {
+	font-size: larger;
+}
+
+.caret-right {
+	border-bottom: 4px solid transparent;
+	border-top: 4px solid transparent;
+	border-left: 4px solid #000000;
+	display: inline-block;
+	opacity: 0.5;
+	margin-right: .5em;
+}
+/** Center the contents of the element **/
+.centercontents {
+	text-align: center !important;
+}
+
+.transparent {
+	border: none;
+	background: transparent;
+}
+
+/* content visible to screenreaders only */
+.visually-hidden {
+	position: absolute !important;
+	clip: rect(1px, 1px, 1px, 1px); /* IE6, IE7 */
+	clip: rect(1px, 1px, 1px, 1px);
+	padding: 0 !important;
+	border: 0 !important;
+	height: 1px !important;
+	width: 1px !important;
+	overflow: hidden;
+}
+
+body:hover .visually-hidden a,body:hover .visually-hidden input,body:hover .visually-hidden button
+	{
+	display: none !important;
+}
+
+/*wider dl list display*/
+.dl-horizontal-wide dt {
+	float: left;
+	width: 250px;
+	overflow: visible;
+	clear: left;
+	text-align: right;
+	text-overflow: visible !important;
+	white-space: normal !important;
+}
+
+.dl-horizontal-wide dd {
+	margin-left: 270px;
+}
+
+/*customized styles for dataTables jQuery plugin*/
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * DataTables features
+ */
+.dataTables_wrapper {
+	position: relative;
+	clear: both;
+	zoom: 1; /* Feeling sorry for IE */
+}
+
+.dataTables_processing {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 250px;
+	height: 30px;
+	margin-left: -125px;
+	margin-top: -15px;
+	padding: 14px 0 2px 0;
+	border: 1px solid #ddd;
+	text-align: center;
+	color: #999;
+	font-size: 14px;
+	background-color: white;
+}
+
+.dataTables_length {
+	width: 40%;
+	float: left;
+}
+
+.dataTables_filter {
+	width: 50%;
+	float: right;
+	text-align: right;
+}
+
+.dataTables_info {
+	width: 60%;
+	float: left;
+}
+
+.dataTables_paginate {
+	float: right;
+	text-align: right;
+}
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * DataTables display
+ */
+table.display {
+	margin: 0 auto;
+	clear: both;
+	width: 100%;
+}
+
+table.display thead th {
+	padding: 3px 18px 3px 10px;
+	border-bottom: 1px solid black;
+	font-weight: bold;
+	cursor: pointer; *
+	cursor: hand;
+}
+
+table.display tfoot th {
+	padding: 3px 18px 3px 10px;
+	border-top: 1px solid black;
+	font-weight: bold;
+}
+
+table.display tr.heading2 td {
+	border-bottom: 1px solid #aaa;
+}
+
+table.display td {
+	padding: 3px 10px;
+}
+
+table.display td.center {
+	text-align: center;
+}
+
+table.display thead th:active,table.display thead td:active {
+	outline: none;
+}
+
+div.dataTables_length label {
+	width: 460px;
+	float: left;
+	text-align: left;
+}
+
+div.dataTables_length select {
+	width: 75px;
+}
+
+div.dataTables_filter label {
+	float: right;
+	width: 460px;
+}
+
+div.dataTables_info {
+	padding-top: 8px;
+}
+
+div.dataTables_paginate {
+	float: right;
+	margin: 0;
+}
+
+table {
+	margin: 1em 0;
+	clear: both;
+}
+
+table .header {
+	cursor: pointer;
+}
+
+table .header:after {
+	content: "";
+	float: right;
+	margin-top: 7px;
+	border-width: 0 4px 4px;
+	border-style: solid;
+	border-color: #000000 transparent;
+	visibility: hidden;
+}
+
+table .headerSortUp,table .headerSortDown {
+	background-color: #f7f7f9;
+	text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+}
+
+table .header:hover:after {
+	visibility: visible;
+}
+
+table .headerSortDown:after,table .headerSortDown:hover:after {
+	visibility: visible;
+	filter: alpha(opacity =                                           60);
+	-moz-opacity: 0.6;
+	opacity: 0.6;
+}
+
+table .headerSortUp:after {
+	border-bottom: none;
+	border-left: 4px solid transparent;
+	border-right: 4px solid transparent;
+	border-top: 4px solid #000000;
+	visibility: visible;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+	filter: alpha(opacity =                                           60);
+	-moz-opacity: 0.6;
+	opacity: 0.6;
+}
+
+/************** end DataTable styles********************/
+
+/************** search form styles *********************/
+#search-bar {
+	float: left;
+	position: relative;
+	padding-top: .3em;
+	padding-left: .3em;
+}
+
+input.add-on[type="submit"] {
+	height: inherit !important;
+	min-height: 30px;
+}
+
+/*--------iframe classes------------*/
+#iframeDiv {
+	height: auto;
+}
+
+#iframe { 
+	width: 100%;
+	overflow: auto;
+}
+
+/*------moreInfo--------------*/
+.moreInfoLink {
+	padding: .3em !important;
+}
+
+.moreInfoLink:hover {
+	text-decoration: none;
+}
+
+/*--------overriding bootstrap classes for color contrast accessibility---------*/
+.alert {
+	color: #000 !important;
+	/*override colors in bootstrap alerts for accessibility*/
+	margin-top: .8em;
+}
+
+.alert ul {
+	list-style: none;
+}
+
+.alert>p:first-of-type {
+	margin-top: 1em;
+}
+
+.alert h1,.alert h2,.alert h3,.alert h4,.alert h5 {
+	display: inline;
+	line-height: 20px;
+	font-size: 1.1em;
+}
+
+.alert-info {
+	background-color: #ECF4FE;
+	border-color: #bac5cc;
+}
+
+a {
+	color: #00529b;
+}
+
+/*override bootstrap classes for accessibility/color contrast in menus*/
+.navbar .nav>li>a, .nav-collapse .nav>li>a, .nav-collapse .dropdown-menu a {
+	color: #333;
+}
+
+
+
+.dark {
+	color: #333 !important;
+	font-weight: bolder;	
+	text-shadow: none !important;
+}
+
+.addMarginsAll{
+	margin: .4em;
+}
+
+.btn-rounded {
+	margin: 0 0 0 .5em !important;
+	-webkit-border-radius: 14px;
+    -moz-border-radius: 14px;
+    border-radius: 14px;
+}
+
+
+/*modal and modal form styles*/
+ 
+.modal {
+	max-height: 90%;
+	overflow-y: auto;
+}
+.modal-form {
+	
+}
+
+.modal-form legend {
+	padding-top: .5em;
+	font-size: small;
+	line-height: 20px;
+	color: #333;
+	font-weight: bolder;
+}
+
+.modal-form fieldset {
+	margin-bottom: 1em;
+}
+
+.elionModalHeader {
+	line-height: 20px;
+	min-height: 20px;
+	font-weight: bolder;
+	background-color: #f5f5f5;
+	border-bottom: 1px solid #ddd;
+}
+
+/*table class for extra contrast against panel background*/
+.table-contrast tbody>tr:nth-child(odd)>td {
+	background-color: #fff;
+}
+
+/* message styling */
+.msg {
+	color: #000;
+	padding: 8px 35px 8px 14px;
+	margin-bottom: 20px;
+	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+	background: #eee;
+	border: 1px solid #ddd;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	margin-top: .8em;
+}
+
+/*styles for ul messages generated by h:messages */
+ul.msg {
+	list-style: none;
+	margin-left: 0 !important;
+}
+
+ul.msg li:before {
+	background: url(/eLionStudent/javax.faces.resource/img/message-sprite.png.seam);
+	background-repeat: no-repeat;
+	vertical-align: top;
+	margin: .1em .3em 0 0;
+	content: '';
+	width: 16px;
+	height: 16px;
+	line-height: 16px;
+	display: inline-block;
+}
+
+.msg li.errormsg:before {
+	background-position: -32px -0px;
+}
+
+.msg li.warnmsg:before {
+	background-position: -16px -0px
+}
+
+.msg li.infomsg:before {
+	background-position: -48px -0px;
+}
+
+.msg li.successmsg:before {
+	background-position: -0px -0px;
+}
+
+/*styles for custom messages */
+.msg-icon {
+	width: 16px;
+	height: 16px;
+	background: transparent url(/eLionStudent/javax.faces.resource/img/message-sprite.png.seam) no-repeat;
+	display: inline-block;
+	vertical-align: text-top;
+}
+
+.msg-icon-error {
+	background-position: -32px -0px;
+}
+
+.msg-icon-warn {
+	background-position: -16px -0px;
+}
+
+.msg-icon-info {
+	background-position: -48px -0px;
+}
+
+.msg-icon-success {
+	background-position: -0px -0px;
+}
+
+.ajaxMsg {
+	padding-right: .5em;
+	vertical-align: middle;
+	font-style: italic;
+}
+
+.ajaxMsgInfo {
+	color: #00529b;
+}
+
+.ajaxMsgError {
+	color: #B94A48;
+}
+
+/* for forms - classes used by edit.xhtml */
+.required {
+	color: #CC0000;
+	font-size: large;
+}
+
+.control-label {
+	font-size: small;
+	font-weight: bolder; /*extending bootstrap class*/
+	padding-right: 1em;
+	padding-top: 3px !important;
+}
+
+.errors {
+	color: #CC0000;
+}
+
+.errors input,.errors textarea,.errors select {
+	border: thin solid #CC0000 !important;
+}
+
+/* experimenting with h:selectOneRadio display*/
+div.radioDisplay * label {
+	display: inline-table;
+}
+
+div.radioDisplay * input[type="radio"] {
+	vertical-align: top;
+	margin: 2px 5px;
+}
+
+/************styling JSF components to match ***********/
+/****radio buttons h:selectOneRadio ****/
+/****for vertical display, use layout="pageDirection" styleClass="jsfRadio" ****/
+/****for horizontal display, use layout="lineDirection" styleClass="jsfRadio" ****/
+.jsfRadio label {
+	float: left;
+}
+
+.jsfRadio input {
+	float: left;
+	margin: 0 1em;
+}
+
+/*override bootstrap classes for labels and buttons for color contrast*/
+.badge-info {
+	background-color: #d8dfea;
+	color: #3b5998;
+}
+
+.btn-success {
+	background-color: #008000;
+}
+
+.btn-danger {
+	background-color: #b94a48;
+}
+
+.nav-pills>.active>a,.nav-pills>.active>a:hover {
+	background-color: #006DCC;
+	color: #FFFFFF;
+}
+/*custom media queries */
+@media ( max-width : 979px) {
+	.dl-horizontal-wide dt {
+		float: none;
+		width: auto;
+		clear: none;
+		text-align: left;
+	}
+	.dl-horizontal-wide dd {
+		margin-left: 0;
+	}
+	.navbar-inner#hiddenNavbar {
+		min-height: 0px;
+	}
+	
+}
+
+@media ( max-width : 767px) {
+	body {
+		padding-right: 5px;
+		padding-left: 5px;
+	}
+	header, #servicesNavBar{
+		margin-right: -5px;
+		margin-left:-5px;
+	}
+}
+
+@media ( min-width : 768px) and (max-width: 979px) {
+	.control-label {
+		text-align: left !important;
+	}
+}
+
+@media ( min-width : 768px) and (max-width: 979px) {
+	
+	.controls {
+		margin-left: 0 !important;
+	}
+}
+
+/*print media */
+@media print { /*page sections to not display in print mode*/
+	#eLionHeader,#servicesNavBar,#functionTitleFavArea,#footer {
+		display: none;
+	}
+
+	/*class to declare element to not display in print mode*/
+	.noPrint {
+		display: none;
+	}
+
+	/*modify colors*/
+	a {
+		color: black;
+		text-decoration: underline;
+	}
+	.msg {
+		background-color: transparent !important;
+	}
+	
+	a[href^="mailto"]:after {
+		content: none !important;
+	}
+}

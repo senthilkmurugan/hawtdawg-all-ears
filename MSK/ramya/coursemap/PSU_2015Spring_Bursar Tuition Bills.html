@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<!-- saved from url=(0085)https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewBursarTuitionBills.seam -->
+<html lang="en" class=" js flexbox flexboxlegacy canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Bursar Tuition Bills</title>
+
+	
+	
+
+	
+	<link rel="shortcut icon" href="https://elionnx.ais.psu.edu/eLionStudent/javax.faces.resource/img/psuicon.png.seam">
+	<link rel="apple-touch-icon" sizes="57x57" href="https://elionnx.ais.psu.edu/eLionStudent/javax.faces.resource/img/eLion-App-Icon-57.png.seam">
+	<link rel="apple-touch-icon" sizes="60x60" href="https://elionnx.ais.psu.edu/eLionStudent/javax.faces.resource/img/eLion-App-Icon-60.png.seam">
+	<link rel="apple-touch-icon" sizes="72x72" href="https://elionnx.ais.psu.edu/eLionStudent/javax.faces.resource/img/eLion-App-Icon-72.png.seam">
+	<link rel="apple-touch-icon" sizes="76x76" href="https://elionnx.ais.psu.edu/eLionStudent/javax.faces.resource/img/eLion-App-Icon-76.png.seam">
+	<link rel="apple-touch-icon" sizes="114x114" href="https://elionnx.ais.psu.edu/eLionStudent/javax.faces.resource/img/eLion-App-Icon-114.png.seam">
+	<link rel="apple-touch-icon" sizes="120x120" href="https://elionnx.ais.psu.edu/eLionStudent/javax.faces.resource/img/eLion-App-Icon-120.png.seam">
+	<link rel="apple-touch-icon" sizes="144x144" href="https://elionnx.ais.psu.edu/eLionStudent/javax.faces.resource/img/eLion-App-Icon-144.png.seam">
+	<link rel="apple-touch-icon" sizes="152x152" href="https://elionnx.ais.psu.edu/eLionStudent/javax.faces.resource/img/eLion-App-Icon-152.png.seam"><link type="text/css" rel="stylesheet" href="./PSU_2015Spring_Bursar Tuition Bills_files/bootstrap.min.css.seam"><link type="text/css" rel="stylesheet" href="./PSU_2015Spring_Bursar Tuition Bills_files/bootstrap-responsive.min.css.seam"><link type="text/css" rel="stylesheet" href="./PSU_2015Spring_Bursar Tuition Bills_files/custom.css.seam"><script type="text/javascript" src="./PSU_2015Spring_Bursar Tuition Bills_files/jsf.js.seam"></script><script type="text/javascript" src="./PSU_2015Spring_Bursar Tuition Bills_files/jquery.js.seam"></script><script type="text/javascript" src="./PSU_2015Spring_Bursar Tuition Bills_files/richfaces.js.seam"></script><script type="text/javascript" src="./PSU_2015Spring_Bursar Tuition Bills_files/richfaces-queue.js.seam"></script><script type="text/javascript" src="./PSU_2015Spring_Bursar Tuition Bills_files/richfaces-base-component.js.seam"></script><script type="text/javascript" src="./PSU_2015Spring_Bursar Tuition Bills_files/status.js.seam"></script><script id="_org_richfaces_queue" type="text/javascript">RichFaces.queue.setQueueOptions({"org.richfaces.queue.global":{"ignoreDupResponses":true} });</script></head><body style="zoom: 1;">
+
+	<div id="wrap">
+	<header>
+		<div class="page-header" id="eLionHeader">
+
+			<div class="row-fluid" id="upperNavDiv">
+				<div class="span3" id="logoDiv">
+
+					<div id="logo">
+						<div class="visually-hidden">
+							<a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewBursarTuitionBills.seam#maincontent">Skip to Main Content</a>  <a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewBursarTuitionBills.seam#servicesNavBar">Skip to Navigation</a>
+						</div>
+						<a id="psu_link" class="pull-left" href="http://www.psu.edu/" title="Visit the Penn State University Home Page">Penn State
+							University</a>  
+						<a id="elion_link" class="pull-left" title="eLion Home" href="https://elionnx.ais.psu.edu/eLionStudent/secure/elionHome.seam">eLion
+							Home</a>
+					</div>
+
+
+				</div><div id="upperNavLinks" class="pull-right span9">
+
+
+
+					<ul class="nav nav-pills pull-right tight" title="Upper navigation links">
+						<li class="visible-desktop padded-text"><span id="headerWelcomeMessage">You are logged in as </span><span id="currentPersonName">RAMYA BALARAM</span>
+						</li>
+
+						<li><a id="messageCenterLink" name="messageCenterLink" href="https://elionnx.ais.psu.edu/eLionStudent/secure/elionHome.seam" title="eLion Home">
+								<span class="icon-home icon-white"></span>
+								<span class="hidden-phone"> Home</span></a></li>
+
+						<li><a id="messagesLink" name="messagesLink" href="https://elionnx.ais.psu.edu/eLionStudent/secure/messages/viewMessages.seam" title="eLion Messages">
+								<span class="icon-envelope icon-white"></span>
+
+								<span class="hidden-phone"> Messages</span>
+								 
+								<span id="msgCount" class="badge badge-important">3</span></a></li>
+
+						<li><a id="favoritesLink" name="favoritesLink" href="https://elionnx.ais.psu.edu/eLionStudent/secure/favorites/viewFavorites.seam" title="Favorite eLion Services">
+								<span class="icon-star icon-white"></span>
+								<span class="hidden-phone"> Favorites</span></a></li>
+
+						<li><a id="helpLink" name="helpLink" href="https://elion.psu.edu/bursar/semester_bill.html" title="Help - opens new window" target="_blank">
+								<span class="icon-white icon-question-sign"></span>
+								<span class="hidden-phone"> Help</span>
+								<span class="visually-hidden"> - opens new window </span></a></li>
+
+
+						<li><a href="https://elionnx.ais.psu.edu/eLionStudent/elionSplash.seam?actionMethod=secure%2Fsmalltalk%2FviewBursarTuitionBills.xhtml%3Aidentity.logout%28%29" id="logoutLink" type="submit" title="Log out of eLion">
+								<span class="icon-white icon-off"></span>
+								<span class="hidden-phone"> Logout</span></a></li>
+
+					</ul></div>
+
+			</div>
+		</div>
+	</header>
+	<nav><div id="servicesNavBar" class="navbar">
+
+			<div class="navbar-inner tight">
+				<h1 class="visually-hidden">Navigation</h1>
+	
+	<div id="search-bar">
+<form id="searchForm" name="searchForm" method="post" action="./PSU_2015Spring_Bursar Tuition Bills_files/PSU_2015Spring_Bursar Tuition Bills.html" class="tight form-search" enctype="application/x-www-form-urlencoded">
+<input type="hidden" name="searchForm" value="searchForm">
+
+			 
+			<div class="input-append">
+			
+				<label class="visually-hidden" for="searchText" id="searchLabel">Search</label> <input class="search-query" type="text" placeholder="Search" id="searchText" name="searchText" data-provide="typeahead" data-items="4" data-source="[&quot;ALEKS Assessment&quot;,&quot;Academic Success&quot;,&quot;Academic Summary&quot;,&quot;Academic Verification&quot;,&quot;Act 48 Reporting&quot;,&quot;Address Information&quot;,&quot;Adviser Information&quot;,&quot;Advising Preparation&quot;,&quot;Alternative Majors&quot;,&quot;Bursar Tuition Bills&quot;,&quot;Calendar, Academic&quot;,&quot;Change of Campus&quot;,&quot;Change of Major &quot;,&quot;Code of Conduct&quot;,&quot;College Cost Estimate&quot;,&quot;Concurrent Majors&quot;,&quot;Confidentiality/FERPA&quot;,&quot;Consumer Information &quot;,&quot;Course Description Search&quot;,&quot;Course Drop Dates&quot;,&quot;Course Preferences&quot;,&quot;Course Watch List&quot;,&quot;Degree Audit&quot;,&quot;Drop/Add&quot;,&quot;Early Progress Report&quot;,&quot;Entrance to Major&quot;,&quot;Ethnicity/Race Reporting&quot;,&quot;Exploring Majors&quot;,&quot;Final Exam Schedule&quot;,&quot;GPA Prediction&quot;,&quot;Grades&quot;,&quot;Graduating this Semester&quot;,&quot;Holds&quot;,&quot;Housing/eLiving&quot;,&quot;Immunizations/Health&quot;,&quot;Late Course Drop&quot;,&quot;Leave of Absence &quot;,&quot;Loan Debt Summary&quot;,&quot;Loan Decrease&quot;,&quot;Loan Entrance Counseling&quot;,&quot;Loan Exit Counseling&quot;,&quot;Mail Semester Grades&quot;,&quot;Major Preferences&quot;,&quot;Major Themes&quot;,&quot;Minor Declaration&quot;,&quot;Minor Themes&quot;,&quot;PLUS Request Form&quot;,&quot;PSU Alert&quot;,&quot;Parent/Other Access&quot;,&quot;Penn State Principles&quot;,&quot;Placement Test Results&quot;,&quot;Policies and Rules&quot;,&quot;Recommended Academic Plan&quot;,&quot;Refund Information&quot;,&quot;Registration&quot;,&quot;Registration Calendar&quot;,&quot;Registration Watch List&quot;,&quot;Schedule Planner&quot;,&quot;Schedule of Courses&quot;,&quot;Student Aid Summary&quot;,&quot;Student Schedule&quot;,&quot;Summer Direct Stafford Loan&quot;,&quot;Summer PA State Grant&quot;,&quot;Summer Work-Study&quot;,&quot;Target GPA Prediction&quot;,&quot;Taxes - 1098T&quot;,&quot;Transcripts&quot;,&quot;Transferring Credits&quot;,&quot;Withdrawal&quot;,&quot;Work-Study Extension&quot;,&quot;Work-Study Job Search&quot;,&quot;id+ Card&quot;]" title="Enter Search Term"> <input id="searchForm:searchTextButton" type="submit" name="searchForm:searchTextButton" value="Search" class="btn add-on" onclick="mojarra.jsfcljs(document.getElementById(&#39;searchForm&#39;),{&#39;searchForm:searchTextButton&#39;:&#39;searchForm:searchTextButton&#39;,&#39;conversationPropagation&#39;:&#39;none&#39;},&#39;&#39;);return false"><script language="JavaScript" type="text/javascript">var cp_searchTextButton = new Function("event", "{if (document.getElementById){var form = document.getElementById('searchForm');var input = document.createElement('input');if (document.all){ input.type = 'hidden';input.name = 'conversationPropagation';input.value = 'none';}else if (document.getElementById) {input.setAttribute('type', 'hidden');input.setAttribute('name', 'conversationPropagation');input.setAttribute('value', 'none');}form.appendChild(input);return true;}}");if (document.getElementById('searchForm:searchTextButton')){document.getElementById('searchForm:searchTextButton').onclick = new Function("event", "{if (document.getElementById){var form = document.getElementById('searchForm');var input = document.createElement('input');if (document.all){ input.type = 'hidden';input.name = 'conversationPropagation';input.value = 'none';}else if (document.getElementById) {input.setAttribute('type', 'hidden');input.setAttribute('name', 'conversationPropagation');input.setAttribute('value', 'none');}form.appendChild(input);return true;}}");}</script>
+
+			</div><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewBursarTuitionBills.seam?actionMethod=secure%2Fsmalltalk%2FviewBursarTuitionBills.xhtml%3Anexus.functionSearch.searchViewAll%28%29" id="searchForm:viewAllLink" type="submit" title="View all eLion Services - filter or sort" class="btn btn-default btn-rounded">View All</a><input type="hidden" name="javax.faces.ViewState" value="-7486040825353698767:-4167563049150377706">
+</form>
+	</div>
+
+
+				<div class="container">
+
+					<a class="btn btn-navbar dark addMarginsAll" data-toggle="collapse" data-target=".nav-collapse">Menu <span class="caret"></span>
+					</a>
+
+
+					
+					<div class="nav-collapse collapse">
+<form id="allListForm" name="allListForm" method="post" action="./PSU_2015Spring_Bursar Tuition Bills_files/PSU_2015Spring_Bursar Tuition Bills.html" class="tight" enctype="application/x-www-form-urlencoded">
+<input type="hidden" name="allListForm" value="allListForm">
+
+
+							<ul class="nav" id="category_list" title="eLion Services by Category">
+
+									<li class="dropdown"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewBursarTuitionBills.seam#" class="dropdown-toggle" data-toggle="dropdown" id="AdvisingCategoryDiv" title="Advising Category - click to expand">Advising
+											<span class="visually-hidden">Category - click to
+												expand</span><span class="caret"></span>
+									</a>
+
+										<ul id="Advising_functions_list" class="dropdown-menu" title="Advising Category">
+												<li id="AdvisingLIeLionStu001" title="Academic Success"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewAcademicSuccess.seam" id="allListForm:cats:0:functions:0:j_idt45">Academic Success</a>
+												</li>
+												<li id="AdvisingLIeLionStu002" title="Academic Summary"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/academicSummary/viewAcademicSummary.seam" id="allListForm:cats:0:functions:1:j_idt45">Academic Summary</a>
+												</li>
+												<li id="AdvisingLIeLionStu006" title="Adviser Information"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewAdviserInformation.seam" id="allListForm:cats:0:functions:2:j_idt45">Adviser Information</a>
+												</li>
+												<li id="AdvisingLIeLionStu007" title="Advising Preparation"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewAdvisingPreparation.seam" id="allListForm:cats:0:functions:3:j_idt45">Advising Preparation</a>
+												</li>
+												<li id="AdvisingLIeLionStu075" title="ALEKS Assessment"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/mathPlacement/viewMathPlacement.seam" id="allListForm:cats:0:functions:4:j_idt45">ALEKS Assessment</a>
+												</li>
+												<li id="AdvisingLIeLionStu016" title="Course Watch List"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewCourseWatchList.seam" id="allListForm:cats:0:functions:5:j_idt45">Course Watch List</a>
+												</li>
+												<li id="AdvisingLIeLionStu017" title="Degree Audit"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewDegreeAudit.seam" id="allListForm:cats:0:functions:6:j_idt45">Degree Audit</a>
+												</li>
+												<li id="AdvisingLIeLionStu019" title="Early Progress Report"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewEarlyProgressReport.seam" id="allListForm:cats:0:functions:7:j_idt45">Early Progress Report</a>
+												</li>
+												<li id="AdvisingLIeLionStu032" title="Late Course Drop"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewLateCourseDrop.seam" id="allListForm:cats:0:functions:8:j_idt45">Late Course Drop</a>
+												</li>
+												<li id="AdvisingLIeLionStu039" title="Major Themes"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewMajorThemes.seam" id="allListForm:cats:0:functions:9:j_idt45">Major Themes</a>
+												</li>
+												<li id="AdvisingLIeLionStu040" title="Minor Themes"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewMinorThemes.seam" id="allListForm:cats:0:functions:10:j_idt45">Minor Themes</a>
+												</li>
+												<li id="AdvisingLIeLionStu071" title="Placement Test Results"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewPlacementTest.seam" id="allListForm:cats:0:functions:11:j_idt45">Placement Test Results</a>
+												</li>
+												<li id="AdvisingLIeLionStu046" title="Recommended Academic Plan"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/recommendedAcademicPlan/viewRecommendAcademicPlan.seam" id="allListForm:cats:0:functions:12:j_idt45">Recommended Academic Plan</a>
+												</li>
+												<li id="AdvisingLIeLionStu048" title="Registration"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewRegistration.seam" id="allListForm:cats:0:functions:13:j_idt45">Registration</a>
+												</li>
+												<li id="AdvisingLIeLionStu073" title="Registration Calendar"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/registrationCalendar/viewRegistrationCalendar.seam" id="allListForm:cats:0:functions:14:j_idt45">Registration Calendar</a>
+												</li>
+												<li id="AdvisingLIeLionStu049" title="Registration Watch List"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewCourseWatchList.seam" id="allListForm:cats:0:functions:15:j_idt45">Registration Watch List</a>
+												</li>
+												<li id="AdvisingLIeLionStu050" title="Schedule of Courses"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/scheduleOfCourses/viewScheduleOfCourses.seam" id="allListForm:cats:0:functions:16:j_idt45">Schedule of Courses</a>
+												</li>
+												<li id="AdvisingLIeLionStu058" title="Transcripts"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewTranscripts.seam" id="allListForm:cats:0:functions:17:j_idt45">Transcripts</a>
+												</li>
+												<li id="AdvisingLIeLionStu059" title="Transferring Credits"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/transferringCredits/viewTransferringCredits.seam" id="allListForm:cats:0:functions:18:j_idt45">Transferring Credits</a>
+												</li>
+												<li id="AdvisingLIeLionStu060" title="Withdrawal"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewWithdrawal.seam" id="allListForm:cats:0:functions:19:j_idt45">Withdrawal</a>
+												</li>
+											
+										</ul></li>
+
+									<li class="dropdown"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewBursarTuitionBills.seam#" class="dropdown-toggle" data-toggle="dropdown" id="FinancialCategoryDiv" title="Financial Category - click to expand">Financial
+											<span class="visually-hidden">Category - click to
+												expand</span><span class="caret"></span>
+									</a>
+
+										<ul id="Financial_functions_list" class="dropdown-menu" title="Financial Category">
+												<li id="FinancialLIeLionStu009" title="Bursar Tuition Bills"><a href="./PSU_2015Spring_Bursar Tuition Bills_files/PSU_2015Spring_Bursar Tuition Bills.html" id="allListForm:cats:1:functions:0:j_idt45">Bursar Tuition Bills</a>
+												</li>
+												<li id="FinancialLIeLionStu076" title="College Cost Estimate"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/collegeCostEstimate/viewCollegeCostEstimate.seam" id="allListForm:cats:1:functions:1:j_idt45">College Cost Estimate</a>
+												</li>
+												<li id="FinancialLIeLionStu028" title="Holds"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/holdsInformation/viewHoldsInformation.seam" id="allListForm:cats:1:functions:2:j_idt45">Holds</a>
+												</li>
+												<li id="FinancialLIeLionStu030" title="Housing/eLiving"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/housingeLiving/viewHousingeLiving.seam" id="allListForm:cats:1:functions:3:j_idt45">Housing/eLiving</a>
+												</li>
+												<li id="FinancialLIeLionStu070" title="id+ Card"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/idCard/viewIDCard.seam" id="allListForm:cats:1:functions:4:j_idt45">id+ Card</a>
+												</li>
+												<li id="FinancialLIeLionStu033" title="Loan Debt Summary"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewLoanDebtSummary.seam" id="allListForm:cats:1:functions:5:j_idt45">Loan Debt Summary</a>
+												</li>
+												<li id="FinancialLIeLionStu034" title="Loan Decrease"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewLoanDecrease.seam" id="allListForm:cats:1:functions:6:j_idt45">Loan Decrease</a>
+												</li>
+												<li id="FinancialLIeLionStu035" title="Loan Entrance Counseling"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewLoanEntranceCounseling.seam" id="allListForm:cats:1:functions:7:j_idt45">Loan Entrance Counseling</a>
+												</li>
+												<li id="FinancialLIeLionStu036" title="Loan Exit Counseling"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewLoanExitCounseling.seam" id="allListForm:cats:1:functions:8:j_idt45">Loan Exit Counseling</a>
+												</li>
+												<li id="FinancialLIeLionStu043" title="PLUS Request Form"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewPLUSRequestForm.seam" id="allListForm:cats:1:functions:9:j_idt45">PLUS Request Form</a>
+												</li>
+												<li id="FinancialLIeLionStu047" title="Refund Information"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewRefundInformation.seam" id="allListForm:cats:1:functions:10:j_idt45">Refund Information</a>
+												</li>
+												<li id="FinancialLIeLionStu052" title="Student Aid Summary"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewStudentAidSummary.seam" id="allListForm:cats:1:functions:11:j_idt45">Student Aid Summary</a>
+												</li>
+												<li id="FinancialLIeLionStu054" title="Summer Direct Stafford Loan"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewSummerDirectStaffordLoan.seam" id="allListForm:cats:1:functions:12:j_idt45">Summer Direct Stafford Loan</a>
+												</li>
+												<li id="FinancialLIeLionStu055" title="Summer PA State Grant"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewSummerPAStateGrant.seam" id="allListForm:cats:1:functions:13:j_idt45">Summer PA State Grant</a>
+												</li>
+												<li id="FinancialLIeLionStu056" title="Summer Work-Study"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewSummerWorkStudy.seam" id="allListForm:cats:1:functions:14:j_idt45">Summer Work-Study</a>
+												</li>
+												<li id="FinancialLIeLionStu029" title="Taxes - 1098T"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewTaxes1098t.seam" id="allListForm:cats:1:functions:15:j_idt45">Taxes - 1098T</a>
+												</li>
+												<li id="FinancialLIeLionStu061" title="Work-Study Extension"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewWorkStudyExtension.seam" id="allListForm:cats:1:functions:16:j_idt45">Work-Study Extension</a>
+												</li>
+												<li id="FinancialLIeLionStu062" title="Work-Study Job Search"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewWorkStudyJobSearch.seam" id="allListForm:cats:1:functions:17:j_idt45">Work-Study Job Search</a>
+												</li>
+											
+										</ul></li>
+
+									<li class="dropdown"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewBursarTuitionBills.seam#" class="dropdown-toggle" data-toggle="dropdown" id="GradesCategoryDiv" title="Grades Category - click to expand">Grades
+											<span class="visually-hidden">Category - click to
+												expand</span><span class="caret"></span>
+									</a>
+
+										<ul id="Grades_functions_list" class="dropdown-menu" title="Grades Category">
+												<li id="GradesLIeLionStu001" title="Academic Success"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewAcademicSuccess.seam" id="allListForm:cats:2:functions:0:j_idt45">Academic Success</a>
+												</li>
+												<li id="GradesLIeLionStu004" title="Act 48 Reporting"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewAct48Reporting.seam" id="allListForm:cats:2:functions:1:j_idt45">Act 48 Reporting</a>
+												</li>
+												<li id="GradesLIeLionStu074" title="Course Description Search"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/courseDescriptionSearch/viewCourseDescriptionSearch.seam" id="allListForm:cats:2:functions:2:j_idt45">Course Description Search</a>
+												</li>
+												<li id="GradesLIeLionStu025" title="GPA Prediction"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewGPAPrediction.seam" id="allListForm:cats:2:functions:3:j_idt45">GPA Prediction</a>
+												</li>
+												<li id="GradesLIeLionStu026" title="Grades"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/grades/viewGradeReport.seam" id="allListForm:cats:2:functions:4:j_idt45">Grades</a>
+												</li>
+												<li id="GradesLIeLionStu037" title="Mail Semester Grades"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewMailSemesterGrades.seam" id="allListForm:cats:2:functions:5:j_idt45">Mail Semester Grades</a>
+												</li>
+												<li id="GradesLIeLionStu057" title="Target GPA Prediction"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewTargetGPAPrediction.seam" id="allListForm:cats:2:functions:6:j_idt45">Target GPA Prediction</a>
+												</li>
+												<li id="GradesLIeLionStu058" title="Transcripts"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewTranscripts.seam" id="allListForm:cats:2:functions:7:j_idt45">Transcripts</a>
+												</li>
+												<li id="GradesLIeLionStu059" title="Transferring Credits"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/transferringCredits/viewTransferringCredits.seam" id="allListForm:cats:2:functions:8:j_idt45">Transferring Credits</a>
+												</li>
+											
+										</ul></li>
+
+									<li class="dropdown"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewBursarTuitionBills.seam#" class="dropdown-toggle" data-toggle="dropdown" id="GraduationCategoryDiv" title="Graduation Category - click to expand">Graduation
+											<span class="visually-hidden">Category - click to
+												expand</span><span class="caret"></span>
+									</a>
+
+										<ul id="Graduation_functions_list" class="dropdown-menu" title="Graduation Category">
+												<li id="GraduationLIeLionStu003" title="Academic Verification"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewAcademicVerification.seam" id="allListForm:cats:3:functions:0:j_idt45">Academic Verification</a>
+												</li>
+												<li id="GraduationLIeLionStu017" title="Degree Audit"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewDegreeAudit.seam" id="allListForm:cats:3:functions:1:j_idt45">Degree Audit</a>
+												</li>
+												<li id="GraduationLIeLionStu027" title="Graduating this Semester"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewGraduatingThisSemester.seam" id="allListForm:cats:3:functions:2:j_idt45">Graduating this Semester</a>
+												</li>
+												<li id="GraduationLIeLionStu036" title="Loan Exit Counseling"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewLoanExitCounseling.seam" id="allListForm:cats:3:functions:3:j_idt45">Loan Exit Counseling</a>
+												</li>
+												<li id="GraduationLIeLionStu058" title="Transcripts"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewTranscripts.seam" id="allListForm:cats:3:functions:4:j_idt45">Transcripts</a>
+												</li>
+											
+										</ul></li>
+
+									<li class="dropdown"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewBursarTuitionBills.seam#" class="dropdown-toggle" data-toggle="dropdown" id="MajorsCategoryDiv" title="Major/Minor Category - click to expand">Major/Minor
+											<span class="visually-hidden">Category - click to
+												expand</span><span class="caret"></span>
+									</a>
+
+										<ul id="Majors_functions_list" class="dropdown-menu" title="Major/Minor Category">
+												<li id="MajorsLIeLionStu008" title="Alternative Majors"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewAlternativeMajors.seam" id="allListForm:cats:4:functions:0:j_idt45">Alternative Majors</a>
+												</li>
+												<li id="MajorsLIeLionStu065" title="Change of Campus"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewChangeOfCampus.seam" id="allListForm:cats:4:functions:1:j_idt45">Change of Campus</a>
+												</li>
+												<li id="MajorsLIeLionStu066" title="Change of Major "><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/changeOfMajor/viewChangeOfMajor.seam" id="allListForm:cats:4:functions:2:j_idt45">Change of Major </a>
+												</li>
+												<li id="MajorsLIeLionStu069" title="Concurrent Majors"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/concurrentMajors/viewConcurrentMajors.seam" id="allListForm:cats:4:functions:3:j_idt45">Concurrent Majors</a>
+												</li>
+												<li id="MajorsLIeLionStu015" title="Course Preferences"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewCoursePreferences.seam" id="allListForm:cats:4:functions:4:j_idt45">Course Preferences</a>
+												</li>
+												<li id="MajorsLIeLionStu017" title="Degree Audit"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewDegreeAudit.seam" id="allListForm:cats:4:functions:5:j_idt45">Degree Audit</a>
+												</li>
+												<li id="MajorsLIeLionStu020" title="Entrance to Major"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewEntranceToMajor.seam" id="allListForm:cats:4:functions:6:j_idt45">Entrance to Major</a>
+												</li>
+												<li id="MajorsLIeLionStu077" title="Exploring Majors"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/exploringMajors/viewExploringMajors.seam" id="allListForm:cats:4:functions:7:j_idt45">Exploring Majors</a>
+												</li>
+												<li id="MajorsLIeLionStu038" title="Major Preferences"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewMajorPreferences.seam" id="allListForm:cats:4:functions:8:j_idt45">Major Preferences</a>
+												</li>
+												<li id="MajorsLIeLionStu039" title="Major Themes"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewMajorThemes.seam" id="allListForm:cats:4:functions:9:j_idt45">Major Themes</a>
+												</li>
+												<li id="MajorsLIeLionStu064" title="Minor Declaration"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewMinorDeclaration.seam" id="allListForm:cats:4:functions:10:j_idt45">Minor Declaration</a>
+												</li>
+											
+										</ul></li>
+
+									<li class="dropdown"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewBursarTuitionBills.seam#" class="dropdown-toggle" data-toggle="dropdown" id="PersonalCategoryDiv" title="Personal Profile Category - click to expand">Personal Profile
+											<span class="visually-hidden">Category - click to
+												expand</span><span class="caret"></span>
+									</a>
+
+										<ul id="Personal_functions_list" class="dropdown-menu" title="Personal Profile Category">
+												<li id="PersonalLIeLionStu002" title="Academic Summary"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/academicSummary/viewAcademicSummary.seam" id="allListForm:cats:5:functions:0:j_idt45">Academic Summary</a>
+												</li>
+												<li id="PersonalLIeLionStu003" title="Academic Verification"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewAcademicVerification.seam" id="allListForm:cats:5:functions:1:j_idt45">Academic Verification</a>
+												</li>
+												<li id="PersonalLIeLionStu005" title="Address Information"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/address/viewAddress.seam" id="allListForm:cats:5:functions:2:j_idt45">Address Information</a>
+												</li>
+												<li id="PersonalLIeLionStu065" title="Change of Campus"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewChangeOfCampus.seam" id="allListForm:cats:5:functions:3:j_idt45">Change of Campus</a>
+												</li>
+												<li id="PersonalLIeLionStu021" title="Ethnicity/Race Reporting"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewEthnicityRaceReporting.seam" id="allListForm:cats:5:functions:4:j_idt45">Ethnicity/Race Reporting</a>
+												</li>
+												<li id="PersonalLIeLionStu028" title="Holds"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/holdsInformation/viewHoldsInformation.seam" id="allListForm:cats:5:functions:5:j_idt45">Holds</a>
+												</li>
+												<li id="PersonalLIeLionStu030" title="Housing/eLiving"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/housingeLiving/viewHousingeLiving.seam" id="allListForm:cats:5:functions:6:j_idt45">Housing/eLiving</a>
+												</li>
+												<li id="PersonalLIeLionStu031" title="Immunizations/Health"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/immunizationsHealth/viewImmunizationsHealth.seam" id="allListForm:cats:5:functions:7:j_idt45">Immunizations/Health</a>
+												</li>
+												<li id="PersonalLIeLionStu068" title="Leave of Absence "><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/leaveOfAbsence/viewLeaveOfAbsence.seam" id="allListForm:cats:5:functions:8:j_idt45">Leave of Absence </a>
+												</li>
+												<li id="PersonalLIeLionStu041" title="Parent/Other Access"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/parentOtherAccess/viewParentOtherAccess.seam" id="allListForm:cats:5:functions:9:j_idt45">Parent/Other Access</a>
+												</li>
+												<li id="PersonalLIeLionStu078" title="PSU Alert"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/psuAlert/viewPsuAlertInfo.seam" id="allListForm:cats:5:functions:10:j_idt45">PSU Alert</a>
+												</li>
+											
+										</ul></li>
+
+									<li class="dropdown"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewBursarTuitionBills.seam#" class="dropdown-toggle" data-toggle="dropdown" id="PlacementsCategoryDiv" title="Placements Category - click to expand">Placements
+											<span class="visually-hidden">Category - click to
+												expand</span><span class="caret"></span>
+									</a>
+
+										<ul id="Placements_functions_list" class="dropdown-menu" title="Placements Category">
+												<li id="PlacementsLIeLionStu075" title="ALEKS Assessment"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/mathPlacement/viewMathPlacement.seam" id="allListForm:cats:6:functions:0:j_idt45">ALEKS Assessment</a>
+												</li>
+												<li id="PlacementsLIeLionStu071" title="Placement Test Results"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewPlacementTest.seam" id="allListForm:cats:6:functions:1:j_idt45">Placement Test Results</a>
+												</li>
+											
+										</ul></li>
+
+									<li class="dropdown"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewBursarTuitionBills.seam#" class="dropdown-toggle" data-toggle="dropdown" id="PolicyCategoryDiv" title="Policy Category - click to expand">Policy
+											<span class="visually-hidden">Category - click to
+												expand</span><span class="caret"></span>
+									</a>
+
+										<ul id="Policy_functions_list" class="dropdown-menu" title="Policy Category">
+												<li id="PolicyLIeLionStu010" title="Calendar, Academic"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/calendarAcademic/viewCalendarAcademic.seam" id="allListForm:cats:7:functions:0:j_idt45">Calendar, Academic</a>
+												</li>
+												<li id="PolicyLIeLionStu011" title="Code of Conduct"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/codeOfConduct/viewCodeOfConduct.seam" id="allListForm:cats:7:functions:1:j_idt45">Code of Conduct</a>
+												</li>
+												<li id="PolicyLIeLionStu013" title="Confidentiality/FERPA"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/confidentialityFERPA/viewConfidentialityFERPA.seam" id="allListForm:cats:7:functions:2:j_idt45">Confidentiality/FERPA</a>
+												</li>
+												<li id="PolicyLIeLionStu067" title="Consumer Information "><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/consumerInformation/viewConsumerInformation.seam" id="allListForm:cats:7:functions:3:j_idt45">Consumer Information </a>
+												</li>
+												<li id="PolicyLIeLionStu042" title="Penn State Principles"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/pennStatePrinciples/viewPennStatePrinciples.seam" id="allListForm:cats:7:functions:4:j_idt45">Penn State Principles</a>
+												</li>
+												<li id="PolicyLIeLionStu044" title="Policies and Rules"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/policiesAndRules/viewPoliciesAndRules.seam" id="allListForm:cats:7:functions:5:j_idt45">Policies and Rules</a>
+												</li>
+											
+										</ul></li>
+
+									<li class="dropdown"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewBursarTuitionBills.seam#" class="dropdown-toggle" data-toggle="dropdown" id="ScheduleCategoryDiv" title="Schedule Category - click to expand">Schedule
+											<span class="visually-hidden">Category - click to
+												expand</span><span class="caret"></span>
+									</a>
+
+										<ul id="Schedule_functions_list" class="dropdown-menu" title="Schedule Category">
+												<li id="ScheduleLIeLionStu003" title="Academic Verification"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewAcademicVerification.seam" id="allListForm:cats:8:functions:0:j_idt45">Academic Verification</a>
+												</li>
+												<li id="ScheduleLIeLionStu009" title="Bursar Tuition Bills"><a href="./PSU_2015Spring_Bursar Tuition Bills_files/PSU_2015Spring_Bursar Tuition Bills.html" id="allListForm:cats:8:functions:1:j_idt45">Bursar Tuition Bills</a>
+												</li>
+												<li id="ScheduleLIeLionStu010" title="Calendar, Academic"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/calendarAcademic/viewCalendarAcademic.seam" id="allListForm:cats:8:functions:2:j_idt45">Calendar, Academic</a>
+												</li>
+												<li id="ScheduleLIeLionStu074" title="Course Description Search"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/courseDescriptionSearch/viewCourseDescriptionSearch.seam" id="allListForm:cats:8:functions:3:j_idt45">Course Description Search</a>
+												</li>
+												<li id="ScheduleLIeLionStu014" title="Course Drop Dates"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/courseDropDates/viewCourseDropDates.seam" id="allListForm:cats:8:functions:4:j_idt45">Course Drop Dates</a>
+												</li>
+												<li id="ScheduleLIeLionStu016" title="Course Watch List"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewCourseWatchList.seam" id="allListForm:cats:8:functions:5:j_idt45">Course Watch List</a>
+												</li>
+												<li id="ScheduleLIeLionStu017" title="Degree Audit"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewDegreeAudit.seam" id="allListForm:cats:8:functions:6:j_idt45">Degree Audit</a>
+												</li>
+												<li id="ScheduleLIeLionStu018" title="Drop/Add"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewDropAdd.seam" id="allListForm:cats:8:functions:7:j_idt45">Drop/Add</a>
+												</li>
+												<li id="ScheduleLIeLionStu023" title="Final Exam Schedule"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewFinalExamSchedule.seam" id="allListForm:cats:8:functions:8:j_idt45">Final Exam Schedule</a>
+												</li>
+												<li id="ScheduleLIeLionStu032" title="Late Course Drop"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewLateCourseDrop.seam" id="allListForm:cats:8:functions:9:j_idt45">Late Course Drop</a>
+												</li>
+												<li id="ScheduleLIeLionStu068" title="Leave of Absence "><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/leaveOfAbsence/viewLeaveOfAbsence.seam" id="allListForm:cats:8:functions:10:j_idt45">Leave of Absence </a>
+												</li>
+												<li id="ScheduleLIeLionStu071" title="Placement Test Results"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewPlacementTest.seam" id="allListForm:cats:8:functions:11:j_idt45">Placement Test Results</a>
+												</li>
+												<li id="ScheduleLIeLionStu046" title="Recommended Academic Plan"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/recommendedAcademicPlan/viewRecommendAcademicPlan.seam" id="allListForm:cats:8:functions:12:j_idt45">Recommended Academic Plan</a>
+												</li>
+												<li id="ScheduleLIeLionStu048" title="Registration"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewRegistration.seam" id="allListForm:cats:8:functions:13:j_idt45">Registration</a>
+												</li>
+												<li id="ScheduleLIeLionStu073" title="Registration Calendar"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/registrationCalendar/viewRegistrationCalendar.seam" id="allListForm:cats:8:functions:14:j_idt45">Registration Calendar</a>
+												</li>
+												<li id="ScheduleLIeLionStu049" title="Registration Watch List"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewCourseWatchList.seam" id="allListForm:cats:8:functions:15:j_idt45">Registration Watch List</a>
+												</li>
+												<li id="ScheduleLIeLionStu050" title="Schedule of Courses"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/scheduleOfCourses/viewScheduleOfCourses.seam" id="allListForm:cats:8:functions:16:j_idt45">Schedule of Courses</a>
+												</li>
+												<li id="ScheduleLIeLionStu063" title="Schedule Planner"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/schedulePlanner/viewSchedulePlanner.seam" id="allListForm:cats:8:functions:17:j_idt45">Schedule Planner</a>
+												</li>
+												<li id="ScheduleLIeLionStu053" title="Student Schedule"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/schedule/schedule.seam" id="allListForm:cats:8:functions:18:j_idt45">Student Schedule</a>
+												</li>
+												<li id="ScheduleLIeLionStu059" title="Transferring Credits"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/transferringCredits/viewTransferringCredits.seam" id="allListForm:cats:8:functions:19:j_idt45">Transferring Credits</a>
+												</li>
+												<li id="ScheduleLIeLionStu060" title="Withdrawal"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewWithdrawal.seam" id="allListForm:cats:8:functions:20:j_idt45">Withdrawal</a>
+												</li>
+											
+										</ul></li>
+
+							</ul><input type="hidden" name="javax.faces.ViewState" value="-7486040825353698767:-4167563049150377706">
+</form>
+						
+
+
+					</div>
+					
+
+				</div>
+				
+			</div></div>
+	</nav>
+
+		<div class="container" role="main" id="maincontent">
+
+	<div id="functionTitleDiv" class="row-fluid">
+		<div class="span12" id="titleDiv">
+			<div>
+				<h1 id="functionTitle" class="elionHeading displayInline">Bursar Tuition Bills
+				</h1><div id="functionTitleFavArea" class="displayInline addMarginsAll">
+<form id="addRemoveFavForm" name="addRemoveFavForm" method="post" action="./PSU_2015Spring_Bursar Tuition Bills_files/PSU_2015Spring_Bursar Tuition Bills.html" class="displayInline tight" enctype="application/x-www-form-urlencoded">
+<input type="hidden" name="addRemoveFavForm" value="addRemoveFavForm">
+<span id="addRemoveFavForm:j_idt60"><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewBursarTuitionBills.seam?actionMethod=secure%2Fsmalltalk%2FviewBursarTuitionBills.xhtml%3Anexus.userPreferences.removeFavorite%28nexus.currentFunction%29" id="addRemoveFavForm:removeFavLinkStu" type="submit" title="Remove Bursar Tuition Bills from Favorites List" class="btn btn-mini">
+								<span class="visually-hidden">Remove
+									Bursar Tuition Bills from Favorites</span>
+								<span class="icon icon-star"></span></a></span><span id="addRemoveFavForm:favStatus"><span style="display:none" class="rf-st-start"><img src="./PSU_2015Spring_Bursar Tuition Bills_files/ajax-loader-spheres.gif.seam" alt="Loading"></span><span class="rf-st-stop"></span><script type="text/javascript">new RichFaces.ui.Status("addRemoveFavForm:favStatus",{"statusName":"favStatus"} )</script></span><input type="hidden" name="javax.faces.ViewState" value="-7486040825353698767:-4167563049150377706">
+</form></div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row-fluid hidden-desktop">
+		<div class="alert alert-info" role="alert">
+			<button type="button" class="close" data-dismiss="alert">x</button>
+			<span class="msg-icon msg-icon-info"></span> Bursar Tuition Bills has not
+			been optimized for mobile viewing and may not display properly on all
+			mobile devices.
+		</div>
+	</div>
+	<div class="row-fluid">
+		<div id="iframeDiv" class="span12">
+			<iframe id="iframe" src="./PSU_2015Spring_Bursar Tuition Bills_files/submit.html" frameborder="0" height="900" title="Bursar Tuition Bills iFrame">
+				&lt;p&gt;Your browser does not support iframes.&lt;/p&gt;
+			</iframe>
+		</div>
+
+	</div>
+		</div>
+		
+
+		<div id="push"></div>
+	</div>
+	<footer><div id="footer" class="clearfix">
+			<div class="container">
+				<div class="credit">
+					<ul>
+						<li><span class="hidden-phone"> This page is
+								maintained by </span><a href="https://elion.psu.edu/general/about.html" target="_blank" id="elionInfoLink" title="Information about eLion - opens new window">eLion<span class="visually-hidden"> - opens new window</span></a></li>
+						<li><a href="http://www.psu.edu/ur/legal.html" target="_blank" id="legalStatementLink" title="Link to Penn State Privacy and Legal Statement - opens new window">Privacy
+								and Legal Statements<span class="visually-hidden"> -
+									opens new window</span>
+						</a></li>
+						<li><a href="https://elionnx.ais.psu.edu/eLionStudent/secure/smalltalk/viewBursarTuitionBills.seam#contactPanel" data-toggle="modal" id="contactUsLink" title="Contact information for the current eLion function - opens modal panel">Contact
+								Us<span class="visually-hidden"> - opens modal panel</span>
+						</a></li>
+						<li><a href="https://elion.psu.edu/general/browser_rec.html" target="_blank" id="browserCompatibilityLink" title="Link to eLion Browser Compatibility - opens new window">
+								Browser Compatibility<span class="visually-hidden"> -
+									opens new window</span>
+						</a></li>
+						<li>©2014 The Pennsylvania State University</li>
+						<li class="last-child"><span class="hidden-phone">Last
+								Update:  12/11/2014
+						</span></li>
+					</ul>
+				</div>
+			</div></div>
+
+		<div class="modal hide fade" id="contactPanel" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle" aria-describedby="modalDescription" role="dialog">
+			<div class="modal-header elionModalHeader">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true" tabindex="-1">
+					<span class="icon-remove"></span>
+				</button>
+				<span class="modal-ititle" id="modalTitle"> <a class="modal-title-anchor"></a>Contact Information  for Bursar Tuition Bills
+				</span> <span id="modalDescription" class="visually-hidden">The
+					requested information is as follows.</span>
+			</div>
+
+			<div class="modal-body"><div id="j_idt75">
+
+					<dl class="dl-horizontal"><span id="j_idt77">
+							<dt>Service</dt>
+							<dd>Bursar Tuition Bills
+							</dd></span><span id="j_idt81">
+							<dt>Contact Name</dt>
+							<dd>Bursar
+							</dd></span><span id="j_idt93">
+							<dt>URL</dt>
+							<dd>https://www.bursar.psu.edu/question.cfm
+							</dd></span>
+					</dl></div>
+			</div>
+
+			<div class="modal-footer">
+				<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+			</div>
+		</div>
+	</footer><script type="text/javascript" src="./PSU_2015Spring_Bursar Tuition Bills_files/jquery-1.9.0.min.js.seam"></script><script type="text/javascript" src="./PSU_2015Spring_Bursar Tuition Bills_files/bootstrap.min.js.seam"></script><script type="text/javascript" src="./PSU_2015Spring_Bursar Tuition Bills_files/modernizr-latest.js.seam"></script><script type="text/javascript" src="./PSU_2015Spring_Bursar Tuition Bills_files/modal.js.seam"></script>
+	</body></html>

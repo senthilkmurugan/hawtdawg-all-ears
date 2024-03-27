@@ -1,0 +1,50 @@
+@charset "utf-8";
+/* CSS Document */
+
+body   {
+	background-color: #eef0f0;
+	font-family: Verdana, Geneva, sans-serif;
+	margin: 0px;
+	padding: 4px;
+	font-size: 	70%;
+}
+
+#aaSuperResponsiveContainer table {
+	margin-bottom: .5em;
+	font-size: 1.2em;
+}
+#aaSuperResponsiveContainer tr{}
+#aaSuperResponsiveContainer th {
+	font-weight: bold;
+	font-size: 1em;
+    text-shadow: 0px 2px 3px #fff;
+}
+#aaSuperResponsiveContainer td {
+	padding-top: 1px;
+	padding-bottom: 1px;
+	font-size: 0.9em;
+}
+
+
+#aaSuperResponsiveContainer select, #aaSuperResponsiveContainer textarea {
+		 font-size:.8em;
+}
+#aaSuperResponsiveContainer input [type=file],
+#aaSuperResponsiveContainer input [type=password],
+#aaSuperResponsiveContainer input [type=text]{
+        font-size:1.2em;
+}
+
+
+#aaSuperResponsiveContainer input[type=hidden] {
+ font-size:1.2em;
+}
+
+#aaSuperResponsiveContainer hr{
+	background: #eef0f0;
+	border:bottom 1px #f5f5f4;
+	margin-top:5px;
+	margin-bottom:5px;
+	background-position: bottom;
+	background-repeat: repeat-x;
+}

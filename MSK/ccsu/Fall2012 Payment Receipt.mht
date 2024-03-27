@@ -1,0 +1,712 @@
+From: <Saved by Windows Internet Explorer 8>
+Subject: QuikPAY(R)
+Date: Wed, 19 Sep 2012 17:31:59 -0400
+MIME-Version: 1.0
+Content-Type: multipart/related;
+	type="text/html";
+	boundary="----=_NextPart_000_0000_01CD968C.AC5F3180"
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.6109
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_0000_01CD968C.AC5F3180
+Content-Type: text/html;
+	charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: https://quikpayasp.com/ccsu/qp/epay/preparePaymentReceipt.do
+
+=EF=BB=BF<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" =
+"http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<HTML lang=3Den-us><HEAD><TITLE>QuikPAY(R)</TITLE>
+<META content=3D"text/html; charset=3Dutf-8" http-equiv=3DContent-Type>
+<META content=3Dno-cache http-equiv=3DPragma>
+<META content=3D-1 http-equiv=3DExpires><LINK rel=3Dstylesheet =
+type=3Dtext/css=20
+href=3D"https://quikpayasp.com/ccsu/quikpay/Style.css"><LINK =
+rel=3Dstylesheet=20
+type=3Dtext/css =
+href=3D"https://quikpayasp.com/ccsu/quikpay/template/Style.css">
+<META name=3DGENERATOR content=3D"MSHTML 8.00.6001.19298"></HEAD>
+<BODY>
+<DIV id=3Dtemplate_ErrorTemplate>
+<DIV id=3Dtemplate_ErrorTemplate_content><LINK rel=3Dstylesheet =
+type=3Dtext/css=20
+href=3D"https://quikpayasp.com/ccsu/quikpay/etc/error/Style.css">
+<DIV id=3Detc_error_SessionExpiredError class=3DgeneralText>
+<H1 class=3DpageTitle>Session Expired </H1>
+<P class=3DetcErrorTimestamp>Wed Sep 19 17:31:55 EDT 2012 </P>
+<P class=3DetcErrorMessage>Please log in again. </P>
+<H3 class=3DgeneralTextBold>Common reasons your session expired:</H3>
+<UL>
+  <LI>User left the site and came back using the back button</LI>
+  <LI>User bookmarked a page in QuikPAY</LI>
+  <LI>User activity was idle for too long</LI></UL></DIV><SPAN=20
+id=3Dtemplate_ErrorTemplate_id>( 1348090315942 ) </SPAN></DIV>
+<DIV id=3Dtemplate_ErrorTemplate_copy>Copyright =C2=A9 2001 - 2012. =
+<I>Nelnet Business=20
+Solutions, Inc.</I> All rights reserved. <BR><I>QuikPAY</I> is a =
+registered=20
+trademark of <I>Nelnet Business Solutions, Inc.</I> =
+</DIV></DIV></BODY></HTML>
+
+------=_NextPart_000_0000_01CD968C.AC5F3180
+Content-Type: text/css;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: https://quikpayasp.com/ccsu/quikpay/Style.css
+
+BODY {
+	BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; =
+PADDING-LEFT: 0px; PADDING-RIGHT: 0px; BORDER-TOP: 0px; BORDER-RIGHT: =
+0px; PADDING-TOP: 0px
+}
+FORM {
+	BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; =
+PADDING-LEFT: 0px; PADDING-RIGHT: 0px; BORDER-TOP: 0px; BORDER-RIGHT: =
+0px; PADDING-TOP: 0px
+}
+FIELDSET {
+	BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; =
+PADDING-LEFT: 0px; PADDING-RIGHT: 0px; BORDER-TOP: 0px; BORDER-RIGHT: =
+0px; PADDING-TOP: 0px
+}
+IMG {
+	BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; =
+PADDING-LEFT: 0px; PADDING-RIGHT: 0px; BORDER-TOP: 0px; BORDER-RIGHT: =
+0px; PADDING-TOP: 0px
+}
+DIV {
+	BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; =
+PADDING-LEFT: 0px; PADDING-RIGHT: 0px; BORDER-TOP: 0px; BORDER-RIGHT: =
+0px; PADDING-TOP: 0px
+}
+H1 {
+	BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; =
+PADDING-LEFT: 0px; PADDING-RIGHT: 0px; BORDER-TOP: 0px; BORDER-RIGHT: =
+0px; PADDING-TOP: 0px
+}
+H2 {
+	BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; =
+PADDING-LEFT: 0px; PADDING-RIGHT: 0px; BORDER-TOP: 0px; BORDER-RIGHT: =
+0px; PADDING-TOP: 0px
+}
+H3 {
+	BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; =
+PADDING-LEFT: 0px; PADDING-RIGHT: 0px; BORDER-TOP: 0px; BORDER-RIGHT: =
+0px; PADDING-TOP: 0px
+}
+LI {
+	BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; =
+PADDING-LEFT: 0px; PADDING-RIGHT: 0px; BORDER-TOP: 0px; BORDER-RIGHT: =
+0px; PADDING-TOP: 0px
+}
+TABLE {
+	BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; =
+PADDING-LEFT: 0px; PADDING-RIGHT: 0px; BORDER-TOP: 0px; BORDER-RIGHT: =
+0px; PADDING-TOP: 0px
+}
+TD {
+	BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; BORDER-TOP: 0px; BORDER-RIGHT: =
+0px
+}
+INPUT[type=3Dtext] {
+	WIDTH: 142px
+}
+INPUT {
+	MARGIN: 0px
+}
+.inputBox {
+	PADDING-LEFT: 2px
+}
+.inputBox {
+	PADDING-LEFT: 2px
+}
+OL.lowerAlpha {
+	PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 2.5em; PADDING-RIGHT: =
+0px; PADDING-TOP: 0px
+}
+OL.decimal {
+	PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 2.5em; PADDING-RIGHT: =
+0px; PADDING-TOP: 0px
+}
+OL.lowerAlpha {
+	LIST-STYLE-TYPE: lower-alpha
+}
+OL.decimal {
+	LIST-STYLE-TYPE: decimal
+}
+H2.subTitle {
+	BORDER-BOTTOM: 0px solid; TEXT-ALIGN: left; BORDER-LEFT: 1px solid; =
+PADDING-BOTTOM: 0.15em; MARGIN: 0px; PADDING-LEFT: 0.5em; PADDING-RIGHT: =
+0.5em; LETTER-SPACING: normal; BORDER-TOP: 1px solid; BORDER-RIGHT: 1px =
+solid; PADDING-TOP: 0.15em
+}
+H3.header {
+	FONT-SIZE: 1em; FONT-WEIGHT: bold
+}
+H3.header A {
+	FLOAT: right; FONT-WEIGHT: normal; TEXT-DECORATION: none
+}
+TABLE.dataTable {
+	BORDER-BOTTOM: 0px solid; BORDER-LEFT: 1px solid; WIDTH: 100%; =
+BORDER-TOP: 1px solid; BORDER-RIGHT: 0px solid
+}
+TABLE.dataTable TH {
+	BORDER-BOTTOM: 1px solid; BORDER-LEFT: 0px solid; PADDING-BOTTOM: 2px; =
+PADDING-LEFT: 2px; PADDING-RIGHT: 2px; BORDER-TOP: 0px solid; =
+BORDER-RIGHT: 1px solid; PADDING-TOP: 2px
+}
+TABLE.dataTable TD {
+	BORDER-BOTTOM: 1px solid; BORDER-LEFT: 0px solid; PADDING-BOTTOM: 2px; =
+PADDING-LEFT: 2px; PADDING-RIGHT: 2px; BORDER-TOP: 0px solid; =
+BORDER-RIGHT: 1px solid; PADDING-TOP: 2px
+}
+TD.minimumWidth {
+	TEXT-ALIGN: center; WIDTH: 1%; WHITE-SPACE: nowrap
+}
+TD.noWrap {
+	WHITE-SPACE: nowrap
+}
+TD.noData {
+	TEXT-ALIGN: center
+}
+TD.action {
+	TEXT-ALIGN: center; WIDTH: 1%; WHITE-SPACE: nowrap
+}
+TD.action A {
+	PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: =
+0px; DISPLAY: block; PADDING-TOP: 0px
+}
+DIV.noData {
+	BORDER-BOTTOM: 1px solid; TEXT-ALIGN: center; BORDER-LEFT: 1px solid; =
+PADDING-BOTTOM: 0.5em; PADDING-LEFT: 0.5em; PADDING-RIGHT: 0.5em; =
+BORDER-TOP: 1px solid; BORDER-RIGHT: 1px solid; PADDING-TOP: 0.5em
+}
+DIV.noData {
+	MARGIN-BOTTOM: 5px
+}
+TABLE.ioTable {
+	BORDER-BOTTOM: 1px solid; BORDER-LEFT: 1px solid; WIDTH: 100%; =
+BORDER-TOP: 1px solid; BORDER-RIGHT: 1px solid
+}
+TABLE.ioTable TD {
+	PADDING-BOTTOM: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; =
+PADDING-TOP: 2px
+}
+TABLE.ioTable TD.ioLabel {
+	TEXT-ALIGN: right; LETTER-SPACING: 0.05em; VERTICAL-ALIGN: top
+}
+TABLE.ioTable TD.ioValue {
+	VERTICAL-ALIGN: top
+}
+TABLE.ioTable TD.ioValue P.note {
+	PADDING-BOTTOM: 5px; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: =
+0px; PADDING-TOP: 3px
+}
+DIV.ioTable {
+	BORDER-BOTTOM: 1px solid; BORDER-LEFT: 1px solid; PADDING-BOTTOM: 15px; =
+PADDING-LEFT: 0px; PADDING-RIGHT: 0px; BORDER-TOP: 1px solid; =
+BORDER-RIGHT: 1px solid; PADDING-TOP: 15px
+}
+DIV.ioTable DIV.noData {
+	TEXT-ALIGN: center; PADDING-BOTTOM: 0px; BORDER-RIGHT-WIDTH: 0px; =
+MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; BORDER-TOP-WIDTH: =
+0px; BORDER-BOTTOM-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px; PADDING-TOP: 0px
+}
+DIV.ioTable TABLE.ioTable {
+	BORDER-RIGHT-WIDTH: 0px; WIDTH: 99%; BORDER-TOP-WIDTH: 0px; =
+BORDER-BOTTOM-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px
+}
+TABLE.summaryTable {
+	MARGIN: 15px 0px 0px; WIDTH: 100%
+}
+TABLE.summaryTable TD.summaryAction {
+	TEXT-ALIGN: right; PADDING-BOTTOM: 2px; PADDING-LEFT: 2px; =
+PADDING-RIGHT: 2px; VERTICAL-ALIGN: bottom; PADDING-TOP: 2px
+}
+TABLE.summaryTable TD.summaryAccount {
+	PADDING-BOTTOM: 0px; PADDING-LEFT: 4px; PADDING-RIGHT: 0px; =
+VERTICAL-ALIGN: top; PADDING-TOP: 0px
+}
+TABLE.summaryTable TD.summaryLabel {
+	BORDER-BOTTOM: 0px solid; BORDER-LEFT: 1px solid; PADDING-BOTTOM: 2px; =
+PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BORDER-TOP: 1px solid; =
+BORDER-RIGHT: 0px solid; PADDING-TOP: 2px
+}
+TABLE.summaryTable TD.summaryValue {
+	BORDER-BOTTOM: 0px solid; TEXT-ALIGN: right; BORDER-LEFT: 1px solid; =
+PADDING-BOTTOM: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BORDER-TOP: =
+1px solid; BORDER-RIGHT: 1px solid; PADDING-TOP: 2px
+}
+FIELDSET.dynamicTable H2.subTitle SPAN {
+	FLOAT: right; FONT-WEIGHT: normal
+}
+FIELDSET.dynamicTable DIV.tableHeaderRow {
+	BORDER-BOTTOM: 1px solid; TEXT-ALIGN: center; BORDER-LEFT: 1px solid; =
+PADDING-BOTTOM: 2px; PADDING-LEFT: 2px; PADDING-RIGHT: 2px; BORDER-TOP: =
+0px solid; BORDER-RIGHT: 1px solid; PADDING-TOP: 2px
+}
+FIELDSET.dynamicTable DIV.tableHeaderRow A {
+	BORDER-BOTTOM: 1px solid; BORDER-LEFT: 1px solid; PADDING-BOTTOM: 0px; =
+PADDING-LEFT: 15px; PADDING-RIGHT: 15px; BORDER-TOP: 1px solid; =
+BORDER-RIGHT: 1px solid; PADDING-TOP: 1px
+}
+DIV.actionSetTop {
+	TEXT-ALIGN: right; PADDING-BOTTOM: 0px; MARGIN: 0px 0px 5px; =
+PADDING-LEFT: 0px; PADDING-RIGHT: 0px; PADDING-TOP: 0px
+}
+DIV.actionSetBottom {
+	TEXT-ALIGN: right; PADDING-BOTTOM: 0px; MARGIN: 5px 0px 0px; =
+PADDING-LEFT: 0px; PADDING-RIGHT: 0px; PADDING-TOP: 0px
+}
+IMG.actionIcon {
+	VERTICAL-ALIGN: bottom
+}
+IMG.linkIcon {
+	VERTICAL-ALIGN: middle
+}
+SPAN.comment {
+	FONT-SIZE: 80%
+}
+DIV.comment {
+	FONT-SIZE: 80%
+}
+SPAN.asterick {
+	FONT-SIZE: 1.25em; FONT-WEIGHT: bold
+}
+.floatRight {
+	FLOAT: right
+}
+TD.amount {
+	TEXT-ALIGN: right
+}
+TH.amount {
+	TEXT-ALIGN: right
+}
+TH.right {
+	TEXT-ALIGN: right
+}
+TD.right {
+	TEXT-ALIGN: right
+}
+TH.center {
+	TEXT-ALIGN: center
+}
+TD.center {
+	TEXT-ALIGN: center
+}
+DIV.center {
+	TEXT-ALIGN: center
+}
+TR.selectedRowBackground TD {
+	BACKGROUND-COLOR: rgb(255,252,207)
+}
+A.selectedRowBackgroundHover:hover {
+	BACKGROUND-COLOR: rgb(255,252,207)
+}
+A.selectedRowBackground {
+	BACKGROUND-COLOR: rgb(255,252,207)
+}
+A.plainLink {
+	TEXT-DECORATION: none
+}
+A.plainLink:hover {
+	TEXT-DECORATION: none
+}
+.disabledItem {
+	TEXT-DECORATION: line-through
+}
+.buttonAdd {
+	PADDING-LEFT: 16px; BACKGROUND-REPEAT: no-repeat; BACKGROUND-POSITION: =
+2px center
+}
+.buttonSave {
+	PADDING-LEFT: 16px; BACKGROUND-REPEAT: no-repeat; BACKGROUND-POSITION: =
+2px center
+}
+.buttonCancel {
+	PADDING-LEFT: 16px; BACKGROUND-REPEAT: no-repeat; BACKGROUND-POSITION: =
+2px center
+}
+.buttonDelete {
+	PADDING-LEFT: 16px; BACKGROUND-REPEAT: no-repeat; BACKGROUND-POSITION: =
+2px center
+}
+.buttonCopy {
+	PADDING-LEFT: 16px; BACKGROUND-REPEAT: no-repeat; BACKGROUND-POSITION: =
+2px center
+}
+.buttonDisable {
+	PADDING-LEFT: 16px; BACKGROUND-REPEAT: no-repeat; BACKGROUND-POSITION: =
+2px center
+}
+.buttonEnable {
+	PADDING-LEFT: 16px; BACKGROUND-REPEAT: no-repeat; BACKGROUND-POSITION: =
+2px center
+}
+.buttonPreview {
+	PADDING-LEFT: 16px; BACKGROUND-REPEAT: no-repeat; BACKGROUND-POSITION: =
+2px center
+}
+.buttonAdd {
+	BACKGROUND-IMAGE: url(./etc/image/system/add2.gif)
+}
+.buttonAdd:hover {
+	BACKGROUND-IMAGE: url(./etc/image/system/add2_on.gif)
+}
+.buttonSave {
+	BACKGROUND-IMAGE: url(./etc/image/system/disk_off.gif)
+}
+.buttonSave:hover {
+	BACKGROUND-IMAGE: url(./etc/image/system/disk_on.gif)
+}
+.buttonCancel {
+	BACKGROUND-IMAGE: url(./etc/image/system/cancel.gif); MARGIN-LEFT: 10px
+}
+.buttonCancel:hover {
+	BACKGROUND-IMAGE: url(./etc/image/system/cancel_on.gif)
+}
+.buttonDelete {
+	BACKGROUND-IMAGE: url(./etc/image/system/delete_off.gif)
+}
+.buttonDelete:hover {
+	BACKGROUND-IMAGE: url(./etc/image/system/delete_on.gif)
+}
+.buttonCopy {
+	BACKGROUND-IMAGE: url(./etc/image/system/copy.gif)
+}
+.buttonCopy:hover {
+	BACKGROUND-IMAGE: url(./etc/image/system/copy.gif)
+}
+.buttonDisable {
+	BACKGROUND-IMAGE: url(./etc/image/system/disable.gif)
+}
+.buttonDisable:hover {
+	BACKGROUND-IMAGE: url(./etc/image/system/disable_on.gif)
+}
+.buttonEnable {
+	BACKGROUND-IMAGE: url(./etc/image/system/enable.gif)
+}
+.buttonEnable:hover {
+	BACKGROUND-IMAGE: url(./etc/image/system/enable_on.gif)
+}
+.buttonPreview {
+	BACKGROUND-IMAGE: url(./etc/image/system/search.gif)
+}
+.buttonPreview:hover {
+	BACKGROUND-IMAGE: url(./etc/image/system/search_on.gif)
+}
+DIV.hr {
+	PADDING-BOTTOM: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; HEIGHT: =
+2px; FONT-SIZE: 1px; PADDING-TOP: 0px
+}
+.horizontalFieldList {
+	LIST-STYLE-TYPE: none; PADDING-LEFT: 0px; PADDING-RIGHT: 1em; DISPLAY: =
+inline
+}
+.horizontalFieldList LI {
+	DISPLAY: inline-block
+}
+.verticalFieldList {
+	LIST-STYLE-TYPE: none; MARGIN-TOP: 0px; PADDING-LEFT: 0px
+}
+.label {
+	PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: =
+0px; DISPLAY: inline; PADDING-TOP: 0px
+}
+A.toggle {
+	BACKGROUND-IMAGE: url(./etc/image/system/minus1.gif); MARGIN-TOP: 10px; =
+PADDING-LEFT: 15px; DISPLAY: block; BACKGROUND-REPEAT: no-repeat; =
+BACKGROUND-POSITION: left center; TEXT-DECORATION: none
+}
+A.toggleHidden {
+	BACKGROUND-IMAGE: url(./etc/image/system/minus1.gif)
+}
+A.toggleVisable {
+	BACKGROUND-IMAGE: url(./etc/image/system/plus1.gif)
+}
+DIV.allowDisallowButtons {
+	TEXT-ALIGN: right; PADDING-BOTTOM: 4px; PADDING-LEFT: 12px; =
+PADDING-RIGHT: 12px; PADDING-TOP: 4px
+}
+A.showHelp {
+	BACKGROUND-IMAGE: url(./etc/image/system/help_off.gif); PADDING-LEFT: =
+15px; BACKGROUND-REPEAT: no-repeat; BACKGROUND-POSITION: left center; =
+MARGIN-LEFT: 7px; FONT-SIZE: 15px
+}
+:focus {
+	OUTLINE-STYLE: none; OUTLINE-COLOR: invert; OUTLINE-WIDTH: medium; =
+-moz-outline-style: none
+}
+
+------=_NextPart_000_0000_01CD968C.AC5F3180
+Content-Type: text/css;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: https://quikpayasp.com/ccsu/quikpay/template/Style.css
+
+DIV#template_MainTemplate {
+	WIDTH: 760px
+}
+DIV#template_MainTemplate_sideBar {
+	POSITION: absolute; WIDTH: 155px; OVERFLOW: hidden; LEFT: 0px
+}
+DIV#template_MainTemplate_content {
+	PADDING-BOTTOM: 0px; PADDING-LEFT: 0px; BORDER-SPACING: 0; WIDTH: =
+605px; PADDING-RIGHT: 0px; DISPLAY: table; HEIGHT: 600px; MARGIN-LEFT: =
+155px; PADDING-TOP: 0px
+}
+DIV#template_MainTemplate_embedded {
+	WIDTH: 605px
+}
+DIV#template_MainTemplate_content_embedded {
+	PADDING-BOTTOM: 0px; PADDING-LEFT: 0px; BORDER-SPACING: 0; WIDTH: =
+605px; PADDING-RIGHT: 0px; DISPLAY: table; HEIGHT: 500px; PADDING-TOP: =
+0px
+}
+DIV#template_MainTemplate_noscript {
+	BACKGROUND-IMAGE: url(../etc/image/system/warning20.gif); =
+BORDER-BOTTOM: 1px solid; BORDER-LEFT: 1px solid; PADDING-BOTTOM: 5px; =
+MARGIN-TOP: 0px; PADDING-LEFT: 35px; PADDING-RIGHT: 5px; =
+BACKGROUND-REPEAT: no-repeat; BACKGROUND-POSITION: 4px center; =
+BORDER-TOP: 1px solid; BORDER-RIGHT: 1px solid; PADDING-TOP: 5px
+}
+A#template_MainTemplate_logo_test {
+	BORDER-BOTTOM: #fdff00 5px double; TEXT-ALIGN: center; BORDER-LEFT: =
+#fdff00 5px double; PADDING-BOTTOM: 0.75em; BACKGROUND-COLOR: #fdff00; =
+PADDING-LEFT: 0px; PADDING-RIGHT: 0px; DISPLAY: block; FONT-FAMILY: =
+arial; COLOR: #fdff00; FONT-SIZE: 10px; BORDER-TOP: #fdff00 5px double; =
+BORDER-RIGHT: #fdff00 5px double; TEXT-DECORATION: none; PADDING-TOP: =
+0.75em
+}
+A#template_MainTemplate_logo_test SPAN#left_warning {
+	FONT-WEIGHT: bold; MARGIN-RIGHT: 15em
+}
+A#template_MainTemplate_logo_test SPAN#right_warning {
+	MARGIN-LEFT: 15em; FONT-WEIGHT: bold
+}
+DIV#template_LoginTemplate {
+	WIDTH: 760px
+}
+DIV#template_LoginTemplate_sideBar {
+	POSITION: absolute; WIDTH: 155px; OVERFLOW: hidden; LEFT: 0px
+}
+DIV#template_LoginTemplate_content {
+	PADDING-BOTTOM: 0px; PADDING-LEFT: 0px; BORDER-SPACING: 0; WIDTH: =
+605px; PADDING-RIGHT: 0px; DISPLAY: table; HEIGHT: 450px; MARGIN-LEFT: =
+155px; PADDING-TOP: 0px
+}
+DIV#template_LogoTemplate {
+	WIDTH: 760px
+}
+DIV#template_LogoTemplate_embedded {
+	WIDTH: 605px
+}
+DIV#template_LogoTemplate_statusBar DIV.statusBarBorderColor {
+	BORDER-BOTTOM: 1px solid; BORDER-LEFT: 1px solid; BORDER-TOP: 1px =
+solid; BORDER-RIGHT: 1px solid
+}
+DIV#template_LogoTemplate_sideBar {
+	POSITION: absolute; WIDTH: 155px; OVERFLOW: hidden; LEFT: 0px
+}
+DIV#template_LogoTemplate_content {
+	PADDING-BOTTOM: 0px; MARGIN: 0px 0px 0px 155px; PADDING-LEFT: 0px; =
+BORDER-SPACING: 0; WIDTH: 605px; PADDING-RIGHT: 0px; DISPLAY: table; =
+HEIGHT: 600px; PADDING-TOP: 0px
+}
+DIV#template_LogoTemplate_content_embedded {
+	PADDING-BOTTOM: 0px; PADDING-LEFT: 0px; BORDER-SPACING: 0; WIDTH: =
+605px; PADDING-RIGHT: 0px; DISPLAY: table; HEIGHT: 500px; PADDING-TOP: =
+0px
+}
+DIV#template_ContentTemplate {
+	WIDTH: 760px
+}
+DIV#template_ContentTemplate_content {
+	PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; WIDTH: 100%; =
+PADDING-RIGHT: 0px; PADDING-TOP: 0px
+}
+DIV#template_PrintTemplate {
+	WIDTH: 100%
+}
+DIV#template_PrintTemplate_content {
+	WIDTH: 100%
+}
+DIV#template_PrintTemplate_statusBar {
+	BORDER-BOTTOM: 1px solid; TEXT-ALIGN: right; BORDER-LEFT: 1px solid; =
+PADDING-BOTTOM: 1px; PADDING-LEFT: 0px; PADDING-RIGHT: 5px; BORDER-TOP: =
+1px solid; BORDER-RIGHT: 1px solid; PADDING-TOP: 3px
+}
+DIV#template_PrintTemplate_statusBar A {
+	FONT: 80% verdana
+}
+DIV#template_PrintTemplate_statusBar IMG {
+	VERTICAL-ALIGN: bottom
+}
+DIV#template_ErrorTemplate {
+	BACKGROUND-IMAGE: url(../etc/image/system/dialog-warning.png); =
+TEXT-ALIGN: left; PADDING-BOTTOM: 0px; MARGIN: 100px auto; PADDING-LEFT: =
+0px; WIDTH: 600px; PADDING-RIGHT: 0px; BACKGROUND-REPEAT: no-repeat; =
+FONT-FAMILY: arial; BACKGROUND-POSITION: 20px 35px; COLOR: black; =
+FONT-SIZE: 14px; PADDING-TOP: 0px
+}
+DIV#template_ErrorTemplate_content {
+	BORDER-BOTTOM: #a9a9a9 1px solid; BORDER-LEFT: #a9a9a9 1px solid; =
+PADDING-BOTTOM: 30px; PADDING-LEFT: 80px; PADDING-RIGHT: 25px; =
+MARGIN-BOTTOM: 10px; BORDER-TOP: #a9a9a9 1px solid; BORDER-RIGHT: =
+#a9a9a9 1px solid; PADDING-TOP: 35px
+}
+SPAN#template_ErrorTemplate_id {
+	FLOAT: right
+}
+DIV#template_ErrorTemplate_copy {
+	TEXT-ALIGN: center; MARGIN-TOP: 10px; COLOR: #666666; FONT-SIZE: 80%
+}
+DIV#template_include_Logo {
+=09
+}
+DIV#template_include_Logo IMG {
+	VERTICAL-ALIGN: bottom
+}
+DIV#template_include_StatusBar {
+	BORDER-BOTTOM: 1px solid; BORDER-LEFT: 1px solid; BORDER-TOP: 1px =
+solid; BORDER-RIGHT: 1px solid
+}
+DIV#template_include_StatusBar_name {
+	PADDING-BOTTOM: 3px; PADDING-LEFT: 3px; WIDTH: 54%; PADDING-RIGHT: 3px; =
+FLOAT: left; PADDING-TOP: 3px
+}
+DIV#template_include_StatusBar_actions {
+	TEXT-ALIGN: right; PADDING-BOTTOM: 0px; MARGIN: 5px 0px 1px; =
+PADDING-LEFT: 0px; WIDTH: 45%; PADDING-RIGHT: 0px; FLOAT: left; =
+PADDING-TOP: 0px
+}
+DIV#template_include_StatusBar_actions A {
+	FONT: 80% verdana
+}
+DIV#template_include_StatusBar_actions IMG {
+	VERTICAL-ALIGN: bottom
+}
+DIV#template_include_SideBar {
+	PADDING-BOTTOM: 0px; PADDING-LEFT: 3px; PADDING-RIGHT: 3px; =
+PADDING-TOP: 15px
+}
+DIV#template_include_SideBar_fixedMenu {
+	BORDER-BOTTOM: 1px solid; BORDER-LEFT: 1px solid; PADDING-BOTTOM: 5px; =
+PADDING-LEFT: 5px; PADDING-RIGHT: 5px; BORDER-TOP: 1px solid; =
+BORDER-RIGHT: 1px solid; PADDING-TOP: 5px
+}
+DIV#template_include_SideBar_primaryUserMenu {
+	BORDER-BOTTOM: 1px solid; BORDER-LEFT: 1px solid; MARGIN-TOP: 10px; =
+BORDER-TOP: 1px solid; BORDER-RIGHT: 1px solid
+}
+DIV#template_include_SideBar_primaryUserMenu H3 {
+	BORDER-BOTTOM: 1px solid; TEXT-ALIGN: center; BORDER-LEFT: 0px solid; =
+PADDING-BOTTOM: 2px; PADDING-LEFT: 2px; PADDING-RIGHT: 2px; BORDER-TOP: =
+0px solid; BORDER-RIGHT: 0px solid; PADDING-TOP: 2px
+}
+DIV#template_include_SideBar_primaryUserMenu DIV {
+	PADDING-BOTTOM: 5px; PADDING-LEFT: 5px; PADDING-RIGHT: 5px; =
+PADDING-TOP: 5px
+}
+TD.subMenu {
+	PADDING-LEFT: 5px
+}
+DIV#template_include_Content {
+	MARGIN: 0px 3px 14px 6px
+}
+DIV#template_include_Content TABLE {
+	WIDTH: 100%
+}
+H1#template_include_Content_title {
+	PADDING-BOTTOM: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; =
+PADDING-TOP: 10px
+}
+DIV#template_include_Content_header {
+	MARGIN-TOP: 10px; PADDING-RIGHT: 3px
+}
+DIV.templateIncludeContentMessage {
+	MARGIN-TOP: 10px; PADDING-RIGHT: 3px
+}
+DIV#template_include_Content_content {
+	MARGIN-TOP: 10px; PADDING-RIGHT: 3px
+}
+DIV#template_include_Content_footer {
+	MARGIN-TOP: 10px; PADDING-RIGHT: 3px
+}
+DIV#template_include_Content_message {
+	BACKGROUND-IMAGE: url(../etc/image/system/important20.gif); =
+PADDING-BOTTOM: 5px; MARGIN-TOP: 10px; PADDING-LEFT: 30px; =
+PADDING-RIGHT: 0px; BACKGROUND-REPEAT: no-repeat; BACKGROUND-POSITION: =
+left 4px; PADDING-TOP: 5px
+}
+DIV#template_include_Content_error {
+	BACKGROUND-IMAGE: url(../etc/image/system/pageError20.gif); =
+PADDING-BOTTOM: 5px; MARGIN-TOP: 10px; PADDING-LEFT: 30px; =
+PADDING-RIGHT: 0px; BACKGROUND-REPEAT: no-repeat; BACKGROUND-POSITION: =
+left 4px; PADDING-TOP: 5px
+}
+DIV#template_include_Copyright {
+	BORDER-BOTTOM: 0px solid; BORDER-LEFT: 0px solid; PADDING-BOTTOM: 20px; =
+BACKGROUND: white; COLOR: #404040; BORDER-TOP: 1px solid; BORDER-RIGHT: =
+0px solid
+}
+IMG#template_include_Copyright_qp {
+	MARGIN: 10px 0px 0px 155px; WIDTH: 71px; FLOAT: left
+}
+IMG#template_include_Copyright_qp_embedded {
+	MARGIN: 10px 0px 0px; WIDTH: 71px; FLOAT: left
+}
+DIV#template_include_Copyright_vs {
+	TEXT-ALIGN: right; MARGIN: 2px 0px 0px; WIDTH: 100px; FLOAT: right
+}
+DIV#template_include_Copyright_text {
+	PADDING-BOTTOM: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; =
+FONT-FAMILY: Arial; MARGIN-LEFT: 265px; FONT-SIZE: 11px; MARGIN-RIGHT: =
+115px; PADDING-TOP: 24px
+}
+DIV#template_include_Copyright_text_embedded {
+	PADDING-BOTTOM: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; =
+FONT-FAMILY: Arial; MARGIN-LEFT: 110px; FONT-SIZE: 11px; MARGIN-RIGHT: =
+115px; PADDING-TOP: 24px
+}
+
+------=_NextPart_000_0000_01CD968C.AC5F3180
+Content-Type: text/css;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: https://quikpayasp.com/ccsu/quikpay/etc/error/Style.css
+
+P {
+	PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: =
+0px; PADDING-TOP: 0px
+}
+H1 {
+	PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: =
+0px; FONT-SIZE: 180%; FONT-WEIGHT: bold; PADDING-TOP: 0px
+}
+H2 {
+	PADDING-BOTTOM: 0px; MARGIN: 0.5em 0px; PADDING-LEFT: 0px; =
+PADDING-RIGHT: 0px; FONT-SIZE: 110%; FONT-WEIGHT: bold; PADDING-TOP: 0px
+}
+P.etcErrorTimestamp {
+	MARGIN: -0.1em 0px 0px 2em; COLOR: #666666; FONT-SIZE: 80%; =
+FONT-WEIGHT: bold
+}
+P.etcErrorMessage {
+	MARGIN: 2em 0px 1em; COLOR: red; FONT-WEIGHT: bold
+}
+DIV#etc_error_SessionExpiredError A {
+	BORDER-BOTTOM: #a9a9a9 2px outset; TEXT-ALIGN: center; BORDER-LEFT: =
+#a9a9a9 2px outset; PADDING-BOTTOM: 2px; MARGIN-TOP: 5px; PADDING-LEFT: =
+10px; WIDTH: 100px; PADDING-RIGHT: 10px; DISPLAY: block; BACKGROUND: =
+#cccccc; COLOR: #003c74; BORDER-TOP: #a9a9a9 2px outset; FONT-WEIGHT: =
+bold; BORDER-RIGHT: #a9a9a9 2px outset; TEXT-DECORATION: none; =
+PADDING-TOP: 2px
+}
+DIV#etc_error_PageError {
+	PADDING-BOTTOM: 0px; PADDING-LEFT: 10px; WIDTH: 595px; PADDING-RIGHT: =
+0px; FONT-FAMILY: arial; COLOR: black; FONT-SIZE: 14px; PADDING-TOP: 5px
+}
+
+------=_NextPart_000_0000_01CD968C.AC5F3180--

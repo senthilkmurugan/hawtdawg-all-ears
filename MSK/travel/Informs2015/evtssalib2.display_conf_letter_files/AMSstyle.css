@@ -1,0 +1,939 @@
+BODY {
+	font-family : Arial, Helvetica, sans-serif;
+	font-size : 11.5px;
+	color : #333333;
+}
+
+TD {
+	font-family : Arial, Helvetica, sans-serif;
+	font-size : 11.5px;
+	color : #333333;
+}
+TH {
+	font-family : Arial, Helvetica, sans-serif;
+	font-size : 11.5px;
+	color : #333333;
+}
+
+ul, li{ 
+margin:0; 
+padding:0; 
+list-style-type:none; 
+} 
+
+#evtssareg-custinfo ul, #evtssareg-custinfo li{ 
+margin:5px 10px; 
+padding:0; 
+list-style-type:disc; 
+} 
+
+#evtssareg-custinfo .aaFormFields ul, #evtssareg-custinfo .aaFormFields li
+{
+  margin:0; 
+padding:0; 
+list-style-type:none; 
+}
+li{
+	/*background-image: url(bullet.gif);*/
+	background-repeat: no-repeat;
+	background-position: 0px 1px;
+	padding-top:0px;
+	/*padding-right: 15px;*/
+	padding-bottom: 5px;
+	/*padding-left: 15px;*/
+	font-size: 11.5px;
+} 
+
+hr 
+{
+  border-width: 1px;
+  width: 0%;
+}
+H1 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-weight: bold;
+	color: #000000;	
+}
+
+H2 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	font-weight: bold;
+	color: #666666;	
+}
+
+.hdr_msg {
+	font-size: 14px;
+	color: #65658b;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	
+	
+}
+.hdr_msg_name {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-weight: bold;
+	color: #000066;	
+}
+
+H3 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11.5px;
+	font-weight: bold;
+}
+
+H4 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11.5px;
+	font-weight: bold;
+	color: #000000;
+}
+.alert {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 15px;
+	font-weight: bold;
+	color: #FF6633;
+		
+}
+.red {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #E60000;
+		
+}
+.pagetitles {
+	font-size: 20px;
+	color: #6565a0;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+.CH1 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-weight: bold;
+	color: #FFFFFF;
+	background-color: #66632F;
+	display: table-cell;
+	height: auto;
+	width: 100%;
+	padding: 5px;	
+}
+
+.CH2 {
+  /*display: block;*/
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	color: #6A6731;
+	background-color: #E9E8CF;
+	height: auto;
+	padding: 5px;
+	text-transform: uppercase;
+	text-align: left;
+}
+
+.MH1 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	font-weight: bold;
+	color: #FFFFFF;
+	background-color: #000066;
+	display: block;
+	height: auto;
+	padding: 5px;
+	text-transform: uppercase;
+	font-variant: normal;
+	margin-bottom: 8px;
+}
+
+.order_summary_hdr
+{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	font-weight: bold;
+	color: #FFFFFF;
+	background-color: #000066;
+	display: block;
+	height: auto;
+	padding: 5px;
+	text-transform: uppercase;
+	font-variant: normal;
+}
+
+.MH2 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	color: #333333;
+	background-color: #D5EAFF;
+	display: block;
+	height: auto;
+	width: 100%;
+	padding: 5px;
+	text-transform: uppercase;
+	text-align: center;
+}
+
+.section_name {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	color: #333333;
+	background-color: #D5EAFF;
+	display: table-cell;
+	height: auto;
+	width: 100%;
+	padding: 5px;
+	text-transform: uppercase;
+	text-align: center;
+}
+.EVTPRIREG {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	color: #333333;
+	background-color: #e8e8e8;
+	display: table-cell;
+	height: auto;
+	width: 100%;
+	padding: 5px;
+	text-transform: uppercase;
+    text-align: left;
+}
+.EVTCIADDR {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	color: #333333;
+	background-color: #e8e8e8;
+	display: table-cell;
+	height: auto;
+	width: 100%;
+	padding: 5px;
+	text-transform: uppercase;
+    text-align: left;
+
+}
+.EVTPAYTOTAL {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	color: #FF6633;
+	display: table-cell;
+	height: auto;
+	width: 100%;
+	text-transform: uppercase;
+	text-align: right;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+	border-top-color: #cccccc;
+	
+	padding-top: 5px;
+	padding-right: 20px;
+	padding-bottom: 5px;
+	padding-left: 20px;
+}
+.EVTPAYITEM {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	color: #333333;
+	display: table-cell;
+	height: auto;
+	width: 100%;
+	padding: 5px;
+	
+    text-align: left;
+	border-bottom-width: 1px;
+	border-top-width: 1px;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: solid;
+	border-top-style: solid;
+	border-left-style: none;
+	border-bottom-color: #cccccc;
+	border-top-color: #cccccc;
+	padding-top: 5px;
+	padding-right: 0px;
+	padding-bottom: 5px;
+	padding-left: 0px;
+}
+.EVTCIBADGE {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	color: #333333;
+	background-color: #e8e8e8;
+	display: table-cell;
+	height: auto;
+	width: 100%;
+	padding: 5px;
+	text-transform: uppercase;
+    text-align: left;
+}
+
+.sgp_type_hdr {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	font-weight: bold;
+	color: #333333;
+	background-color: #EBEBEB;
+	display: inline-block;
+	height: auto;
+	width: 100%;
+	padding: 5px;	
+}
+
+.section {
+	font-size: 14px;
+	color: #65658b;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+.cust_name
+{
+	font-size: 16px;
+	color: #65658b;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+a:link {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	color: #0080c0;
+	text-decoration: none;
+	text-transform: none;
+	font-weight: normal;
+}
+a:visited {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	color: #0080c0;
+	text-decoration: none;
+}
+a:hover {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	color: #FF6600;
+	text-decoration: none;
+}
+a:active {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+    color: #0000CC;
+	text-decoration: none;
+	}
+.ECShoppingCartHdr { display: table-row; }
+.ECShoppingCartHdr td, .ECShoppingCartHdr th {
+
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	color: #333333;
+	background-color: #e8e8e8;
+	display: table-cell;
+	height: auto;
+	padding: 5px;
+    text-align: left;
+}
+
+.item_group_descr {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	color: #333333;
+	background-color: #F0F0F0;
+	display: block;
+	height: auto;
+	padding: 2px;
+	margin-top: 5px;
+}
+
+#aaSuperResponsiveContainer #aaLoginInner
+{
+  padding: 0;
+  background-image: none;
+  margin-bottom: 10px;
+  height: auto;
+}
+#aaSuperResponsiveContainer #aaLoginInner #aaLoginBox
+{
+  padding: 0;
+  background-image: none;
+  border-width: 0;
+  margin-top: 10px;
+  height: auto;
+  width: 920px;
+}
+
+#aaSSAMenu h4 {
+  margin: 0;
+}
+
+#aaSSAMenu h4 a img {
+  margin-right: 0;
+  vertical-align: middle;
+}
+
+#aaSSAMenu h4 + p {
+  margin: 0 0 0 28px;
+  font-size: 11px;
+}
+
+#aaSSAMenu li {
+  background-image: none;
+}
+
+#loginBox, #aaSuperResponsiveContainer #aaLoginBox {
+  width: 100%;
+}
+#Login_Page {
+  text-align: left;
+}
+
+#loginBox ul, #aaSuperResponsiveContainer #aaLoginBox ul {
+  width: 300px;
+  margin-left:auto;
+  margin-right: auto;
+}
+
+#loginBox li, #aaLoginBox li {
+  background-image:none;
+}
+
+#loginBox ul#loginLinks, #aaLoginBox ul#loginLinks {
+  width:100%;
+}
+
+#loginBox ul#loginLinks li#forgotPW, #aaLoginBox ul#loginLinks li#forgotPW{
+  text-align: center;
+}
+
+#loginBox ul#loginLinks li#forgotPW label, 
+#aaSuperResponsiveContainer #aaLoginBox ul#loginLinks li#forgotPW label,
+#aaSuperResponsiveContainer #aaLoginBox ul li#newCust label
+{
+  display: none;
+}
+
+#aaSuperResponsiveContainer #loginBox label, #aaLoginBox label {
+  font-weight: bold;
+  min-width: 80px;
+}
+
+#aaSuperResponsiveContainer #loginBox .aaSubmitButton, #aaLoginBox  .aaSubmitButton {
+  width: 100px;
+}
+
+#aaSuperResponsiveContainer #aaLoginBox #loginLinks li 
+{
+  clear: both;
+  display: block;
+}
+
+#aaSuperResponsiveContainer #newCust label {
+  display: none;
+}
+.red2 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	color: #E60000;
+	
+}
+
+#aaLoginBox label {
+    display: block;
+    float: left;
+    height: 26px;
+    line-height: 26px;
+    margin-right: 5px;
+    text-align: right;
+    width: 11em;
+}
+#aaSuperResponsiveContainer #aaLoginBox ul li label
+{
+  margin: 0 5px 5px;
+}
+
+.aaFormFields li {padding-left: 0;}
+
+.aaFormFields label 
+{
+font-weight: bold;
+}
+
+#aaCenssacustloginCustFields label 
+{
+width: 100px;
+display: block;
+float: left;
+clear: left;
+text-align: right;
+padding-right: 5PX;
+}
+
+
+#aaCenssacustloginCustFields input[type=text]
+{
+display: block;
+float: left;
+width: 300px;
+}
+
+td#reg-attrs p {display: inline; padding-left: 10px; }
+
+
+td#reg-attrs label {font-weight: bold; }
+
+li.aaSvyForm, li.aaRadio {display: block; clear: left;}
+#aaCenssaCustLoginUD li input[type="password"], 
+#aaCenssacustloginSecretFields li input[type="text"], 
+#aaCenssacustloginCustFields li input[type="text"], 
+#forgotPWBox input, 
+#forgotPWBox select, 
+#aaSuperResponsiveContainer #aaLoginBox input, 
+#aaLoginBox select
+{
+  padding: 3px;
+}
+ul#lastNmCustId
+{
+  margin: 10px 0;
+  width: 300px;
+  float: left;
+}
+ul#loginPW
+{
+  margin: 10px 0;
+  width: 300px;
+  float: left;
+}
+li#newCust
+{ 
+  padding: 0;
+  /*
+  position: absolute;
+  width: 460px;
+  left: 480px;
+  top: 20px;*/
+}
+
+#loginBox label, #aaSuperResponsiveContainer #aaLoginBox label
+{
+  width: 80px;
+}
+
+#aaSuperResponsiveContainer #aaLoginBox .authLabelMethodStdDoc, #aaSuperResponsiveContainer #loginBox .authLabelMethodStdDoc
+{
+  width: 100px;
+  float: left;
+}
+
+#aaSuperResponsiveContainer #loginBox .authLabelMethodStdDoc hr, #aaSuperResponsiveContainer #aaLoginBox .authLabelMethodStdDoc hr, #aaSuperResponsiveContainer #aaLoginBox ul.aaSubmission label
+{
+  display: none;
+}
+
+#aaSuperResponsiveContainer #aaLoginBox .authLabelMethodStdDoc
+{
+  padding-top: 15px;
+}
+
+#aaSuperResponsiveContainer #loginBox ul.aaSubmission, #aaSuperResponsiveContainer #aaLoginBox ul.aaSubmission
+{
+  width: 100px; 
+  float:left;
+  padding-left: 20px;
+}
+
+#aaSuperResponsiveContainer #loginBox ul.aaSubmission label, #aaSuperResponsiveContainer #aaLoginBox ul.aaSubmission label
+{
+  width: 0px;
+  height: 10px;
+}
+
+.aaWarning .aaWarningMsg
+{
+  padding-left: 20px;
+}
+
+form#Login_Page span.CH2 ~ br
+{
+  display: none;
+}
+
+#aaSuperResponsiveContainer #aaLoginBox ul li input
+{
+  min-width: 100px;
+}
+
+#aaSuperResponsiveContainer #aaLoginBox ul li input[type=submit]
+{
+  width: 100px;
+  min-width: 100px;
+  height: 32px;
+  margin-top: 25px;
+}
+
+#aaSuperResponsiveContainer #loginBox input[type="text"], #aaSuperResponsiveContainer #loginBox input[type="password"], 
+#aaSuperResponsiveContainer  #aaLoginBox input[type="text"], #aaSuperResponsiveContainer #aaLoginBox input[type="password"]
+{
+  width: 150px;
+}
+
+#ecssaContainer .aaECShopCategoryDisplay 
+{
+  float: none !important;
+  width: 100% !important;
+}
+
+#ecssaContainer #aaECCheckoutForm #aaECBillingInformation label, #ecssaContainer #aaECCheckoutForm #aaECShippingInformation label 
+{
+  text-align: left !important;
+}
+
+#ecssaContainer #aaECCheckoutForm #aaECBillingInformation input[type="text"], #ecssaContainer #aaECCheckoutForm #aaECShippingInformation input[type="text"] 
+{
+  width: 300px !important;
+}
+
+#aaSuperResponsiveContainer form[name="Login_Page"] p 
+{
+  margin: 10px 0;
+}
+
+#aaSuperResponsiveContainer #aaLoginBox li#newCust,
+#aaSuperResponsiveContainer #aaLoginBox li#forgotPW a, 
+#aaSuperResponsiveContainer #aaLoginBox li#forgotPW a:hover,
+#aaSuperResponsiveContainer #aaLoginBox li#newCust a,
+#aaSuperResponsiveContainer #aaLoginBox li#newCust a:hover
+{
+  text-align: left;
+}
+
+.homepage .aaRsContainer
+{
+
+}
+
+.homepage .aaRsColumn, .homepage .aaRsColumns
+{
+  margin-left: 0;
+  margin-right: 0;
+  background-color: #fff;
+}
+
+ul.aaFormFields li.aaAttrty
+{
+  margin-bottom: 0.8em;
+  margin-top: 4px;
+  padding-bottom: 2px;
+}
+ul.aaFormFields li.aaAttrty label
+{
+  padding-left: 10px;
+}
+ul.aaFormFields div.aaAttrInstruct 
+{
+  border-width: 0;
+  margin-bottom: 0;
+  padding-bottom: 0;
+  padding-top: 0;
+  padding-left: 0;
+}
+.aaFormFields .aaLabel, .aaFormFields label
+{
+  margin-bottom: 4px;
+  margin-top: 0;
+}
+.aaFormFields .aaProfileDataWrapper, 
+.aaFormFields .aaProfileDataWrapper p
+{
+  display: inline-block;
+}
+.aaFormFields label
+{
+  padding-right: 10px;
+  width: auto;
+}
+ul.aaRadioGroup li
+{
+  margin: 0 10px;
+}
+ul.aaCheckboxGroup li
+{
+  margin: 1px 10px;
+}
+.aaNewCustomerPage .aaStyleOuter
+{
+  padding: 0 15px;
+  margin-top: 10px;
+}
+.aaNewCustomerPage .aaFormFields .aaProfileDoc
+{
+  display: none;
+}
+.aaNewCustomerPage .aaFormFields
+{
+
+}
+
+#aaAttrty_EDUCATION_Institution input
+{
+  width: 300px;
+}
+.aaSectionBlockInstructions
+{
+  margin-bottom: 1em;
+}
+
+.aaNewCustomerPage .aaFormFields li label
+{
+  display: inline-block;
+  width: 200px;
+  text-align: right;
+}
+
+.aaNewCustomerPage .aaSectionBlock .aaFormFields li label
+{
+  text-align: left;
+  width: auto;
+}
+
+.aaNewCustomerPage ul.aaFormFields li
+{
+  min-height: 20px;
+}
+
+.aaRsColumn, .aaRsColumns
+{
+  margin-left: 0;
+}
+
+.aaProfileContentWrapper label
+{
+  display: inline-block !important;
+  width: 200px !important;
+  text-align: right !important;
+  height: auto !important;
+  margin-top: 0 !important;
+}
+.aaProfileContentWrapper hr
+{
+  border: 1px solid #444;
+  border-width: 1px 0 0;
+  width: 100%;
+}
+.aaProfileContentWrapper ul.aaFormFields li
+{
+  min-height: 15px;
+}
+.aaProfileDataWrapper p
+{
+  margin: 0 !important;
+}
+
+#ship_method {
+DISPLAY: none
+}
+#dflt-addr-hdr {
+DISPLAY: none
+}
+#dflt-addr-input {
+DISPLAY: none
+}
+#county-hdr {
+DISPLAY: none
+}
+#county-input {
+DISPLAY: none
+}
+.utilitymenu a {font-size:8pt;}
+
+#ec_shop_topbar
+{
+  text-align: right;
+  margin-right: 10px;
+}
+
+.aaCrtPeriodNavLinks {display:none;}
+.aaCrtEvalCol {display:none;}
+#aaCrtTransSpclHdr th{color: #EEEEEE; font-weight:bold;}
+
+.aaProfileDoc
+{
+  display: block;
+  clear: left;
+}
+
+input[type=submit], input[type=reset], input[type=button]
+{
+    -moz-border-bottom-colors: none;
+    -moz-border-image: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    -moz-transition: all 0.2s ease-in-out 0s;
+    -webkit-transition: all 0.2s ease-in-out 0s;
+    background: -moz-linear-gradient(center top , #EDEDED, #C4C4C4) repeat scroll 0 0 transparent;
+    background-color: -webkit-linear-gradient(center top , #EDEDED, #C4C4C4);
+    border-color: #BDBDBD #ACACAC #949494;
+    border-left: 1px solid #ACACAC;
+    border-radius: 0.214em 0.214em 0.214em 0.214em;
+    border-right: 1px solid #ACACAC;
+    border-style: solid;
+    border-width: 1px;
+    color: #4F4F4F;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    margin-right: 0.5em;
+    margin-top: 0.5em;
+    padding: 0.15em 1em;
+    text-shadow: 0 1px 1px #FFFFFF;
+
+}
+
+
+input[type="submit"]:hover
+{
+      -moz-border-bottom-colors: none;
+    -moz-border-image: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    -webkit-border-bottom-colors: none;
+    -webkit-border-image: none;
+    -webkit-border-left-colors: none;
+    -webkit-border-right-colors: none;
+    -webkit-border-top-colors: none;
+    background-color: #DDDDDD;
+    border-color: #BDBDBD #ACACAC #949494;
+    border-left: 1px solid #ACACAC;
+    border-right: 1px solid #ACACAC;
+    border-style: solid;
+    border-width: 1px;
+    box-shadow: 0 0 7px rgba(0, 0, 0, 0.4);
+}
+
+#aaAttrTDataEmpty1
+{
+  display: none;
+}
+
+#EDUCATION_tr .aaProfileDataWrapper 
+{
+  margin: 5px 0;
+}
+.aaRsSixteen.aaRsColumns table
+{
+  margin-bottom: 10px;
+}
+.aaRsSixteen.aaRsColumns td
+{
+  padding: 5px 10px !important;
+}
+
+.aaRsSixteen.aaRsColumns #electives_tbl td
+{
+  border: 1px solid #000;
+}
+
+#electives_tbl th[align=left]
+{
+  width: 35%;
+}
+
+#na_core_pack select
+{
+  margin: 5px 0;
+}
+
+#aaInformspubssarenewForm input[type=checkbox]
+{
+  margin-left: 20px;
+}
+
+#subscription_alert p
+{
+  margin: 5px 0;
+}
+
+#ecshoppingutilDisplayShoppingCart center
+{
+  clear: left;
+}
+img.book_topics
+{
+  border: 1px solid #000;
+}
+
+#aaECBillingInformation select, 
+#aaECShippingInformation select
+{
+  display: block;
+  clear: left;
+}
+
+#contact-info-hdr
+{
+  width: 200px;
+}
+#badge-info-hdr
+{
+  width: 500px;
+}
+#evtssareg-custid table { margin-bottom: 0; }
+#event-nm {margin-left: 10px;}
+#event-dt, #event-dt+br, #location-nm, #location-nm+br, #location-city-state, #location-city-state+br
+{
+  display: none;
+}
+#aaEventName, #aaEventDate { display: none; }
+
+#aaInformsSSAMemStartOver { width: 480px; }
+
+.footer p, ul { margin: 2px; }
+
+#simple_reg_instructions {
+  font-size: 11pt;
+}
+
+#simple_reg_instructions p {
+  margin: 20px 0;
+}
+
+#simple_reg_instructions ul {
+  padding: 0 10px;
+}
+
+#simple_reg_instructions li {
+  list-style-type: square;
+  margin: 8px 20px;
+  font-size: 11pt;
+}
+
+.banner_alert {
+    color: #fff;
+    background-color: #f00;
+    text-align: center;
+    font-size: 10pt;
+    padding: 3px;
+}
+#aaSuperResponsiveContainer #aaSSAMenu .aaBodyNav li {
+  height: 40px;
+}
+
+a[href^="evtssareg.custinfo?p_event_id=1148&p_cust_id="] {
+  border: 1px solid red;
+  font-weight: bold;
+}

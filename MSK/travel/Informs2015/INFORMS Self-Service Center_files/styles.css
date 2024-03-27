@@ -1,0 +1,212 @@
+/* ****************** */
+/* Reset HTML styles */
+/* ****************** */
+/*html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+dl, dt, dd, 
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-weight: inherit;
+	font-style: inherit;
+	font-size: 100%;
+	font-family: inherit;
+	vertical-align: baseline;
+}*/
+/* remember to define focus styles! */
+
+
+/* *************** */
+/* Utility Styles */
+/* ************** */
+/* CLEARFIX: Just add a class of .clearfix to any element containing a float needing to be cleared, plus any Guillotine-Bug-fixing block elements within the container. (source: http://www.positioniseverything.net/easyclearing.html) */
+.clearfix:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+/* additional clearfix elements are in ie.css */
+.clearfix {display: inline-block;} /* IE fix for Mac */
+/* IE fix reset for non-mac \*/ * html .clearfix {height: 1%;} /* End hide from IE-mac */
+/* IE hack to fix weird EM bug (http://www.positioniseverything.net/explorer/italicbug-ie.html) */
+/* \*/
+/* */
+/* Peekaboo bug fix 
+#wrapper, #page {zoom: 1;} */
+body
+{
+  background: url(../images/bg-body.jpg) repeat-x; 
+  background-attachment: fixed; color: #333; 
+  font-family: Arial,Helvetica, sans-serif; 
+  font-size: 62.5%; 
+  line-height: 1.6em; 
+  margin: 0 auto; 
+  width: 1000px; 
+  text-align: center;
+  background-color:#999;
+}
+
+.wrapper
+{
+  background: #fff url(https://acgi.informs.org/images/bg-wrapper.png); 
+  width: 980px; 
+  text-align: left;
+  margin-left:auto;
+  margin-right:auto;
+  -moz-box-shadow: 10px 0px 10px -5px #686868, -10px 0px 10px -5px #686868;
+  -webkit-box-shadow: 10px 0px 10px -5px #686868, -10px 0px 10px -5px #686868;
+  box-shadow: 10px 0px 10px -5px #686868, -10px 0px 10px -5px #686868; 
+}
+.container{margin: 0; background-color: #fff}
+.nobg{background-image: none;}
+/* Start generic classes */
+.content .body{overflow: hidden;}
+.module{clear: left;}
+.clear{clear: left;}
+.not-bold{font-weight: normal !important;}
+.img-left{float: left;}
+.img-right{float: right;}
+.small{color: #666; font-size: 94%;}
+
+.content sup,.content sub{font-size: 0.7em; line-height: -1px; vertical-align: text-top;}
+.content sub{vertical-align : text-bottom;}
+.content table{padding: 1.0em 0;}
+.content table table, .content table table th, .content table table td{padding: 0;margin-bottom: 0;}
+.content table caption{color: #003794; text-align: center; padding: 0.4em;}
+.content table th,
+.content table td{padding: 0.2em;}
+
+.header{background: url(https://acgi.informs.org/images/bg-header-nonav.jpg) repeat-x; font-size: 1.1em; height: 94px; width: 980px;}
+.header.nonav{background: #DCE1E7 url(https://acgi.informs.org/images/bg-header-nonav.jpg) repeat-x; height: 8.75em;}
+.header .logo{float: left; padding: 9px 19px; width: 330px;}
+.header .right{float: right; text-align: right;}
+.header .utilitymenu {float: right; text-align: right; padding: 10px; width: 520px; white-space: nowrap;}
+.header .utilitymenu ul {display: block; float: right; list-style-image: none; list-style-position: outside; list-style-type: none; margin: 0 0 10px; vertical-align: bottom;}
+.header .utilitymenu ul li {background: url(https://acgi.informs.org/images/bg-pipe.gif) no-repeat; background-position: right; float: left; list-style-image: none; list-style-position: outside; list-style-type: none; margin-right: 10px; padding: 0px 10px 0px 0px; vertical-align: bottom;}
+.header .utilitymenu ul li.no-pipe {background: none; margin-right: 0px; padding-right: 0px;}
+.header .utilitymenu ul li.member{margin-right: 0px; padding-right: 0px; position: relative; top: -3px;}
+.header .utilitymenu ul li.member a{background: url(https://acgi.informs.org/images/b-member-login.gif) no-repeat; display: block; height: 24px; margin: 0px 0px 0px 12px; padding: 0px; width: 110px;}
+.header .utilitymenu ul li.member span.login{display: none;}
+.header  .utilitymenu li{display: inline !important;}
+.header .utilitymenu form {float: right;clear:right;}
+.header .utilitymenu input.searchfield{padding: 2px; color: #666; font-size: 1.1em; width: 180px; background: url(https://acgi.informs.org/images/bg-txtInput.png) 0 0 no-repeat; border: 1px #E8EBF0 solid;}
+.header .utilitymenu input{vertical-align: middle;}
+/* MAIN NAVIGATION STYLES */
+.mainnav{float: left; clear: both; font-family: arial, helvetica, sans-serif; font-size: 1.2em; font-weight: normal; height: 48px; margin: 0; padding: 0; width: 980px; position: relative; z-index: 2000;}
+.mainnav ul#nav,.mainnav ul#nav ul{margin: 0; padding: 0; list-style: none;}
+/* 1st level */
+.mainnav ul#nav li{float: left;}
+.mainnav ul#nav li a{display: block;}
+/* individual first level items */
+.mainnav ul#nav li#connect{ background: url(https://acgi.informs.org/images/mnav-connect-over.gif) no-repeat; width: 108px;}
+.mainnav ul#nav li#participate { background: url(https://acgi.informs.org/images/mnav-participate-over.gif) no-repeat; width: 114px;}
+.mainnav ul#nav li#attend { background: url(https://acgi.informs.org/images/mnav-attend-over.gif) no-repeat; width: 102px }
+.mainnav ul#nav li#find{ background: url(https://acgi.informs.org/images/mnav-find-over.gif) no-repeat; width: 118px;}
+.mainnav ul#nav li#apply { background: url(https://acgi.informs.org/images/mnav-apply-over.gif) no-repeat; width: 143px;}
+.mainnav ul#nav li#build { background: url(https://acgi.informs.org/images/mnav-build-over.gif) no-repeat; width: 93px ;}
+.mainnav ul#nav li#recognize{ background: url(https://acgi.informs.org/images/mnav-recognize-over.gif) no-repeat; width: 97px;}
+.mainnav ul#nav li#about { background: url(https://acgi.informs.org/images/mnav-about-over.gif) no-repeat; width: 89px;}
+.mainnav ul#nav li#membership { background: url(https://acgi.informs.org/images/mnav-membership-over-with-heads.gif) no-repeat; width: 116px; margin-top: -20px; height: 68px;}
+/**/
+.mainnav ul#nav li a{display: block; height: 48px; text-indent: -9999em;}
+.mainnav ul#nav li#connect a{ background: url(https://acgi.informs.org/images/mnav-connect.gif) no-repeat;}
+.mainnav ul#nav li#participate a { background: url(https://acgi.informs.org/images/mnav-participate.gif) no-repeat;}
+.mainnav ul#nav li#attend a { background: url(https://acgi.informs.org/images/mnav-attend.gif) no-repeat;}
+.mainnav ul#nav li#find a{ background: url(https://acgi.informs.org/images/mnav-find.gif) no-repeat;}
+.mainnav ul#nav li#apply a { background: url(https://acgi.informs.org/images/mnav-apply.gif) no-repeat;}
+.mainnav ul#nav li#build a { background: url(https://acgi.informs.org/images/mnav-build.gif) no-repeat;;}
+.mainnav ul#nav li#recognize a{ background: url(https://acgi.informs.org/images/mnav-recognize.gif) no-repeat;}
+.mainnav ul#nav li#about a { background: url(https://acgi.informs.org/images/mnav-about.gif) no-repeat;}
+.mainnav ul#nav li#membership a { background: url(https://acgi.informs.org/images/mnav-membership-with-heads.gif) no-repeat; height: 68px;}
+/* individual first level on states */
+.mainnav ul#nav li#connect.on{background: url(https://acgi.informs.org/images/mnav-connect-on.gif) no-repeat;}
+.mainnav ul#nav li#participate.on{background: url(https://acgi.informs.org/images/mnav-participate-on.gif) no-repeat;}
+.mainnav ul#nav li#attend.on {background: url(https://acgi.informs.org/images/mnav-attend-on.gif) no-repeat;}
+.mainnav ul#nav li#apply.on{background: url(https://acgi.informs.org/images/mnav-apply-on.gif) no-repeat;}
+.mainnav ul#nav li#find.on{background: url(https://acgi.informs.org/images/mnav-find-on.gif) no-repeat;}
+.mainnav ul#nav li#build.on{background: url(https://acgi.informs.org/images/mnav-build-on.gif) no-repeat;}
+.mainnav ul#nav li#recognize.on{background: url(https://acgi.informs.org/images/mnav-recognize-on.gif) no-repeat;}
+.mainnav ul#nav li#about.on{background: url(https://acgi.informs.org/images/mnav-about-on.gif) no-repeat;}
+.mainnav ul#nav li#membership.on{background: url(https://acgi.informs.org/images/mnav-membership-over-with-heads.gif) no-repeat;}
+/* individual first level reveal LI bg image on hover and on */
+.mainnav ul#nav li a:hover,
+.mainnav ul#nav li.on a,
+.mainnav ul#nav li.sfHover a{background-image: none !important;}
+/* 1st level - first list item */
+li.first span {display: none;}
+li.first a {height: 48px;}
+/* 2nd level */
+.mainnav ul#nav ul{background: #013797 url(https://acgi.informs.org/images/bg-mnav-level2.gif) repeat-x; margin-left: 3px; /*display: none; */width: 167px; z-index: 500 !important;}
+.mainnav ul#nav li#membership ul{margin-top: 20px; margin-left: -56px;}
+.mainnav ul#nav li li a {display: block; line-height: normal; padding-top: 5px !important; padding-bottom: 5px !important; text-decoration: none; background-image: none !important; width: 287px; height: auto !important; text-indent: 0;}
+.mainnav #nav li.first li a{border-top: 1px solid #002B60; border-bottom: 1px solid #124AA9; color: #fff; display: none; padding: 0px 16px 0px 12px; width: 139px;}
+.mainnav #nav li.first li.first a,
+.mainnav #nav li.first li.first a:hover{border-top: 4px solid #002B60;}
+.mainnav #nav li.first li.last a,.mainnav #nav li.first li.last a:hover{margin-bottom: 1px;}
+.mainnav #nav li li a:hover{background-image: url(https://acgi.informs.org/images/bg-mnav-level2-on.gif) !important; color: #fff; margin: 0px;}
+/* 2nd level - first list item */
+.mainnav #nav li.sfHover li a,.mainnav #nav li.sfHover li a:hover{color: #fff; margin: 0px; z-index: 550 !important;}
+.mainnav #nav li.sfHover li a,.mainnav #nav li.over li a{display: block; font-weight: normal !important;}
+li#test{display: none; visibility: hidden;}
+/* home page styles */
+
+/* contentwrap and alternate layout content widths */
+.contentwrap{float: left; width: 100%; position: relative; z-index: 1000;}
+.no-rightbar{background-image: none;}
+.shadowTrans{background: transparent url(https://acgi.informs.org/images/shadowTrans.png) top left no-repeat; width: 100%; height: 12px; position: absolute; left: 0;}
+.homepage{background: none; padding: 0px 0px 20px 0px;}
+.content {width: 490px; float: left; font-size: 1.2em; padding-top: 20px;}
+.homepage .content{width: 738px !important;}
+.site-login{background: #E1E4E9 url(https://acgi.informs.org/images/bg-leftnav-divider.gif) no-repeat; background-position: bottom; padding-bottom: 12px;}
+.site-login .pad{padding: 12px 22px;}
+.site-login input.username{color: #999; font-size: 1.0em; padding: 2px; width: 172px;}
+.site-login input.password{color: #999; font-size: 1.0em; padding: 2px; width: 172px;}
+.site-login p{margin-bottom: 8px;}
+.left-column .divider{background: url(https://acgi.informs.org/images/bg-left-column-divider.gif) no-repeat; height: 53px; width: 222px;}
+/*  content styles */
+.breadcrumbs{font-size: 0.9em; padding-top: 8px; overflow: hidden;}
+.breadcrumbs .breadHead{background-image: none; padding-right: 0;}
+.no-rightbar .breadcrumbs{width: 425px;}
+.footer{background: #fff url(https://acgi.informs.org/images/bg-footer.jpg) no-repeat; font-size: 1.1em; height: 125px; border-top: 5px solid #fff; padding: 15px 12px;}
+.footer p{margin-bottom: 2px;}
+.footer li{background: url(https://acgi.informs.org/images/bg-pipe.gif) no-repeat 0px 2px; display: inline; padding: 0px 6px 0px 10px;}
+.footer li.firstli{background: none; padding-left: 0px;}
+.footer li.last{background: url(https://acgi.informs.org/images/bg-footer-pipe-last.gif) no-repeat 0px 2px;}
+/* put into float flow of page */
+.border-box {float: left;}
+
+/*NON-CMS Site styles*/
+.non-cms .siteName
+{
+  background: #003588; 
+  color: #fff; 
+  padding: 16px 10px; 
+  font-size: 2.4em;
+}
+.non-cms .siteName a{color: #fff; text-decoration: none;}
+.non-cms .mainnav{height: 36px; background: #fff url(https://acgi.informs.org/images/bg-topNav.png) 0 0 repeat-x; color: #003588; font-size: 1.2em;}
+.non-cms .mainnav a{height: 19px; display: block; float: left; padding: 7px; margin: 1px 0; color: #003588; text-decoration: none; font-weight: bold; border-right: 1px #003588 solid;}
+.non-cms .mainnav a:hover{color: #fff; background: #003588;}
+.non-cms .content
+{
+  width: 970px; 
+  padding-left: 10px;
+  -moz-box-shadow: 0 5px 10px #a0a0a0 inset;
+  -webkit-box-shadow: 0 5px 10px #a0a0a0 inset;
+  box-shadow: 0 5px 10px #a0a0a0 inset;
+  background-color: #fff;
+}
+.non-cms .footer{border-top: 1px solid #D1D1D3;}
+.bannerlink{font-size: 16pt;}
+.bannerlink:hover { text-decoration: underline; }
+div.shadowTrans { display: none; }
+
+#aaCenCustLoginEmailId label:before {
+   content: "Preferred ";
+}
+#aaCenCustLastNameId:before {
+  content: "and";
+
+} 

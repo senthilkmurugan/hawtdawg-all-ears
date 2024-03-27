@@ -1,0 +1,2803 @@
+// fix IE's lack of indexOf method - from https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/indexOf
+if (!Array.prototype.indexOf) {
+    Array.prototype.indexOf = function (searchElement /*, fromIndex */ ) {
+        "use strict";
+        if (this == null) {
+            throw new TypeError();
+        }
+        var t = Object(this);
+        var len = t.length >>> 0;
+        if (len === 0) {
+            return -1;
+        }
+        var n = 0;
+        if (arguments.length > 0) {
+            n = Number(arguments[1]);
+            if (n != n) { // shortcut for verifying if it's NaN
+                n = 0;
+            } else if (n != 0 && n != Infinity && n != -Infinity) {
+                n = (n > 0 || -1) * Math.floor(Math.abs(n));
+            }
+        }
+        if (n >= len) {
+            return -1;
+        }
+        var k = n >= 0 ? n : Math.max(len - Math.abs(n), 0);
+        for (; k < len; k++) {
+            if (k in t && t[k] === searchElement) {
+                return k;
+            }
+        }
+        return -1;
+    }
+}
+
+// Start clicky tooltip 
+$(function() {
+    $("div.aaToolTipTrigger").click(function () {
+      $(this).closest("div.aaToolTipTrigger").toggleClass("aaToolTipClickShow aaToolTipClickHide");
+     
+    });
+    });
+//end clicky tooltip
+	
+
+	
+	
+	function pad (n) {
+		// adapted from Ext.util.JSON.pad
+		return n < 10 ? "0" + n : n;
+	};
+
+	function encodeDateMMDDYYYY( dateArg ) {
+		// adapted from Ext.util.JSON.encode / encodeDate
+
+		return  pad(dateArg.getMonth() + 1) + "/" +
+			pad(dateArg.getDate()) + "/" +
+			dateArg.getFullYear();
+	};
+
+	function encodeDateMMDDYYYYHH24MISS( dateArg ) {
+		// adapted from Ext.util.JSON.encode / encodeDate
+
+		return  pad(dateArg.getMonth() + 1) + "/" +
+			pad(dateArg.getDate()) + "/" +
+			dateArg.getFullYear() + " " +
+			pad(dateArg.getHours()) + ":" +
+			pad(dateArg.getMinutes()) + ":" +
+			pad(dateArg.getSeconds());
+	};
+
+	function getElementClass(e){
+		if(e&&e.getAttribute){
+			// try IE naming first
+			var className = e.getAttribute("className");
+			if (className){
+				return className;
+			}else{
+				// then try FF
+				className = e.getAttribute("class");
+				if (className){
+					return className;
+				}
+			}
+		}
+	}
+
+	// overwrites any existing class(es)
+	function setElementClass(e,className){
+		if(e&&e.setAttribute){
+			// try IE naming first
+			if(!e.setAttribute("className",className)){
+				// hopefully FF syntax works
+				e.setAttribute("class",className);
+			}
+		}
+
+	}
+
+	// the array is an array of the same type as the search key
+	function findInArray(arrayParm,searchFor){
+		var idx=-1;
+
+		for(var i=0; (i<arrayParm.length)&&(idx<0); i++){
+			if(arrayParm[i]==searchFor){
+				idx=i;
+			}
+		}
+
+		if(idx>-1){
+			return idx;
+		}
+	}
+
+	function addClass(e,className){
+		if (e){
+			var classStr=getElementClass(e);
+			if (classStr){
+				var classArray=classStr.split(" ");
+
+				if (!(findInArray(classArray,className)>=0)){
+					classArray[classArray.length]=className;
+					setElementClass(e,classArray.join(" "));
+				}
+			}else{
+					setElementClass(e,className);
+			}
+		}else{
+			// debugging
+			alert( "addClass() calling error: no valid element passed in" )
+		}
+	}
+
+	function removeClass(e,className){
+		if (e){
+			var classStr=getElementClass(e);
+			if (classStr){
+				var classArray=classStr.split(" ");
+				var classIdx=findInArray(classArray,className);
+				if (classIdx>=0){
+					classArray.splice(classIdx,1);
+					setElementClass(e,classArray.join(" "));
+				}
+			}
+		}else{
+			// debugging
+			alert( "removeClass() calling error: no valid element passed in" )
+		}
+	}
+
+	function replaceClass(e,oldClassName,newClassName){
+		if (e){
+			var classArray=getElementClass(e).split(" ");
+			var classIdx=findInArray(classArray,oldClassName);
+			if (!(classIdx>=0)){
+				classIdx=classArray.length;
+			}
+			if (findInArray(classArray,newClassName)>=0){
+				classArray.splice(classIdx,1);
+			}else{
+				classArray[classIdx]=newClassName;
+			}
+			setElementClass(e,classArray.join(" "));
+		}else{
+			// debugging
+			alert( "replaceClass() calling error: no valid element passed in" )
+		}
+	}
+
+	function getElementId(e){
+		if(e&&e.getAttribute){
+			return e.getAttribute("id");
+		}
+	}
+
+
+   	function xmlEncode(textToEncode){
+		var result = textToEncode;
+
+		var amp = /&/gi;
+		var gt = />/gi;
+		var lt = /</gi;
+		var quot = /"/gi;
+		var apos = /'/gi;
+
+		var xml_amp = "&#38;";
+		var xml_quot = "&#34;";
+		var xml_gt = "&#62;";
+		var xml_lt = "&#60;";
+		var xml_apos = "&#39;";
+
+		if (result&&result.replace&&typeof result.replace === "function") {
+			result = result.replace(amp, xml_amp);
+			result = result.replace(quot, xml_quot);
+			result = result.replace(lt, xml_lt);
+			result = result.replace(gt, xml_gt);
+			result = result.replace(apos, xml_apos);
+		}
+
+		return result;
+	};
+
+	function isArray(value) { // from "JavaScript: The Good Parts" Chapter 6: Arrays / Section "Confusion" p. 61
+		return value &&
+			typeof value === "object" &&
+			typeof value.length === "number" &&
+			typeof value.splice === "function" &&
+			!(value.propertyIsEnumerable("length"));
+	};
+
+	// create object constructor so this can be instantiated later
+
+	function IFrameSSIscriptII(iframeIdParm) {
+
+		// define explicitly and locally
+		// to avoid potential conflicts in the global namespace
+
+		var getFFVersion;
+		var FFextraHeight;
+		var resizeCaller;
+		var resizeIframe;
+		var readjustIframe;
+		var loadintoIframe;
+
+		/***********************************************
+		* IFrame SSI script II- ) Dynamic Drive DHTML code library (http://www.dynamicdrive.com)
+		* Visit DynamicDrive.com for hundreds of original DHTML scripts
+		* This notice must stay intact for legal use
+		***********************************************/
+
+		//Input the IDs of the IFRAMES you wish to dynamically resize to match its content height:
+		//Separate each ID with a comma. Examples: ["frame1", "frame2"] or ["mainAAframe"] or [] for none:
+		this.iframeids= iframeIdParm; // ["mainAAframe"];
+
+		//Should script hide iframe from browsers that don't support this script (non IE5+/NS6+ browsers. Recommended):
+		var iframehide="yes";
+
+		getFFVersion=navigator.userAgent.substring(navigator.userAgent.indexOf("Firefox")).split("/")[1];
+		FFextraHeight=parseFloat(getFFVersion)>=0.1? 30 : 0; //extra height in px to add to iframe in FireFox 1.0+ browsers
+
+		resizeCaller=function() {
+			var tempobj;
+			for (var i=0; i<iframeIdParm.length; i++){
+				if (document.getElementById){
+					resizeIframe(iframeIdParm[i])
+				}
+				//reveal iframe for lower end browsers? (see var above):
+				if ((document.getElementById||document.all) && iframehide=="no"){
+					tempobj=document.getElementById? document.getElementById(iframeIdParm[i]) : document.all[iframeIdParm[i]]
+					tempobj.style.display="block"
+				}
+			}
+		};
+
+		resizeIframe=function(frameid){
+
+			var currentfr;
+
+			if (top===self){
+				currentfr=document.getElementById(frameid);
+			}else{
+				currentfr=top.document.getElementById(frameid);
+			}
+
+			if (currentfr && !window.opera){
+
+				currentfr.style.display="block";
+
+                                if (currentfr.Document && currentfr.Document.body && currentfr.Document.body.scrollHeight) { //ie5+ syntax
+                                                currentfr.height = (currentfr.Document.body.scrollHeight<600)?600:currentfr.Document.body.scrollHeight;
+                                                //currentfr.height = currentfr.Document.body.scrollHeight;
+                                                //currentfr.style.width = currentfr.Document.body.scrollWidth;
+                                        }
+				else if (currentfr.contentDocument && currentfr.contentDocument.body && currentfr.contentDocument.body.offsetHeight) { //ns6 syntax
+					currentfr.height = (currentfr.contentDocument.body.offsetHeight<600)?600:currentfr.contentDocument.body.offsetHeight+FFextraHeight;
+					//currentfr.height = currentfr.contentDocument.body.offsetHeight+FFextraHeight;
+					//currentfr.width = currentfr.contentDocument.body.offsetWidth;
+
+				}  // browser-specific code
+
+				if (currentfr.addEventListener){
+					currentfr.addEventListener("load", readjustIframe, false)
+				}else if (currentfr.attachEvent){
+					currentfr.detachEvent("onload", readjustIframe) // Bug fix line
+					currentfr.attachEvent("onload", readjustIframe)
+				}
+			}  // (currentfr && !window.opera)
+
+		};  // function resizeIframe()
+
+		readjustIframe=function(loadevt) {
+			var crossevt=(window.event)? event : loadevt
+			var iframeroot=(crossevt.currentTarget)? crossevt.currentTarget : crossevt.srcElement
+			if (iframeroot){
+				resizeIframe(iframeroot.id);
+			}
+		};
+
+		loadintoIframe=function (iframeid, url){
+			if (document.getElementById){
+				if (location===top.location){
+					document.getElementById(iframeid).src=url
+				}else{
+					top.document.getElementById(iframeid).src=url
+				}
+			}
+		};
+
+		this.getFFVersion=getFFVersion;
+		this.FFextraHeight=FFextraHeight;
+		this.resizeCaller=resizeCaller;
+		this.resizeIframe=resizeIframe;
+		this.readjustIframe=readjustIframe;
+		this.loadintoIframe=loadintoIframe;
+
+		// end of IFrame SSI script II
+	}  // constructor function
+
+	function initializeIframeSizing( iframeNameParm ) {
+
+		var iframeArray;
+
+		if (typeof associationAnywhere === "undefined") {
+			// new global variable
+			associationAnywhere= new Object;
+		}
+
+		if (!associationAnywhere.iframeSSI) {
+			// instantiate first
+			if (isArray(iframeNameParm) && (iframeNameParm.length>0)) {
+				iframeArray=iframeNameParm;
+			} else {
+				iframeArray = new Array;
+
+				if (typeof iframeNameParm === "string") {
+					iframeArray[0] = iframeNameParm;
+				} else {
+					iframeArray[0] = "mainAAframe";
+				}
+			}
+			associationAnywhere.iframeSSI = new IFrameSSIscriptII(iframeArray);
+		}
+	};
+
+	function setIframeSrc( newSrc, iframeNameParm ) {
+
+		var iframeName;
+
+		if ((typeof associationAnywhere === "object") && associationAnywhere.iframeSSI) {
+
+			// no op
+
+		} else {
+			initializeIframeSizing( iframeNameParm );
+		}
+
+
+		if ((typeof associationAnywhere === "object") && associationAnywhere.iframeSSI) {
+			if (isArray(associationAnywhere.iframeSSI.iframeids) && associationAnywhere.iframeSSI.iframeids[0]) {
+				iframeName = associationAnywhere.iframeSSI.iframeids[0];
+			}else{
+				iframeName = "mainAAframe";
+			}
+			associationAnywhere.iframeSSI.loadintoIframe(iframeName, newSrc);
+		} else {
+			alert("setIframeSrc() IFrame library failed to instantiate");
+		}
+		return false;
+	}
+
+	function resizeTemplateIframe( iframeNameParm ) {
+
+		if ((typeof associationAnywhere === "object") && associationAnywhere.iframeSSI) {
+			associationAnywhere.iframeSSI.resizeCaller();
+		} else {
+			// initialize first
+			initializeIframeSizing(iframeNameParm);
+			associationAnywhere.iframeSSI.resizeCaller();
+		}
+		return false;
+	};
+
+	// for backwards compatibility
+	function resizeTemplate(){
+        // if statement to avoid JS runtime errors in a v5 install
+        if (typeof resizeTemplateIframe === "function") {
+           // for v6 iframe
+           resizeTemplateIframe();
+        }
+	}
+
+	// toggles element style between none and display
+	// <div id="query-advanced-search-foot" style="display: block;">
+	function toggleDisplay(elementParm){
+		var elem;
+
+		if (elementParm) {
+			// try element ID first
+			if (typeof elementParm == "string"){
+
+				elem = document.getElementById( elementParm );
+
+				if (elem == undefined){
+					// debugging code
+					alert("no element found with ID " + elementParm );
+				}
+			}else if (typeof elementParm == "object"){
+				if (elementParm.style){
+					elem = elementParm;
+				}
+			}else{
+				// debugging code
+				alert( "not handling arg type " + (typeof elementParm) );
+			}
+
+// does this work across browers??
+// and -- can you have multiple styles that I would overwrite this way?
+
+			if (elem.style){
+				if (elem.style.display == "none"){
+					elem.style.display = "block";
+					resizeTemplate();
+				}else{
+					elem.style.display = "none";
+					resizeTemplate();
+				}
+			}else{
+				// debugging code
+				alert( "can't toggle display in toggleDisplay() when nothing is passed in!" );
+			}
+		}else{
+			// debugging code
+			alert( "can't toggle display in toggleDisplay() when nothing is passed in!" );
+		}
+
+		return false;
+	} // toggleDisplay()
+
+	// look for documentation in package body
+	function xmlEncodeSingleElement(elem){
+
+		var i;
+		var xmlString = "";
+
+		if(elem.type){
+			if(elem.name){
+				if(elem.type=="text" || elem.type=="textarea" || elem.type=="select-one" ||
+					elem.type=="hidden" || elem.type=="password" ){
+
+					if(elem.value){
+						xmlString="<"+elem.name+">"+xmlEncode(elem.value)+"</"+elem.name+">";
+					}else{
+						xmlString="<"+elem.name+"></"+elem.name+">";
+					}
+				}else if (elem.type=="radio" || elem.type=="checkbox"){
+					if(elem.value && elem.checked){
+						xmlString="<"+elem.name+">"+xmlEncode(elem.value)+"</"+elem.name+">";
+					}
+				}else if (elem.type=="select-multiple"){
+					if (elem.options) {
+						for(i=0; i<elem.options.length; i++){
+							if(elem.options[i].selected){
+								xmlString+="<"+elem.name+">"+xmlEncode(elem.options[i].value)+"</"+elem.name+">";
+							}
+						}
+					}
+				}
+			}
+		}
+		return(xmlString);
+	}
+
+	// look for documentation in package body
+	function xmlEncodeFormElements(d){
+
+		var xmlString = "";
+		var div;
+		var i;
+		var elem
+
+		if ((typeof d) == "string"){
+			div=document.getElementById(d);
+		}else if(((typeof d) == "object")&&(d.getElementsByTagName)){
+			div=d;
+		}
+
+		if (div){
+			if (div.elements){
+				// the form
+
+				for(i=0; i<div.elements.length; i++){
+					elem=div.elements[i];
+
+					if (elem.type&&elem.name){
+						// to exclude fieldset and label tags
+
+						xmlString += xmlEncodeSingleElement(elem);
+					}
+				}
+			}else if(div.getElementsByTagName){
+				// a div or a table
+				var formSelect=div.getElementsByTagName("select");
+				for(i=0; i<formSelect.length; i++){
+					elem=formSelect[i];
+					if (elem.type&&elem.name){
+						xmlString += xmlEncodeSingleElement(elem);
+					}
+				}
+
+				var formInput=div.getElementsByTagName("input");
+				for(i=0; i<formInput.length; i++){
+					elem=formInput[i];
+					if (elem.type&&elem.name){
+						xmlString += xmlEncodeSingleElement(elem);
+					}
+				}
+
+				var textArea=div.getElementsByTagName("textarea");
+				for(i=0; i<textArea.length; i++){
+					elem=textArea[i];
+					if (elem.type&&elem.name){
+						xmlString += xmlEncodeSingleElement(elem);
+					}
+				}
+			} // form or div
+		}else{
+			// debugging
+			alert( "xmlEncodeFormElements() div not found: " + d );
+		}
+		return xmlString;
+	}
+
+	// look for documentation in package body
+	function sharedPopup( urlParm, titleParm, attributesParm ){
+
+		var popupWindow = open( urlParm, titleParm, attributesParm );
+
+		if ( popupWindow.opener === null ) {
+			popupWindow.opener = self;
+		}
+		popupWindow.focus();
+		return false;
+	}
+
+
+	// generate an element ID that should be unique
+	// throughout the entire DOM
+
+	function getUniqueId() {
+
+		if (typeof associationAnywhere === "undefined") {
+			// create new global variable
+			associationAnywhere= new Object;
+		}
+
+		if (associationAnywhere.nextElementId) {
+			++associationAnywhere.nextElementId;
+		} else {
+			associationAnywhere.nextElementId=1000;
+		}
+
+		return "aa60_" + associationAnywhere.nextElementId;
+	};  // getNextUniqueId()
+	
+	// feedback functions: originally generated from stdtemplatelib.include_js_for_feedback_divs
+
+        function show_success( successMsgParm, successDetailsParm ) {
+
+                var successDiv = document.getElementById( "success_top" );
+                var errorDiv = document.getElementById( "error_top" );
+                var warningDiv = document.getElementById( "warning_top" );
+
+                if (successDiv) {
+                        resetFrameFeedback(parent.document);
+                }else{
+                        // locate the divs located in the frame of this iframe
+                        successDiv = parent.document.getElementById( "success_top" );
+                        errorDiv = parent.document.getElementById( "error_top" );
+                        warningDiv = parent.document.getElementById( "warning_top" );
+                }
+
+                // please pass in *something*
+                var successMsg = (successMsgParm?successMsgParm:"Success!");
+                var successDetails = "";
+                if (successDetailsParm) {
+                        if (typeof successDetailsParm == "string"){
+                                successDetails = successDetailsParm;
+                        }else if (typeof successDetailsParm == "object"){
+                                // array of url-descr objects
+                                for (var i=0; i< successDetailsParm.length; i++){
+                                        if (successDetailsParm[i].url && successDetailsParm[i].descr){
+                                                if (i>0) {
+                                                        successDetails += " | ";
+                                                }
+                                                successDetails += "<a href='#' onclick='setIframeSrc(\""+
+                                                                successDetailsParm[i].url+"\");return false;'>" +
+                                                                successDetailsParm[i].descr + "</a>";
+                                        }
+                                }
+                        }
+                }
+
+                errorDiv.style.display = "none";
+                warningDiv.style.display = "none";
+
+                // is there any point in checking for non-existance of success div?
+                // what would i do in that case anyway?
+
+                var successHeader = successDiv.getElementsByTagName("h3");
+                if(successHeader.length==1){
+                        successHeader[0].innerHTML=successMsg;
+                }
+
+                var successPara = successDiv.getElementsByTagName("p");
+                if(successPara.length==1){
+                        successPara[0].innerHTML=successDetails;
+                }
+
+                successDiv.style.display = "block";
+
+
+        };  // function show_success()
+
+
+        function show_error( errorMsg, errorDetails ) {
+
+                var successDiv = document.getElementById( "success_top" );
+                var errorDiv = document.getElementById( "error_top" );
+                var warningDiv = document.getElementById( "warning_top" );
+
+                if (successDiv) {
+                        resetFrameFeedback(parent.document);
+                }else{
+                        // locate the divs located in the frame of this iframe
+                        successDiv = parent.document.getElementById( "success_top" );
+                        errorDiv = parent.document.getElementById( "error_top" );
+                        warningDiv = parent.document.getElementById( "warning_top" );
+                }
+
+                successDiv.style.display = "none";
+                warningDiv.style.display = "none";
+
+                // is there any point in checking for non-existance of error div?
+                // what would i do in that case anyway?
+
+                var errorHeader = errorDiv.getElementsByTagName("h3");
+                if(errorHeader.length==1){
+                        errorHeader[0].innerHTML = (errorMsg?errorMsg:"Error Occurred: No Details Given");
+                }
+
+                var errorPara = errorDiv.getElementsByTagName("p");
+                if(errorPara.length==1){
+                        if (errorDetails){
+                                errorPara[0].innerHTML = errorDetails;
+                        }else{
+                                errorPara[0].innerHTML = "";
+                        }
+                }
+
+                errorDiv.style.display = "block";
+
+        };  // function show_error()
+
+
+        function show_warning( warningMsg, warningDetails ) {
+
+                var successDiv = document.getElementById( "success_top" );
+                var errorDiv = document.getElementById( "error_top" );
+                var warningDiv = document.getElementById( "warning_top" );
+
+                if (successDiv) {
+                        resetFrameFeedback(parent.document);
+                }else{
+                        // locate the divs located in the frame of this iframe
+                        successDiv = parent.document.getElementById( "success_top" );
+                        errorDiv = parent.document.getElementById( "error_top" );
+                        warningDiv = parent.document.getElementById( "warning_top" );
+                }
+
+                successDiv.style.display = "none";
+                errorDiv.style.display = "none";
+
+                // is there any point in checking for non-existance of warning div?
+                // what would i do in that case anyway?
+
+                var warningHeader = warningDiv.getElementsByTagName("h3");
+                if(warningHeader.length==1){
+                        warningHeader[0].innerHTML = (warningMsg?warningMsg:"Warning!");
+                }
+
+                var warningPara = warningDiv.getElementsByTagName("p");
+                if(warningPara.length==1){
+                        if (warningDetails){
+                                warningPara[0].innerHTML = warningDetails;
+                        }else{
+                                warningPara[0].innerHTML = "";
+                        }
+                }
+
+                warningDiv.style.display = "block"; 
+
+        };  // function show_warning()
+
+
+        function resetFrameFeedback(frameDocument) {
+                var successDiv = frameDocument.getElementById( "success_top" );
+                var errorDiv = frameDocument.getElementById( "error_top" );
+                var warningDiv = frameDocument.getElementById( "warning_top" );
+
+                if (successDiv && successDiv.style) {
+                        successDiv.style.display = "none";
+                        if (errorDiv){
+                                errorDiv.style.display = "none";
+                        }
+                        if (warningDiv){
+                                warningDiv.style.display = "none";
+                        }
+                }
+        }
+
+        function resetFeedbackDivs() {
+
+                // reset the divs in this document
+                resetFrameFeedback(document);
+
+                // repeat for second set of divs in the frame's parent
+                resetFrameFeedback(parent.document);
+
+        };  // function resetFeedbackDivs()
+
+	// end feedback functions: originally generated from stdtemplatelib.include_js_for_feedback_divs
+
+    
+	// LOV handlers - formerly pulled from stdlovlib.include_js()
+
+/***
+** to do-s...
+** clean up JS 1 hr (check)
+** convert img-s back to links -- return fasle 1 hr (check)
+
+** change function to invoke 1hr (check)
+
+** copy procedure to stdlov.pck 1-2hr
+**   change to return by ID
+
+** add to normal pages 1-2 hr
+
+** test
+****/
+
+
+	// function to find and parse the LOV config info
+	// stored in the html inside the div,
+	// build a URL
+	// and open it in a new popup window
+
+	function openPopupLov( eventParm, elementParm, OptionsParm ) {
+
+		var parentDiv = elementParm.parentNode;
+		var xmlElementArray;
+		var xmlElement;
+		var lovNameArray;
+		var lovNameNode;
+		var lovName;
+		var inputField;
+		var inputId;
+		var windowUrl;
+
+		// for <div><a><img> .. it is the parent of the parent we need:
+		if (parentDiv.nodeName.toLowerCase() === "a") {
+			parentDiv = parentDiv.parentNode;
+		}
+
+		// access the inline XML data island
+		// to get the config information about the LOV
+
+// it's not really XML anymore
+
+		lovNameArray = parentDiv.getElementsByTagName( "span" ); // lov_name
+
+		if (lovNameArray.length>0) {
+
+			lovNameNode=lovNameArray[0];
+
+			if ((lovNameNode) && (lovNameNode.childNodes.length>0)) {
+
+				// alert( "LOV = " + lovNameNode.childNodes[0].nodeValue );
+
+				lovName = lovNameNode.childNodes[0].nodeValue;
+
+				// find and/or set the input field's ID
+				inputField = parentDiv.getElementsByTagName( "input" )[0];
+				if (!(inputField.id)) {
+					inputField.id = getUniqueId();
+				}
+
+				inputId = inputField.id;
+
+				// build a URL for a new window
+				windowUrl = "stdlov.popup_window" +
+					"?p_lov=" + lovName +
+					"&p_input_element_id=" + inputId;
+
+				// then open a window
+
+				sharedPopup( windowUrl, "popupLovWindow", "Scrollbars=1,resizable=1,width=400,height=450");
+
+			}else{
+				alert( "XML parsing error stdlovlib openPopupLov() lov name value not found" );
+			}
+		}else{
+			alert( "Internal Error stdlovlib openPopupLov() xml island not found" );
+		}  // xmlElementArray.length>0
+
+		return false;
+	};  // openPopupLov()
+
+
+	// end of LOV handlers - formerly pulled from stdlovlib.include_js()
+
+// begin window size handler
+$(document).ready(function(){ 
+    function checkWindowSize() { 
+       
+        if ( $(window).width() > 2500 ) { 
+$('body#wwwstdhdrbody').addClass('wwwstdhdrbody2500'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody2210'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1920'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1840'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1760'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1600'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1440'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1360'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1280'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1230');
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1170'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1120');
+$('#innerbody').removeClass('innerbody1120');
+$('#innerbody').removeClass('innerbody1170');
+$('#innerbody').removeClass('innerbody1090');
+$('#innerbody').removeClass('innerbody1050');
+$('#innerbody').removeClass('innerbody1024');
+$('#innerbody').removeClass('innerbody990');
+$('.success-outer3').addClass('success-outer32500'); 
+$('.success-outer3').removeClass('success-outer32210'); 
+$('.success-outer3').removeClass('success-outer31920'); 
+$('.success-outer3').removeClass('success-outer31840'); 
+$('.success-outer3').removeClass('success-outer31760'); 
+$('.success-outer3').removeClass('success-outer31600'); 
+$('.success-outer3').removeClass('success-outer31440'); 
+$('.success-outer3').removeClass('success-outer31360'); 
+$('.success-outer3').removeClass('success-outer31280'); 
+$('.success-outer3').removeClass('success-outer31230');
+$('.success-outer3').removeClass('success-outer31170'); 
+$('.success-outer3').removeClass('success-outer31120');
+$('.success-outer3').removeClass('success-outer31090'); 
+$('.success-outer3').removeClass('success-outer31050'); 
+$('.success-outer3').removeClass('success-outer31024');
+$('.success-outer3').removeClass('success-outer3990'); 
+$('.warning-outer3').addClass('warning-outer32500'); 
+$('.warning-outer3').removeClass('warning-outer32210'); 
+$('.warning-outer3').removeClass('warning-outer31920'); 
+$('.warning-outer3').removeClass('warning-outer31840'); 
+$('.warning-outer3').removeClass('warning-outer31760'); 
+$('.warning-outer3').removeClass('warning-outer31600'); 
+$('.warning-outer3').removeClass('warning-outer31440'); 
+$('.warning-outer3').removeClass('warning-outer31360'); 
+$('.warning-outer3').removeClass('warning-outer31280'); 
+$('.warning-outer3').removeClass('warning-outer31230');
+$('.warning-outer3').removeClass('warning-outer31170'); 
+$('.warning-outer3').removeClass('warning-outer31120');
+$('.warning-outer3').removeClass('warning-outer31090'); 
+$('.warning-outer3').removeClass('warning-outer31050'); 
+$('.warning-outer3').removeClass('warning-outer31024');
+$('.warning-outer3').removeClass('warning-outer3990'); 
+$('.error-outer3').addClass('error-outer32500'); 
+$('.error-outer3').removeClass('error-outer32210'); 
+$('.error-outer3').removeClass('error-outer31920'); 
+$('.error-outer3').removeClass('error-outer31840'); 
+$('.error-outer3').removeClass('error-outer31760'); 
+$('.error-outer3').removeClass('error-outer31600'); 
+$('.error-outer3').removeClass('error-outer31440'); 
+$('.error-outer3').removeClass('error-outer31360'); 
+$('.error-outer3').removeClass('error-outer31280'); 
+$('.error-outer3').removeClass('error-outer31230');
+$('.error-outer3').removeClass('error-outer31170'); 
+$('.error-outer3').removeClass('error-outer31120');
+$('.error-outer3').removeClass('error-outer31090'); 
+$('.error-outer3').removeClass('error-outer31050'); 
+$('.error-outer3').removeClass('error-outer31024');
+$('.error-outer3').removeClass('error-outer3990'); 
+
+        } 
+
+else if ( $(window).width() > 2210 ) { 
+$('body#wwwstdhdrbody').addClass('wwwstdhdrbody2210'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody2500'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1920'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1840'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1760'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1600'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1440'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1360'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1280'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1230'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1170');
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1120');
+$('#innerbody').removeClass('innerbody1120');
+$('#innerbody').removeClass('innerbody1170');
+$('#innerbody').removeClass('innerbody1090');
+$('#innerbody').removeClass('innerbody1050');
+$('#innerbody').removeClass('innerbody1024');
+$('#innerbody').removeClass('innerbody990');
+$('.success-outer3').removeClass('success-outer32500'); 
+$('.success-outer3').addClass('success-outer32210'); 
+$('.success-outer3').removeClass('success-outer31920'); 
+$('.success-outer3').removeClass('success-outer31840'); 
+$('.success-outer3').removeClass('success-outer31760'); 
+$('.success-outer3').removeClass('success-outer31600'); 
+$('.success-outer3').removeClass('success-outer31440'); 
+$('.success-outer3').removeClass('success-outer31360'); 
+$('.success-outer3').removeClass('success-outer31280'); 
+$('.success-outer3').removeClass('success-outer31230');
+$('.success-outer3').removeClass('success-outer31170'); 
+$('.success-outer3').removeClass('success-outer31120');
+$('.success-outer3').removeClass('success-outer31090'); 
+$('.success-outer3').removeClass('success-outer31050'); 
+$('.success-outer3').removeClass('success-outer31024');
+$('.success-outer3').removeClass('success-outer3990'); 
+$('.warning-outer3').removeClass('warning-outer32500'); 
+$('.warning-outer3').addClass('warning-outer32210'); 
+$('.warning-outer3').removeClass('warning-outer31920'); 
+$('.warning-outer3').removeClass('warning-outer31840'); 
+$('.warning-outer3').removeClass('warning-outer31760'); 
+$('.warning-outer3').removeClass('warning-outer31600'); 
+$('.warning-outer3').removeClass('warning-outer31440'); 
+$('.warning-outer3').removeClass('warning-outer31360'); 
+$('.warning-outer3').removeClass('warning-outer31280'); 
+$('.warning-outer3').removeClass('warning-outer31230');
+$('.warning-outer3').removeClass('warning-outer31170'); 
+$('.warning-outer3').removeClass('warning-outer31120');
+$('.warning-outer3').removeClass('warning-outer31090'); 
+$('.warning-outer3').removeClass('warning-outer31050'); 
+$('.warning-outer3').removeClass('warning-outer31024');
+$('.warning-outer3').removeClass('warning-outer3990'); 
+$('.error-outer3').removeClass('error-outer32500'); 
+$('.error-outer3').addClass('error-outer32210'); 
+$('.error-outer3').removeClass('error-outer31920'); 
+$('.error-outer3').removeClass('error-outer31840'); 
+$('.error-outer3').removeClass('error-outer31760'); 
+$('.error-outer3').removeClass('error-outer31600'); 
+$('.error-outer3').removeClass('error-outer31440'); 
+$('.error-outer3').removeClass('error-outer31360'); 
+$('.error-outer3').removeClass('error-outer31280'); 
+$('.error-outer3').removeClass('error-outer31230');
+$('.error-outer3').removeClass('error-outer31170'); 
+$('.error-outer3').removeClass('error-outer31120');
+$('.error-outer3').removeClass('error-outer31090'); 
+$('.error-outer3').removeClass('error-outer31050'); 
+$('.error-outer3').removeClass('error-outer31024');
+$('.error-outer3').removeClass('error-outer3990'); 
+} 
+else if ( $(window).width() > 1920 ) { 
+$('body#wwwstdhdrbody').addClass('wwwstdhdrbody1920'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody2500'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody2210'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1840'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1760'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1600'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1440'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1360'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1280'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1230'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1170');
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1120');
+$('#innerbody').removeClass('innerbody1120');
+$('#innerbody').removeClass('innerbody1170');
+$('#innerbody').removeClass('innerbody1090');
+$('#innerbody').removeClass('innerbody1050');
+$('#innerbody').removeClass('innerbody1024');
+$('#innerbody').removeClass('innerbody990');
+$('.success-outer3').removeClass('success-outer32500'); 
+$('.success-outer3').removeClass('success-outer32210'); 
+$('.success-outer3').addClass('success-outer31920'); 
+$('.success-outer3').removeClass('success-outer31840'); 
+$('.success-outer3').removeClass('success-outer31760'); 
+$('.success-outer3').removeClass('success-outer31600'); 
+$('.success-outer3').removeClass('success-outer31440'); 
+$('.success-outer3').removeClass('success-outer31360'); 
+$('.success-outer3').removeClass('success-outer31280'); 
+$('.success-outer3').removeClass('success-outer31230');
+$('.success-outer3').removeClass('success-outer31170'); 
+$('.success-outer3').removeClass('success-outer31120');
+$('.success-outer3').removeClass('success-outer31090'); 
+$('.success-outer3').removeClass('success-outer31050'); 
+$('.success-outer3').removeClass('success-outer31024');
+$('.success-outer3').removeClass('success-outer3990'); 
+$('.warning-outer3').removeClass('warning-outer32500'); 
+$('.warning-outer3').removeClass('warning-outer32210'); 
+$('.warning-outer3').addClass('warning-outer31920'); 
+$('.warning-outer3').removeClass('warning-outer31840'); 
+$('.warning-outer3').removeClass('warning-outer31760'); 
+$('.warning-outer3').removeClass('warning-outer31600'); 
+$('.warning-outer3').removeClass('warning-outer31440'); 
+$('.warning-outer3').removeClass('warning-outer31360'); 
+$('.warning-outer3').removeClass('warning-outer31280'); 
+$('.warning-outer3').removeClass('warning-outer31230');
+$('.warning-outer3').removeClass('warning-outer31170'); 
+$('.warning-outer3').removeClass('warning-outer31120');
+$('.warning-outer3').removeClass('warning-outer31090'); 
+$('.warning-outer3').removeClass('warning-outer31050'); 
+$('.warning-outer3').removeClass('warning-outer31024');
+$('.warning-outer3').removeClass('warning-outer3990'); 
+$('.error-outer3').removeClass('error-outer32500'); 
+$('.error-outer3').removeClass('error-outer32210'); 
+$('.error-outer3').addClass('error-outer31920'); 
+$('.error-outer3').removeClass('error-outer31840'); 
+$('.error-outer3').removeClass('error-outer31760'); 
+$('.error-outer3').removeClass('error-outer31600'); 
+$('.error-outer3').removeClass('error-outer31440'); 
+$('.error-outer3').removeClass('error-outer31360'); 
+$('.error-outer3').removeClass('error-outer31280'); 
+$('.error-outer3').removeClass('error-outer31230');
+$('.error-outer3').removeClass('error-outer31170'); 
+$('.error-outer3').removeClass('error-outer31120');
+$('.error-outer3').removeClass('error-outer31090'); 
+$('.error-outer3').removeClass('error-outer31050'); 
+$('.error-outer3').removeClass('error-outer31024');
+$('.error-outer3').removeClass('error-outer3990'); 
+        } 
+
+else if ( $(window).width() > 1840 ) { 
+$('body#wwwstdhdrbody').addClass('wwwstdhdrbody1840'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody2500'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody2210'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1920'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1760'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1600'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1440'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1360'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1280'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1230'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1170');
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1120');
+$('#innerbody').removeClass('innerbody1120');
+$('#innerbody').removeClass('innerbody1170');
+$('#innerbody').removeClass('innerbody1090');
+$('#innerbody').removeClass('innerbody1050');
+$('#innerbody').removeClass('innerbody1024');
+$('#innerbody').removeClass('innerbody990');
+$('.success-outer3').removeClass('success-outer32500'); 
+$('.success-outer3').removeClass('success-outer32210'); 
+$('.success-outer3').removeClass('success-outer31920'); 
+$('.success-outer3').addClass('success-outer31840'); 
+$('.success-outer3').removeClass('success-outer31760'); 
+$('.success-outer3').removeClass('success-outer31600'); 
+$('.success-outer3').removeClass('success-outer31440'); 
+$('.success-outer3').removeClass('success-outer31360'); 
+$('.success-outer3').removeClass('success-outer31280'); 
+$('.success-outer3').removeClass('success-outer31230');
+$('.success-outer3').removeClass('success-outer31170'); 
+$('.success-outer3').removeClass('success-outer31120');
+$('.success-outer3').removeClass('success-outer31090'); 
+$('.success-outer3').removeClass('success-outer31050'); 
+$('.success-outer3').removeClass('success-outer31024');
+$('.success-outer3').removeClass('success-outer3990'); 
+$('.warning-outer3').removeClass('warning-outer32500'); 
+$('.warning-outer3').removeClass('warning-outer32210'); 
+$('.warning-outer3').removeClass('warning-outer31920'); 
+$('.warning-outer3').addClass('warning-outer31840'); 
+$('.warning-outer3').removeClass('warning-outer31760'); 
+$('.warning-outer3').removeClass('warning-outer31600'); 
+$('.warning-outer3').removeClass('warning-outer31440'); 
+$('.warning-outer3').removeClass('warning-outer31360'); 
+$('.warning-outer3').removeClass('warning-outer31280'); 
+$('.warning-outer3').removeClass('warning-outer31230');
+$('.warning-outer3').removeClass('warning-outer31170'); 
+$('.warning-outer3').removeClass('warning-outer31120');
+$('.warning-outer3').removeClass('warning-outer31090'); 
+$('.warning-outer3').removeClass('warning-outer31050'); 
+$('.warning-outer3').removeClass('warning-outer31024');
+$('.warning-outer3').removeClass('warning-outer3990'); 
+$('.error-outer3').removeClass('error-outer32500'); 
+$('.error-outer3').removeClass('error-outer32210'); 
+$('.error-outer3').removeClass('error-outer31920'); 
+$('.error-outer3').addClass('error-outer31840'); 
+$('.error-outer3').removeClass('error-outer31760'); 
+$('.error-outer3').removeClass('error-outer31600'); 
+$('.error-outer3').removeClass('error-outer31440'); 
+$('.error-outer3').removeClass('error-outer31360'); 
+$('.error-outer3').removeClass('error-outer31280'); 
+$('.error-outer3').removeClass('error-outer31230');
+$('.error-outer3').removeClass('error-outer31170'); 
+$('.error-outer3').removeClass('error-outer31120');
+$('.error-outer3').removeClass('error-outer31090'); 
+$('.error-outer3').removeClass('error-outer31050'); 
+$('.error-outer3').removeClass('error-outer31024');
+$('.error-outer3').removeClass('error-outer3990'); 
+        } 
+
+else if ( $(window).width() > 1760 ) { 
+$('body#wwwstdhdrbody').addClass('wwwstdhdrbody1760'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody2500'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody2210'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1920'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1840'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1600'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1440'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1360'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1280'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1230'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1170');
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1120');
+$('#innerbody').removeClass('innerbody1120');
+$('#innerbody').removeClass('innerbody1170');
+$('#innerbody').removeClass('innerbody1090');
+$('#innerbody').removeClass('innerbody1050');
+$('#innerbody').removeClass('innerbody1024');
+$('#innerbody').removeClass('innerbody990');
+$('.success-outer3').removeClass('success-outer32500'); 
+$('.success-outer3').removeClass('success-outer32210'); 
+$('.success-outer3').removeClass('success-outer31920'); 
+$('.success-outer3').removeClass('success-outer31840'); 
+$('.success-outer3').addClass('success-outer31760'); 
+$('.success-outer3').removeClass('success-outer31600'); 
+$('.success-outer3').removeClass('success-outer31440'); 
+$('.success-outer3').removeClass('success-outer31360'); 
+$('.success-outer3').removeClass('success-outer31280'); 
+$('.success-outer3').removeClass('success-outer31230');
+$('.success-outer3').removeClass('success-outer31170'); 
+$('.success-outer3').removeClass('success-outer31120');
+$('.success-outer3').removeClass('success-outer31090'); 
+$('.success-outer3').removeClass('success-outer31050'); 
+$('.success-outer3').removeClass('success-outer31024');
+$('.success-outer3').removeClass('success-outer3990'); 
+$('.warning-outer3').removeClass('warning-outer32500'); 
+$('.warning-outer3').removeClass('warning-outer32210'); 
+$('.warning-outer3').removeClass('warning-outer31920'); 
+$('.warning-outer3').removeClass('warning-outer31840'); 
+$('.warning-outer3').addClass('warning-outer31760'); 
+$('.warning-outer3').removeClass('warning-outer31600'); 
+$('.warning-outer3').removeClass('warning-outer31440'); 
+$('.warning-outer3').removeClass('warning-outer31360'); 
+$('.warning-outer3').removeClass('warning-outer31280'); 
+$('.warning-outer3').removeClass('warning-outer31230');
+$('.warning-outer3').removeClass('warning-outer31170'); 
+$('.warning-outer3').removeClass('warning-outer31120');
+$('.warning-outer3').removeClass('warning-outer31090'); 
+$('.warning-outer3').removeClass('warning-outer31050'); 
+$('.warning-outer3').removeClass('warning-outer31024');
+$('.warning-outer3').removeClass('warning-outer3990'); 
+$('.error-outer3').removeClass('error-outer32500'); 
+$('.error-outer3').removeClass('error-outer32210'); 
+$('.error-outer3').removeClass('error-outer31920'); 
+$('.error-outer3').removeClass('error-outer31840'); 
+$('.error-outer3').addClass('error-outer31760'); 
+$('.error-outer3').removeClass('error-outer31600'); 
+$('.error-outer3').removeClass('error-outer31440'); 
+$('.error-outer3').removeClass('error-outer31360'); 
+$('.error-outer3').removeClass('error-outer31280'); 
+$('.error-outer3').removeClass('error-outer31230');
+$('.error-outer3').removeClass('error-outer31170'); 
+$('.error-outer3').removeClass('error-outer31120');
+$('.error-outer3').removeClass('error-outer31090'); 
+$('.error-outer3').removeClass('error-outer31050'); 
+$('.error-outer3').removeClass('error-outer31024');
+$('.error-outer3').removeClass('error-outer3990'); 
+        } 
+		
+else if ( $(window).width() > 1600 ) { 
+$('body#wwwstdhdrbody').addClass('wwwstdhdrbody1600'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody2500'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody2210'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1920'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1840'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1760'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1440'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1360'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1280'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1230');
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1170'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1120');
+$('#innerbody').removeClass('innerbody1120');
+$('#innerbody').removeClass('innerbody1170');
+$('#innerbody').removeClass('innerbody1090');
+$('#innerbody').removeClass('innerbody1050');
+$('#innerbody').removeClass('innerbody1024');
+$('#innerbody').removeClass('innerbody990');
+$('.success-outer3').removeClass('success-outer32500'); 
+$('.success-outer3').removeClass('success-outer32210'); 
+$('.success-outer3').removeClass('success-outer31920'); 
+$('.success-outer3').removeClass('success-outer31840'); 
+$('.success-outer3').removeClass('success-outer31760'); 
+$('.success-outer3').addClass('success-outer31600'); 
+$('.success-outer3').removeClass('success-outer31440'); 
+$('.success-outer3').removeClass('success-outer31360'); 
+$('.success-outer3').removeClass('success-outer31280'); 
+$('.success-outer3').removeClass('success-outer31230');
+$('.success-outer3').removeClass('success-outer31170'); 
+$('.success-outer3').removeClass('success-outer31120');
+$('.success-outer3').removeClass('success-outer31090'); 
+$('.success-outer3').removeClass('success-outer31050'); 
+$('.success-outer3').removeClass('success-outer31024');
+$('.success-outer3').removeClass('success-outer3990'); 
+$('.warning-outer3').removeClass('warning-outer32500'); 
+$('.warning-outer3').removeClass('warning-outer32210'); 
+$('.warning-outer3').removeClass('warning-outer31920'); 
+$('.warning-outer3').removeClass('warning-outer31840'); 
+$('.warning-outer3').removeClass('warning-outer31760'); 
+$('.warning-outer3').addClass('warning-outer31600'); 
+$('.warning-outer3').removeClass('warning-outer31440'); 
+$('.warning-outer3').removeClass('warning-outer31360'); 
+$('.warning-outer3').removeClass('warning-outer31280'); 
+$('.warning-outer3').removeClass('warning-outer31230');
+$('.warning-outer3').removeClass('warning-outer31170'); 
+$('.warning-outer3').removeClass('warning-outer31120');
+$('.warning-outer3').removeClass('warning-outer31090'); 
+$('.warning-outer3').removeClass('warning-outer31050'); 
+$('.warning-outer3').removeClass('warning-outer31024');
+$('.warning-outer3').removeClass('warning-outer3990'); 
+$('.error-outer3').removeClass('error-outer32500'); 
+$('.error-outer3').removeClass('error-outer32210'); 
+$('.error-outer3').removeClass('error-outer31920'); 
+$('.error-outer3').removeClass('error-outer31840'); 
+$('.error-outer3').removeClass('error-outer31760'); 
+$('.error-outer3').addClass('error-outer31600'); 
+$('.error-outer3').removeClass('error-outer31440'); 
+$('.error-outer3').removeClass('error-outer31360'); 
+$('.error-outer3').removeClass('error-outer31280'); 
+$('.error-outer3').removeClass('error-outer31230');
+$('.error-outer3').removeClass('error-outer31170'); 
+$('.error-outer3').removeClass('error-outer31120');
+$('.error-outer3').removeClass('error-outer31090'); 
+$('.error-outer3').removeClass('error-outer31050'); 
+$('.error-outer3').removeClass('error-outer31024');
+$('.error-outer3').removeClass('error-outer3990');  
+        } 
+
+else if ( $(window).width() > 1440 ) { 
+$('body#wwwstdhdrbody').addClass('wwwstdhdrbody1440'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody2500'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody2210'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1920'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1840'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1760'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1600'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1360'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1280'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1230'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1170');
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1120');
+$('#innerbody').removeClass('innerbody1120');
+$('#innerbody').removeClass('innerbody1170');
+$('#innerbody').removeClass('innerbody1090');
+$('#innerbody').removeClass('innerbody1050');
+$('#innerbody').removeClass('innerbody1024');
+$('#innerbody').removeClass('innerbody990');
+$('.success-outer3').removeClass('success-outer32500'); 
+$('.success-outer3').removeClass('success-outer32210'); 
+$('.success-outer3').removeClass('success-outer31920'); 
+$('.success-outer3').removeClass('success-outer31840'); 
+$('.success-outer3').removeClass('success-outer31760'); 
+$('.success-outer3').removeClass('success-outer31600'); 
+$('.success-outer3').addClass('success-outer31440'); 
+$('.success-outer3').removeClass('success-outer31360'); 
+$('.success-outer3').removeClass('success-outer31280'); 
+$('.success-outer3').removeClass('success-outer31230');
+$('.success-outer3').removeClass('success-outer31170'); 
+$('.success-outer3').removeClass('success-outer31120');
+$('.success-outer3').removeClass('success-outer31090'); 
+$('.success-outer3').removeClass('success-outer31050'); 
+$('.success-outer3').removeClass('success-outer31024');
+$('.success-outer3').removeClass('success-outer3990'); 
+$('.warning-outer3').removeClass('warning-outer32500'); 
+$('.warning-outer3').removeClass('warning-outer32210'); 
+$('.warning-outer3').removeClass('warning-outer31920'); 
+$('.warning-outer3').removeClass('warning-outer31840'); 
+$('.warning-outer3').removeClass('warning-outer31760'); 
+$('.warning-outer3').removeClass('warning-outer31600'); 
+$('.warning-outer3').addClass('warning-outer31440'); 
+$('.warning-outer3').removeClass('warning-outer31360'); 
+$('.warning-outer3').removeClass('warning-outer31280'); 
+$('.warning-outer3').removeClass('warning-outer31230');
+$('.warning-outer3').removeClass('warning-outer31170'); 
+$('.warning-outer3').removeClass('warning-outer31120');
+$('.warning-outer3').removeClass('warning-outer31090'); 
+$('.warning-outer3').removeClass('warning-outer31050'); 
+$('.warning-outer3').removeClass('warning-outer31024');
+$('.warning-outer3').removeClass('warning-outer3990'); 
+$('.error-outer3').removeClass('error-outer32500'); 
+$('.error-outer3').removeClass('error-outer32210'); 
+$('.error-outer3').removeClass('error-outer31920'); 
+$('.error-outer3').removeClass('error-outer31840'); 
+$('.error-outer3').removeClass('error-outer31760'); 
+$('.error-outer3').removeClass('error-outer31600'); 
+$('.error-outer3').addClass('error-outer31440'); 
+$('.error-outer3').removeClass('error-outer31360'); 
+$('.error-outer3').removeClass('error-outer31280'); 
+$('.error-outer3').removeClass('error-outer31230');
+$('.error-outer3').removeClass('error-outer31170'); 
+$('.error-outer3').removeClass('error-outer31120');
+$('.error-outer3').removeClass('error-outer31090'); 
+$('.error-outer3').removeClass('error-outer31050'); 
+$('.error-outer3').removeClass('error-outer31024');
+$('.error-outer3').removeClass('error-outer3990');  
+        } 
+		
+
+else if ( $(window).width() > 1360) { 
+$('body#wwwstdhdrbody').addClass('wwwstdhdrbody1360'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody2500'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody2210'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1920'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1840'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1760'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1600'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1440'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1280'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1230');
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1170'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1120');
+$('#innerbody').removeClass('innerbody1120');
+$('#innerbody').removeClass('innerbody1170');
+$('#innerbody').removeClass('innerbody1090');
+$('#innerbody').removeClass('innerbody1050');
+$('#innerbody').removeClass('innerbody1024');
+$('#innerbody').removeClass('innerbody990');
+$('.success-outer3').removeClass('success-outer32500'); 
+$('.success-outer3').removeClass('success-outer32210'); 
+$('.success-outer3').removeClass('success-outer31920'); 
+$('.success-outer3').removeClass('success-outer31840'); 
+$('.success-outer3').removeClass('success-outer31760'); 
+$('.success-outer3').removeClass('success-outer31600'); 
+$('.success-outer3').removeClass('success-outer31440'); 
+$('.success-outer3').addClass('success-outer31360'); 
+$('.success-outer3').removeClass('success-outer31280'); 
+$('.success-outer3').removeClass('success-outer31230');
+$('.success-outer3').removeClass('success-outer31170'); 
+$('.success-outer3').removeClass('success-outer31120');
+$('.success-outer3').removeClass('success-outer31090'); 
+$('.success-outer3').removeClass('success-outer31050'); 
+$('.success-outer3').removeClass('success-outer31024');
+$('.success-outer3').removeClass('success-outer3990'); 
+$('.warning-outer3').removeClass('warning-outer32500'); 
+$('.warning-outer3').removeClass('warning-outer32210'); 
+$('.warning-outer3').removeClass('warning-outer31920'); 
+$('.warning-outer3').removeClass('warning-outer31840'); 
+$('.warning-outer3').removeClass('warning-outer31760'); 
+$('.warning-outer3').removeClass('warning-outer31600'); 
+$('.warning-outer3').removeClass('warning-outer31440'); 
+$('.warning-outer3').addClass('warning-outer31360'); 
+$('.warning-outer3').removeClass('warning-outer31280'); 
+$('.warning-outer3').removeClass('warning-outer31230');
+$('.warning-outer3').removeClass('warning-outer31170'); 
+$('.warning-outer3').removeClass('warning-outer31120');
+$('.warning-outer3').removeClass('warning-outer31090'); 
+$('.warning-outer3').removeClass('warning-outer31050'); 
+$('.warning-outer3').removeClass('warning-outer31024');
+$('.warning-outer3').removeClass('warning-outer3990'); 
+$('.error-outer3').removeClass('error-outer32500'); 
+$('.error-outer3').removeClass('error-outer32210'); 
+$('.error-outer3').removeClass('error-outer31920'); 
+$('.error-outer3').removeClass('error-outer31840'); 
+$('.error-outer3').removeClass('error-outer31760'); 
+$('.error-outer3').removeClass('error-outer31600'); 
+$('.error-outer3').removeClass('error-outer31440'); 
+$('.error-outer3').addClass('error-outer31360'); 
+$('.error-outer3').removeClass('error-outer31280'); 
+$('.error-outer3').removeClass('error-outer31230');
+$('.error-outer3').removeClass('error-outer31170'); 
+$('.error-outer3').removeClass('error-outer31120');
+$('.error-outer3').removeClass('error-outer31090'); 
+$('.error-outer3').removeClass('error-outer31050'); 
+$('.error-outer3').removeClass('error-outer31024');
+$('.error-outer3').removeClass('error-outer3990');   
+        } 
+
+else if ( $(window).width() > 1280) { 
+$('body#wwwstdhdrbody').addClass('wwwstdhdrbody1280'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody2500'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody2210'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1920'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1840'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1760'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1600'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1440'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1360'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1230');
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1170');
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1120');
+$('#innerbody').removeClass('innerbody1120');
+$('#innerbody').removeClass('innerbody1170');
+$('#innerbody').removeClass('innerbody1090');
+$('#innerbody').removeClass('innerbody1050');
+$('#innerbody').removeClass('innerbody1024');
+$('#innerbody').removeClass('innerbody990');
+$('.success-outer3').removeClass('success-outer32500'); 
+$('.success-outer3').removeClass('success-outer32210'); 
+$('.success-outer3').removeClass('success-outer31920'); 
+$('.success-outer3').removeClass('success-outer31840'); 
+$('.success-outer3').removeClass('success-outer31760'); 
+$('.success-outer3').removeClass('success-outer31600'); 
+$('.success-outer3').removeClass('success-outer31440'); 
+$('.success-outer3').removeClass('success-outer31360'); 
+$('.success-outer3').addClass('success-outer31280'); 
+$('.success-outer3').removeClass('success-outer31230');
+$('.success-outer3').removeClass('success-outer31170'); 
+$('.success-outer3').removeClass('success-outer31120');
+$('.success-outer3').removeClass('success-outer31090'); 
+$('.success-outer3').removeClass('success-outer31050'); 
+$('.success-outer3').removeClass('success-outer31024');
+$('.success-outer3').removeClass('success-outer3990'); 
+$('.warning-outer3').removeClass('warning-outer32500'); 
+$('.warning-outer3').removeClass('warning-outer32210'); 
+$('.warning-outer3').removeClass('warning-outer31920'); 
+$('.warning-outer3').removeClass('warning-outer31840'); 
+$('.warning-outer3').removeClass('warning-outer31760'); 
+$('.warning-outer3').removeClass('warning-outer31600'); 
+$('.warning-outer3').removeClass('warning-outer31440'); 
+$('.warning-outer3').removeClass('warning-outer31360'); 
+$('.warning-outer3').addClass('warning-outer31280'); 
+$('.warning-outer3').removeClass('warning-outer31230');
+$('.warning-outer3').removeClass('warning-outer31170'); 
+$('.warning-outer3').removeClass('warning-outer31120');
+$('.warning-outer3').removeClass('warning-outer31090'); 
+$('.warning-outer3').removeClass('warning-outer31050'); 
+$('.warning-outer3').removeClass('warning-outer31024');
+$('.warning-outer3').removeClass('warning-outer3990'); 
+$('.error-outer3').removeClass('error-outer32500'); 
+$('.error-outer3').removeClass('error-outer32210'); 
+$('.error-outer3').removeClass('error-outer31920'); 
+$('.error-outer3').removeClass('error-outer31840'); 
+$('.error-outer3').removeClass('error-outer31760'); 
+$('.error-outer3').removeClass('error-outer31600'); 
+$('.error-outer3').removeClass('error-outer31440'); 
+$('.error-outer3').removeClass('error-outer31360'); 
+$('.error-outer3').addClass('error-outer31280'); 
+$('.error-outer3').removeClass('error-outer31230');
+$('.error-outer3').removeClass('error-outer31170'); 
+$('.error-outer3').removeClass('error-outer31120');
+$('.error-outer3').removeClass('error-outer31090'); 
+$('.error-outer3').removeClass('error-outer31050'); 
+$('.error-outer3').removeClass('error-outer31024');
+$('.error-outer3').removeClass('error-outer3990');   
+        } 
+
+else if ( $(window).width() > 1230 ) { 
+$('body#wwwstdhdrbody').addClass('wwwstdhdrbody1230'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody2500'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody2210'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1920'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1840'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1760'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1600'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1440'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1360'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1280');
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1170');
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1120');
+$('#innerbody').removeClass('innerbody1120');
+$('#innerbody').removeClass('innerbody1170');
+$('#innerbody').removeClass('innerbody1090');
+$('#innerbody').removeClass('innerbody1050');
+$('#innerbody').removeClass('innerbody1024');
+$('#innerbody').removeClass('innerbody990');
+$('.success-outer3').removeClass('success-outer32500'); 
+$('.success-outer3').removeClass('success-outer32210'); 
+$('.success-outer3').removeClass('success-outer31920'); 
+$('.success-outer3').removeClass('success-outer31840'); 
+$('.success-outer3').removeClass('success-outer31760'); 
+$('.success-outer3').removeClass('success-outer31600'); 
+$('.success-outer3').removeClass('success-outer31440'); 
+$('.success-outer3').removeClass('success-outer31360'); 
+$('.success-outer3').removeClass('success-outer31280'); 
+$('.success-outer3').addClass('success-outer31230');
+$('.success-outer3').removeClass('success-outer31170'); 
+$('.success-outer3').removeClass('success-outer31120');
+$('.success-outer3').removeClass('success-outer31090'); 
+$('.success-outer3').removeClass('success-outer31050'); 
+$('.success-outer3').removeClass('success-outer31024');
+$('.success-outer3').removeClass('success-outer3990'); 
+$('.warning-outer3').removeClass('warning-outer32500'); 
+$('.warning-outer3').removeClass('warning-outer32210'); 
+$('.warning-outer3').removeClass('warning-outer31920'); 
+$('.warning-outer3').removeClass('warning-outer31840'); 
+$('.warning-outer3').removeClass('warning-outer31760'); 
+$('.warning-outer3').removeClass('warning-outer31600'); 
+$('.warning-outer3').removeClass('warning-outer31440'); 
+$('.warning-outer3').removeClass('warning-outer31360'); 
+$('.warning-outer3').removeClass('warning-outer31280'); 
+$('.warning-outer3').addClass('warning-outer31230');
+$('.warning-outer3').removeClass('warning-outer31170'); 
+$('.warning-outer3').removeClass('warning-outer31120');
+$('.warning-outer3').removeClass('warning-outer31090'); 
+$('.warning-outer3').removeClass('warning-outer31050'); 
+$('.warning-outer3').removeClass('warning-outer31024');
+$('.warning-outer3').removeClass('warning-outer3990'); 
+$('.error-outer3').removeClass('error-outer32500'); 
+$('.error-outer3').removeClass('error-outer32210'); 
+$('.error-outer3').removeClass('error-outer31920'); 
+$('.error-outer3').removeClass('error-outer31840'); 
+$('.error-outer3').removeClass('error-outer31760'); 
+$('.error-outer3').removeClass('error-outer31600'); 
+$('.error-outer3').removeClass('error-outer31440'); 
+$('.error-outer3').removeClass('error-outer31360'); 
+$('.error-outer3').removeClass('error-outer31280'); 
+$('.error-outer3').addClass('error-outer31230');
+$('.error-outer3').removeClass('error-outer31170'); 
+$('.error-outer3').removeClass('error-outer31120');
+$('.error-outer3').removeClass('error-outer31090'); 
+$('.error-outer3').removeClass('error-outer31050'); 
+$('.error-outer3').removeClass('error-outer31024');
+$('.error-outer3').removeClass('error-outer3990');  
+        } 
+		
+else if ( $(window).width() > 1170 ) { 
+$('body#wwwstdhdrbody').addClass('wwwstdhdrbody1170'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody2500'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody2210'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1920'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1840'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1760'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1600'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1440'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1360'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1280');
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1230');
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1120');
+$('#innerbody').addClass('innerbody1170');
+$('#innerbody').removeClass('innerbody1120');
+$('#innerbody').removeClass('innerbody1090');
+$('#innerbody').removeClass('innerbody1050');
+$('#innerbody').removeClass('innerbody1024');
+$('#innerbody').removeClass('innerbody990');
+$('.success-outer3').removeClass('success-outer32500'); 
+$('.success-outer3').removeClass('success-outer32210'); 
+$('.success-outer3').removeClass('success-outer31920'); 
+$('.success-outer3').removeClass('success-outer31840'); 
+$('.success-outer3').removeClass('success-outer31760'); 
+$('.success-outer3').removeClass('success-outer31600'); 
+$('.success-outer3').removeClass('success-outer31440'); 
+$('.success-outer3').removeClass('success-outer31360'); 
+$('.success-outer3').removeClass('success-outer31280'); 
+$('.success-outer3').removeClass('success-outer31230');
+$('.success-outer3').addClass('success-outer31170'); 
+$('.success-outer3').removeClass('success-outer31120');
+$('.success-outer3').removeClass('success-outer31090'); 
+$('.success-outer3').removeClass('success-outer31050'); 
+$('.success-outer3').removeClass('success-outer31024');
+$('.success-outer3').removeClass('success-outer3990'); 
+$('.warning-outer3').removeClass('warning-outer32500'); 
+$('.warning-outer3').removeClass('warning-outer32210'); 
+$('.warning-outer3').removeClass('warning-outer31920'); 
+$('.warning-outer3').removeClass('warning-outer31840'); 
+$('.warning-outer3').removeClass('warning-outer31760'); 
+$('.warning-outer3').removeClass('warning-outer31600'); 
+$('.warning-outer3').removeClass('warning-outer31440'); 
+$('.warning-outer3').removeClass('warning-outer31360'); 
+$('.warning-outer3').removeClass('warning-outer31280'); 
+$('.warning-outer3').removeClass('warning-outer31230');
+$('.warning-outer3').addClass('warning-outer31170'); 
+$('.warning-outer3').removeClass('warning-outer31120');
+$('.warning-outer3').removeClass('warning-outer31090'); 
+$('.warning-outer3').removeClass('warning-outer31050'); 
+$('.warning-outer3').removeClass('warning-outer31024');
+$('.warning-outer3').removeClass('warning-outer3990'); 
+$('.error-outer3').removeClass('error-outer32500'); 
+$('.error-outer3').removeClass('error-outer32210'); 
+$('.error-outer3').removeClass('error-outer31920'); 
+$('.error-outer3').removeClass('error-outer31840'); 
+$('.error-outer3').removeClass('error-outer31760'); 
+$('.error-outer3').removeClass('error-outer31600'); 
+$('.error-outer3').removeClass('error-outer31440'); 
+$('.error-outer3').removeClass('error-outer31360'); 
+$('.error-outer3').removeClass('error-outer31280'); 
+$('.error-outer3').removeClass('error-outer31230');
+$('.error-outer3').addClass('error-outer31170'); 
+$('.error-outer3').removeClass('error-outer31120');
+$('.error-outer3').removeClass('error-outer31090'); 
+$('.error-outer3').removeClass('error-outer31050'); 
+$('.error-outer3').removeClass('error-outer31024');
+$('.error-outer3').removeClass('error-outer3990');  
+        } 
+		
+else if ( $(window).width() > 1120 ) { 
+$('body#wwwstdhdrbody').addClass('wwwstdhdrbody1120'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody2500'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody2210'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1920'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1840'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1760'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1600'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1440'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1360'); 
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1280');
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1230');
+$('body#wwwstdhdrbody').removeClass('wwwstdhdrbody1170');
+$('#innerbody').addClass('innerbody1120');
+$('#innerbody').removeClass('innerbody1170');
+$('#innerbody').removeClass('innerbody1090');
+$('#innerbody').removeClass('innerbody1050');
+$('#innerbody').removeClass('innerbody1024');
+$('#innerbody').removeClass('innerbody990');
+$('.success-outer3').removeClass('success-outer32500'); 
+$('.success-outer3').removeClass('success-outer32210'); 
+$('.success-outer3').removeClass('success-outer31920'); 
+$('.success-outer3').removeClass('success-outer31840'); 
+$('.success-outer3').removeClass('success-outer31760'); 
+$('.success-outer3').removeClass('success-outer31600'); 
+$('.success-outer3').removeClass('success-outer31440'); 
+$('.success-outer3').removeClass('success-outer31360'); 
+$('.success-outer3').removeClass('success-outer31280'); 
+$('.success-outer3').removeClass('success-outer31230');
+$('.success-outer3').removeClass('success-outer31170'); 
+$('.success-outer3').addClass('success-outer31120');
+$('.success-outer3').removeClass('success-outer31090'); 
+$('.success-outer3').removeClass('success-outer31050'); 
+$('.success-outer3').removeClass('success-outer31024');
+$('.success-outer3').removeClass('success-outer3990'); 
+$('.warning-outer3').removeClass('warning-outer32500'); 
+$('.warning-outer3').removeClass('warning-outer32210'); 
+$('.warning-outer3').removeClass('warning-outer31920'); 
+$('.warning-outer3').removeClass('warning-outer31840'); 
+$('.warning-outer3').removeClass('warning-outer31760'); 
+$('.warning-outer3').removeClass('warning-outer31600'); 
+$('.warning-outer3').removeClass('warning-outer31440'); 
+$('.warning-outer3').removeClass('warning-outer31360'); 
+$('.warning-outer3').removeClass('warning-outer31280'); 
+$('.warning-outer3').removeClass('warning-outer31230');
+$('.warning-outer3').removeClass('warning-outer31170'); 
+$('.warning-outer3').addClass('warning-outer31120');
+$('.warning-outer3').removeClass('warning-outer31090'); 
+$('.warning-outer3').removeClass('warning-outer31050'); 
+$('.warning-outer3').removeClass('warning-outer31024');
+$('.warning-outer3').removeClass('warning-outer3990'); 
+$('.error-outer3').removeClass('error-outer32500'); 
+$('.error-outer3').removeClass('error-outer32210'); 
+$('.error-outer3').removeClass('error-outer31920'); 
+$('.error-outer3').removeClass('error-outer31840'); 
+$('.error-outer3').removeClass('error-outer31760'); 
+$('.error-outer3').removeClass('error-outer31600'); 
+$('.error-outer3').removeClass('error-outer31440'); 
+$('.error-outer3').removeClass('error-outer31360'); 
+$('.error-outer3').removeClass('error-outer31280'); 
+$('.error-outer3').removeClass('error-outer31230');
+$('.error-outer3').removeClass('error-outer31170'); 
+$('.error-outer3').addClass('error-outer31120');
+$('.error-outer3').removeClass('error-outer31090'); 
+$('.error-outer3').removeClass('error-outer31050'); 
+$('.error-outer3').removeClass('error-outer31024');
+$('.error-outer3').removeClass('error-outer3990');  
+        } 
+		
+else if ( $(window).width() > 1090 ) { 
+$('#innerbody').addClass('innerbody1090');
+$('#innerbody').removeClass('innerbody1120');
+$('#innerbody').removeClass('innerbody1170');
+$('.success-outer3').removeClass('success-outer32500'); 
+$('.success-outer3').removeClass('success-outer32210'); 
+$('.success-outer3').removeClass('success-outer31920'); 
+$('.success-outer3').removeClass('success-outer31840'); 
+$('.success-outer3').removeClass('success-outer31760'); 
+$('.success-outer3').removeClass('success-outer31600'); 
+$('.success-outer3').removeClass('success-outer31440'); 
+$('.success-outer3').removeClass('success-outer31360'); 
+$('.success-outer3').removeClass('success-outer31280'); 
+$('.success-outer3').removeClass('success-outer31230');
+$('.success-outer3').removeClass('success-outer31170'); 
+$('.success-outer3').removeClass('success-outer31120');
+$('.success-outer3').addClass('success-outer31090'); 
+$('.success-outer3').removeClass('success-outer31050'); 
+$('.success-outer3').removeClass('success-outer31024');
+$('.success-outer3').removeClass('success-outer3990'); 
+$('.warning-outer3').removeClass('warning-outer32500'); 
+$('.warning-outer3').removeClass('warning-outer32210'); 
+$('.warning-outer3').removeClass('warning-outer31920'); 
+$('.warning-outer3').removeClass('warning-outer31840'); 
+$('.warning-outer3').removeClass('warning-outer31760'); 
+$('.warning-outer3').removeClass('warning-outer31600'); 
+$('.warning-outer3').removeClass('warning-outer31440'); 
+$('.warning-outer3').removeClass('warning-outer31360'); 
+$('.warning-outer3').removeClass('warning-outer31280'); 
+$('.warning-outer3').removeClass('warning-outer31230');
+$('.warning-outer3').removeClass('warning-outer31170'); 
+$('.warning-outer3').removeClass('warning-outer31120');
+$('.warning-outer3').addClass('warning-outer31090'); 
+$('.warning-outer3').removeClass('warning-outer31050'); 
+$('.warning-outer3').removeClass('warning-outer31024');
+$('.warning-outer3').removeClass('warning-outer3990'); 
+$('.error-outer3').removeClass('error-outer32500'); 
+$('.error-outer3').removeClass('error-outer32210'); 
+$('.error-outer3').removeClass('error-outer31920'); 
+$('.error-outer3').removeClass('error-outer31840'); 
+$('.error-outer3').removeClass('error-outer31760'); 
+$('.error-outer3').removeClass('error-outer31600'); 
+$('.error-outer3').removeClass('error-outer31440'); 
+$('.error-outer3').removeClass('error-outer31360'); 
+$('.error-outer3').removeClass('error-outer31280'); 
+$('.error-outer3').removeClass('error-outer31230');
+$('.error-outer3').removeClass('error-outer31170'); 
+$('.error-outer3').removeClass('error-outer31120');
+$('.error-outer3').addClass('error-outer31090'); 
+$('.error-outer3').removeClass('error-outer31050'); 
+$('.error-outer3').removeClass('error-outer31024');
+$('.error-outer3').removeClass('error-outer3990');  
+ 
+        } 
+else if ( $(window).width() > 1050) { 
+$('#innerbody').addClass('innerbody1050');
+$('#innerbody').removeClass('innerbody1120');
+$('#innerbody').removeClass('innerbody1170');
+$('#innerbody').removeClass('innerbody1090');
+$('#innerbody').removeClass('innerbody1024');
+$('#innerbody').removeClass('innerbody990');
+$('.success-outer3').removeClass('success-outer32500'); 
+$('.success-outer3').removeClass('success-outer32210'); 
+$('.success-outer3').removeClass('success-outer31920'); 
+$('.success-outer3').removeClass('success-outer31840'); 
+$('.success-outer3').removeClass('success-outer31760'); 
+$('.success-outer3').removeClass('success-outer31600'); 
+$('.success-outer3').removeClass('success-outer31440'); 
+$('.success-outer3').removeClass('success-outer31360'); 
+$('.success-outer3').removeClass('success-outer31280'); 
+$('.success-outer3').removeClass('success-outer31230');
+$('.success-outer3').removeClass('success-outer31170'); 
+$('.success-outer3').removeClass('success-outer31120');
+$('.success-outer3').removeClass('success-outer31090'); 
+$('.success-outer3').addClass('success-outer31050'); 
+$('.success-outer3').removeClass('success-outer31024');
+$('.success-outer3').removeClass('success-outer3990'); 
+$('.warning-outer3').removeClass('warning-outer32500'); 
+$('.warning-outer3').removeClass('warning-outer32210'); 
+$('.warning-outer3').removeClass('warning-outer31920'); 
+$('.warning-outer3').removeClass('warning-outer31840'); 
+$('.warning-outer3').removeClass('warning-outer31760'); 
+$('.warning-outer3').removeClass('warning-outer31600'); 
+$('.warning-outer3').removeClass('warning-outer31440'); 
+$('.warning-outer3').removeClass('warning-outer31360'); 
+$('.warning-outer3').removeClass('warning-outer31280'); 
+$('.warning-outer3').removeClass('warning-outer31230');
+$('.warning-outer3').removeClass('warning-outer31170'); 
+$('.warning-outer3').removeClass('warning-outer31120');
+$('.warning-outer3').removeClass('warning-outer31090'); 
+$('.warning-outer3').addClass('warning-outer31050'); 
+$('.warning-outer3').removeClass('warning-outer31024');
+$('.warning-outer3').removeClass('warning-outer3990'); 
+$('.error-outer3').removeClass('error-outer32500'); 
+$('.error-outer3').removeClass('error-outer32210'); 
+$('.error-outer3').removeClass('error-outer31920'); 
+$('.error-outer3').removeClass('error-outer31840'); 
+$('.error-outer3').removeClass('error-outer31760'); 
+$('.error-outer3').removeClass('error-outer31600'); 
+$('.error-outer3').removeClass('error-outer31440'); 
+$('.error-outer3').removeClass('error-outer31360'); 
+$('.error-outer3').removeClass('error-outer31280'); 
+$('.error-outer3').removeClass('error-outer31230');
+$('.error-outer3').removeClass('error-outer31170'); 
+$('.error-outer3').removeClass('error-outer31120');
+$('.error-outer3').removeClass('error-outer31090'); 
+$('.error-outer3').addClass('error-outer31050'); 
+$('.error-outer3').removeClass('error-outer31024');
+$('.error-outer3').removeClass('error-outer3990');  
+        } 
+		
+else if ( $(window).width() > 1024 ) { 
+$('#innerbody').addClass('innerbody1024');
+$('#innerbody').removeClass('innerbody1170');
+$('#innerbody').removeClass('innerbody1120');
+$('#innerbody').removeClass('innerbody1090');
+$('#innerbody').removeClass('innerbody1050');
+$('#innerbody').removeClass('innerbody990');
+$('.success-outer3').removeClass('success-outer32500'); 
+$('.success-outer3').removeClass('success-outer32210'); 
+$('.success-outer3').removeClass('success-outer31920'); 
+$('.success-outer3').removeClass('success-outer31840'); 
+$('.success-outer3').removeClass('success-outer31760'); 
+$('.success-outer3').removeClass('success-outer31600'); 
+$('.success-outer3').removeClass('success-outer31440'); 
+$('.success-outer3').removeClass('success-outer31360'); 
+$('.success-outer3').removeClass('success-outer31280'); 
+$('.success-outer3').removeClass('success-outer31230');
+$('.success-outer3').removeClass('success-outer31170'); 
+$('.success-outer3').removeClass('success-outer31120');
+$('.success-outer3').removeClass('success-outer31090'); 
+$('.success-outer3').removeClass('success-outer31050'); 
+$('.success-outer3').addClass('success-outer31024');
+$('.success-outer3').removeClass('success-outer3990'); 
+$('.warning-outer3').removeClass('warning-outer32500'); 
+$('.warning-outer3').removeClass('warning-outer32210'); 
+$('.warning-outer3').removeClass('warning-outer31920'); 
+$('.warning-outer3').removeClass('warning-outer31840'); 
+$('.warning-outer3').removeClass('warning-outer31760'); 
+$('.warning-outer3').removeClass('warning-outer31600'); 
+$('.warning-outer3').removeClass('warning-outer31440'); 
+$('.warning-outer3').removeClass('warning-outer31360'); 
+$('.warning-outer3').removeClass('warning-outer31280'); 
+$('.warning-outer3').removeClass('warning-outer31230');
+$('.warning-outer3').removeClass('warning-outer31170'); 
+$('.warning-outer3').removeClass('warning-outer31120');
+$('.warning-outer3').removeClass('warning-outer31090'); 
+$('.warning-outer3').removeClass('warning-outer31050'); 
+$('.warning-outer3').addClass('warning-outer31024');
+$('.warning-outer3').removeClass('warning-outer3990'); 
+$('.error-outer3').removeClass('error-outer32500'); 
+$('.error-outer3').removeClass('error-outer32210'); 
+$('.error-outer3').removeClass('error-outer31920'); 
+$('.error-outer3').removeClass('error-outer31840'); 
+$('.error-outer3').removeClass('error-outer31760'); 
+$('.error-outer3').removeClass('error-outer31600'); 
+$('.error-outer3').removeClass('error-outer31440'); 
+$('.error-outer3').removeClass('error-outer31360'); 
+$('.error-outer3').removeClass('error-outer31280'); 
+$('.error-outer3').removeClass('error-outer31230');
+$('.error-outer3').removeClass('error-outer31170'); 
+$('.error-outer3').removeClass('error-outer31120');
+$('.error-outer3').removeClass('error-outer31090'); 
+$('.error-outer3').removeClass('error-outer31050'); 
+$('.error-outer3').addClass('error-outer31024');
+$('.error-outer3').removeClass('error-outer3990');  
+ 
+        } 
+else if ( $(window).width() > 990 ) { 
+$('#innerbody').addClass('innerbody990');
+$('#innerbody').removeClass('innerbody1024');
+$('#innerbody').removeClass('innerbody1170');
+$('#innerbody').removeClass('innerbody1120');
+$('#innerbody').removeClass('innerbody1090');
+$('#innerbody').removeClass('innerbody1050');
+$('.success-outer3').removeClass('success-outer32500'); 
+$('.success-outer3').removeClass('success-outer32210'); 
+$('.success-outer3').removeClass('success-outer31920'); 
+$('.success-outer3').removeClass('success-outer31840'); 
+$('.success-outer3').removeClass('success-outer31760'); 
+$('.success-outer3').removeClass('success-outer31600'); 
+$('.success-outer3').removeClass('success-outer31440'); 
+$('.success-outer3').removeClass('success-outer31360'); 
+$('.success-outer3').removeClass('success-outer31280'); 
+$('.success-outer3').removeClass('success-outer31230');
+$('.success-outer3').removeClass('success-outer31170'); 
+$('.success-outer3').removeClass('success-outer31120');
+$('.success-outer3').removeClass('success-outer31090'); 
+$('.success-outer3').removeClass('success-outer31050'); 
+$('.success-outer3').removeClass('success-outer31024');
+$('.success-outer3').addClass('success-outer3990'); 
+$('.warning-outer3').removeClass('warning-outer32500'); 
+$('.warning-outer3').removeClass('warning-outer32210'); 
+$('.warning-outer3').removeClass('warning-outer31920'); 
+$('.warning-outer3').removeClass('warning-outer31840'); 
+$('.warning-outer3').removeClass('warning-outer31760'); 
+$('.warning-outer3').removeClass('warning-outer31600'); 
+$('.warning-outer3').removeClass('warning-outer31440'); 
+$('.warning-outer3').removeClass('warning-outer31360'); 
+$('.warning-outer3').removeClass('warning-outer31280'); 
+$('.warning-outer3').removeClass('warning-outer31230');
+$('.warning-outer3').removeClass('warning-outer31170'); 
+$('.warning-outer3').removeClass('warning-outer31120');
+$('.warning-outer3').removeClass('warning-outer31090'); 
+$('.warning-outer3').removeClass('warning-outer31050'); 
+$('.warning-outer3').removeClass('warning-outer31024');
+$('.warning-outer3').addClass('warning-outer3990'); 
+$('.error-outer3').removeClass('error-outer32500'); 
+$('.error-outer3').removeClass('error-outer32210'); 
+$('.error-outer3').removeClass('error-outer31920'); 
+$('.error-outer3').removeClass('error-outer31840'); 
+$('.error-outer3').removeClass('error-outer31760'); 
+$('.error-outer3').removeClass('error-outer31600'); 
+$('.error-outer3').removeClass('error-outer31440'); 
+$('.error-outer3').removeClass('error-outer31360'); 
+$('.error-outer3').removeClass('error-outer31280'); 
+$('.error-outer3').removeClass('error-outer31230');
+$('.error-outer3').removeClass('error-outer31170'); 
+$('.error-outer3').removeClass('error-outer31120');
+$('.error-outer3').removeClass('error-outer31090'); 
+$('.error-outer3').removeClass('error-outer31050'); 
+$('.error-outer3').removeClass('error-outer31024');
+$('.error-outer3').addClass('error-outer3990'); 
+ 
+        } 		
+       
+    } 
+      checkWindowSize(); 
+$(window).resize(checkWindowSize); 
+   
+});
+
+// end window size handler
+
+
+
+// Start Row Stripe 
+
+$(function(){
+  $("table.aaTabularTable tr:odd").addClass("aaOddRow");
+  $("table.aaTabularTable tr:even").addClass("aaEvenRow");
+});
+
+//end row stripe
+
+
+
+/*
+
+Start Uniform JS
+
+
+*/
+
+(function($) {
+  $.uniform = {
+    options: {
+      selectClass:   'selector',
+      radioClass: 'radio',
+      checkboxClass: 'checker',
+      fileClass: 'uploader',
+      filenameClass: 'filename',
+      fileBtnClass: 'action',
+      fileDefaultText: 'No file selected',
+      fileBtnText: 'Choose File',
+      checkedClass: 'checked',
+      focusClass: 'focus',
+      disabledClass: 'disabled',
+      buttonClass: 'button',
+      activeClass: 'active',
+      hoverClass: 'hover',
+      useID: true,
+      idPrefix: 'uniform',
+      resetSelector: false,
+      autoHide: true
+    },
+    elements: []
+  };
+
+  if($.browser.msie && $.browser.version < 7){
+    $.support.selectOpacity = false;
+  }else{
+    $.support.selectOpacity = true;
+  }
+
+  $.fn.uniform = function(options) {
+
+    options = $.extend($.uniform.options, options);
+
+    var el = this;
+    //code for specifying a reset button
+    if(options.resetSelector != false){
+      $(options.resetSelector).mouseup(function(){
+        function resetThis(){
+          $.uniform.update(el);
+        }
+        setTimeout(resetThis, 10);
+      });
+    }
+    
+    function doInput(elem){
+      $el = $(elem);
+      $el.addClass($el.attr("type"));
+      storeElement(elem);
+    }
+    
+    function doTextarea(elem){
+      $(elem).addClass("uniform");
+      storeElement(elem);
+    }
+    
+    function doButton(elem){
+      var $el = $(elem);
+      
+      var divTag = $("<div>"),
+          spanTag = $("<span>");
+      
+      divTag.addClass(options.buttonClass);
+      
+      if(options.useID && $el.attr("id") != "") divTag.attr("id", options.idPrefix+"-"+$el.attr("id"));
+      
+      var btnText;
+      
+      if($el.is("a") || $el.is("button")){
+        btnText = $el.text();
+      }else if($el.is(":submit") || $el.is(":reset") || $el.is("input[type=button]")){
+        btnText = $el.attr("value");
+      }
+      
+      btnText = btnText == "" ? $el.is(":reset") ? "Reset" : "Submit" : btnText;
+      
+      spanTag.html(btnText);
+      
+      $el.css("opacity", 0);
+      $el.wrap(divTag);
+      $el.wrap(spanTag);
+      
+      //redefine variables
+      divTag = $el.closest("div");
+      spanTag = $el.closest("span");
+      
+      if($el.is(":disabled")) divTag.addClass(options.disabledClass);
+      
+      divTag.bind({
+        "mouseenter.uniform": function(){
+          divTag.addClass(options.hoverClass);
+        },
+        "mouseleave.uniform": function(){
+          divTag.removeClass(options.hoverClass);
+          divTag.removeClass(options.activeClass);
+        },
+        "mousedown.uniform touchbegin.uniform": function(){
+          divTag.addClass(options.activeClass);
+        },
+        "mouseup.uniform touchend.uniform": function(){
+          divTag.removeClass(options.activeClass);
+        },
+        "click.uniform touchend.uniform": function(e){
+          if($(e.target).is("span") || $(e.target).is("div")){    
+            if(elem[0].dispatchEvent){
+              var ev = document.createEvent('MouseEvents');
+              ev.initEvent( 'click', true, true );
+              elem[0].dispatchEvent(ev);
+            }else{
+              elem[0].click();
+            }
+          }
+        }
+      });
+      
+      elem.bind({
+        "focus.uniform": function(){
+          divTag.addClass(options.focusClass);
+        },
+        "blur.uniform": function(){
+          divTag.removeClass(options.focusClass);
+        }
+      });
+      
+      $.uniform.noSelect(divTag);
+      storeElement(elem);
+      
+    }
+
+    function doSelect(elem){
+      var $el = $(elem);
+      
+      var divTag = $('<div />'),
+          spanTag = $('<span />');
+      
+      if(!$el.css("display") == "none" && options.autoHide){
+        divTag.hide();
+      }
+
+      divTag.addClass(options.selectClass);
+
+      if(options.useID && elem.attr("id") != ""){
+        divTag.attr("id", options.idPrefix+"-"+elem.attr("id"));
+      }
+      
+      var selected = elem.find(":selected:first");
+      if(selected.length == 0){
+        selected = elem.find("option:first");
+      }
+      spanTag.html(selected.html());
+      
+      elem.css('opacity', 0);
+      elem.wrap(divTag);
+      elem.before(spanTag);
+
+      //redefine variables
+      divTag = elem.parent("div");
+      spanTag = elem.siblings("span");
+
+      elem.bind({
+        "change.uniform": function() {
+          spanTag.text(elem.find(":selected").html());
+          divTag.removeClass(options.activeClass);
+        },
+        "focus.uniform": function() {
+          divTag.addClass(options.focusClass);
+        },
+        "blur.uniform": function() {
+          divTag.removeClass(options.focusClass);
+          divTag.removeClass(options.activeClass);
+        },
+        "mousedown.uniform touchbegin.uniform": function() {
+          divTag.addClass(options.activeClass);
+        },
+        "mouseup.uniform touchend.uniform": function() {
+          divTag.removeClass(options.activeClass);
+        },
+        "click.uniform touchend.uniform": function(){
+          divTag.removeClass(options.activeClass);
+        },
+        "mouseenter.uniform": function() {
+          divTag.addClass(options.hoverClass);
+        },
+        "mouseleave.uniform": function() {
+          divTag.removeClass(options.hoverClass);
+          divTag.removeClass(options.activeClass);
+        },
+        "keyup.uniform": function(){
+          spanTag.text(elem.find(":selected").html());
+        }
+      });
+      
+      //handle disabled state
+      if($(elem).attr("disabled")){
+        //box is checked by default, check our box
+        divTag.addClass(options.disabledClass);
+      }
+      $.uniform.noSelect(spanTag);
+      
+      storeElement(elem);
+
+    }
+
+    function doCheckbox(elem){
+      var $el = $(elem);
+      
+      var divTag = $('<div />'),
+          spanTag = $('<span />');
+      
+      if(!$el.css("display") == "none" && options.autoHide){
+        divTag.hide();
+      }
+      
+      divTag.addClass(options.checkboxClass);
+
+      //assign the id of the element
+      if(options.useID && elem.attr("id") != ""){
+        divTag.attr("id", options.idPrefix+"-"+elem.attr("id"));
+      }
+
+      //wrap with the proper elements
+      $(elem).wrap(divTag);
+      $(elem).wrap(spanTag);
+
+      //redefine variables
+      spanTag = elem.parent();
+      divTag = spanTag.parent();
+
+      //hide normal input and add focus classes
+      $(elem)
+      .css("opacity", 0)
+      .bind({
+        "focus.uniform": function(){
+          divTag.addClass(options.focusClass);
+        },
+        "blur.uniform": function(){
+          divTag.removeClass(options.focusClass);
+        },
+        "click.uniform touchend.uniform": function(){
+          if(!$(elem).attr("checked")){
+            //box was just unchecked, uncheck span
+            spanTag.removeClass(options.checkedClass);
+          }else{
+            //box was just checked, check span.
+            spanTag.addClass(options.checkedClass);
+          }
+        },
+        "mousedown.uniform touchbegin.uniform": function() {
+          divTag.addClass(options.activeClass);
+        },
+        "mouseup.uniform touchend.uniform": function() {
+          divTag.removeClass(options.activeClass);
+        },
+        "mouseenter.uniform": function() {
+          divTag.addClass(options.hoverClass);
+        },
+        "mouseleave.uniform": function() {
+          divTag.removeClass(options.hoverClass);
+          divTag.removeClass(options.activeClass);
+        }
+      });
+      
+      //handle defaults
+      if($(elem).attr("checked")){
+        //box is checked by default, check our box
+        spanTag.addClass(options.checkedClass);
+      }
+
+      //handle disabled state
+      if($(elem).attr("disabled")){
+        //box is checked by default, check our box
+        divTag.addClass(options.disabledClass);
+      }
+
+      storeElement(elem);
+    }
+
+    function doRadio(elem){
+      var $el = $(elem);
+      
+      var divTag = $('<div />'),
+          spanTag = $('<span />');
+          
+      if(!$el.css("display") == "none" && options.autoHide){
+        divTag.hide();
+      }
+
+      divTag.addClass(options.radioClass);
+
+      if(options.useID && elem.attr("id") != ""){
+        divTag.attr("id", options.idPrefix+"-"+elem.attr("id"));
+      }
+
+      //wrap with the proper elements
+      $(elem).wrap(divTag);
+      $(elem).wrap(spanTag);
+
+      //redefine variables
+      spanTag = elem.parent();
+      divTag = spanTag.parent();
+
+      //hide normal input and add focus classes
+      $(elem)
+      .css("opacity", 0)
+      .bind({
+        "focus.uniform": function(){
+          divTag.addClass(options.focusClass);
+        },
+        "blur.uniform": function(){
+          divTag.removeClass(options.focusClass);
+        },
+        "click.uniform touchend.uniform": function(){
+          if(!$(elem).attr("checked")){
+            //box was just unchecked, uncheck span
+            spanTag.removeClass(options.checkedClass);
+          }else{
+            //box was just checked, check span
+            var classes = options.radioClass.split(" ")[0];
+            $("." + classes + " span." + options.checkedClass + ":has([name='" + $(elem).attr('name') + "'])").removeClass(options.checkedClass);
+            spanTag.addClass(options.checkedClass);
+          }
+        },
+        "mousedown.uniform touchend.uniform": function() {
+          if(!$(elem).is(":disabled")){
+            divTag.addClass(options.activeClass);
+          }
+        },
+        "mouseup.uniform touchbegin.uniform": function() {
+          divTag.removeClass(options.activeClass);
+        },
+        "mouseenter.uniform touchend.uniform": function() {
+          divTag.addClass(options.hoverClass);
+        },
+        "mouseleave.uniform": function() {
+          divTag.removeClass(options.hoverClass);
+          divTag.removeClass(options.activeClass);
+        }
+      });
+
+      //handle defaults
+      if($(elem).attr("checked")){
+        //box is checked by default, check span
+        spanTag.addClass(options.checkedClass);
+      }
+      //handle disabled state
+      if($(elem).attr("disabled")){
+        //box is checked by default, check our box
+        divTag.addClass(options.disabledClass);
+      }
+
+      storeElement(elem);
+
+    }
+
+    function doFile(elem){
+      //sanitize input
+      var $el = $(elem);
+
+      var divTag = $('<div />'),
+          filenameTag = $('<span>'+options.fileDefaultText+'</span>'),
+          btnTag = $('<span>'+options.fileBtnText+'</span>');
+      
+      if(!$el.css("display") == "none" && options.autoHide){
+        divTag.hide();
+      }
+
+      divTag.addClass(options.fileClass);
+      filenameTag.addClass(options.filenameClass);
+      btnTag.addClass(options.fileBtnClass);
+
+      if(options.useID && $el.attr("id") != ""){
+        divTag.attr("id", options.idPrefix+"-"+$el.attr("id"));
+      }
+
+      //wrap with the proper elements
+      $el.wrap(divTag);
+      $el.after(btnTag);
+      $el.after(filenameTag);
+
+      //redefine variables
+      divTag = $el.closest("div");
+      filenameTag = $el.siblings("."+options.filenameClass);
+      btnTag = $el.siblings("."+options.fileBtnClass);
+
+      //set the size
+      if(!$el.attr("size")){
+        var divWidth = divTag.width();
+        //$el.css("width", divWidth);
+        $el.attr("size", divWidth/10);
+      }
+
+      //actions
+      var setFilename = function()
+      {
+        var filename = $el.val();
+        if (filename === '')
+        {
+          filename = options.fileDefaultText;
+        }
+        else
+        {
+          filename = filename.split(/[\/\\]+/);
+          filename = filename[(filename.length-1)];
+        }
+        filenameTag.text(filename);
+      };
+
+      // Account for input saved across refreshes
+      setFilename();
+
+      $el
+      .css("opacity", 0)
+      .bind({
+        "focus.uniform": function(){
+          divTag.addClass(options.focusClass);
+        },
+        "blur.uniform": function(){
+          divTag.removeClass(options.focusClass);
+        },
+        "mousedown.uniform": function() {
+          if(!$(elem).is(":disabled")){
+            divTag.addClass(options.activeClass);
+          }
+        },
+        "mouseup.uniform": function() {
+          divTag.removeClass(options.activeClass);
+        },
+        "mouseenter.uniform": function() {
+          divTag.addClass(options.hoverClass);
+        },
+        "mouseleave.uniform": function() {
+          divTag.removeClass(options.hoverClass);
+          divTag.removeClass(options.activeClass);
+        }
+      });
+
+      // IE7 doesn't fire onChange until blur or second fire.
+      if ($.browser.msie){
+        // IE considers browser chrome blocking I/O, so it
+        // suspends tiemouts until after the file has been selected.
+        $el.bind('click.uniform.ie7', function() {
+          setTimeout(setFilename, 0);
+        });
+      }else{
+        // All other browsers behave properly
+        $el.bind('change.uniform', setFilename);
+      }
+
+      //handle defaults
+      if($el.attr("disabled")){
+        //box is checked by default, check our box
+        divTag.addClass(options.disabledClass);
+      }
+      
+      $.uniform.noSelect(filenameTag);
+      $.uniform.noSelect(btnTag);
+      
+      storeElement(elem);
+
+    }
+    
+    $.uniform.restore = function(elem){
+      if(elem == undefined){
+        elem = $($.uniform.elements);
+      }
+      
+      $(elem).each(function(){
+        if($(this).is(":checkbox")){
+          //unwrap from span and div
+          $(this).unwrap().unwrap();
+        }else if($(this).is("select")){
+          //remove sibling span
+          $(this).siblings("span").remove();
+          //unwrap parent div
+          $(this).unwrap();
+        }else if($(this).is(":radio")){
+          //unwrap from span and div
+          $(this).unwrap().unwrap();
+        }else if($(this).is(":file")){
+          //remove sibling spans
+          $(this).siblings("span").remove();
+          //unwrap parent div
+          $(this).unwrap();
+        }else if($(this).is("button, :submit, :reset, a, input[type='button']")){
+          //unwrap from span and div
+          $(this).unwrap().unwrap();
+        }
+        
+        //unbind events
+        $(this).unbind(".uniform");
+        
+        //reset inline style
+        $(this).css("opacity", "1");
+        
+        //remove item from list of uniformed elements
+        var index = $.inArray($(elem), $.uniform.elements);
+        $.uniform.elements.splice(index, 1);
+      });
+    };
+
+    function storeElement(elem){
+      //store this element in our global array
+      elem = $(elem).get();
+      if(elem.length > 1){
+        $.each(elem, function(i, val){
+          $.uniform.elements.push(val);
+        });
+      }else{
+        $.uniform.elements.push(elem);
+      }
+    }
+    
+    //noSelect v1.0
+    $.uniform.noSelect = function(elem) {
+      function f() {
+       return false;
+      };
+      $(elem).each(function() {
+       this.onselectstart = this.ondragstart = f; // Webkit & IE
+       $(this)
+        .mousedown(f) // Webkit & Opera
+        .css({ MozUserSelect: 'none' }); // Firefox
+      });
+     };
+
+    $.uniform.update = function(elem){
+      if(elem == undefined){
+        elem = $($.uniform.elements);
+      }
+      //sanitize input
+      elem = $(elem);
+
+      elem.each(function(){
+        //do to each item in the selector
+        //function to reset all classes
+        var $e = $(this);
+
+        if($e.is("select")){
+          //element is a select
+          var spanTag = $e.siblings("span");
+          var divTag = $e.parent("div");
+
+          divTag.removeClass(options.hoverClass+" "+options.focusClass+" "+options.activeClass);
+
+          //reset current selected text
+          spanTag.html($e.find(":selected").html());
+
+          if($e.is(":disabled")){
+            divTag.addClass(options.disabledClass);
+          }else{
+            divTag.removeClass(options.disabledClass);
+          }
+
+        }else if($e.is(":checkbox")){
+          //element is a checkbox
+          var spanTag = $e.closest("span");
+          var divTag = $e.closest("div");
+
+          divTag.removeClass(options.hoverClass+" "+options.focusClass+" "+options.activeClass);
+          spanTag.removeClass(options.checkedClass);
+
+          if($e.is(":checked")){
+            spanTag.addClass(options.checkedClass);
+          }
+          if($e.is(":disabled")){
+            divTag.addClass(options.disabledClass);
+          }else{
+            divTag.removeClass(options.disabledClass);
+          }
+
+        }else if($e.is(":radio")){
+          //element is a radio
+          var spanTag = $e.closest("span");
+          var divTag = $e.closest("div");
+
+          divTag.removeClass(options.hoverClass+" "+options.focusClass+" "+options.activeClass);
+          spanTag.removeClass(options.checkedClass);
+
+          if($e.is(":checked")){
+            spanTag.addClass(options.checkedClass);
+          }
+
+          if($e.is(":disabled")){
+            divTag.addClass(options.disabledClass);
+          }else{
+            divTag.removeClass(options.disabledClass);
+          }
+        }else if($e.is(":file")){
+          var divTag = $e.parent("div");
+          var filenameTag = $e.siblings(options.filenameClass);
+          btnTag = $e.siblings(options.fileBtnClass);
+
+          divTag.removeClass(options.hoverClass+" "+options.focusClass+" "+options.activeClass);
+
+          filenameTag.text($e.val());
+
+          if($e.is(":disabled")){
+            divTag.addClass(options.disabledClass);
+          }else{
+            divTag.removeClass(options.disabledClass);
+          }
+        }else if($e.is(":submit") || $e.is(":reset") || $e.is("button") || $e.is("a") || elem.is("input[type=button]")){
+          var divTag = $e.closest("div");
+          divTag.removeClass(options.hoverClass+" "+options.focusClass+" "+options.activeClass);
+          
+          if($e.is(":disabled")){
+            divTag.addClass(options.disabledClass);
+          }else{
+            divTag.removeClass(options.disabledClass);
+          }
+          
+        }
+        
+      });
+    };
+
+    return this.each(function() {
+      if($.support.selectOpacity){
+        var elem = $(this);
+
+        if(elem.is("select")){
+          //element is a select
+          if(elem.attr("multiple") != true){
+            //element is not a multi-select
+            if(elem.attr("size") == undefined || elem.attr("size") <= 1){
+              doSelect(elem);
+            }
+          }
+        }else if(elem.is(":checkbox")){
+          //element is a checkbox
+          doCheckbox(elem);
+        }else if(elem.is(":radio")){
+          //element is a radio
+          doRadio(elem);
+        }else if(elem.is(":file")){
+          //element is a file upload
+          doFile(elem);
+        }else if(elem.is(":text, :password, input[type='email']")){
+          doInput(elem);
+        }else if(elem.is("textarea")){
+          doTextarea(elem);
+        }else if(elem.is("a") || elem.is(":submit") || elem.is(":reset") || elem.is("button") || elem.is("input[type=button]")){
+          doButton(elem);
+        }
+          
+      }
+    });
+  };
+})(jQuery);
+
+/*
+
+Evd Uniform JS
+
+
+*/
+
+
+// Start Uniform Function
+
+      $(function(){
+        $(" input:password,input:text, textarea, #p_order_ty_span select").not("input:file, #quick-batch, #switch_vw_lov,#p_field_nm").uniform();
+      });
+    
+//end Uniform Function
+
+
+// Begin Validation Functions
+function aaTrim(str) {
+    str = str.replace(/^\s*/, '').replace(/\s*$/, '');
+    return str;
+}
+
+function aaIsNull( field ) {
+  selected = 0;
+  fieldIsNull = 0;
+  if ( field.type == "text" || field.type == "password" ||
+       field.type == "textarea" || field.type == "file" ) {
+    if ( aaTrim(field.value) == "" )
+      fieldIsNull = 1;
+  } else if ( field.type == "select-one" ) {
+      if (( aaTrim(field.options[field.selectedIndex].value) == "") ||
+         ( field.options[field.selectedIndex].value == "%null%"))
+        fieldIsNull = 1;
+  } else if ( field.type == "select-multiple" ) {
+      fieldIsNull = 1;
+      for ( i = 0; i < field.length; i++ )
+        if ( field.options[i].selected )
+          fieldIsNull = 0;
+  } else if ( field.type == "undefined" || field.type == "checkbox"  ||
+              field.type == "radio" ) {
+      fieldIsNull = 1;
+      for ( i = 0; i < field.length; i++ )
+        if ( field[i].checked )
+          fieldIsNull = 0;
+  }
+  if ( fieldIsNull ) {
+     return true;
+  }
+  else {
+     return false;
+  }
+}
+function aaIsNullArray( formElements ) {
+  var selected = 0;
+  if (typeof formElements[0] == 'undefined') // not array - possibly single value selected
+  {
+     if (formElements.checked==false || formElements.disabled==true )
+        return true;
+  }
+  else
+  {
+     for (var i=0;i<formElements.length;i++)
+     {
+        if (formElements[i].checked==true && formElements[i].disabled==false )
+          selected = 1;
+     }
+     if ( selected == 0 )
+     {
+        return true;
+     }
+  }
+  return false;
+}
+
+function aaIsNumber(value)
+{
+  s = value;
+  if (isNaN(Math.abs(value)) && (s.charAt(0) != '#'))
+  {
+         for (var i=0; (i <= s.length && s.charAt(i) != '.'); )
+         {
+          if (((s.charAt(i) >= 0) && (s.charAt(i) <= 9)) ||
+               (s.charAt(i) == ',' && i != 0 && i != s.length-1) || (s.charAt(i) == '.') )
+                 i++; 
+          else 
+           { 
+             return false; 
+           } 
+         } 
+        if (s.charAt(i) == '.') 
+         { 
+	     for (i++;i <= s.length; ) 
+           { 
+            if (((s.charAt(i) >= 0) && (s.charAt(i) <= 9))) 
+              i++; 
+            else 
+            {
+             return false;
+            } 
+           } 
+         }
+  } 
+  return true;
+}
+
+function aaLongerThan( value, limit ) {
+   return $.trim(value).length > limit;
+}
+
+function aaShorterThan( value, limit ) {
+   return $.trim(value).length < limit;
+}
+
+function aaIsLowerCase( value ) {
+   return (value == value.toLowerCase());
+}
+
+function aaIsUpperCase( value ) {
+   return (value == value.toUpperCase());
+}
+
+// email regex changed by pn 20140512 eng-11898 as the original would allow anything after the email address 
+
+function aaIsType(type, value)
+{
+  UpperType = type.toUpperCase();
+  if (["INTEGER","NUMBER"].indexOf(UpperType) >= 0)
+     var str = Math.abs(value);
+  else var str = value;
+
+  if (UpperType === "INTEGER")
+     var filter=/(^\d+$)/;
+  else if (UpperType === "NUMBER")
+     return aaIsNumber(value);
+  else if (UpperType === "ALPHA")
+     var filter=/^[a-zA-Z]{1,}$/;
+  else if (UpperType === "ALPHANUMERIC")
+     var filter=/^[a-zA-Z0-9]{1,}$/;
+  else if (UpperType === "EMAIL")
+     var filter = /^[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$/; 
+  else if (UpperType === "PHONE") // minimum of 7 digits - standard characters supported
+     var filter = /^([a-zA-Z,#/ \.\(\)\-\+\*]*[0-9]){7}[0-9a-zA-Z,#/ \.\(\)\-\+\*]*$/;
+  else alert("unsupported validation type [" + type + "]");
+
+  if (str.length === 0)
+     return true;
+  else if (filter.test(str))  
+     return true;
+  else  
+     return false;
+}
+// End Validation Functions
+
+function HTMLtoPlaintext(HTML,dumpIframeId) {
+      $("#" + dumpIframeId).empty();
+      $("#" + dumpIframeId).append(HTML);
+      $("#" + dumpIframeId + " style").remove();
+      $("#" + dumpIframeId + " script").remove();
+      var convertedText = $("#" + dumpIframeId).text();
+      $("#" + dumpIframeId).empty();
+      convertedText = $.trim(convertedText); // trims leading and trailing space
+      convertedText = convertedText.replace(/\u00a0/g, " "); // this is the character created by &nbsp;
+      return convertedText;
+   }
+
+if (jQuery.fn.dataTableExt) // this will prevent js errors on pages w/o datatables
+{
+   // attach new function to access pagination data
+   $.fn.dataTableExt.oApi.fnPagingInfo = function ( oSettings )
+   {
+     return {
+       "iStart":         oSettings._iDisplayStart,
+       "iEnd":           oSettings.fnDisplayEnd(),
+       "iLength":        oSettings._iDisplayLength,
+       "iTotal":         oSettings.fnRecordsTotal(),
+       "iFilteredTotal": oSettings.fnRecordsDisplay(),
+       "iPage":          Math.ceil( oSettings._iDisplayStart / oSettings._iDisplayLength ),
+       "iTotalPages":    Math.ceil( oSettings.fnRecordsDisplay() / oSettings._iDisplayLength )
+     };
+   }
+
+   // handle formatted numbers (commas, etc...) detection
+   jQuery.fn.dataTableExt.aTypes.unshift(  
+       function ( sData )
+       {
+           var deformatted = sData.replace(/[^\d\-\.\/a-zA-Z]/g,'');
+           if ( $.isNumeric( deformatted ) ) {
+               return 'formatted-num';
+           }
+           return null;
+       }
+   );
+
+   // handle currency sorting
+   jQuery.fn.dataTableExt.oSort['formatted-num-asc'] = function(a,b) {
+      /* Remove any formatting */
+      if (a != null && b != null && a != "sortfalse" && b != "sortfalse"){  
+         var x = a.match(/\d/) ? a.replace( /[^\d\-\.]/g, "" ) : 0;
+         var y = b.match(/\d/) ? b.replace( /[^\d\-\.]/g, "" ) : 0;
+         /* Parse and return */
+         return parseFloat(x) - parseFloat(y);
+      } 
+      return 0;
+   };
+      
+   jQuery.fn.dataTableExt.oSort['formatted-num-desc'] = function(a,b) {
+      if (a != null && b != null && a != "sortfalse" && b != "sortfalse"){
+         var x = a.match(/\d/) ? a.replace( /[^\d\-\.]/g, "" ) : 0;
+         var y = b.match(/\d/) ? b.replace( /[^\d\-\.]/g, "" ) : 0;
+         return parseFloat(y) - parseFloat(x);
+      }
+      return 0;
+   };
+
+}
+
+function insertAtCursor(fieldId,text) {
+    var field = document.getElementById(fieldId);
+
+    if (document.selection) {
+        var range = document.selection.createRange();
+
+        if (!range || range.parentElement() != field) {
+            field.focus();
+            range = field.createTextRange();
+            range.collapse(false);
+        }
+        range.text = text;
+        range.collapse(false);
+        range.select();
+    } else {
+        field.focus();
+        var val = field.value;
+        var selStart = field.selectionStart;
+        var caretPos = selStart + text.length;
+        field.value = val.slice(0, selStart) + text + val.slice(field.selectionEnd);
+        field.setSelectionRange(caretPos, caretPos);
+    }
+}
+
+
+// ENG-8803 Table Scroller
+$(function() {
+ $('table.aaTabularTable').wrap('<div class="aaTableScrollWrapper"/>');
+});
