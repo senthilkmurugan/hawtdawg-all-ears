@@ -1,0 +1,501 @@
+1    LIBNAME DEEPD "\\WPUSHH01\DINFOPLN\MARKETING MIX PI\INVOPT\P2 2014 AB\PROMO\DIABETES DEEP
+1  ! DIVE\SAS WORK";
+NOTE: Libref DEEPD was successfully assigned as follows:
+      Engine:        V9
+      Physical Name: \\WPUSHH01\DINFOPLN\MARKETING MIX PI\INVOPT\P2 2014 AB\PROMO\DIABETES DEEP
+      DIVE\SAS WORK
+2
+3    *********************************************************************************************
+3  ! *********************************************;
+4    * IMPORT PROMOTION SPEND, DIRECT SELLING AND RX VOLUME DATA FROM EXCEL "LONG GRAPHS"
+4  ! SPREADSHEET. TRANSPOSE, RENAME AND WEIGHT 2009/10.   ;
+5    *********************************************************************************************
+5  ! *********************************************;
+6
+7    * BRING EXCEL DATA INTO SAS FROM FOUR SPREADSHEETS;
+8    %MACRO IMPEM (FNAME,RNAME);
+9        PROC IMPORT OUT= WORK.&FNAME
+10       DATAFILE= "\\WPUSHH01\DINFOPLN\MARKETING MIX PI\INVOPT\P2 2014 AB\PROMO\DIABETES DEEP
+10 ! DIVE\DIABETES PROMO DETAIL 2009-2013 LONG GRAPHS.XLS"
+11       DBMS=EXCEL REPLACE; RANGE="&RNAME"; GETNAMES=YES; MIXED=NO; SCANTEXT=YES; USEDATE=YES;
+11 ! SCANTIME=YES; RUN;
+12   %MEND;
+13   %IMPEM (CAT,CATEGORY$);                     *PROMOTION SPEND BY CATEGORY;
+
+NOTE: WORK.CAT data set was successfully created.
+NOTE: The data set WORK.CAT has 9 observations and 61 variables.
+NOTE: PROCEDURE IMPORT used (Total process time):
+      real time           10.04 seconds
+      cpu time            0.75 seconds
+
+
+14   %IMPEM (SUBCAT,SUB-CATEGORY$);              *PROMOTION SPEND BY SUB-CATEGORY;
+
+NOTE: WORK.SUBCAT data set was successfully created.
+NOTE: The data set WORK.SUBCAT has 28 observations and 64 variables.
+NOTE: PROCEDURE IMPORT used (Total process time):
+      real time           9.89 seconds
+      cpu time            0.76 seconds
+
+
+15   %IMPEM (NPA,RX VOLUME (NPA)$);              *RX VOLUME FROM BADS DRIVE;
+
+NOTE: WORK.NPA data set was successfully created.
+NOTE: The data set WORK.NPA has 2 observations and 61 variables.
+NOTE: PROCEDURE IMPORT used (Total process time):
+      real time           8.98 seconds
+      cpu time            0.54 seconds
+
+
+16   %IMPEM (GRAIL,RX VOLUME & PROMO (GRAIL)$);  *RX VOLUME AND PROMOTION FROM GRAIL;
+
+NOTE: WORK.GRAIL data set was successfully created.
+NOTE: The data set WORK.GRAIL has 4 observations and 61 variables.
+NOTE: PROCEDURE IMPORT used (Total process time):
+      real time           8.99 seconds
+      cpu time            0.61 seconds
+
+
+17
+18   PROC CONTENTS DATA=CAT VARNUM; PROC CONTENTS DATA=SUBCAT VARNUM; PROC CONTENTS DATA=NPA
+18 ! VARNUM; PROC CONTENTS DATA=GRAIL VARNUM; RUN;
+NOTE: Writing HTML Body file: sashtml.htm
+NOTE: PROCEDURE CONTENTS used (Total process time):
+      real time           23.62 seconds
+      cpu time            1.73 seconds
+
+
+NOTE: PROCEDURE CONTENTS used (Total process time):
+      real time           0.06 seconds
+      cpu time            0.04 seconds
+
+
+NOTE: PROCEDURE CONTENTS used (Total process time):
+      real time           0.06 seconds
+      cpu time            0.06 seconds
+
+
+
+NOTE: PROCEDURE CONTENTS used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.03 seconds
+
+
+19
+20   * TRANSPOSE...VAR NAMES ARE EXCEL DATES WITH FIRST CHARACTER REPLACED BY UNDERSCORE (EXCEL TO
+20 !  SAS DATE TRANSFORMATION IN NEXT DATA STEP);
+21   * VAR USED TO FORCE TRANSPOSITION OF ALL MONTHS IN EACH FILE DESPITE MISSING VALUES...MISSING
+21 !  VALUES RESULT IN VARS AS CHARACTER FORMAT;
+22   %MACRO TRANEM (FNAME, VTYPE);
+23       PROC TRANSPOSE DATA=&FNAME OUT=&FNAME._T; ID &VTYPE;
+24        VAR _9814 _9845 _9873 _9904 _9934 _9965 _9995 _0026 _0057 _0087 _0118 _0148
+25            _0179 _0210 _0238 _0269 _0299 _0330 _0360 _0391 _0422 _0452 _0483 _0513
+26            _0544 _0575 _0603 _0634 _0664 _0695 _0725 _0756 _0787 _0817 _0848 _0878
+27            _0909 _0940 _0969 _1000 _1030 _1061 _1091 _1122 _1153 _1183 _1214 _1244
+28            _1275 _1306 _1334 _1365 _1395 _1426 _1456 _1487 _1518 _1548 _1579 _1609;
+29   %MEND;
+30   %TRANEM(CAT,CATEGORY);
+31   %TRANEM(SUBCAT,SUB_CATEGORY_LABEL);
+
+NOTE: Numeric variables in the input data set will be converted to character in the output data
+      set.
+NOTE: There were 9 observations read from the data set WORK.CAT.
+NOTE: The data set WORK.CAT_T has 60 observations and 11 variables.
+NOTE: PROCEDURE TRANSPOSE used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+
+
+32   %TRANEM(NPA,REC_TYPE);
+
+NOTE: Numeric variables in the input data set will be converted to character in the output data
+      set.
+NOTE: There were 28 observations read from the data set WORK.SUBCAT.
+NOTE: The data set WORK.SUBCAT_T has 60 observations and 30 variables.
+NOTE: PROCEDURE TRANSPOSE used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+
+
+33   %TRANEM(GRAIL,REC_TYPE); RUN;
+
+NOTE: There were 2 observations read from the data set WORK.NPA.
+NOTE: The data set WORK.NPA_T has 60 observations and 4 variables.
+NOTE: PROCEDURE TRANSPOSE used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+
+
+
+NOTE: Numeric variables in the input data set will be converted to character in the output data
+      set.
+NOTE: There were 4 observations read from the data set WORK.GRAIL.
+NOTE: The data set WORK.GRAIL_T has 60 observations and 6 variables.
+NOTE: PROCEDURE TRANSPOSE used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+
+
+34
+35   PROC CONTENTS DATA=CAT_T VARNUM;
+
+NOTE: PROCEDURE CONTENTS used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+
+
+35 !                                  PROC CONTENTS DATA=SUBCAT_T VARNUM;
+
+NOTE: PROCEDURE CONTENTS used (Total process time):
+      real time           0.04 seconds
+      cpu time            0.03 seconds
+
+
+35 !                                                                      PROC CONTENTS DATA=NPA_T
+35 !  VARNUM; PROC CONTENTS DATA=GRAIL_T VARNUM; RUN;
+
+NOTE: PROCEDURE CONTENTS used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+
+
+
+NOTE: PROCEDURE CONTENTS used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+
+
+36   PROC SORT DATA=CAT_T ; BY _LABEL_ _NAME_;
+
+NOTE: There were 60 observations read from the data set WORK.CAT_T.
+NOTE: The data set WORK.CAT_T has 60 observations and 11 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+
+
+36 !                                           PROC SORT DATA=SUBCAT_T ; BY _LABEL_ _NAME_;
+
+NOTE: There were 60 observations read from the data set WORK.SUBCAT_T.
+NOTE: The data set WORK.SUBCAT_T has 60 observations and 30 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+
+
+36 !                                                                                        PROC
+36 ! SORT DATA=NPA_T ; BY _LABEL_ _NAME_; PROC SORT DATA=GRAIL_T ; BY _LABEL_ _NAME_; RUN;
+
+NOTE: There were 60 observations read from the data set WORK.NPA_T.
+NOTE: The data set WORK.NPA_T has 60 observations and 4 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+
+
+
+NOTE: There were 60 observations read from the data set WORK.GRAIL_T.
+NOTE: The data set WORK.GRAIL_T has 60 observations and 6 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+
+
+37
+38   * MERGE TRANSPOSED DATASETS;
+39   DATA DEEPD.COMBO (DROP=_NAME_ _LABEL_ NRX_NPA_T TRX_NPA_T
+40           COMMUNICATION_PROGRAMS___CAMPAIG CUSTOMER_RESOURCES MEDICAL_EDUCATION
+40 ! OUTCOMES_RESEARCH_AND_PRICING SALES_TEAM_SUPPORT
+41           SAMPLES___COUPONS___VOUCHERS STRATEGIC_INPUT___MARKET_UNDERST
+41 ! GRANTS_AND_CONTRIBUTIONS TOTAL ADVERTISING_PROGRAMS
+42           MULTI_CHANNEL_CAMPAIGN_EXECUTION DISEASE_TREATMENT_RESOURCES
+42 ! PRODUCT_PROMOTIONAL_RESOURCES LECTURE_PROGRAMS MERCK_MEDICAL_FORUMS
+43           COUPONS___VOUCHERS PRODUCT_SAMPLES SAMPLES_DISTRIBUTION___FULFILLME
+43 ! PUBLIC_AFFAIRS_EXTERNAL_RELATION PAYER_POLICY_RESOURCES
+44           CONGRESS___EXHIBITS HEALTH_CARE_CONSUMER__HCC__PROGR SPEAKER_PREPARATION_FORUMS
+44 ! OUTCOMES_RESEARCH PRICING_AND_REIMBURSEMENT_SUPPOR
+45           LAUNCH_MEETINGS SALES_TEAM_SUPPORT_AND_LOGISTICS ADVISORY_BOARDS
+45 ! COMPETETIVE_INTELLIGENCE EXPERT_INPUT_FORUMS
+46           MARKET_RESEARCH_ACTIVITIES NETWORK_STRATEGY__COP_ PROMOTIONAL_MATERIAL_DEPRECIATIO
+46 ! CHARITABLE_CONTRIBUTIONS GRANTS TOTAL_S
+47           OTHER NRX_GRL_C TRX_GRL_C DETAILS_C SAMPLES_C);
+48       FORMAT SAS_DATE YYMMD.;
+49       MERGE CAT_T SUBCAT_T (RENAME=(TOTAL=TOTAL_S))
+50             NPA_T (RENAME=(NRX_VOLUME=NRX_NPA_T TRX_VOLUME=TRX_NPA_T))
+51             GRAIL_T (RENAME=(NRX_VOLUME=NRX_GRL_C TRX_VOLUME=TRX_GRL_C DETAILS=DETAILS_C
+51 ! SAMPLES=SAMPLES_C));
+52       BY _LABEL_ _NAME_;
+53       SAS_DATE=_LABEL_-21916; *CONVERT EXCEL DATE TO SAS DATE...EXCEL DATE USES 1900 BASE YEAR;
+54       * RENAME EACH TRANSPOSED VARIABLE AND CONVERT TO NUMERIC FROM CHARACTER;
+55           C_2_COMM_PROGRAMS_AND_CAMPAIGNS=COMMUNICATION_PROGRAMS___CAMPAIG*1;
+56           C_1_CUSTOMER_RESOURCES=CUSTOMER_RESOURCES*1;
+57           C_3_MEDICAL_EDUCATION=MEDICAL_EDUCATION*1;
+58           C_4_OUTCOMES_RESEARCH_PRICING=OUTCOMES_RESEARCH_AND_PRICING*1;
+59           C_7_SALES_TEAM_SUPPORT=SALES_TEAM_SUPPORT*1;
+60           C_6_SAMPLES_COUPONS_VOUCHERS=SAMPLES___COUPONS___VOUCHERS*1;
+61           C_5_STRATEGIC_INPUT=STRATEGIC_INPUT___MARKET_UNDERST*1;
+62           C_8_GRANTS_CONTRIBUTIONS=GRANTS_AND_CONTRIBUTIONS*1;
+63           SC_2_ADVERTISING_PROGRAMS=ADVERTISING_PROGRAMS*1;
+64           SC_2_MCM_CAMPAIGN_EXECUTION=MULTI_CHANNEL_CAMPAIGN_EXECUTION*1;
+65           SC_1_DISEASE_TREATMENT_RSCRS=DISEASE_TREATMENT_RESOURCES*1;
+66           SC_1_PRODUCT_PROMO_RESOURCES=PRODUCT_PROMOTIONAL_RESOURCES*1;
+67           SC_3_LECTURE_PROGRAMS=LECTURE_PROGRAMS*1;
+68           SC_3_MMFS=MERCK_MEDICAL_FORUMS*1;
+69           SC_6_COUPONS_VOUCHERS=COUPONS___VOUCHERS*1;
+70           SC_6_PRODUCT_SAMPLES=PRODUCT_SAMPLES*1;
+71           SC_6_SAMPLES_DIST_FULFILLMENT=SAMPLES_DISTRIBUTION___FULFILLME*1;
+72           SC_2_PUBLIC_AFFAIRS_EXT_RLTNS=PUBLIC_AFFAIRS_EXTERNAL_RELATION*1;
+73           SC_1_PAYER_POLICY_RESOURCES=PAYER_POLICY_RESOURCES*1;
+74           SC_3_CONGRESSES_EXHIBITS=CONGRESS___EXHIBITS*1;
+75           SC_3_HCC_PROGRAMS=HEALTH_CARE_CONSUMER__HCC__PROGR*1;
+76           SC_3_SPEAKER_PREP_FORUMS=SPEAKER_PREPARATION_FORUMS*1;
+77           SC_4_OUTCOMES_RESEARCH=OUTCOMES_RESEARCH*1;
+78           SC_4_PRICING_AND_REIMB_SUPPORT=PRICING_AND_REIMBURSEMENT_SUPPOR*1;
+79           SC_7_LAUNCH_MEETINGS=LAUNCH_MEETINGS*1;
+80           SC_7_SALES_TEAM_SUPPORT=SALES_TEAM_SUPPORT_AND_LOGISTICS*1;
+81           SC_5_AD_BOARDS=ADVISORY_BOARDS*1;
+82           SC_5_COMPETITIVE_INTELLIGENCE=COMPETETIVE_INTELLIGENCE*1;
+83           SC_5_EXPERT_INPUT_FORUMS=EXPERT_INPUT_FORUMS*1;
+84           SC_5_MARKET_RESEARCH=MARKET_RESEARCH_ACTIVITIES*1;
+85           SC_5_COP=NETWORK_STRATEGY__COP_*1;
+86           SC_1_PROMO_MATERIALS_DEPREC=PROMOTIONAL_MATERIAL_DEPRECIATIO*1;
+87           SC_8_CHARITABLE_CONTRIBUTIONS=CHARITABLE_CONTRIBUTIONS*1;
+88           SC_8_GRANTS=GRANTS*1;
+89           TOTAL_C=TOTAL*1; *POPULATED ONLY FOR 2009 AND 2010...ELSE ZERO FOR EXCEL GRAPHING
+89 ! PURPOSES;
+90           TOTAL_SC=TOTAL_S*1; *POPULATED ONLY FOR 2009 AND 2010...ELSE ZERO FOR EXCEL GRAPHING
+90 ! PURPOSES;
+91           * CREATE SUM OF SUB-CATEGORIES EXPECTED TO EXERT DIRECT INFLUENCE ON RX
+91 ! VOLUME...OTHER SUB-CATEGORIES ARE RESEARCH/SUPPORT-TYPE;
+92           DIRECT_SC=SUM(OF SC_2_ADVERTISING_PROGRAMS  SC_2_MCM_CAMPAIGN_EXECUTION
+92 ! SC_1_DISEASE_TREATMENT_RSCRS SC_1_PRODUCT_PROMO_RESOURCES
+93                     SC_3_LECTURE_PROGRAMS SC_3_MMFS SC_6_COUPONS_VOUCHERS SC_6_PRODUCT_SAMPLES
+93 ! SC_6_SAMPLES_DIST_FULFILLMENT);
+94           OTHER_SC=OTHER*1; *SUM OF SUB-CATEGORIES NOT EXPECTED TO EXERT DIRECT INFLUENCE ON RX
+94 !  VOLUME...COMPUTED IN EXCEL PRE-IMPORT;
+95           *COMPUTE TOTAL PROMO SPEND FOR 2011, 2012 & 2013 ELSE USE TOTAL_SC;
+96           IF SAS_DATE>='1-JAN-2011'D THEN TOTAL_PROMO=DIRECT_SC+OTHER_SC;
+97               ELSE TOTAL_PROMO=TOTAL_SC;
+98           DETAILS=DETAILS_C*1;
+99           SAMPLES=SAMPLES_C*1;
+100          NRX_GRL=NRX_GRL_C*1;
+101          TRX_GRL=TRX_GRL_C*1;
+102      * NPA DATA REPORTED IN THOUSANDS...RESCALE BELOW;
+103      NRX_NPA=NRX_NPA_T*1000;
+104      TRX_NPA=TRX_NPA_T*1000;
+105      IF SAS_DATE<'1-JAN-2011'D THEN MTCVAR=1; ELSE MTCVAR=0; * PREP FOR MATCHING WEIGHTS TO
+105! 2009/2010 OBS;
+106  RUN;
+
+NOTE: Character values have been converted to numeric values at the places given by:
+      (Line):(Column).
+      53:14    55:41    56:32    57:31    58:39    59:32    60:38    61:29    62:34    63:35
+      64:37    65:38    66:38    67:31    68:19    69:31    70:30    71:39    72:39    73:37
+      74:34    75:27    76:34    77:32    78:40    79:30    80:33    81:24    82:39    83:34
+      84:30    85:18    86:37    87:39    88:21    89:17    90:18    94:18    98:17    99:17
+      100:17   101:17
+NOTE: Missing values were generated as a result of performing an operation on missing values.
+      Each place is given by: (Number of times) at (Line):(Column).
+      24 at 55:73    24 at 56:50    24 at 57:48    24 at 58:68    24 at 59:50    24 at 60:66
+      24 at 61:61    24 at 62:58    24 at 63:55    24 at 64:69    24 at 65:65    24 at 66:67
+      48 at 67:47    24 at 68:39    24 at 69:49    24 at 70:45    24 at 71:71    24 at 72:71
+      24 at 73:59    24 at 74:53    24 at 75:59    24 at 76:60    24 at 77:49    24 at 78:72
+      24 at 79:45    24 at 80:65    24 at 81:39    24 at 82:63    24 at 83:53    24 at 84:56
+      24 at 85:40    48 at 86:69    48 at 87:63    48 at 88:27    24 at 92:19    13 at 98:26
+      13 at 99:26    13 at 100:26   37 at 101:26
+NOTE: There were 60 observations read from the data set WORK.CAT_T.
+NOTE: There were 60 observations read from the data set WORK.SUBCAT_T.
+NOTE: There were 60 observations read from the data set WORK.NPA_T.
+NOTE: There were 60 observations read from the data set WORK.GRAIL_T.
+NOTE: The data set DEEPD.COMBO has 60 observations and 47 variables.
+NOTE: DATA statement used (Total process time):
+      real time           2.87 seconds
+      cpu time            0.01 seconds
+
+
+107
+108  PROC PRINT DATA=DEEPD.COMBO (OBS=5); RUN;
+
+NOTE: There were 5 observations read from the data set DEEPD.COMBO.
+NOTE: PROCEDURE PRINT used (Total process time):
+      real time           0.82 seconds
+      cpu time            0.04 seconds
+
+
+109  PROC CONTENTS DATA=DEEPD.COMBO VARNUM; RUN;
+
+NOTE: PROCEDURE CONTENTS used (Total process time):
+      real time           0.20 seconds
+      cpu time            0.04 seconds
+
+
+110
+111  *EXPLORE VARIABILITY OF MONTHLY WEIGHTS BY PROMO TYPE FOR 2011...TO BE USED TO DERIVE
+111! 2009/2010 PROMO BY TYPE;
+112  DATA MNTHLY_WGHTS_2011 (KEEP=SAS_DATE TOTAL_PROMO C_WGHT: SC_WGHT:);
+113      SET DEEPD.COMBO (WHERE=(SAS_DATE>='1-JAN-2011'D AND SAS_DATE<'1-JAN-2012'D));
+114      ARRAY PROMO {13}
+115            C_2_COMM_PROGRAMS_AND_CAMPAIGNS C_1_CUSTOMER_RESOURCES C_3_MEDICAL_EDUCATION
+115! C_6_SAMPLES_COUPONS_VOUCHERS
+116            SC_2_ADVERTISING_PROGRAMS SC_2_MCM_CAMPAIGN_EXECUTION SC_1_DISEASE_TREATMENT_RSCRS
+116! SC_1_PRODUCT_PROMO_RESOURCES
+117            SC_3_LECTURE_PROGRAMS SC_3_MMFS SC_6_COUPONS_VOUCHERS SC_6_PRODUCT_SAMPLES
+117! SC_6_SAMPLES_DIST_FULFILLMENT;
+118      ARRAY WGHT {13}
+119            C_WGHT_2_CPCS C_WGHT_1_CRS C_WGHT_3_ME C_WGHT_6_SCVS
+120            SC_WGHT_2_AP SC_WGHT_2_MCM_CE SC_WGHT_1_DTRS SC_WGHT_1_PPRS
+121            SC_WGHT_3_LPS SC_WGHT_3_MMFS SC_WGHT_6_CV SC_WGHT_6_PS SC_WGHT_6_SAMFUL;
+122      DO I=1 TO DIM(PROMO);
+123          WGHT(I)= PROMO(I)/TOTAL_PROMO;
+124      END;
+125      C_WGHT_SUM=SUM(OF C_WGHT_2_CPCS C_WGHT_1_CRS C_WGHT_3_ME C_WGHT_6_SCVS);
+126      SC_WGHT_SUM=SUM(OF SC_WGHT_2_AP SC_WGHT_2_MCM_CE SC_WGHT_1_DTRS SC_WGHT_1_PPRS
+127                         SC_WGHT_3_LPS SC_WGHT_3_MMFS SC_WGHT_6_CV SC_WGHT_6_PS
+127! SC_WGHT_6_SAMFUL);
+128  RUN;
+
+NOTE: There were 12 observations read from the data set DEEPD.COMBO.
+      WHERE (SAS_DATE>='01JAN2011'D and SAS_DATE<'01JAN2012'D);
+NOTE: The data set WORK.MNTHLY_WGHTS_2011 has 12 observations and 17 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.43 seconds
+      cpu time            0.01 seconds
+
+
+129  PROC TRANSPOSE DATA=MNTHLY_WGHTS_2011 OUT=TMNTHLY_WGHTS_2011; ID SAS_DATE;
+130      VAR C_WGHT_SUM SC_WGHT_SUM C_WGHT_2_CPCS C_WGHT_1_CRS C_WGHT_3_ME C_WGHT_6_SCVS
+131          SC_WGHT_2_AP SC_WGHT_2_MCM_CE SC_WGHT_1_DTRS SC_WGHT_1_PPRS
+132          SC_WGHT_3_LPS SC_WGHT_3_MMFS SC_WGHT_6_CV SC_WGHT_6_PS SC_WGHT_6_SAMFUL; RUN;
+
+NOTE: There were 12 observations read from the data set WORK.MNTHLY_WGHTS_2011.
+NOTE: The data set WORK.TMNTHLY_WGHTS_2011 has 15 observations and 13 variables.
+NOTE: PROCEDURE TRANSPOSE used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+
+
+133  PROC PRINT DATA=TMNTHLY_WGHTS_2011; RUN;
+
+NOTE: There were 15 observations read from the data set WORK.TMNTHLY_WGHTS_2011.
+NOTE: PROCEDURE PRINT used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+
+
+134
+135  * CREATE WEIGHTS BY PROMOTION TYPE FOR ALL OF 2011 TO DERIVE 2009/2010 PROMOTION EXPENSE BY
+135! TYPE;
+136  PROC MEANS NOPRINT DATA=DEEPD.COMBO (WHERE=(SAS_DATE>='1-JAN-2011'D AND
+136! SAS_DATE<'1-JAN-2012'D));
+137      VAR C_2_COMM_PROGRAMS_AND_CAMPAIGNS C_1_CUSTOMER_RESOURCES C_3_MEDICAL_EDUCATION
+137! C_6_SAMPLES_COUPONS_VOUCHERS
+138          SC_2_ADVERTISING_PROGRAMS SC_2_MCM_CAMPAIGN_EXECUTION SC_1_DISEASE_TREATMENT_RSCRS
+138! SC_1_PRODUCT_PROMO_RESOURCES
+139          SC_3_LECTURE_PROGRAMS SC_3_MMFS SC_6_COUPONS_VOUCHERS SC_6_PRODUCT_SAMPLES
+139! SC_6_SAMPLES_DIST_FULFILLMENT TOTAL_PROMO DIRECT_SC;
+140      OUTPUT OUT=SUMS_2011
+141      SUM=C_SUM_2_CPCS C_SUM_1_CRS C_SUM_3_ME C_SUM_6_SCVS
+142          SC_SUM_2_AP SC_SUM_2_MCM_CE SC_SUM_1_DTRS SC_SUM_1_PPRS
+143          SC_SUM_3_LPS SC_SUM_3_MMFS SC_SUM_6_CV SC_SUM_6_PS SC_SUM_6_SAMFUL SUM_TOTAL_PROMO
+143! SC_SUM_DIRECT;
+144      RUN;
+
+NOTE: There were 12 observations read from the data set DEEPD.COMBO.
+      WHERE (SAS_DATE>='01JAN2011'D and SAS_DATE<'01JAN2012'D);
+NOTE: The data set WORK.SUMS_2011 has 1 observations and 17 variables.
+NOTE: PROCEDURE MEANS used (Total process time):
+      real time           0.56 seconds
+      cpu time            0.03 seconds
+
+
+145
+146  DATA WEIGHTS_2011 (DROP=C_SUM_2_CPCS C_SUM_1_CRS C_SUM_3_ME C_SUM_6_SCVS
+147                          SC_SUM_2_AP SC_SUM_2_MCM_CE SC_SUM_1_DTRS SC_SUM_1_PPRS
+148                          SC_SUM_3_LPS SC_SUM_3_MMFS SC_SUM_6_CV SC_SUM_6_PS SC_SUM_6_SAMFUL
+149                          _TYPE_ _FREQ_ I SUM_TOTAL_PROMO SC_SUM_DIRECT);
+150      SET SUMS_2011;
+151      ARRAY SUMS {14}
+152          C_SUM_2_CPCS C_SUM_1_CRS C_SUM_3_ME C_SUM_6_SCVS
+153          SC_SUM_2_AP SC_SUM_2_MCM_CE SC_SUM_1_DTRS SC_SUM_1_PPRS
+154          SC_SUM_3_LPS SC_SUM_3_MMFS SC_SUM_6_CV SC_SUM_6_PS SC_SUM_6_SAMFUL SC_SUM_DIRECT;
+155      ARRAY WGHT {14}
+156          C_WGHT_2_CPCS C_WGHT_1_CRS C_WGHT_3_ME C_WGHT_6_SCVS
+157          SC_WGHT_2_AP SC_WGHT_2_MCM_CE SC_WGHT_1_DTRS SC_WGHT_1_PPRS
+158          SC_WGHT_3_LPS SC_WGHT_3_MMFS SC_WGHT_6_CV SC_WGHT_6_PS SC_WGHT_6_SAMFUL
+158! SC_WGHT_DIRECT;
+159      DO I=1 TO DIM(SUMS);
+160          WGHT(I)=SUMS(I)/SUM_TOTAL_PROMO;
+161      END;
+162      MTCVAR=1;
+163  RUN;
+
+NOTE: There were 1 observations read from the data set WORK.SUMS_2011.
+NOTE: The data set WORK.WEIGHTS_2011 has 1 observations and 15 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.01 seconds
+
+
+164
+165  PROC SORT DATA=DEEPD.COMBO; BY MTCVAR SAS_DATE; RUN;
+
+NOTE: There were 60 observations read from the data set DEEPD.COMBO.
+NOTE: The data set DEEPD.COMBO has 60 observations and 47 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           3.10 seconds
+      cpu time            0.00 seconds
+
+
+166  DATA DEEPD.INFERRED (KEEP=SAS_DATE CI_2_COMM_PROGRAMS_AND_CAMPAIGNS CI_1_CUSTOMER_RESOURCES
+166! CI_3_MEDICAL_EDUCATION CI_6_SAMPLES_COUPONS_VOUCHERS
+167            SCI_2_ADVERTISING_PROGRAMS SCI_2_MCM_CAMPAIGN_EXECUTION
+167! SCI_1_DISEASE_TREATMENT_RSCRS SCI_1_PRODUCT_PROMO_RESOURCES
+168            SCI_3_LECTURE_PROGRAMS SCI_3_MMFS SCI_6_COUPONS_VOUCHERS SCI_6_PRODUCT_SAMPLES
+168! SCI_6_SAMPLES_DIST_FULFILLMENT SCI_DIRECT
+169            TOTAL_PROMO DETAILS SAMPLES NRX: TRX:);
+170      MERGE DEEPD.COMBO WEIGHTS_2011;
+171      BY MTCVAR;
+172      ARRAY PROMO {14}
+173            C_2_COMM_PROGRAMS_AND_CAMPAIGNS C_1_CUSTOMER_RESOURCES C_3_MEDICAL_EDUCATION
+173! C_6_SAMPLES_COUPONS_VOUCHERS
+174            SC_2_ADVERTISING_PROGRAMS SC_2_MCM_CAMPAIGN_EXECUTION SC_1_DISEASE_TREATMENT_RSCRS
+174! SC_1_PRODUCT_PROMO_RESOURCES
+175            SC_3_LECTURE_PROGRAMS SC_3_MMFS SC_6_COUPONS_VOUCHERS SC_6_PRODUCT_SAMPLES
+175! SC_6_SAMPLES_DIST_FULFILLMENT DIRECT_SC;
+176      ARRAY WGHT {14}
+177            C_WGHT_2_CPCS C_WGHT_1_CRS C_WGHT_3_ME C_WGHT_6_SCVS
+178            SC_WGHT_2_AP SC_WGHT_2_MCM_CE SC_WGHT_1_DTRS SC_WGHT_1_PPRS
+179            SC_WGHT_3_LPS SC_WGHT_3_MMFS SC_WGHT_6_CV SC_WGHT_6_PS SC_WGHT_6_SAMFUL
+179! SC_WGHT_DIRECT;
+180      ARRAY NEWP {14}
+181            CI_2_COMM_PROGRAMS_AND_CAMPAIGNS CI_1_CUSTOMER_RESOURCES CI_3_MEDICAL_EDUCATION
+181! CI_6_SAMPLES_COUPONS_VOUCHERS
+182            SCI_2_ADVERTISING_PROGRAMS SCI_2_MCM_CAMPAIGN_EXECUTION
+182! SCI_1_DISEASE_TREATMENT_RSCRS SCI_1_PRODUCT_PROMO_RESOURCES
+183            SCI_3_LECTURE_PROGRAMS SCI_3_MMFS SCI_6_COUPONS_VOUCHERS SCI_6_PRODUCT_SAMPLES
+183! SCI_6_SAMPLES_DIST_FULFILLMENT SCI_DIRECT;
+184      DO I=1 TO DIM(PROMO);
+185          IF MTCVAR=1 THEN NEWP(I)=TOTAL_PROMO*WGHT(I);
+186              ELSE NEWP(I)=PROMO(I);
+187          IF NEWP(I)=. THEN NEWP(I)=0;
+188      END;
+189  RUN;
+
+NOTE: There were 60 observations read from the data set DEEPD.COMBO.
+NOTE: There were 1 observations read from the data set WORK.WEIGHTS_2011.
+NOTE: The data set DEEPD.INFERRED has 60 observations and 22 variables.
+NOTE: DATA statement used (Total process time):
+      real time           3.28 seconds
+      cpu time            0.03 seconds
+
+
+190  PROC SORT DATA=DEEPD.INFERRED; BY SAS_DATE; RUN;
+
+NOTE: There were 60 observations read from the data set DEEPD.INFERRED.
+NOTE: The data set DEEPD.INFERRED has 60 observations and 22 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           3.26 seconds
+      cpu time            0.01 seconds
+
+
+

@@ -1,0 +1,249 @@
+NOTE: PROCEDURE PRINTTO used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+
+NOTE: Character values have been converted to numeric values at the places given by: 
+      (Line):(Column).
+      686:14   
+NOTE: There were 3332 observations read from the data set OUTPUT.SEL_RAW_NATL_TV.
+NOTE: The data set WORK.SEL_RAW_NATL_TV has 3332 observations and 14 variables.
+NOTE: Compressing data set WORK.SEL_RAW_NATL_TV decreased size by 86.02 percent. 
+      Compressed is 26 pages; un-compressed would require 186 pages.
+NOTE: DATA statement used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.03 seconds
+      
+
+NOTE: Compressing data set WORK.RAW_NATL_TV_2 decreased size by 84.62 percent. 
+      Compressed is 28 pages; un-compressed would require 182 pages.
+NOTE: Table WORK.RAW_NATL_TV_2 created, with 3256 rows and 16 columns.
+
+NOTE: PROCEDURE SQL used (Total process time):
+      real time           0.04 seconds
+      cpu time            0.03 seconds
+      
+
+
+NOTE: There were 3256 observations read from the data set WORK.RAW_NATL_TV_2.
+NOTE: PROCEDURE FREQ used (Total process time):
+      real time           0.04 seconds
+      cpu time            0.03 seconds
+      
+
+
+NOTE: There were 3256 observations read from the data set WORK.RAW_NATL_TV_2.
+NOTE: The data set WORK.RAW_NATL_TV_2 has 3256 observations and 16 variables.
+NOTE: Compressing data set WORK.RAW_NATL_TV_2 decreased size by 84.62 percent. 
+      Compressed is 28 pages; un-compressed would require 182 pages.
+NOTE: DATA statement used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.03 seconds
+      
+
+SYMBOLGEN:  Macro variable TGT_SUFFIX resolves to A2154
+SYMBOLGEN:  Macro variable STD_ADSECS resolves to 60
+SYMBOLGEN:  Macro variable TGT_SUFFIX resolves to A2154
+SYMBOLGEN:  Macro variable STD_ADSECS resolves to 60
+SYMBOLGEN:  Macro variable TGT_SUFFIX resolves to A2154
+SYMBOLGEN:  Macro variable STD_ADSECS resolves to 60
+NOTE: Compressing data set WORK.NATL_TV_WTD_GRP decreased size by 0.00 percent. 
+      Compressed is 9 pages; un-compressed would require 9 pages.
+NOTE: Table WORK.NATL_TV_WTD_GRP created, with 776 rows and 4 columns.
+
+NOTE: PROCEDURE SQL used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.03 seconds
+      
+
+
+NOTE: Character values have been converted to numeric values at the places given by: 
+      (Line):(Column).
+      724:14   
+NOTE: There were 319416 observations read from the data set OUTPUT.SEL_RAW_LOCL_TV.
+NOTE: The data set WORK.SEL_RAW_LOCL_TV has 319416 observations and 12 variables.
+NOTE: Compressing data set WORK.SEL_RAW_LOCL_TV decreased size by 85.10 percent. 
+      Compressed is 2505 pages; un-compressed would require 16812 pages.
+NOTE: DATA statement used (Total process time):
+      real time           4.85 seconds
+      cpu time            1.10 seconds
+      
+
+NOTE: Compressing data set WORK.RAW_LOCL_TV_2 decreased size by 84.56 percent. 
+      Compressed is 2700 pages; un-compressed would require 17487 pages.
+NOTE: Table WORK.RAW_LOCL_TV_2 created, with 314758 rows and 14 columns.
+
+NOTE: PROCEDURE SQL used (Total process time):
+      real time           1.29 seconds
+      cpu time            1.07 seconds
+      
+
+
+NOTE: There were 314758 observations read from the data set WORK.RAW_LOCL_TV_2.
+NOTE: PROCEDURE FREQ used (Total process time):
+      real time           0.29 seconds
+      cpu time            0.26 seconds
+      
+
+
+NOTE: There were 314758 observations read from the data set WORK.RAW_LOCL_TV_2.
+NOTE: The data set WORK.RAW_LOCL_TV_2 has 314758 observations and 14 variables.
+NOTE: Compressing data set WORK.RAW_LOCL_TV_2 decreased size by 84.56 percent. 
+      Compressed is 2700 pages; un-compressed would require 17487 pages.
+NOTE: DATA statement used (Total process time):
+      real time           1.79 seconds
+      cpu time            1.09 seconds
+      
+
+SYMBOLGEN:  Macro variable TGT_SUFFIX resolves to A2154
+SYMBOLGEN:  Macro variable STD_ADSECS resolves to 60
+SYMBOLGEN:  Macro variable TGT_SUFFIX resolves to A2154
+SYMBOLGEN:  Macro variable STD_ADSECS resolves to 60
+SYMBOLGEN:  Macro variable TGT_SUFFIX resolves to A2154
+SYMBOLGEN:  Macro variable STD_ADSECS resolves to 60
+NOTE: Compressing data set WORK.LOCL_TV_WTD_GRP decreased size by 15.47 percent. 
+      Compressed is 1399 pages; un-compressed would require 1655 pages.
+NOTE: Table WORK.LOCL_TV_WTD_GRP created, with 138934 rows and 5 columns.
+
+NOTE: PROCEDURE SQL used (Total process time):
+      real time           0.46 seconds
+      cpu time            0.64 seconds
+      
+
+
+NOTE: There were 1 observations read from the data set WORK.CONF_DATA_PERIOD.
+NOTE: The data set WORK.TIMEPERIODS has 160 observations and 3 variables.
+NOTE: Compressing data set WORK.TIMEPERIODS increased size by 50.00 percent. 
+      Compressed is 3 pages; un-compressed would require 2 pages.
+NOTE: DATA statement used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+
+NOTE: There were 160 observations read from the data set WORK.TIMEPERIODS.
+NOTE: 4 observations with duplicate key values were deleted.
+NOTE: The data set WORK.TIMEPERIODS has 156 observations and 3 variables.
+NOTE: Compressing data set WORK.TIMEPERIODS increased size by 50.00 percent. 
+      Compressed is 3 pages; un-compressed would require 2 pages.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.00 seconds
+      
+
+NOTE: The execution of this query involves performing one or more Cartesian product joins that can 
+      not be optimized.
+NOTE: Compressing data set WORK.REFTBL decreased size by 24.14 percent. 
+      Compressed is 2762 pages; un-compressed would require 3641 pages.
+NOTE: Table WORK.REFTBL created, with 262080 rows and 6 columns.
+
+NOTE: PROCEDURE SQL used (Total process time):
+      real time           1.06 seconds
+      cpu time            0.50 seconds
+      
+
+
+NOTE: There were 262080 observations read from the data set WORK.REFTBL.
+NOTE: The data set WORK.REFTBL has 262080 observations and 6 variables.
+NOTE: Compressing data set WORK.REFTBL decreased size by 24.14 percent. 
+      Compressed is 2762 pages; un-compressed would require 3641 pages.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.90 seconds
+      cpu time            0.46 seconds
+      
+
+
+NOTE: Input data set is already sorted, no sorting done.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+
+NOTE: There were 262080 observations read from the data set WORK.REFTBL.
+NOTE: There were 776 observations read from the data set WORK.NATL_TV_WTD_GRP.
+NOTE: The data set WORK.REF_AND_NATL has 262080 observations and 8 variables.
+NOTE: Compressing data set WORK.REF_AND_NATL decreased size by 29.46 percent. 
+      Compressed is 3302 pages; un-compressed would require 4681 pages.
+NOTE: DATA statement used (Total process time):
+      real time           0.75 seconds
+      cpu time            0.61 seconds
+      
+
+
+NOTE: There were 262080 observations read from the data set WORK.REF_AND_NATL.
+NOTE: PROCEDURE FREQ used (Total process time):
+      real time           0.12 seconds
+      cpu time            0.12 seconds
+      
+
+
+NOTE: There were 262080 observations read from the data set WORK.REF_AND_NATL.
+NOTE: The data set WORK.REF_AND_NATL has 262080 observations and 8 variables.
+NOTE: Compressing data set WORK.REF_AND_NATL decreased size by 29.46 percent. 
+      Compressed is 3302 pages; un-compressed would require 4681 pages.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.48 seconds
+      cpu time            0.59 seconds
+      
+
+
+NOTE: There were 138934 observations read from the data set WORK.LOCL_TV_WTD_GRP.
+NOTE: The data set WORK.LOCL_TV_WTD_GRP has 138934 observations and 5 variables.
+NOTE: Compressing data set WORK.LOCL_TV_WTD_GRP decreased size by 15.47 percent. 
+      Compressed is 1399 pages; un-compressed would require 1655 pages.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.20 seconds
+      cpu time            0.29 seconds
+      
+
+
+NOTE: There were 262080 observations read from the data set WORK.REF_AND_NATL.
+NOTE: There were 138934 observations read from the data set WORK.LOCL_TV_WTD_GRP.
+NOTE: The data set WORK.REF_NATL_LOCL has 262080 observations and 11 variables.
+NOTE: Compressing data set WORK.REF_NATL_LOCL decreased size by 33.87 percent. 
+      Compressed is 2064 pages; un-compressed would require 3121 pages.
+NOTE: DATA statement used (Total process time):
+      real time           1.25 seconds
+      cpu time            0.68 seconds
+      
+
+
+NOTE: There were 262080 observations read from the data set WORK.REF_NATL_LOCL.
+NOTE: PROCEDURE FREQ used (Total process time):
+      real time           0.21 seconds
+      cpu time            0.20 seconds
+      
+
+
+NOTE: There were 262080 observations read from the data set WORK.REF_NATL_LOCL.
+NOTE: The data set WORK.REF_NATL_LOCL has 262080 observations and 11 variables.
+NOTE: Compressing data set WORK.REF_NATL_LOCL decreased size by 33.90 percent. 
+      Compressed is 2063 pages; un-compressed would require 3121 pages.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.48 seconds
+      cpu time            0.59 seconds
+      
+
+
+NOTE: There were 262080 observations read from the data set WORK.REF_NATL_LOCL.
+NOTE: The data set WORK.TR_REF_NATL_LOCL has 32760 observations and 12 variables.
+NOTE: Compressing data set WORK.TR_REF_NATL_LOCL decreased size by 28.39 percent. 
+      Compressed is 280 pages; un-compressed would require 391 pages.
+NOTE: PROCEDURE TRANSPOSE used (Total process time):
+      real time           1.04 seconds
+      cpu time            0.89 seconds
+      
+
+
+NOTE: There were 32760 observations read from the data set WORK.TR_REF_NATL_LOCL.
+NOTE: The data set OUTPUT.WTD_GRP_BY_DMA_REPORT_WEEK has 32760 observations and 12 variables.
+NOTE: Compressing data set OUTPUT.WTD_GRP_BY_DMA_REPORT_WEEK decreased size by 28.39 percent. 
+      Compressed is 280 pages; un-compressed would require 391 pages.
+NOTE: DATA statement used (Total process time):
+      real time           0.17 seconds
+      cpu time            0.06 seconds
+      
+
+

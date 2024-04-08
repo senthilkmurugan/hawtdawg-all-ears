@@ -1,0 +1,122 @@
+                                           The SAS System       15:37 Thursday, October 13, 2011  33
+
+                                         The FREQ Procedure
+
+                                                                    Cumulative    Cumulative
+       Brand_Group             BRAND       Frequency     Percent     Frequency      Percent
+       ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+       ADVAIR                  ADVAIR           615       18.89           615        18.89  
+       ALAVERT                 ALAVERT           83        2.55           698        21.44  
+       ALLEGRA                 ALLEGRA          404       12.41          1102        33.85  
+       BENADRYL                BENADRYL         135        4.15          1237        37.99  
+       CLARITIN                CLARITIN         866       26.60          2103        64.59  
+       NASONEX                 NASONEX          192        5.90          2295        70.49  
+       OMNARIS                 OMNARIS          158        4.85          2453        75.34  
+       ZYRTEC                  ZYRTEC           803       24.66          3256       100.00  
+
+
+                                                                     Cumulative    Cumulative
+       Brand_Group             BG_PREFIX    Frequency     Percent     Frequency      Percent
+       ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+       ADVAIR                  ADV               615       18.89           615        18.89  
+       ALAVERT                 ALA                83        2.55           698        21.44  
+       ALLEGRA                 ALL               404       12.41          1102        33.85  
+       BENADRYL                BEN               135        4.15          1237        37.99  
+       CLARITIN                CLA               866       26.60          2103        64.59  
+       NASONEX                 NAS               192        5.90          2295        70.49  
+       OMNARIS                 OMN               158        4.85          2453        75.34  
+       ZYRTEC                  ZYR               803       24.66          3256       100.00  
+
+
+                                                        Cumulative    Cumulative
+                   DURATION    Frequency     Percent     Frequency      Percent
+                   ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+                         10         174        5.34           174         5.34  
+                         15        1170       35.93          1344        41.28  
+                         16           1        0.03          1345        41.31  
+                         17           1        0.03          1346        41.34  
+                         20          24        0.74          1370        42.08  
+                         30        1285       39.47          2655        81.54  
+                         45          49        1.50          2704        83.05  
+                         60         549       16.86          3253        99.91  
+                         96           1        0.03          3254        99.94  
+                        120           2        0.06          3256       100.00  
+                                           The SAS System       15:37 Thursday, October 13, 2011  34
+
+                                         The FREQ Procedure
+
+                                                                    Cumulative    Cumulative
+       Brand_Group             BRAND       Frequency     Percent     Frequency      Percent
+       ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+       ADVAIR                  ADVAIR         47840       15.20         47840        15.20  
+       ALAVERT                 ALAVERT         6676        2.12         54516        17.32  
+       ALLEGRA                 ALLEGRA        51241       16.28        105757        33.60  
+       BENADRYL                BENADRYL       14347        4.56        120104        38.16  
+       CLARITIN                CLARITIN       85626       27.20        205730        65.36  
+       NASONEX                 NASONEX        18142        5.76        223872        71.13  
+       OMNARIS                 OMNARIS        23945        7.61        247817        78.73  
+       ZYRTEC                  ZYRTEC         66941       21.27        314758       100.00  
+
+
+                                                                     Cumulative    Cumulative
+       Brand_Group             BG_PREFIX    Frequency     Percent     Frequency      Percent
+       ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+       ADVAIR                  ADV             47840       15.20         47840        15.20  
+       ALAVERT                 ALA              6676        2.12         54516        17.32  
+       ALLEGRA                 ALL             51241       16.28        105757        33.60  
+       BENADRYL                BEN             14347        4.56        120104        38.16  
+       CLARITIN                CLA             85626       27.20        205730        65.36  
+       NASONEX                 NAS             18142        5.76        223872        71.13  
+       OMNARIS                 OMN             23945        7.61        247817        78.73  
+       ZYRTEC                  ZYR             66941       21.27        314758       100.00  
+
+
+                                                        Cumulative    Cumulative
+                   DURATION    Frequency     Percent     Frequency      Percent
+                   ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+                         10       17449        5.54         17449         5.54  
+                         15      126289       40.12        143738        45.67  
+                         20          32        0.01        143770        45.68  
+                         30      118409       37.62        262179        83.30  
+                         45        5338        1.70        267517        84.99  
+                         60       47241       15.01        314758       100.00  
+                                           The SAS System       15:37 Thursday, October 13, 2011  35
+
+                                         The FREQ Procedure
+
+                                                       Cumulative    Cumulative
+                     INSET    Frequency     Percent     Frequency      Percent
+                     ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+                        10       99120       37.82         99120        37.82  
+                        11      162960       62.18        262080       100.00  
+                                           The SAS System       15:37 Thursday, October 13, 2011  36
+
+                                         The FREQ Procedure
+
+                                                       Cumulative    Cumulative
+                    INSET2    Frequency     Percent     Frequency      Percent
+                    ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+                        10      132131       50.42        132131        50.42  
+                        11      129949       49.58        262080       100.00  
+
+
+                                                            Cumulative    Cumulative
+                INSET    INSET2    Frequency     Percent     Frequency      Percent
+                ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+                   10        10       99091       37.81         99091        37.81  
+                   10        11          29        0.01         99120        37.82  
+                   11        10       33040       12.61        132160        50.43  
+                   11        11      129920       49.57        262080       100.00  
+
+
+                                                                     Cumulative    Cumulative
+       BRAND_GROUP             BG_PREFIX    Frequency     Percent     Frequency      Percent
+       ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+       ADVAIR                  ADV             32760       12.50         32760        12.50  
+       ALAVERT                 ALA             32760       12.50         65520        25.00  
+       ALLEGRA                 ALL             32760       12.50         98280        37.50  
+       BENADRYL                BEN             32760       12.50        131040        50.00  
+       CLARITIN                CLA             32760       12.50        163800        62.50  
+       NASONEX                 NAS             32760       12.50        196560        75.00  
+       OMNARIS                 OMN             32760       12.50        229320        87.50  
+       ZYRTEC                  ZYR             32760       12.50        262080       100.00  

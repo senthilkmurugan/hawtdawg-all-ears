@@ -1,0 +1,334 @@
+
+libname mdb "/efs-MAIO/Team/promo_opt/MktMixPP/2024 Planning/G9/output/out_sas_data_sets/DMA/MDB";
+libname INTER "/efs-MAIO/Team/promo_opt/MktMixPP/2024 Planning/G9/output/out_sas_data_sets/DMA/INTER";
+libname MODEL "/efs-MAIO/Team/promo_opt/MktMixPP/2024 Planning/G9/output/out_sas_data_sets/DMA/MODEL";
+
+OPTIONS COMPRESS=YES NOLABEL NOCENTER ERROR=1 MACROGEN SYMBOLGEN ;
+PROC DATASETS LIBRARY = WORK NOLIST KILL;
+RUN;QUIT;
+
+data model_data;
+set  MODEL.FT_ADS_G9_DMA_MDB;
+WHERE DMANAME <> 'ZZUNASSIGNED';
+run;
+
+
+%MACRO ols_regression_impact_ridge(cnt, data, LAMBDA, DEP_VAR, IND_VAR);
+
+DATA INTERMEDIATE;
+SET &data. (KEEP=&DEP_VAR. &IND_VAR. YEARMO dmaname) nobs=degfreedom;   *change it to dmaname/party_id/zip3 as applicable;
+RUN;
+
+ODS OUTPUT PARAMETERESTIMATES=PEST;
+
+proc reg data= INTERMEDIATE outvif outseb plots(only)=ridge(unpack VIFaxis=log) 
+		outest=temp_ridge ridge= &LAMBDA.;
+model &DEP_VAR.= &IND_VAR.
+		/* M1-M11 */
+		/* BUDGET_CUT */ /VIF;
+	plot / ridgeplot nomodel nostat;
+	run;
+quit;
+
+proc transpose data = temp_ridge out=temp_ridge_t;run;
+
+proc sql ;
+create table PEST as
+select Model, Dependent , Variable,
+DF, Estimate, StdErr, tValue, Probt, VarianceInflation,
+key
+from
+(
+select "MODEL1" as Model, "&DEP_VAR." as Dependent , _NAME_ as Variable,   /*change to whatever dependent variable required like hcp_grail_nrx etc*/
+"1" as DF, COL4 as Estimate, COL5 as StdErr, 0 as tValue, 0 as Probt, COL3 as VarianceInflation,
+101 as key,
+monotonic()   AS RowNumber, count(*) as rows
+from temp_ridge_t
+having RowNumber >3 and RowNumber<rows) as A
+;
+run;
+
+DATA TEMP&cnt.;
+SET PEST;
+length key 6.;
+key=&cnt.;
+RUN;
+
+proc means data=INTERMEDIATE sum nway nonobs maxdec=2 noprint;
+var _numeric_;
+output out=col_sums sum=;
+run;
+
+data col_sums;
+set col_sums;
+Rename _Freq_=Intercept;
+run;
+
+proc transpose data=col_sums out=col_sums_t;
+run;
+
+data sums_w_sales_temp (drop=_name_);
+length variable $32;
+set col_sums_t;
+Variable=_name_;
+rename col1=Total_Activity;
+run;
+
+proc sql;
+create table sums_w_sales as select *, (select sum(Total_Activity) from
+sums_w_sales_temp where variable="&DEP_VAR.") as Total_sales from          /*change to whatever dependent variable required like hcp_grail_nrx etc*/
+sums_w_sales_temp;
+quit;
+
+proc sort data=sums_w_sales;
+by variable;
+run;
+
+data results (drop=Model Dependent key);
+set temp&cnt.;
+run;
+
+proc means data=INTERMEDIATE sum nway nonobs maxdec=2 noprint;
+where RTIME <= 13 and RTIME > 1;
+var _numeric_;
+output out=col_sums_annual sum=;
+run;
+
+data col_sums_annual;
+set col_sums_annual;
+Rename _Freq_=Intercept;
+run;
+
+proc transpose data=col_sums_annual out=col_sums_annual_t;
+run;
+
+data sums_w_sales_annual_temp (drop=_name_);
+length variable $32;
+set col_sums_annual_t;
+Variable=_name_;
+rename col1=Annual_Activity12;
+run;
+
+proc sql;
+create table sums_w_sales_annual as select *, (select sum(Annual_Activity12)
+from sums_w_sales_annual_temp where variable="&DEP_VAR.") as Annual_sales       /*change to whatever dependent variable required like hcp_grail_nrx etc*/
+from sums_w_sales_annual_temp;
+quit;
+
+proc sort data=sums_w_sales_annual;
+by variable;
+run;
+
+proc sort data=results;
+by variable;
+run;
+
+proc sort data=sums_w_sales;
+by variable;
+run;
+
+proc sort data=sums_w_sales_annual;
+by variable;
+run;
+
+proc sql;
+create table result_w_colsum as select * from results as a left join
+sums_w_sales as b on a.variable=b.variable left join sums_w_sales_annual as
+c on a.variable=c.variable;
+quit;
+
+proc sql noprint;
+select count(*) into :degfreedom
+from INTERMEDIATE;
+run;
+
+data p_impactable;
+set result_w_colsum;
+tValue=Estimate/StdErr;
+Probt=(1-probt(abs(tValue),&degfreedom.))*2;
+Total_percentage=((estimate*Total_Activity)/Total_sales);
+Annual_percentage=((estimate*Annual_Activity12)/Annual_sales);
+drop _label_;
+keep Variable DF Estimate StdErr tValue	Probt VarianceInflation	Total_Activity Total_sales Annual_Activity12 Annual_sales	Total_percentage Annual_percentage;
+run;
+
+PROC PRINT DATA=p_impactable;
+format estimate 15.8;
+RUN;
+
+%MEND;
+
+/* Step 1  */	
+
+*RIDGE Model run with lambda value as 0.041;
+%ols_regression_impact_ridge(101,model_data, 0.025, hcp_doses_prv,
+					hcc_tv_adt_mrk_grps_f255470_rt8
+					hcc_osrch_sessions75
+					hcp_osrch_sessions50
+					hcp_field_adol_eng75
+					npp_adt_eng
+					npp_adol_eng75_rt9
+					hcp_totdet_mmf75
+					hcp_doses_prv_lag
+					hcp_doses_prv_slag
+					Rtime
+					workdays
+					ADT_PP_HCC
+					ADT_PP_HCP
+					ADT_WEBMD
+					popf2554
+					M1-M11);
+/* 		0.9687			 */
+					
+proc export data =p_impactable  outfile= "/efs-MAIO/Team/promo_opt/MktMixPP/2024 Planning/G9/output/out_data/DMA/adt_2" dbms= xlsx replace;
+sheet = '4_s1_0.025';
+run;
+
+
+
+Data step_2;
+set model_data;
+ hcp_doses_prv= hcp_doses_prv-(1.15239957*hcc_tv_adt_mrk_grps_f255470_rt8);
+run;
+
+proc summary data= model_data nway sum ;
+var hcp_doses_prv;
+output out=summ(DROP = _:) SUM=;
+run;
+/* 9323652.5	 */
+
+proc summary data= step_2 nway sum ;
+var hcp_doses_prv;
+output out=summm(DROP = _:) SUM=;
+run;
+/* 8993379.3324 */
+/* 4.27% */
+
+/* Step 2  */					
+			
+					*RIDGE Model run with lambda value as 0.1;
+%ols_regression_impact_ridge(101,step_2, 0.175, hcp_doses_prv,
+					HCC_DISP_ADT_IMP_DCM_COR
+					hcc_olv_adt_imp
+					hcc_psrch_adt_clk80
+					hcc_soc_adt_imp_rt4
+					hcc_stv_adt_imp70
+					hcc_osrch_sessions40
+					hcp_osrch_sessions30
+					hcp_field_adol_eng60
+					npp_adt_eng_rt4
+					npp_adol_eng40_rt4
+					hcp_totdet_mmf
+					hcp_doses_prv_lag
+					hcp_doses_prv_slag
+					Rtime
+					workdays
+					ADT_PP_HCC
+					ADT_PP_HCP
+					ADT_WEBMD
+					popf2554
+					M1-M11);
+/* 		0.9710			 */
+					
+proc export data =p_impactable  outfile= "/efs-MAIO/Team/promo_opt/MktMixPP/2024 Planning/G9/output/out_data/DMA/adt_2" dbms= xlsx replace;
+sheet = '4_s2_0.175';
+run;
+
+
+
+Data step_3;
+set step_2;
+ hcp_doses_prv= hcp_doses_prv-(0.00060268*hcc_olv_adt_imp);
+run;
+
+
+proc summary data= step_2 nway sum ;
+var hcp_doses_prv;
+output out=summm(DROP = _:) SUM=;
+run;
+/* 8956482.101 */
+
+proc summary data= step_3 nway sum ;
+var hcp_doses_prv;
+output out=summ(DROP = _:) SUM=;
+run;
+/* 8844726.3939	 */
+
+/* 	step 3				 */
+
+*RIDGE Model run with lambda value as 0.041;
+%ols_regression_impact_ridge(101,step_3, 0.103, hcp_doses_prv,
+					HCC_DISP_ADT_IMP_DCM_COR75
+					hcc_stv_adt_imp
+					hcc_osrch_sessions75
+					hcp_osrch_sessions50
+					hcp_field_adol_eng75
+					npp_adt_eng
+					npp_adol_eng75_rt9
+					hcp_totdet_mmf75
+					hcp_doses_prv_lag
+					hcp_doses_prv_slag
+					Rtime
+					workdays
+					ADT_PP_HCC
+					ADT_PP_HCP
+					ADT_WEBMD
+					popf2554
+					M1-M11);
+/* 0.9693 */
+
+
+					
+proc export data =p_impactable  outfile= "/efs-MAIO/Team/promo_opt/MktMixPP/2024 Planning/G9/output/out_data/DMA/adt_2" dbms= xlsx replace;
+sheet = '4_s3_0.103';
+run;
+
+
+
+Data step_4;
+set step_3;
+ hcp_doses_prv= hcp_doses_prv-(0.00004718*HCC_DISP_ADT_IMP_DCM_COR75 + 0.00053945*hcc_stv_adt_imp);
+run;
+
+
+proc summary data= step_3 nway sum ;
+var hcp_doses_prv;
+output out=summm(DROP = _:) SUM=;
+run;
+/* 8807802.0306	 */
+
+
+proc summary data= step_4 nway sum ;
+var hcp_doses_prv;
+output out=summ(DROP = _:) SUM=;
+run;
+/* 8506681.6403 */
+
+/* Step 4 */
+
+*RIDGE Model run with lambda value as 0.041;
+%ols_regression_impact_ridge(101,step_4, 0.0315, hcp_doses_prv,
+					hcc_psrch_adt_clk
+					hcc_soc_adt_imp
+					hcc_osrch_sessions75
+					hcp_osrch_sessions50
+					hcp_field_adol_eng75
+					npp_adt_eng
+					npp_adol_eng75_rt9
+					hcp_totdet_mmf75
+					hcp_doses_prv_lag
+					hcp_doses_prv_slag
+					Rtime
+					workdays
+					ADT_PP_HCC
+					ADT_PP_HCP
+					ADT_WEBMD
+					popf2554
+					M1-M11);
+/* 0.9676 */
+
+
+					
+proc export data =p_impactable  outfile= "/efs-MAIO/Team/promo_opt/MktMixPP/2024 Planning/G9/output/out_data/DMA/adt_2" dbms= xlsx replace;
+sheet = '4_s4_0.0315';
+run;

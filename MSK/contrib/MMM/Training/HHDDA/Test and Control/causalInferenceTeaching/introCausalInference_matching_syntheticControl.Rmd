@@ -1,0 +1,425 @@
+---
+title: "Intro to Causal Inference with a focus on Matching and Synthetic Controls"
+author: Michael Johnson
+date: 09/09/2022
+output: 
+  html_document:
+    theme: journal
+    toc: true
+    toc_depth: 2
+    toc_float: true
+    number_sections: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+A special thank you to my advisor Dr. Hyunseung Kang who let me take snippets from his lecture notes for inspiration.
+
+# Causal Inference
+## Intent/Goal
+
+Answer questions of cause and effect. Specifically, to study the effect of the cause *not* the cause of the effect. 
+
+### Examples
+
+* [Is eating an egg a day good or bad for you?](https://www.health.com/nutrition/eating-eggs-daily-healthy)
+* Would stricter gun control laws cause [more](https://en.wikipedia.org/wiki/More_Guns,_Less_Crime) or [less](https://en.wikipedia.org/wiki/Private_Guns,_Public_Health) murders?
+* Does increasing the ad spend result in more new patients?
+
+We quantify these causal questions rather than identify the cause. Otherwise, we're quickly down a rabbit hole/infinite regress (An example from Rubin: They got lung cancer because they smoked. They smoked because their parents smoked, who smoked because they hated each other. They hated each other because...)
+
+## Potential Outcomes Model/Framework
+
+This model was first developed by Jerzy Neyman in 1923 and then popularized by [Donald Rubin in 1974](https://psycnet.apa.org/record/1975-06502-001). It is often referred to as Rubin's Causal Model/Framework or Rubin's Potential Outcomes. See [Holland](https://www.tandfonline.com/doi/abs/10.1080/01621459.1986.10478354) for more background and history.
+
+Consider a set of treatments $\mathcal{A}$, say $\mathcal{A} = \{\textrm{Control}, \textrm{Treatment}\}$. For simplicity, we will denote Control as 0 and Treatment as 1, so that $\mathcal{A} = \{0, 1\}$.
+
+The potential outcomes are defined as the outcomes that we would observe if unit $i$ (patient, zip, DMA, etc.) were to receive treatment or control. So, the potential outcome $Y_i(1)$ is the outcome unit $i$ would experience if exposed to (takes) the treatment at a specific time or in a specific time period. Similarly, the potential outcome $Y_i(0)$ is the outcome unit $i$ would experience if exposed to the control (doesn't take the treatment) at a specific time or in a specific time period. For example,
+
+* $Y_i(1)$: The number of new patients DMA $i$ would experience if it received an increase in ad spend
+* $Y_i(0)$: The number of new patients DMA $i$ would experience if its ad spend remained unchanged
+
+The causal effect of treatment compared to control for unit $i$ is 
+\[\tau_i = Y_i(1) - Y_i(0)\]
+
+* $\tau_i>0$: Increasing ad spend results in more new patients in DMA $i$
+* $\tau_i=0$: Increasing ad spend results in no more new patients in DMA $i$
+* $\tau_i<0$: Increasing ad spend results in fewer new patients in DMA $i$
+
+The potential outcomes model provides a clear definition of the effects of causes and actionable information on how to live our lives, create policy, allocate ad spend, etc.
+
+An alternative interpretation of $\tau_i$ is to think about $Y_i(1)$ and $Y_i(0)$ as parallel universes. 
+
+* Suppose, in one universe, unit $i$ receives the treatment and in an exactly identical/parallel universe unit $i$ receives the control. Since the only difference between the universes is the treatment assignment, then any difference in the outcomes between the two universes can **only** be attributed to the treatment. The potential outcomes $Y_i(1)$ and $Y_i(0)$ reflect these parallel universes.
+* [An example from the movie Sliding Doors](https://www.youtube.com/watch?v=B6wJq9AZVfY)
+
+
+A competing model is Pearl's do calculus which defines the causal effect $\tau_i$ as
+\[\tau_i = P(Y_i=y | do(1)) - P(Y_i=y | do(0))\]
+
+If you're really interested in some of the details of causal inference but want passive (borderline active) aggressive takes on which framework is better, check out [here (and you can ctrl+f "guido" in the comments section)](http://causality.cs.ucla.edu/blog/index.php/2014/10/27/are-economists-smarter-than-epidemiologists-comments-on-imbenss-recent-paper/).
+
+
+### The Fundamental Problem of Causal Inference
+
+It is impossible to *observe* both $Y_i(1)$ and $Y_i(0)$ and therefore impossible to *observe* the causal effect of the treatment.
+
+* Unit $i$ is the room in a house and flicking the light switch one second before 9:48pm is the treatment. Not flicking the light switch one second before 9:48pm is the control. The outcome is whether or not the room's light is on at 9:48pm. Once the light switch is flicked or not, I only observe the outcome for the respective treatment assignment.
+* If the ad spend is increased in the Philadelphia DMA (unit $i$), we observe the potential outcome for treatment $Y_i(1)$. We cannot go back in time and then also observe what would have happened if we instead kept the ad spend unchanged in the Philadelphia DMA to observe $Y_i(0)$.
+
+This implies that causal inference is impossible, but we know that to not be true. We know that flicking the light switch will cause the light to turn on, that smoking causes lung cancer, that increasing the ad spend will result in an increased number of new patients. How do we learn these cause and effect relationships? Which, ultimately, comes to what **assumptions** are underlying such cause and effect claims and how do we quantify causal effects?
+
+### Conditional Ignorability
+
+Instead of focusing on the individual treatment effect $\tau_i$, we use a statistical approach and focus on the average of the individual treatment effects, also called the average treatment effect,
+\[\tau = E[Y_i(1) - Y_i(0)]\]
+
+To identify the average treamtent effect $\tau$ we need to make three causal assumptions. I focus on one here, the assumption of conditional ignorability, also referred to as no unmeasured confounding. This assumption states that there are no unmeasured confounders that would bias our estimation of the average treatment effect. Mathematically, for a confounder $X$ and treatment assignment $A$, conditional ignorability is written as 
+\[Y_i(1), Y_i(0) \perp A | X\]
+
+Consider a simple setting of the causal effect of ice cream on the amount of sunburns and two possible ways of studying it. (i) We only measure ice cream consumption and peoples' sunburns, and (ii) we also measure the sun activity of the individuals. In the first setting, we may incorrectly conclude that ice cream has a non-zero causal effect on increasing sunburns because an unmeasured confounder (sun activity) isn't accounted for. However, if we also measure the sun activity of the individuals then we would correctly observe that there is no causal effect between ice cream consumption.
+
+In setting (i), our assumption of no unmeasured confounding is violated. Individuals who have more sun activity are more likely to eat ice cream to cool off and get sun burned (the potential outcomes are not independent of the treatment assignment), biasing our estimates of the causal effect. In setting (ii), our assumption of no unmeasured confounding holds. We are able to account for the differences in sun activity for individuals (the potential outcomes are independent of treatment assignment after measuring the confounder) and consistently estimate the average treatment effect. We can do this by grouping those with similar sun activity together and then comparing their amounts of sunburns.
+
+Essentially, no unmeasured confounding guarantees the covariates of the units are balanced and made similar so the quantified causal effect is not biased.
+
+
+### Gold Standard
+
+The best way to ensure no unmeasured confounding holds is to randomly assign treatment and control to units. This has lead to the birth (and success) of randomized controlled trials and later A/B testing. All confounders (measured or unmeasured) will be made similar between the treated and control when randomized (on average). Randomizing which individuals get to eat ice cream (I hope I get picked) will not select any individuals based on their sun exposure and the amount of sun activity between treated and control will be similar. This ensures that the treatment assignment is independent of the potential outcomes.
+
+When randomization isn't possible (i.e. observational data), we have to measure all confounders and account for them so that the treated and control can be comparable. Here, "accounting for" essentially means to make the covariates of the treated and control balanced. 
+
+* Compare individuals who ate ice cream with individuals who did not but have similar sun exposure/activity
+* Compare DMAs that received an increased ad spend with DMAs that maintined their ad spend but have similar characteristics
+
+# Matching
+
+One technique to make treated and control groups balanced when all confounders are measured is matching. Matching is to create sets of individuals that have similar covariates where some received treatment and others received control. With all confounders measured, matching will ensure the covariates of the treated and control units are made similar (are balanced).
+
+To match some treated units to possible controls, we can go down the list of treated units finding a control similar to each in all confounders. This algorithm is referred to as greedy as once a control is selected for one treated unit it cannot be selected for another treated unit, i.e. its performance can depend on the order of the treated units. Alternatively, an optimal match is one defined to minimize the total discrepancy between treated and control units.
+
+Typically the same controls are selected in a greedy or optimal match, but an optimal match will result in smaller distances between treated and control. So, greedy matching may be fine if the intent of matching is to select a control population, but optimal matching may be preferred when needing to group units so that the distance between them is minimized. Further, an optimal matching will always be at least as good as the greedy match, and the greedy match cannot be guaranteed to result in a tolerable matching. So, I recommend optimally matching when it is computationally possible, otherwise use greedy matching.
+
+Optimal matching requires a distance matrix with dimension $n_1 \times n_0$, where $n_1$ is the number of treated units and $n_0$ the number of control units. Each entry of the distance matrix is a measure of similarity between the treated and control. Optimal matching then groups units such that these distances are minimized. There are several kinds of distances to consider, such as exact, Euclidean, Mahalanobis, and more.
+
+Instead of matching on all measured confounders, one can alternatively estimate a propensity score and match on it instead. The propensity score is defined as the probability of receiving the treatment and can greatly reduce the dimensionality of the matching problem (go from matching on several variables to matching on one). However, practically, matching on a propensity score is very challenging and can be problematic. It requires a model to estimate the propensity score which, if a poor model, may lead to a poor match. Further, even a good model may result in probabilities close to 0 or close to 1 for most units. While one could use the logit of the esimated propensity scores to improve the dispersion, Paul Rosenbaum, Donald Rubin's student who came up with the propensity score, generally advises matching on all of the measured confounders. 
+
+To my knowledge the established 'best' way of matching is to use a rank based Mahalanobis distance with calipers derived from the propensity scores. Calipers are redefining the distance between a treated unit and a control unit to be infinite if their propensity scores are deemed too far apart (more than .25 of the standard deviations of the linear propensity score). This way, the matching algorithm will never match that treated unit with that control unit.
+
+## Types of Matching
+
+There are many types of mathcing (see [this paper](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2943670/) and/or [this book](chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://link.springer.com/content/pdf/10.1007/978-3-030-46405-9.pdf)), e.g. exact, almost exact, fine balance, near fine balance, risk set, and so on. Exact matching is to match units that are exactly the same in the measured confounders. Almost exact is to try and match exactly on the confounders that are of overriding importance (extra penalties set to discourage matching units with differences in the important confounder). Fine balance and near fine balance are to forego exact matching with the intention of focusing on covariate balance, whenever exact matching isn't feasible. Risk set matching is a matching units across time, i.e. define risk sets across time and match from those sets.
+
+There are several ways of matching, e.g. pair, variable controls, full. Pair matching is matching a single treated unit with a single control. Variable control matching is to match $k>1$ control units to a single treated unit. Full matching is to match a varying number of control units to a treated unit, or a varying number of treated units to a single control unit. Typically, pair matching will result in the most optimal match but may lose some power as it will have a smaller sample size.
+
+### Example: Two-year versus Four-year College
+[Rouse (1995, JBES)](https://www.jstor.org/stable/1392376) compared the educational attainment of students who began college in a two-year (or junior or community college) to that of students who began college at a four-year college. Her data came from the High School and Beyond longitudinal study. The working hypothesis was among students whose academic preparation would permit attendance at either a two-year or a four-year college, what is the effect of this choice on educational attainment? Rouse compared the total years of education completed by students who attended two-year and four-year colleges.
+
+We would like to match each treated subject (two year college) with a control (four-year college) subject.  One approach is to form the matched pairs by minimizing the rank-based Mahalanobis distance with propensity score calipers between the matched pairs.  The solution to this optimal matching problem can be formulated as finding a minimum cost flow in a certain network which has efficient algorithms. [This paper](https://www.jstor.org/stable/2290079) by  Paul Rosenbaum discusses the algorithms and efficiency. Ben Hansen's [optmatch](https://cran.r-project.org/web/packages/optmatch/optmatch.pdf) package does this in R.
+
+First, some functions to compute the rank based Mahalanobis distance and get propensity score calipers.
+```{r smahal and caliper functions}
+# Function for computing 
+# rank based Mahalanobis distance.  Prevents an outlier from
+# inflating the variance for a variable, thereby decreasing its importance.
+# Also, the variances are not permitted to decrease as ties 
+# become more common, so that, for example, it is not more important
+# to match on a rare binary variable than on a common binary variable
+# z is a vector, length(z)=n, with z=1 for treated, z=0 for control
+# X is a matrix with n rows containing variables in the distance
+
+smahal <- function(z,X){
+    X<-as.matrix(X)
+    n<-dim(X)[1]
+    rownames(X)<-1:n
+    k<-dim(X)[2]
+    m<-sum(z)
+    for (j in 1:k) X[,j]<-rank(X[,j])
+    cv<-cov(X)
+    vuntied<-var(1:n)
+    rat<-sqrt(vuntied/diag(cv))
+    cv<-diag(rat)%*%cv%*%diag(rat)
+    out<-matrix(NA,m,n-m)
+    Xc<-X[z==0,]
+    Xt<-X[z==1,]
+    rownames(out)<-rownames(X)[z==1]
+    colnames(out)<-rownames(X)[z==0]
+    library(MASS)
+    icov<-ginv(cv)
+    for (i in 1:m) out[i,]<-mahalanobis(Xc,Xt[i,],icov,inverted=T)
+    out
+  }
+
+# Function for adding a propensity score caliper to a distance matrix dmat
+# calipersd is the caliper in terms of standard deviation of the logit propensity scoe
+addcaliper <- function(dmat,z,logitp,calipersd=.2,penalty=1000){
+  sd.logitp=sd(logitp)
+  adif=abs(outer(logitp[z==1],logitp[z==0],"-"))
+  adif=(adif-(calipersd*sd.logitp))*(adif>(calipersd*sd.logitp))
+  dmat=dmat+adif*penalty
+  dmat
+}
+```
+
+Next, we import the data.
+
+```{r import community college data}
+community_college_data <- read.csv("C:\\Users\\jomich38\\OneDrive - Merck Sharp & Dohme, Corp\\Documents\\adhoc\\teachCausalInference\\community_college_data.csv",header=TRUE)
+str(community_college_data)
+```
+
+And, calculate the propensity scores.
+
+```{r get ps scores}
+# Fit a propensity score using logistic regression with each covariate entering 
+# linearly into the logistic link function
+# Put x=TRUE in order to have model object include design matrix
+propscore.model <- glm(twoyr ~ female+black+hispanic+bytest+dadvoc+dadsome+dadcoll+dadmiss+momvoc+momsome+momcoll+mommiss+fincome+fincmiss+ownhome+perwhite+urban+region_midwest+region_south+region_west,family=binomial, x=TRUE, y=TRUE, data=community_college_data);
+
+X <- propscore.model$x[,-1] #remove intercept
+A <- propscore.model$y
+logitps <- predict(propscore.model)
+```
+
+Now, we create the distance matrix. 
+
+```{r dist mat}
+# We choose three covariates (bytest, momcoll, dadcoll) to be "close in" covariate distance; 
+# You can choose the entire matrix of covariates and it will also be fine.
+distmat=smahal(A,X[,c("bytest","momcoll","dadcoll")]) 
+# Label the rows and columns of the distance matrix by the subject id numbers in the data; you can set it something else as well.
+rownames(distmat) <- rownames(community_college_data)[A == 1]
+colnames(distmat) <- rownames(community_college_data)[A == 0]
+distmat[1:4,1:7]
+```
+This is the rank-based Mahalanobis distance matrix between treated and untreated units.
+
+Then we penalize this matrix so far distances in logit propensity scores are removed.
+```{r}
+distmat_caliper <- addcaliper(distmat,A,logitps,calipersd = 0.5)
+distmat_caliper[1:4,1:7]
+```
+Notice that some distances became far apart from each other thanks to the penalty of 1000. This makes it unlikely that a specific pair of treated,untreated units will be matched.
+
+Finally, we find the optimal match with our distance matrix with propensity score calipers.
+```{r message=FALSE}
+# Matching
+library(optmatch)
+noControls <- 1 # Pair match 1 control to each treated
+matchvec <- pairmatch(distmat_caliper, controls=noControls, data=community_college_data) #The last argument is used to re-order the output; it doesn't actually use the data itself.
+
+# each column represents who they are and the individual's logit PS value
+matchvec.num <- as.numeric(substr(matchvec,start=3,stop=10))
+matchvec.num.notNA <- matchvec.num[!is.na(matchvec.num)] # To remove individuals who didn't get matched.
+matchID <- unique(matchvec.num.notNA)
+I <- length(matchID)
+
+matchedPairMat <- matrix(0,I,4)
+colnames(matchedPairMat) <- c("SubjectID (Treated)","SubjectID (Control)","PS (Treated)","PS (Control)")
+treatedSubjID <- rownames(community_college_data)[A==1]
+controlSubjID <- rownames(community_college_data)[A==0]
+
+for(i in 1:I) {
+  subjectIDs <- which(matchvec.num == matchID[i])
+  matchedPairMat[i,"SubjectID (Treated)"] <- subjectIDs[subjectIDs %in% treatedSubjID]
+  matchedPairMat[i,"SubjectID (Control)"] <- subjectIDs[subjectIDs %in% controlSubjID]
+  matchedPairMat[i,"PS (Treated)"] <- round(logitps[matchedPairMat[i,"SubjectID (Treated)"]],3)
+  matchedPairMat[i,"PS (Control)"] <- round(logitps[matchedPairMat[i,"SubjectID (Control)"]],3)
+}
+knitr::kable(head(matchedPairMat), caption = '430 Matched Pairs')
+```
+
+## Diagnosing Matched Sets
+
+To examine whether we have constructed a treated and matched control group that are balanced on the observed covariates, we look at the standardized differences
+\[\textrm{SDDiff_X} = \frac{\bar{X}_{A=1} - \bar{X}_{A=0}}{\sqrt{\frac{s^2_{A=1} + s^2_{A=0}}{2}}}\]
+
+This is the difference in the mean of the covariate between treated and control units in standard deviation units.
+
+The rule of thumb for what is good or bad balance is
+
+* Ideally have standardized differences less than 0.1
+* Standardized differences between 0.1 and 0.2 are acceptable
+* Standardized differences greater than 0.2 indicate substantial imbalance
+
+### Example: Two-year versus Four-year College
+
+```{r}
+### Check balance
+# Calculate standardized differences 
+# Covariates used in propensity score model
+Xmat <- propscore.model$x;
+treated <- propscore.model$y
+
+# Which variables are missing 
+missing.mat <- matrix(rep(0,ncol(Xmat)*nrow(Xmat)),ncol=ncol(Xmat))
+missing.mat[Xmat[,9]==1,8] <- 1
+missing.mat[Xmat[,13]==1,12] <- 1
+missing.mat[Xmat[,15]==1,14] <- 1
+# Put in NAs for all X variables which are missing and for which mean value has been imputed
+
+Xmat.without.missing <- Xmat
+for(i in 1:ncol(Xmat)){
+  Xmat.without.missing[missing.mat[,i]==1,i] <- NA
+}
+treatedmat <- Xmat.without.missing[treated==1,];
+# Standardized differences before matching
+
+controlmat.before <- Xmat.without.missing[treated==0,];
+controlmean.before <- apply(controlmat.before,2, mean, na.rm=TRUE);
+treatmean <- apply(treatedmat,2, mean, na.rm=TRUE);
+treatvar <- apply(treatedmat,2, var, na.rm=TRUE);
+controlvar <- apply(controlmat.before,2, var, na.rm=TRUE);
+stand.diff.before <- (treatmean-controlmean.before)/sqrt((treatvar+controlvar)/2);
+# Standardized differences after matching
+controlmat.after <- Xmat[matchedPairMat[,2],];
+controlmean.after <- apply(controlmat.after,2,mean);
+# Standardized differences after matching
+stand.diff.after <- (treatmean-controlmean.after)/sqrt((treatvar+controlvar)/2);
+
+standBeforeAfter <- cbind(stand.diff.before[-1],stand.diff.after[-1])
+
+colnames(standBeforeAfter ) <- c("Before Match (Standardized Diff)",
+                                "After Match (Standardized Diff)")
+knitr::kable(round(abs(standBeforeAfter),3), caption = "Differences in Covariates (Before and After)") #-1 removes intercept
+```
+
+Love Plots (I think I've also seen this called a Cleveland Dot Plot)
+```{r message=FALSE, fig.align="center"}
+library(ggplot2)
+
+abs.stand.diff.before <- abs(stand.diff.before[-1])
+abs.stand.diff.after <- abs(stand.diff.after[-1])
+covariates <- names(stand.diff.before[-1])
+
+plot.dataframe <- data.frame(abs.stand.diff=c(abs.stand.diff.before,abs.stand.diff.after),
+                          covariates=rep(covariates,2),
+                          type=c(rep("Before Matching",length(covariates)),rep("After Matching",length(covariates))))
+
+ggplot(plot.dataframe,aes(x=abs.stand.diff,y=covariates)) +
+  geom_point(size=3, aes(shape=factor(type))) +
+  scale_shape_manual(values=c(4,1)) +
+  geom_vline(xintercept=c(.1,.2), lty=2) + 
+  labs( type="",
+        x="Absolute Standardized Differences",
+        y="")
+```
+
+Balance is acceptable, particularly as region may affect the potential outcomes. Also, the propensity score caliper match makes bytest within matched pairs much closer. 
+
+
+# Synthetic Controls
+
+Synthetic controls is similar to matching in that its aim is to get a control unit to be comparable to a treated unit. It differs from matching in that it will combine potential controls to form a *Synthetic* control, but is similar in that it is defining a control unit which is balanced with the treated unit (in fact, I think of synthetic controls as continuous matching). This is helpful when a treated unit is unique and a control unit is unobtainable. 
+
+#### Motivating Example
+In 1988, California formed Prop 99 which taxed cigarettes and cigars and provided anti-smoking educational pamphlets. The question to be answered is then whether or not Prop 99 was effective in reducing cigarette consumption. However California was the only state that with Prop 99 and no single state is exactly like California. The proposed solution is to create a synthetic or fake California that resembles pre-1988 California in every way. The goal is then for time $t \geq 1988$ and $n_0$ control units, to create
+\[\hat{Y}_{CA, t}(0) = \sum_{j=1}^{n_0} \hat{w}_j Y_{j,t}(0)\]
+where $\hat{w}$ is estimated from the pre-1988 data.
+
+```{r ca synth ctrl, echo=FALSE,  out.width = '60%', fig.align="center"}
+knitr::include_graphics("C:\\Users\\jomich38\\OneDrive - Merck Sharp & Dohme, Corp\\Documents\\adhoc\\teachCausalInference\\synthCtrl_CAtobacco.png")
+```
+
+
+#### R Example
+```{r synth ctrl ex data, echo = TRUE}
+library(Synth)
+
+# load data
+data(synth.data)
+
+head(synth.data)
+str(synth.data)
+summary(synth.data)
+```
+
+```{r synth ctrl data prep}
+# create matrices from panel data that provide inputs for synth()
+dataprep.out<-
+  dataprep(
+   foo = synth.data,
+   predictors = c("X1", "X2", "X3"),
+   predictors.op = "mean",
+   dependent = "Y",
+   unit.variable = "unit.num",
+   time.variable = "year",
+   special.predictors = list(
+      list("Y", 1991, "mean"),
+      list("Y", 1985, "mean"),
+      list("Y", 1980, "mean")
+                            ),
+   treatment.identifier = 7,
+   controls.identifier = c(29, 2, 13, 17, 32, 38),
+   time.predictors.prior = c(1984:1989),
+   time.optimize.ssr = c(1984:1990),
+   unit.names.variable = "name",
+   time.plot = 1984:1996
+   )
+```
+
+```{r get synth weights, cache=TRUE}
+## run the synth command to identify the weights
+## that create the best possible synthetic 
+## control unit for the treated.
+synth.out <- synth(dataprep.out)
+
+```
+
+```{r synth ctrl output, fig.align="center"}
+## there are two ways to summarize the results
+## we can either access the output from synth.out directly
+round(synth.out$solution.w,2)
+# contains the unit weights or
+synth.out$solution.v 
+## contains the predictor weights. 
+
+## the output from synth opt 
+## can be flexibly combined with 
+## the output from dataprep to 
+## compute other quantities of interest
+## for example, the period by period 
+## discrepancies between the 
+## treated unit and its synthetic control unit
+## can be computed by typing
+gaps <- dataprep.out$Y1plot - (dataprep.out$Y0plot %*% synth.out$solution.w)
+gaps
+
+## also there are three convenience functions to summarize results.
+## to get summary tables for all information 
+## (V and W weights plus balance btw. 
+## treated and synthetic control) use the 
+## synth.tab() command
+synth.tables <- synth.tab(
+      dataprep.res = dataprep.out,
+      synth.res = synth.out)
+print(synth.tables)
+
+## to get summary plots for outcome trajectories 
+## of the treated and the synthetic control unit use the 
+## path.plot() and the gaps.plot() commands
+
+## plot in levels (treated and synthetic)
+path.plot(dataprep.res = dataprep.out,synth.res = synth.out)
+
+## plot the gaps (treated - synthetic)
+gaps.plot(dataprep.res = dataprep.out,synth.res = synth.out)
+```
+
+## Google's Causal Impact
+
+Google's Causal Impact is very similar to synthetic controls in that it estimates the potential outcome that is not observed (the counterfactual) for a given treated unit. It differs in how the counterfactual is estimated (a Bayesian time series model is used here) and its use of any time series that are correlated with the treated time series to form the counterfactual time series.
+
+In more detail, I understand the difference between the original synthetic control and Google's Causal Impact as
+
+* Synthetic controls use control units (the control units' outcomes before the intervention period and any covariates)
+* Causal Impact uses any time series not impacted by the intervention that is correlated with treated unit time series
+
+I liken this difference to an example on hamburgers. Say we are trying to understand whether including pickles improves the taste of the burger. The synthetic control process will require several other hamburgers that aren't quite comparable to the hamburger with pickles (treated unit). These hamburgers will then be taken apart and then combined to create a hamburger that is identical to the hamburger with pickles in every way except that it lacks pickles. The Causal Impact process instead requires food ingredients (i.e. correlationally related) and then assembles the burger without pickles using these ingredients.
+
+The distinction I am making is that synthetic controls require experimental units where some are treated and others are not. But Causal Impact requires a time series that had an intervention period and several other time series that need only be correlated to the treated time series. This is slightly uncomfortable to me, because I'm used to thinking on a level of experimental units and it doesn't make sense to me to use a time series that may be [spuriously correlated](https://www.tylervigen.com/spurious-correlations). However, the investigator/analyst can choose to only use time series they know to be relevant to the question at hand. Also Causal Impact can still be used for a time series of a treated unit and compared with an estimated counterfactual from time series of control units.
+
+

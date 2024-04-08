@@ -1,0 +1,741 @@
+NOTE: PROCEDURE PRINTTO used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+
+NOTE: There were 32760 observations read from the data set OUTPUT.TV_MM_GRP_BY_DMA_REPORT_WEEK.
+NOTE: The data set WORK.TV_MM_GRP_BY_DMA_REPORT_WEEK has 32760 observations and 17 variables.
+NOTE: Compressing data set WORK.TV_MM_GRP_BY_DMA_REPORT_WEEK decreased size by 42.05 percent. 
+      Compressed is 317 pages; un-compressed would require 547 pages.
+NOTE: DATA statement used (Total process time):
+      real time           0.07 seconds
+      cpu time            0.07 seconds
+      
+
+MLOGIC(GET_VARS_1):  Beginning execution.
+SYMBOLGEN:  Macro variable INCLUDE_MM resolves to YES
+MLOGIC(GET_VARS_1):  %IF condition &INCLUDE_MM.=YES is TRUE
+MLOGIC(GET_VARS_1):  %LET (variable name is TMP_VAR_LST)
+MLOGIC(GET_VARS_1):  Ending execution.
+SYMBOLGEN:  Macro variable TMP_VAR_LST resolves to GRP: MM_:
+GRP: MM_:END
+SYMBOLGEN:  Macro variable TMP_VAR_LST resolves to GRP: MM_:
+
+NOTE: There were 32760 observations read from the data set WORK.TV_MM_GRP_BY_DMA_REPORT_WEEK.
+NOTE: The data set OUTPUT.TV_MM_GRP_BY_FULL_WEEK has 27510 observations and 14 variables.
+NOTE: Compressing data set OUTPUT.TV_MM_GRP_BY_FULL_WEEK decreased size by 43.34 percent. 
+      Compressed is 217 pages; un-compressed would require 383 pages.
+NOTE: PROCEDURE MEANS used (Total process time):
+      real time           0.10 seconds
+      cpu time            0.14 seconds
+      
+
+SYMBOLGEN:  Macro variable TMP_VAR_LST resolves to GRP: MM_:
+
+NOTE: There were 32760 observations read from the data set WORK.TV_MM_GRP_BY_DMA_REPORT_WEEK.
+NOTE: The data set OUTPUT.TV_MM_GRP_BY_REPORT_MONTH has 6300 observations and 14 variables.
+NOTE: Compressing data set OUTPUT.TV_MM_GRP_BY_REPORT_MONTH decreased size by 35.23 percent. 
+      Compressed is 57 pages; un-compressed would require 88 pages.
+NOTE: PROCEDURE MEANS used (Total process time):
+      real time           0.04 seconds
+      cpu time            0.07 seconds
+      
+
+MLOGIC(GET_ADSTK_SOURCE):  Beginning execution.
+SYMBOLGEN:  Macro variable ADS_DATA_UNIT resolves to WEEK
+MLOGIC(GET_ADSTK_SOURCE):  %IF condition &ADS_DATA_UNIT. = MONTH is FALSE
+SYMBOLGEN:  Macro variable ADS_DATA_UNIT resolves to WEEK
+MLOGIC(GET_ADSTK_SOURCE):  %IF condition &ADS_DATA_UNIT. = WEEK is TRUE
+MPRINT(GET_ADSTK_SOURCE):   DATA WGRP_SOURCE;
+MPRINT(GET_ADSTK_SOURCE):   SET OUTPUT.TV_MM_GRP_BY_FULL_WEEK;
+MPRINT(GET_ADSTK_SOURCE):   RUN;
+
+NOTE: There were 27510 observations read from the data set OUTPUT.TV_MM_GRP_BY_FULL_WEEK.
+NOTE: The data set WORK.WGRP_SOURCE has 27510 observations and 14 variables.
+NOTE: Compressing data set WORK.WGRP_SOURCE decreased size by 43.34 percent. 
+      Compressed is 217 pages; un-compressed would require 383 pages.
+NOTE: DATA statement used (Total process time):
+      real time           0.04 seconds
+      cpu time            0.04 seconds
+      
+
+MPRINT(GET_ADSTK_SOURCE):   PROC SORT DATA=WGRP_SOURCE;
+MPRINT(GET_ADSTK_SOURCE):   BY DMA FULL_WEEK;
+MPRINT(GET_ADSTK_SOURCE):   RUN;
+
+NOTE: There were 27510 observations read from the data set WORK.WGRP_SOURCE.
+NOTE: The data set WORK.WGRP_SOURCE has 27510 observations and 14 variables.
+NOTE: Compressing data set WORK.WGRP_SOURCE decreased size by 43.34 percent. 
+      Compressed is 217 pages; un-compressed would require 383 pages.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.04 seconds
+      cpu time            0.04 seconds
+      
+
+MLOGIC(GET_ADSTK_SOURCE):  Ending execution.
+NOTE: PROCEDURE SQL used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+      
+
+SYMBOLGEN:  Macro variable ADSTK_COLS resolves to GRPADV_XX_ GRPALA_XX_ GRPALL_XX_ GRPBEN_XX_ 
+            GRPCLA_XX_ GRPNAS_XX_ GRPOMN_XX_ GRPZYR_XX_ MM_NPRTNAS_XX_ MM_NINTNAS_XX_
+SYMBOLGEN:  Macro variable CALLADSTK resolves to %ADSTK1(0.7071,02);  %ADSTK1(0.8409,04);  
+            %ADSTK1(0.8909,06);  %ADSTK1(0.917,08);  %ADSTK1(0.933,10);  %ADSTK1(0.9439,12);  
+            %ADSTK1(0.9517,14);  %ADSTK1(0.9576,16);  %ADSTK1(0.9659,20);  %ADSTK1(0.9715,24);
+MLOGIC(ADSTK1):  Beginning execution.
+MLOGIC(ADSTK1):  Parameter DECAY has value 0.7071
+MLOGIC(ADSTK1):  Parameter HLLBL has value 02
+SYMBOLGEN:  Macro variable HLLBL resolves to 02
+SYMBOLGEN:  Macro variable ADSTK_COLS resolves to GRPADV_XX_ GRPALA_XX_ GRPALL_XX_ GRPBEN_XX_ 
+            GRPCLA_XX_ GRPNAS_XX_ GRPOMN_XX_ GRPZYR_XX_ MM_NPRTNAS_XX_ MM_NINTNAS_XX_
+SYMBOLGEN:  Macro variable HLLBL resolves to 02
+MPRINT(ADSTK1):   ARRAY arADS02(*) GRPADV_02 GRPALA_02 GRPALL_02 GRPBEN_02 GRPCLA_02 GRPNAS_02 
+GRPOMN_02 GRPZYR_02 MM_NPRTNAS_02 MM_NINTNAS_02;
+MPRINT(ADSTK1):  ;
+SYMBOLGEN:  Macro variable HLLBL resolves to 02
+MPRINT(ADSTK1):   RETAIN arADS02;
+MPRINT(ADSTK1):   IF FIRST.DMA THEN DO;
+SYMBOLGEN:  Macro variable HLLBL resolves to 02
+MPRINT(ADSTK1):   DO J=1 TO DIM(arADS02);
+SYMBOLGEN:  Macro variable HLLBL resolves to 02
+MPRINT(ADSTK1):   arADS02(J) = arGRPS(J);
+MPRINT(ADSTK1):   END;
+MPRINT(ADSTK1):   END;
+MPRINT(ADSTK1):   ELSE DO;
+SYMBOLGEN:  Macro variable HLLBL resolves to 02
+MPRINT(ADSTK1):   DO J=1 TO DIM(arADS02);
+SYMBOLGEN:  Macro variable HLLBL resolves to 02
+SYMBOLGEN:  Macro variable DECAY resolves to 0.7071
+SYMBOLGEN:  Macro variable HLLBL resolves to 02
+MPRINT(ADSTK1):   arADS02(J) = arGRPS(J) + 0.7071*arADS02(J);
+MPRINT(ADSTK1):   END;
+MPRINT(ADSTK1):   END;
+MLOGIC(ADSTK1):  Ending execution.
+MLOGIC(ADSTK1):  Beginning execution.
+MLOGIC(ADSTK1):  Parameter DECAY has value 0.8409
+MLOGIC(ADSTK1):  Parameter HLLBL has value 04
+SYMBOLGEN:  Macro variable HLLBL resolves to 04
+SYMBOLGEN:  Macro variable ADSTK_COLS resolves to GRPADV_XX_ GRPALA_XX_ GRPALL_XX_ GRPBEN_XX_ 
+            GRPCLA_XX_ GRPNAS_XX_ GRPOMN_XX_ GRPZYR_XX_ MM_NPRTNAS_XX_ MM_NINTNAS_XX_
+SYMBOLGEN:  Macro variable HLLBL resolves to 04
+MPRINT(ADSTK1):   ARRAY arADS04(*) GRPADV_04 GRPALA_04 GRPALL_04 GRPBEN_04 GRPCLA_04 GRPNAS_04 
+GRPOMN_04 GRPZYR_04 MM_NPRTNAS_04 MM_NINTNAS_04;
+MPRINT(ADSTK1):  ;
+SYMBOLGEN:  Macro variable HLLBL resolves to 04
+MPRINT(ADSTK1):   RETAIN arADS04;
+MPRINT(ADSTK1):   IF FIRST.DMA THEN DO;
+SYMBOLGEN:  Macro variable HLLBL resolves to 04
+MPRINT(ADSTK1):   DO J=1 TO DIM(arADS04);
+SYMBOLGEN:  Macro variable HLLBL resolves to 04
+MPRINT(ADSTK1):   arADS04(J) = arGRPS(J);
+MPRINT(ADSTK1):   END;
+MPRINT(ADSTK1):   END;
+MPRINT(ADSTK1):   ELSE DO;
+SYMBOLGEN:  Macro variable HLLBL resolves to 04
+MPRINT(ADSTK1):   DO J=1 TO DIM(arADS04);
+SYMBOLGEN:  Macro variable HLLBL resolves to 04
+SYMBOLGEN:  Macro variable DECAY resolves to 0.8409
+SYMBOLGEN:  Macro variable HLLBL resolves to 04
+MPRINT(ADSTK1):   arADS04(J) = arGRPS(J) + 0.8409*arADS04(J);
+MPRINT(ADSTK1):   END;
+MPRINT(ADSTK1):   END;
+MLOGIC(ADSTK1):  Ending execution.
+MLOGIC(ADSTK1):  Beginning execution.
+MLOGIC(ADSTK1):  Parameter DECAY has value 0.8909
+MLOGIC(ADSTK1):  Parameter HLLBL has value 06
+SYMBOLGEN:  Macro variable HLLBL resolves to 06
+SYMBOLGEN:  Macro variable ADSTK_COLS resolves to GRPADV_XX_ GRPALA_XX_ GRPALL_XX_ GRPBEN_XX_ 
+            GRPCLA_XX_ GRPNAS_XX_ GRPOMN_XX_ GRPZYR_XX_ MM_NPRTNAS_XX_ MM_NINTNAS_XX_
+SYMBOLGEN:  Macro variable HLLBL resolves to 06
+MPRINT(ADSTK1):   ARRAY arADS06(*) GRPADV_06 GRPALA_06 GRPALL_06 GRPBEN_06 GRPCLA_06 GRPNAS_06 
+GRPOMN_06 GRPZYR_06 MM_NPRTNAS_06 MM_NINTNAS_06;
+MPRINT(ADSTK1):  ;
+SYMBOLGEN:  Macro variable HLLBL resolves to 06
+MPRINT(ADSTK1):   RETAIN arADS06;
+MPRINT(ADSTK1):   IF FIRST.DMA THEN DO;
+SYMBOLGEN:  Macro variable HLLBL resolves to 06
+MPRINT(ADSTK1):   DO J=1 TO DIM(arADS06);
+SYMBOLGEN:  Macro variable HLLBL resolves to 06
+MPRINT(ADSTK1):   arADS06(J) = arGRPS(J);
+MPRINT(ADSTK1):   END;
+MPRINT(ADSTK1):   END;
+MPRINT(ADSTK1):   ELSE DO;
+SYMBOLGEN:  Macro variable HLLBL resolves to 06
+MPRINT(ADSTK1):   DO J=1 TO DIM(arADS06);
+SYMBOLGEN:  Macro variable HLLBL resolves to 06
+SYMBOLGEN:  Macro variable DECAY resolves to 0.8909
+SYMBOLGEN:  Macro variable HLLBL resolves to 06
+MPRINT(ADSTK1):   arADS06(J) = arGRPS(J) + 0.8909*arADS06(J);
+MPRINT(ADSTK1):   END;
+MPRINT(ADSTK1):   END;
+MLOGIC(ADSTK1):  Ending execution.
+MLOGIC(ADSTK1):  Beginning execution.
+MLOGIC(ADSTK1):  Parameter DECAY has value 0.917
+MLOGIC(ADSTK1):  Parameter HLLBL has value 08
+SYMBOLGEN:  Macro variable HLLBL resolves to 08
+SYMBOLGEN:  Macro variable ADSTK_COLS resolves to GRPADV_XX_ GRPALA_XX_ GRPALL_XX_ GRPBEN_XX_ 
+            GRPCLA_XX_ GRPNAS_XX_ GRPOMN_XX_ GRPZYR_XX_ MM_NPRTNAS_XX_ MM_NINTNAS_XX_
+SYMBOLGEN:  Macro variable HLLBL resolves to 08
+MPRINT(ADSTK1):   ARRAY arADS08(*) GRPADV_08 GRPALA_08 GRPALL_08 GRPBEN_08 GRPCLA_08 GRPNAS_08 
+GRPOMN_08 GRPZYR_08 MM_NPRTNAS_08 MM_NINTNAS_08;
+MPRINT(ADSTK1):  ;
+SYMBOLGEN:  Macro variable HLLBL resolves to 08
+MPRINT(ADSTK1):   RETAIN arADS08;
+MPRINT(ADSTK1):   IF FIRST.DMA THEN DO;
+SYMBOLGEN:  Macro variable HLLBL resolves to 08
+MPRINT(ADSTK1):   DO J=1 TO DIM(arADS08);
+SYMBOLGEN:  Macro variable HLLBL resolves to 08
+MPRINT(ADSTK1):   arADS08(J) = arGRPS(J);
+MPRINT(ADSTK1):   END;
+MPRINT(ADSTK1):   END;
+MPRINT(ADSTK1):   ELSE DO;
+SYMBOLGEN:  Macro variable HLLBL resolves to 08
+MPRINT(ADSTK1):   DO J=1 TO DIM(arADS08);
+SYMBOLGEN:  Macro variable HLLBL resolves to 08
+SYMBOLGEN:  Macro variable DECAY resolves to 0.917
+SYMBOLGEN:  Macro variable HLLBL resolves to 08
+MPRINT(ADSTK1):   arADS08(J) = arGRPS(J) + 0.917*arADS08(J);
+MPRINT(ADSTK1):   END;
+MPRINT(ADSTK1):   END;
+MLOGIC(ADSTK1):  Ending execution.
+MLOGIC(ADSTK1):  Beginning execution.
+MLOGIC(ADSTK1):  Parameter DECAY has value 0.933
+MLOGIC(ADSTK1):  Parameter HLLBL has value 10
+SYMBOLGEN:  Macro variable HLLBL resolves to 10
+SYMBOLGEN:  Macro variable ADSTK_COLS resolves to GRPADV_XX_ GRPALA_XX_ GRPALL_XX_ GRPBEN_XX_ 
+            GRPCLA_XX_ GRPNAS_XX_ GRPOMN_XX_ GRPZYR_XX_ MM_NPRTNAS_XX_ MM_NINTNAS_XX_
+SYMBOLGEN:  Macro variable HLLBL resolves to 10
+MPRINT(ADSTK1):   ARRAY arADS10(*) GRPADV_10 GRPALA_10 GRPALL_10 GRPBEN_10 GRPCLA_10 GRPNAS_10 
+GRPOMN_10 GRPZYR_10 MM_NPRTNAS_10 MM_NINTNAS_10;
+MPRINT(ADSTK1):  ;
+SYMBOLGEN:  Macro variable HLLBL resolves to 10
+MPRINT(ADSTK1):   RETAIN arADS10;
+MPRINT(ADSTK1):   IF FIRST.DMA THEN DO;
+SYMBOLGEN:  Macro variable HLLBL resolves to 10
+MPRINT(ADSTK1):   DO J=1 TO DIM(arADS10);
+SYMBOLGEN:  Macro variable HLLBL resolves to 10
+MPRINT(ADSTK1):   arADS10(J) = arGRPS(J);
+MPRINT(ADSTK1):   END;
+MPRINT(ADSTK1):   END;
+MPRINT(ADSTK1):   ELSE DO;
+SYMBOLGEN:  Macro variable HLLBL resolves to 10
+MPRINT(ADSTK1):   DO J=1 TO DIM(arADS10);
+SYMBOLGEN:  Macro variable HLLBL resolves to 10
+SYMBOLGEN:  Macro variable DECAY resolves to 0.933
+SYMBOLGEN:  Macro variable HLLBL resolves to 10
+MPRINT(ADSTK1):   arADS10(J) = arGRPS(J) + 0.933*arADS10(J);
+MPRINT(ADSTK1):   END;
+MPRINT(ADSTK1):   END;
+MLOGIC(ADSTK1):  Ending execution.
+MLOGIC(ADSTK1):  Beginning execution.
+MLOGIC(ADSTK1):  Parameter DECAY has value 0.9439
+MLOGIC(ADSTK1):  Parameter HLLBL has value 12
+SYMBOLGEN:  Macro variable HLLBL resolves to 12
+SYMBOLGEN:  Macro variable ADSTK_COLS resolves to GRPADV_XX_ GRPALA_XX_ GRPALL_XX_ GRPBEN_XX_ 
+            GRPCLA_XX_ GRPNAS_XX_ GRPOMN_XX_ GRPZYR_XX_ MM_NPRTNAS_XX_ MM_NINTNAS_XX_
+SYMBOLGEN:  Macro variable HLLBL resolves to 12
+MPRINT(ADSTK1):   ARRAY arADS12(*) GRPADV_12 GRPALA_12 GRPALL_12 GRPBEN_12 GRPCLA_12 GRPNAS_12 
+GRPOMN_12 GRPZYR_12 MM_NPRTNAS_12 MM_NINTNAS_12;
+MPRINT(ADSTK1):  ;
+SYMBOLGEN:  Macro variable HLLBL resolves to 12
+MPRINT(ADSTK1):   RETAIN arADS12;
+MPRINT(ADSTK1):   IF FIRST.DMA THEN DO;
+SYMBOLGEN:  Macro variable HLLBL resolves to 12
+MPRINT(ADSTK1):   DO J=1 TO DIM(arADS12);
+SYMBOLGEN:  Macro variable HLLBL resolves to 12
+MPRINT(ADSTK1):   arADS12(J) = arGRPS(J);
+MPRINT(ADSTK1):   END;
+MPRINT(ADSTK1):   END;
+MPRINT(ADSTK1):   ELSE DO;
+SYMBOLGEN:  Macro variable HLLBL resolves to 12
+MPRINT(ADSTK1):   DO J=1 TO DIM(arADS12);
+SYMBOLGEN:  Macro variable HLLBL resolves to 12
+SYMBOLGEN:  Macro variable DECAY resolves to 0.9439
+SYMBOLGEN:  Macro variable HLLBL resolves to 12
+MPRINT(ADSTK1):   arADS12(J) = arGRPS(J) + 0.9439*arADS12(J);
+MPRINT(ADSTK1):   END;
+MPRINT(ADSTK1):   END;
+MLOGIC(ADSTK1):  Ending execution.
+MLOGIC(ADSTK1):  Beginning execution.
+MLOGIC(ADSTK1):  Parameter DECAY has value 0.9517
+MLOGIC(ADSTK1):  Parameter HLLBL has value 14
+SYMBOLGEN:  Macro variable HLLBL resolves to 14
+SYMBOLGEN:  Macro variable ADSTK_COLS resolves to GRPADV_XX_ GRPALA_XX_ GRPALL_XX_ GRPBEN_XX_ 
+            GRPCLA_XX_ GRPNAS_XX_ GRPOMN_XX_ GRPZYR_XX_ MM_NPRTNAS_XX_ MM_NINTNAS_XX_
+SYMBOLGEN:  Macro variable HLLBL resolves to 14
+MPRINT(ADSTK1):   ARRAY arADS14(*) GRPADV_14 GRPALA_14 GRPALL_14 GRPBEN_14 GRPCLA_14 GRPNAS_14 
+GRPOMN_14 GRPZYR_14 MM_NPRTNAS_14 MM_NINTNAS_14;
+MPRINT(ADSTK1):  ;
+SYMBOLGEN:  Macro variable HLLBL resolves to 14
+MPRINT(ADSTK1):   RETAIN arADS14;
+MPRINT(ADSTK1):   IF FIRST.DMA THEN DO;
+SYMBOLGEN:  Macro variable HLLBL resolves to 14
+MPRINT(ADSTK1):   DO J=1 TO DIM(arADS14);
+SYMBOLGEN:  Macro variable HLLBL resolves to 14
+MPRINT(ADSTK1):   arADS14(J) = arGRPS(J);
+MPRINT(ADSTK1):   END;
+MPRINT(ADSTK1):   END;
+MPRINT(ADSTK1):   ELSE DO;
+SYMBOLGEN:  Macro variable HLLBL resolves to 14
+MPRINT(ADSTK1):   DO J=1 TO DIM(arADS14);
+SYMBOLGEN:  Macro variable HLLBL resolves to 14
+SYMBOLGEN:  Macro variable DECAY resolves to 0.9517
+SYMBOLGEN:  Macro variable HLLBL resolves to 14
+MPRINT(ADSTK1):   arADS14(J) = arGRPS(J) + 0.9517*arADS14(J);
+MPRINT(ADSTK1):   END;
+MPRINT(ADSTK1):   END;
+MLOGIC(ADSTK1):  Ending execution.
+MLOGIC(ADSTK1):  Beginning execution.
+MLOGIC(ADSTK1):  Parameter DECAY has value 0.9576
+MLOGIC(ADSTK1):  Parameter HLLBL has value 16
+SYMBOLGEN:  Macro variable HLLBL resolves to 16
+SYMBOLGEN:  Macro variable ADSTK_COLS resolves to GRPADV_XX_ GRPALA_XX_ GRPALL_XX_ GRPBEN_XX_ 
+            GRPCLA_XX_ GRPNAS_XX_ GRPOMN_XX_ GRPZYR_XX_ MM_NPRTNAS_XX_ MM_NINTNAS_XX_
+SYMBOLGEN:  Macro variable HLLBL resolves to 16
+MPRINT(ADSTK1):   ARRAY arADS16(*) GRPADV_16 GRPALA_16 GRPALL_16 GRPBEN_16 GRPCLA_16 GRPNAS_16 
+GRPOMN_16 GRPZYR_16 MM_NPRTNAS_16 MM_NINTNAS_16;
+MPRINT(ADSTK1):  ;
+SYMBOLGEN:  Macro variable HLLBL resolves to 16
+MPRINT(ADSTK1):   RETAIN arADS16;
+MPRINT(ADSTK1):   IF FIRST.DMA THEN DO;
+SYMBOLGEN:  Macro variable HLLBL resolves to 16
+MPRINT(ADSTK1):   DO J=1 TO DIM(arADS16);
+SYMBOLGEN:  Macro variable HLLBL resolves to 16
+MPRINT(ADSTK1):   arADS16(J) = arGRPS(J);
+MPRINT(ADSTK1):   END;
+MPRINT(ADSTK1):   END;
+MPRINT(ADSTK1):   ELSE DO;
+SYMBOLGEN:  Macro variable HLLBL resolves to 16
+MPRINT(ADSTK1):   DO J=1 TO DIM(arADS16);
+SYMBOLGEN:  Macro variable HLLBL resolves to 16
+SYMBOLGEN:  Macro variable DECAY resolves to 0.9576
+SYMBOLGEN:  Macro variable HLLBL resolves to 16
+MPRINT(ADSTK1):   arADS16(J) = arGRPS(J) + 0.9576*arADS16(J);
+MPRINT(ADSTK1):   END;
+MPRINT(ADSTK1):   END;
+MLOGIC(ADSTK1):  Ending execution.
+MLOGIC(ADSTK1):  Beginning execution.
+MLOGIC(ADSTK1):  Parameter DECAY has value 0.9659
+MLOGIC(ADSTK1):  Parameter HLLBL has value 20
+SYMBOLGEN:  Macro variable HLLBL resolves to 20
+SYMBOLGEN:  Macro variable ADSTK_COLS resolves to GRPADV_XX_ GRPALA_XX_ GRPALL_XX_ GRPBEN_XX_ 
+            GRPCLA_XX_ GRPNAS_XX_ GRPOMN_XX_ GRPZYR_XX_ MM_NPRTNAS_XX_ MM_NINTNAS_XX_
+SYMBOLGEN:  Macro variable HLLBL resolves to 20
+MPRINT(ADSTK1):   ARRAY arADS20(*) GRPADV_20 GRPALA_20 GRPALL_20 GRPBEN_20 GRPCLA_20 GRPNAS_20 
+GRPOMN_20 GRPZYR_20 MM_NPRTNAS_20 MM_NINTNAS_20;
+MPRINT(ADSTK1):  ;
+SYMBOLGEN:  Macro variable HLLBL resolves to 20
+MPRINT(ADSTK1):   RETAIN arADS20;
+MPRINT(ADSTK1):   IF FIRST.DMA THEN DO;
+SYMBOLGEN:  Macro variable HLLBL resolves to 20
+MPRINT(ADSTK1):   DO J=1 TO DIM(arADS20);
+SYMBOLGEN:  Macro variable HLLBL resolves to 20
+MPRINT(ADSTK1):   arADS20(J) = arGRPS(J);
+MPRINT(ADSTK1):   END;
+MPRINT(ADSTK1):   END;
+MPRINT(ADSTK1):   ELSE DO;
+SYMBOLGEN:  Macro variable HLLBL resolves to 20
+MPRINT(ADSTK1):   DO J=1 TO DIM(arADS20);
+SYMBOLGEN:  Macro variable HLLBL resolves to 20
+SYMBOLGEN:  Macro variable DECAY resolves to 0.9659
+SYMBOLGEN:  Macro variable HLLBL resolves to 20
+MPRINT(ADSTK1):   arADS20(J) = arGRPS(J) + 0.9659*arADS20(J);
+MPRINT(ADSTK1):   END;
+MPRINT(ADSTK1):   END;
+MLOGIC(ADSTK1):  Ending execution.
+MLOGIC(ADSTK1):  Beginning execution.
+MLOGIC(ADSTK1):  Parameter DECAY has value 0.9715
+MLOGIC(ADSTK1):  Parameter HLLBL has value 24
+SYMBOLGEN:  Macro variable HLLBL resolves to 24
+SYMBOLGEN:  Macro variable ADSTK_COLS resolves to GRPADV_XX_ GRPALA_XX_ GRPALL_XX_ GRPBEN_XX_ 
+            GRPCLA_XX_ GRPNAS_XX_ GRPOMN_XX_ GRPZYR_XX_ MM_NPRTNAS_XX_ MM_NINTNAS_XX_
+SYMBOLGEN:  Macro variable HLLBL resolves to 24
+MPRINT(ADSTK1):   ARRAY arADS24(*) GRPADV_24 GRPALA_24 GRPALL_24 GRPBEN_24 GRPCLA_24 GRPNAS_24 
+GRPOMN_24 GRPZYR_24 MM_NPRTNAS_24 MM_NINTNAS_24;
+MPRINT(ADSTK1):  ;
+SYMBOLGEN:  Macro variable HLLBL resolves to 24
+MPRINT(ADSTK1):   RETAIN arADS24;
+MPRINT(ADSTK1):   IF FIRST.DMA THEN DO;
+SYMBOLGEN:  Macro variable HLLBL resolves to 24
+MPRINT(ADSTK1):   DO J=1 TO DIM(arADS24);
+SYMBOLGEN:  Macro variable HLLBL resolves to 24
+MPRINT(ADSTK1):   arADS24(J) = arGRPS(J);
+MPRINT(ADSTK1):   END;
+MPRINT(ADSTK1):   END;
+MPRINT(ADSTK1):   ELSE DO;
+SYMBOLGEN:  Macro variable HLLBL resolves to 24
+MPRINT(ADSTK1):   DO J=1 TO DIM(arADS24);
+SYMBOLGEN:  Macro variable HLLBL resolves to 24
+SYMBOLGEN:  Macro variable DECAY resolves to 0.9715
+SYMBOLGEN:  Macro variable HLLBL resolves to 24
+MPRINT(ADSTK1):   arADS24(J) = arGRPS(J) + 0.9715*arADS24(J);
+MPRINT(ADSTK1):   END;
+MPRINT(ADSTK1):   END;
+MLOGIC(ADSTK1):  Ending execution.
+
+NOTE: There were 27510 observations read from the data set WORK.WGRP_SOURCE.
+NOTE: The data set WORK.ADSTK_DATA has 27510 observations and 114 variables.
+NOTE: Compressing data set WORK.ADSTK_DATA decreased size by 20.37 percent. 
+      Compressed is 1290 pages; un-compressed would require 1620 pages.
+NOTE: DATA statement used (Total process time):
+      real time           1.57 seconds
+      cpu time            0.31 seconds
+      
+
+MLOGIC(STORE_ADSTK_DATA):  Beginning execution.
+SYMBOLGEN:  Macro variable ADS_DATA_UNIT resolves to WEEK
+MLOGIC(STORE_ADSTK_DATA):  %IF condition &ADS_DATA_UNIT. = MONTH is FALSE
+SYMBOLGEN:  Macro variable ADS_DATA_UNIT resolves to WEEK
+MLOGIC(STORE_ADSTK_DATA):  %IF condition &ADS_DATA_UNIT. = WEEK is TRUE
+MPRINT(STORE_ADSTK_DATA):   DATA OUTPUT.ADS_BY_FULL_WEEK;
+MPRINT(STORE_ADSTK_DATA):   SET ADSTK_DATA;
+MPRINT(STORE_ADSTK_DATA):   RUN;
+
+NOTE: There were 27510 observations read from the data set WORK.ADSTK_DATA.
+NOTE: The data set OUTPUT.ADS_BY_FULL_WEEK has 27510 observations and 114 variables.
+NOTE: Compressing data set OUTPUT.ADS_BY_FULL_WEEK decreased size by 20.37 percent. 
+      Compressed is 1290 pages; un-compressed would require 1620 pages.
+NOTE: DATA statement used (Total process time):
+      real time           0.35 seconds
+      cpu time            0.23 seconds
+      
+
+MLOGIC(STORE_ADSTK_DATA):  Ending execution.
+MLOGIC(EXEC_WEEK_TO_MONTH_AGGR):  Beginning execution.
+SYMBOLGEN:  Macro variable ADS_DATA_UNIT resolves to WEEK
+MLOGIC(EXEC_WEEK_TO_MONTH_AGGR):  %IF condition &ADS_DATA_UNIT. = WEEK is TRUE
+MLOGIC(AGGR_FULL_WEEK_TO_MONTH):  Beginning execution.
+MPRINT(AGGR_FULL_WEEK_TO_MONTH):   PROC SORT DATA=OUTPUT.ADS_BY_FULL_WEEK OUT=FULL_WEEK_ADSTKS;
+MPRINT(AGGR_FULL_WEEK_TO_MONTH):   BY DMA FULL_WEEK;
+MPRINT(AGGR_FULL_WEEK_TO_MONTH):   RUN;
+
+NOTE: There were 27510 observations read from the data set OUTPUT.ADS_BY_FULL_WEEK.
+NOTE: The data set WORK.FULL_WEEK_ADSTKS has 27510 observations and 114 variables.
+NOTE: Compressing data set WORK.FULL_WEEK_ADSTKS decreased size by 20.37 percent. 
+      Compressed is 1290 pages; un-compressed would require 1620 pages.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           1.56 seconds
+      cpu time            0.29 seconds
+      
+
+MPRINT(AGGR_FULL_WEEK_TO_MONTH):   DATA FULL_WEEK_ADSTKS;
+MPRINT(AGGR_FULL_WEEK_TO_MONTH):   SET FULL_WEEK_ADSTKS;
+MPRINT(AGGR_FULL_WEEK_TO_MONTH):   YEARMO = put(FULL_WEEK,yymmn6.);
+SYMBOLGEN:  Macro variable ADSTK_COLS resolves to GRPADV_XX_ GRPALA_XX_ GRPALL_XX_ GRPBEN_XX_ 
+            GRPCLA_XX_ GRPNAS_XX_ GRPOMN_XX_ GRPZYR_XX_ MM_NPRTNAS_XX_ MM_NINTNAS_XX_
+MPRINT(AGGR_FULL_WEEK_TO_MONTH):   KEEP DMA FULL_WEEK YEARMO GRPADV_: GRPALA_: GRPALL_: GRPBEN_: 
+GRPCLA_: GRPNAS_: GRPOMN_: GRPZYR_: MM_NPRTNAS_: MM_NINTNAS_:;
+MPRINT(AGGR_FULL_WEEK_TO_MONTH):  ;
+MPRINT(AGGR_FULL_WEEK_TO_MONTH):   RUN;
+
+NOTE: There were 27510 observations read from the data set WORK.FULL_WEEK_ADSTKS.
+NOTE: The data set WORK.FULL_WEEK_ADSTKS has 27510 observations and 103 variables.
+NOTE: Compressing data set WORK.FULL_WEEK_ADSTKS decreased size by 16.29 percent. 
+      Compressed is 1213 pages; un-compressed would require 1449 pages.
+NOTE: DATA statement used (Total process time):
+      real time           0.25 seconds
+      cpu time            0.25 seconds
+      
+
+MPRINT(AGGR_FULL_WEEK_TO_MONTH):   PROC MEANS DATA=FULL_WEEK_ADSTKS SUM NOPRINT NWAY;
+MPRINT(AGGR_FULL_WEEK_TO_MONTH):   CLASS DMA YEARMO;
+SYMBOLGEN:  Macro variable ADSTK_COLS resolves to GRPADV_XX_ GRPALA_XX_ GRPALL_XX_ GRPBEN_XX_ 
+            GRPCLA_XX_ GRPNAS_XX_ GRPOMN_XX_ GRPZYR_XX_ MM_NPRTNAS_XX_ MM_NINTNAS_XX_
+MPRINT(AGGR_FULL_WEEK_TO_MONTH):   VAR GRPADV_: GRPALA_: GRPALL_: GRPBEN_: GRPCLA_: GRPNAS_: 
+GRPOMN_: GRPZYR_: MM_NPRTNAS_: MM_NINTNAS_:;
+MPRINT(AGGR_FULL_WEEK_TO_MONTH):  ;
+MPRINT(AGGR_FULL_WEEK_TO_MONTH):   OUTPUT OUT=ADSTK_BY_MONTH(DROP=_TYPE_ RENAME=(_FREQ_ = 
+NUM_FULL_WEEKS)) SUM=;
+MPRINT(AGGR_FULL_WEEK_TO_MONTH):   RUN;
+
+NOTE: There were 27510 observations read from the data set WORK.FULL_WEEK_ADSTKS.
+NOTE: The data set WORK.ADSTK_BY_MONTH has 6510 observations and 103 variables.
+NOTE: Compressing data set WORK.ADSTK_BY_MONTH decreased size by 18.02 percent. 
+      Compressed is 282 pages; un-compressed would require 344 pages.
+NOTE: PROCEDURE MEANS used (Total process time):
+      real time           0.51 seconds
+      cpu time            0.25 seconds
+      
+
+MLOGIC(AGGR_FULL_WEEK_TO_MONTH):  %LET (variable name is CALLADSTK_2)
+MPRINT(AGGR_FULL_WEEK_TO_MONTH):   PROC SQL;
+MPRINT(AGGR_FULL_WEEK_TO_MONTH):   SELECT '%ADSTK_2('||TRIM(LEFT(ADSTOCK_SUFFIX))||');' INTO 
+:CALLADSTK_2 SEPARATED BY '  ' FROM CONF_ADSTOCK_LAMBDA;
+MPRINT(AGGR_FULL_WEEK_TO_MONTH):   QUIT;
+NOTE: PROCEDURE SQL used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+MPRINT(AGGR_FULL_WEEK_TO_MONTH):   DATA ADSTK_BY_MONTH_2;
+MPRINT(AGGR_FULL_WEEK_TO_MONTH):   SET ADSTK_BY_MONTH;
+MPRINT(AGGR_FULL_WEEK_TO_MONTH):   *get days in month;
+MPRINT(AGGR_FULL_WEEK_TO_MONTH):   som = MDY(SUBSTR(YEARMO,5,2)*1,1,SUBSTR(YEARMO,1,4)*1);
+MPRINT(AGGR_FULL_WEEK_TO_MONTH):   * gets first day of month;
+MPRINT(AGGR_FULL_WEEK_TO_MONTH):   eom = intnx('month',som,0,'end');
+MPRINT(AGGR_FULL_WEEK_TO_MONTH):   * gets last day of month;
+MPRINT(AGGR_FULL_WEEK_TO_MONTH):   days_in_month = day(eom);
+MPRINT(AGGR_FULL_WEEK_TO_MONTH):   * gets number of days in the month;
+SYMBOLGEN:  Macro variable CALLADSTK_2 resolves to %ADSTK_2(02);  %ADSTK_2(04);  %ADSTK_2(06);  
+            %ADSTK_2(08);  %ADSTK_2(10);  %ADSTK_2(12);  %ADSTK_2(14);  %ADSTK_2(16);  
+            %ADSTK_2(20);  %ADSTK_2(24);
+MLOGIC(ADSTK_2):  Beginning execution.
+MLOGIC(ADSTK_2):  Parameter HLLBL has value 02
+SYMBOLGEN:  Macro variable HLLBL resolves to 02
+SYMBOLGEN:  Macro variable ADSTK_COLS resolves to GRPADV_XX_ GRPALA_XX_ GRPALL_XX_ GRPBEN_XX_ 
+            GRPCLA_XX_ GRPNAS_XX_ GRPOMN_XX_ GRPZYR_XX_ MM_NPRTNAS_XX_ MM_NINTNAS_XX_
+SYMBOLGEN:  Macro variable HLLBL resolves to 02
+MPRINT(ADSTK_2):   ARRAY arADS02(*) GRPADV_02 GRPALA_02 GRPALL_02 GRPBEN_02 GRPCLA_02 GRPNAS_02 
+GRPOMN_02 GRPZYR_02 MM_NPRTNAS_02 MM_NINTNAS_02;
+MPRINT(ADSTK_2):  ;
+SYMBOLGEN:  Macro variable HLLBL resolves to 02
+MPRINT(ADSTK_2):   DO J=1 TO DIM(arADS02);
+SYMBOLGEN:  Macro variable HLLBL resolves to 02
+SYMBOLGEN:  Macro variable HLLBL resolves to 02
+MPRINT(ADSTK_2):   arADS02(J) = (arADS02(J)/num_full_weeks)*(days_in_month/7);
+MPRINT(ADSTK_2):   END;
+MLOGIC(ADSTK_2):  Ending execution.
+MPRINT(AGGR_FULL_WEEK_TO_MONTH):  ;
+MLOGIC(ADSTK_2):  Beginning execution.
+MLOGIC(ADSTK_2):  Parameter HLLBL has value 04
+SYMBOLGEN:  Macro variable HLLBL resolves to 04
+SYMBOLGEN:  Macro variable ADSTK_COLS resolves to GRPADV_XX_ GRPALA_XX_ GRPALL_XX_ GRPBEN_XX_ 
+            GRPCLA_XX_ GRPNAS_XX_ GRPOMN_XX_ GRPZYR_XX_ MM_NPRTNAS_XX_ MM_NINTNAS_XX_
+SYMBOLGEN:  Macro variable HLLBL resolves to 04
+MPRINT(ADSTK_2):   ARRAY arADS04(*) GRPADV_04 GRPALA_04 GRPALL_04 GRPBEN_04 GRPCLA_04 GRPNAS_04 
+GRPOMN_04 GRPZYR_04 MM_NPRTNAS_04 MM_NINTNAS_04;
+MPRINT(ADSTK_2):  ;
+SYMBOLGEN:  Macro variable HLLBL resolves to 04
+MPRINT(ADSTK_2):   DO J=1 TO DIM(arADS04);
+SYMBOLGEN:  Macro variable HLLBL resolves to 04
+SYMBOLGEN:  Macro variable HLLBL resolves to 04
+MPRINT(ADSTK_2):   arADS04(J) = (arADS04(J)/num_full_weeks)*(days_in_month/7);
+MPRINT(ADSTK_2):   END;
+MLOGIC(ADSTK_2):  Ending execution.
+MPRINT(AGGR_FULL_WEEK_TO_MONTH):  ;
+MLOGIC(ADSTK_2):  Beginning execution.
+MLOGIC(ADSTK_2):  Parameter HLLBL has value 06
+SYMBOLGEN:  Macro variable HLLBL resolves to 06
+SYMBOLGEN:  Macro variable ADSTK_COLS resolves to GRPADV_XX_ GRPALA_XX_ GRPALL_XX_ GRPBEN_XX_ 
+            GRPCLA_XX_ GRPNAS_XX_ GRPOMN_XX_ GRPZYR_XX_ MM_NPRTNAS_XX_ MM_NINTNAS_XX_
+SYMBOLGEN:  Macro variable HLLBL resolves to 06
+MPRINT(ADSTK_2):   ARRAY arADS06(*) GRPADV_06 GRPALA_06 GRPALL_06 GRPBEN_06 GRPCLA_06 GRPNAS_06 
+GRPOMN_06 GRPZYR_06 MM_NPRTNAS_06 MM_NINTNAS_06;
+MPRINT(ADSTK_2):  ;
+SYMBOLGEN:  Macro variable HLLBL resolves to 06
+MPRINT(ADSTK_2):   DO J=1 TO DIM(arADS06);
+SYMBOLGEN:  Macro variable HLLBL resolves to 06
+SYMBOLGEN:  Macro variable HLLBL resolves to 06
+MPRINT(ADSTK_2):   arADS06(J) = (arADS06(J)/num_full_weeks)*(days_in_month/7);
+MPRINT(ADSTK_2):   END;
+MLOGIC(ADSTK_2):  Ending execution.
+MPRINT(AGGR_FULL_WEEK_TO_MONTH):  ;
+MLOGIC(ADSTK_2):  Beginning execution.
+MLOGIC(ADSTK_2):  Parameter HLLBL has value 08
+SYMBOLGEN:  Macro variable HLLBL resolves to 08
+SYMBOLGEN:  Macro variable ADSTK_COLS resolves to GRPADV_XX_ GRPALA_XX_ GRPALL_XX_ GRPBEN_XX_ 
+            GRPCLA_XX_ GRPNAS_XX_ GRPOMN_XX_ GRPZYR_XX_ MM_NPRTNAS_XX_ MM_NINTNAS_XX_
+SYMBOLGEN:  Macro variable HLLBL resolves to 08
+MPRINT(ADSTK_2):   ARRAY arADS08(*) GRPADV_08 GRPALA_08 GRPALL_08 GRPBEN_08 GRPCLA_08 GRPNAS_08 
+GRPOMN_08 GRPZYR_08 MM_NPRTNAS_08 MM_NINTNAS_08;
+MPRINT(ADSTK_2):  ;
+SYMBOLGEN:  Macro variable HLLBL resolves to 08
+MPRINT(ADSTK_2):   DO J=1 TO DIM(arADS08);
+SYMBOLGEN:  Macro variable HLLBL resolves to 08
+SYMBOLGEN:  Macro variable HLLBL resolves to 08
+MPRINT(ADSTK_2):   arADS08(J) = (arADS08(J)/num_full_weeks)*(days_in_month/7);
+MPRINT(ADSTK_2):   END;
+MLOGIC(ADSTK_2):  Ending execution.
+MPRINT(AGGR_FULL_WEEK_TO_MONTH):  ;
+MLOGIC(ADSTK_2):  Beginning execution.
+MLOGIC(ADSTK_2):  Parameter HLLBL has value 10
+SYMBOLGEN:  Macro variable HLLBL resolves to 10
+SYMBOLGEN:  Macro variable ADSTK_COLS resolves to GRPADV_XX_ GRPALA_XX_ GRPALL_XX_ GRPBEN_XX_ 
+            GRPCLA_XX_ GRPNAS_XX_ GRPOMN_XX_ GRPZYR_XX_ MM_NPRTNAS_XX_ MM_NINTNAS_XX_
+SYMBOLGEN:  Macro variable HLLBL resolves to 10
+MPRINT(ADSTK_2):   ARRAY arADS10(*) GRPADV_10 GRPALA_10 GRPALL_10 GRPBEN_10 GRPCLA_10 GRPNAS_10 
+GRPOMN_10 GRPZYR_10 MM_NPRTNAS_10 MM_NINTNAS_10;
+MPRINT(ADSTK_2):  ;
+SYMBOLGEN:  Macro variable HLLBL resolves to 10
+MPRINT(ADSTK_2):   DO J=1 TO DIM(arADS10);
+SYMBOLGEN:  Macro variable HLLBL resolves to 10
+SYMBOLGEN:  Macro variable HLLBL resolves to 10
+MPRINT(ADSTK_2):   arADS10(J) = (arADS10(J)/num_full_weeks)*(days_in_month/7);
+MPRINT(ADSTK_2):   END;
+MLOGIC(ADSTK_2):  Ending execution.
+MPRINT(AGGR_FULL_WEEK_TO_MONTH):  ;
+MLOGIC(ADSTK_2):  Beginning execution.
+MLOGIC(ADSTK_2):  Parameter HLLBL has value 12
+SYMBOLGEN:  Macro variable HLLBL resolves to 12
+SYMBOLGEN:  Macro variable ADSTK_COLS resolves to GRPADV_XX_ GRPALA_XX_ GRPALL_XX_ GRPBEN_XX_ 
+            GRPCLA_XX_ GRPNAS_XX_ GRPOMN_XX_ GRPZYR_XX_ MM_NPRTNAS_XX_ MM_NINTNAS_XX_
+SYMBOLGEN:  Macro variable HLLBL resolves to 12
+MPRINT(ADSTK_2):   ARRAY arADS12(*) GRPADV_12 GRPALA_12 GRPALL_12 GRPBEN_12 GRPCLA_12 GRPNAS_12 
+GRPOMN_12 GRPZYR_12 MM_NPRTNAS_12 MM_NINTNAS_12;
+MPRINT(ADSTK_2):  ;
+SYMBOLGEN:  Macro variable HLLBL resolves to 12
+MPRINT(ADSTK_2):   DO J=1 TO DIM(arADS12);
+SYMBOLGEN:  Macro variable HLLBL resolves to 12
+SYMBOLGEN:  Macro variable HLLBL resolves to 12
+MPRINT(ADSTK_2):   arADS12(J) = (arADS12(J)/num_full_weeks)*(days_in_month/7);
+MPRINT(ADSTK_2):   END;
+MLOGIC(ADSTK_2):  Ending execution.
+MPRINT(AGGR_FULL_WEEK_TO_MONTH):  ;
+MLOGIC(ADSTK_2):  Beginning execution.
+MLOGIC(ADSTK_2):  Parameter HLLBL has value 14
+SYMBOLGEN:  Macro variable HLLBL resolves to 14
+SYMBOLGEN:  Macro variable ADSTK_COLS resolves to GRPADV_XX_ GRPALA_XX_ GRPALL_XX_ GRPBEN_XX_ 
+            GRPCLA_XX_ GRPNAS_XX_ GRPOMN_XX_ GRPZYR_XX_ MM_NPRTNAS_XX_ MM_NINTNAS_XX_
+SYMBOLGEN:  Macro variable HLLBL resolves to 14
+MPRINT(ADSTK_2):   ARRAY arADS14(*) GRPADV_14 GRPALA_14 GRPALL_14 GRPBEN_14 GRPCLA_14 GRPNAS_14 
+GRPOMN_14 GRPZYR_14 MM_NPRTNAS_14 MM_NINTNAS_14;
+MPRINT(ADSTK_2):  ;
+SYMBOLGEN:  Macro variable HLLBL resolves to 14
+MPRINT(ADSTK_2):   DO J=1 TO DIM(arADS14);
+SYMBOLGEN:  Macro variable HLLBL resolves to 14
+SYMBOLGEN:  Macro variable HLLBL resolves to 14
+MPRINT(ADSTK_2):   arADS14(J) = (arADS14(J)/num_full_weeks)*(days_in_month/7);
+MPRINT(ADSTK_2):   END;
+MLOGIC(ADSTK_2):  Ending execution.
+MPRINT(AGGR_FULL_WEEK_TO_MONTH):  ;
+MLOGIC(ADSTK_2):  Beginning execution.
+MLOGIC(ADSTK_2):  Parameter HLLBL has value 16
+SYMBOLGEN:  Macro variable HLLBL resolves to 16
+SYMBOLGEN:  Macro variable ADSTK_COLS resolves to GRPADV_XX_ GRPALA_XX_ GRPALL_XX_ GRPBEN_XX_ 
+            GRPCLA_XX_ GRPNAS_XX_ GRPOMN_XX_ GRPZYR_XX_ MM_NPRTNAS_XX_ MM_NINTNAS_XX_
+SYMBOLGEN:  Macro variable HLLBL resolves to 16
+MPRINT(ADSTK_2):   ARRAY arADS16(*) GRPADV_16 GRPALA_16 GRPALL_16 GRPBEN_16 GRPCLA_16 GRPNAS_16 
+GRPOMN_16 GRPZYR_16 MM_NPRTNAS_16 MM_NINTNAS_16;
+MPRINT(ADSTK_2):  ;
+SYMBOLGEN:  Macro variable HLLBL resolves to 16
+MPRINT(ADSTK_2):   DO J=1 TO DIM(arADS16);
+SYMBOLGEN:  Macro variable HLLBL resolves to 16
+SYMBOLGEN:  Macro variable HLLBL resolves to 16
+MPRINT(ADSTK_2):   arADS16(J) = (arADS16(J)/num_full_weeks)*(days_in_month/7);
+MPRINT(ADSTK_2):   END;
+MLOGIC(ADSTK_2):  Ending execution.
+MPRINT(AGGR_FULL_WEEK_TO_MONTH):  ;
+MLOGIC(ADSTK_2):  Beginning execution.
+MLOGIC(ADSTK_2):  Parameter HLLBL has value 20
+SYMBOLGEN:  Macro variable HLLBL resolves to 20
+SYMBOLGEN:  Macro variable ADSTK_COLS resolves to GRPADV_XX_ GRPALA_XX_ GRPALL_XX_ GRPBEN_XX_ 
+            GRPCLA_XX_ GRPNAS_XX_ GRPOMN_XX_ GRPZYR_XX_ MM_NPRTNAS_XX_ MM_NINTNAS_XX_
+SYMBOLGEN:  Macro variable HLLBL resolves to 20
+MPRINT(ADSTK_2):   ARRAY arADS20(*) GRPADV_20 GRPALA_20 GRPALL_20 GRPBEN_20 GRPCLA_20 GRPNAS_20 
+GRPOMN_20 GRPZYR_20 MM_NPRTNAS_20 MM_NINTNAS_20;
+MPRINT(ADSTK_2):  ;
+SYMBOLGEN:  Macro variable HLLBL resolves to 20
+MPRINT(ADSTK_2):   DO J=1 TO DIM(arADS20);
+SYMBOLGEN:  Macro variable HLLBL resolves to 20
+SYMBOLGEN:  Macro variable HLLBL resolves to 20
+MPRINT(ADSTK_2):   arADS20(J) = (arADS20(J)/num_full_weeks)*(days_in_month/7);
+MPRINT(ADSTK_2):   END;
+MLOGIC(ADSTK_2):  Ending execution.
+MPRINT(AGGR_FULL_WEEK_TO_MONTH):  ;
+MLOGIC(ADSTK_2):  Beginning execution.
+MLOGIC(ADSTK_2):  Parameter HLLBL has value 24
+SYMBOLGEN:  Macro variable HLLBL resolves to 24
+SYMBOLGEN:  Macro variable ADSTK_COLS resolves to GRPADV_XX_ GRPALA_XX_ GRPALL_XX_ GRPBEN_XX_ 
+            GRPCLA_XX_ GRPNAS_XX_ GRPOMN_XX_ GRPZYR_XX_ MM_NPRTNAS_XX_ MM_NINTNAS_XX_
+SYMBOLGEN:  Macro variable HLLBL resolves to 24
+MPRINT(ADSTK_2):   ARRAY arADS24(*) GRPADV_24 GRPALA_24 GRPALL_24 GRPBEN_24 GRPCLA_24 GRPNAS_24 
+GRPOMN_24 GRPZYR_24 MM_NPRTNAS_24 MM_NINTNAS_24;
+MPRINT(ADSTK_2):  ;
+SYMBOLGEN:  Macro variable HLLBL resolves to 24
+MPRINT(ADSTK_2):   DO J=1 TO DIM(arADS24);
+SYMBOLGEN:  Macro variable HLLBL resolves to 24
+SYMBOLGEN:  Macro variable HLLBL resolves to 24
+MPRINT(ADSTK_2):   arADS24(J) = (arADS24(J)/num_full_weeks)*(days_in_month/7);
+MPRINT(ADSTK_2):   END;
+MLOGIC(ADSTK_2):  Ending execution.
+MPRINT(AGGR_FULL_WEEK_TO_MONTH):  ;
+MPRINT(AGGR_FULL_WEEK_TO_MONTH):  ;
+MPRINT(AGGR_FULL_WEEK_TO_MONTH):   DROP J som eom;
+MPRINT(AGGR_FULL_WEEK_TO_MONTH):   RUN;
+
+NOTE: Character values have been converted to numeric values at the places given by: 
+      (Line):(Column).
+      4:236   5:4     
+NOTE: There were 6510 observations read from the data set WORK.ADSTK_BY_MONTH.
+NOTE: The data set WORK.ADSTK_BY_MONTH_2 has 6510 observations and 104 variables.
+NOTE: Compressing data set WORK.ADSTK_BY_MONTH_2 decreased size by 18.02 percent. 
+      Compressed is 282 pages; un-compressed would require 344 pages.
+NOTE: DATA statement used (Total process time):
+      real time           0.12 seconds
+      cpu time            0.10 seconds
+      
+
+MPRINT(AGGR_FULL_WEEK_TO_MONTH):   * This gives adjusted adstocks for the dma and month;
+MPRINT(AGGR_FULL_WEEK_TO_MONTH):   PROC SORT DATA=OUTPUT.TV_MM_GRP_BY_REPORT_MONTH 
+OUT=GRPS_AGGR_BY_MONTH;
+MPRINT(AGGR_FULL_WEEK_TO_MONTH):   BY DMA YEARMO;
+MPRINT(AGGR_FULL_WEEK_TO_MONTH):   RUN;
+
+NOTE: There were 6300 observations read from the data set OUTPUT.TV_MM_GRP_BY_REPORT_MONTH.
+NOTE: The data set WORK.GRPS_AGGR_BY_MONTH has 6300 observations and 14 variables.
+NOTE: Compressing data set WORK.GRPS_AGGR_BY_MONTH decreased size by 35.23 percent. 
+      Compressed is 57 pages; un-compressed would require 88 pages.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.03 seconds
+      
+
+MPRINT(AGGR_FULL_WEEK_TO_MONTH):   PROC SORT DATA=ADSTK_BY_MONTH_2;
+MPRINT(AGGR_FULL_WEEK_TO_MONTH):   BY DMA YEARMO;
+MPRINT(AGGR_FULL_WEEK_TO_MONTH):   RUN;
+
+NOTE: There were 6510 observations read from the data set WORK.ADSTK_BY_MONTH_2.
+NOTE: The data set WORK.ADSTK_BY_MONTH_2 has 6510 observations and 104 variables.
+NOTE: Compressing data set WORK.ADSTK_BY_MONTH_2 decreased size by 18.02 percent. 
+      Compressed is 282 pages; un-compressed would require 344 pages.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.06 seconds
+      cpu time            0.06 seconds
+      
+
+MPRINT(AGGR_FULL_WEEK_TO_MONTH):   DATA GRP_ADSTK_AGGR_BY_MONTH;
+MPRINT(AGGR_FULL_WEEK_TO_MONTH):   MERGE GRPS_AGGR_BY_MONTH(IN=A) ADSTK_BY_MONTH_2(IN=B);
+MPRINT(AGGR_FULL_WEEK_TO_MONTH):   BY DMA YEARMO;
+MPRINT(AGGR_FULL_WEEK_TO_MONTH):   IF A;
+MPRINT(AGGR_FULL_WEEK_TO_MONTH):   INSET=10*A+B;
+MPRINT(AGGR_FULL_WEEK_TO_MONTH):   RUN;
+
+NOTE: There were 6300 observations read from the data set WORK.GRPS_AGGR_BY_MONTH.
+NOTE: There were 6510 observations read from the data set WORK.ADSTK_BY_MONTH_2.
+NOTE: The data set WORK.GRP_ADSTK_AGGR_BY_MONTH has 6300 observations and 117 variables.
+NOTE: Compressing data set WORK.GRP_ADSTK_AGGR_BY_MONTH decreased size by 22.31 percent. 
+      Compressed is 289 pages; un-compressed would require 372 pages.
+NOTE: DATA statement used (Total process time):
+      real time           0.07 seconds
+      cpu time            0.07 seconds
+      
+
+MPRINT(AGGR_FULL_WEEK_TO_MONTH):   PROC FREQ DATA=GRP_ADSTK_AGGR_BY_MONTH;
+MPRINT(AGGR_FULL_WEEK_TO_MONTH):   TABLES INSET;
+MPRINT(AGGR_FULL_WEEK_TO_MONTH):   RUN;
+
+NOTE: There were 6300 observations read from the data set WORK.GRP_ADSTK_AGGR_BY_MONTH.
+NOTE: PROCEDURE FREQ used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.01 seconds
+      
+
+MPRINT(AGGR_FULL_WEEK_TO_MONTH):   DATA OUTPUT.ADSTK_AGGR_BY_MONTH(DROP=INSET);
+MPRINT(AGGR_FULL_WEEK_TO_MONTH):   SET GRP_ADSTK_AGGR_BY_MONTH;
+MPRINT(AGGR_FULL_WEEK_TO_MONTH):   RUN;
+
+NOTE: There were 6300 observations read from the data set WORK.GRP_ADSTK_AGGR_BY_MONTH.
+NOTE: The data set OUTPUT.ADSTK_AGGR_BY_MONTH has 6300 observations and 116 variables.
+NOTE: Compressing data set OUTPUT.ADSTK_AGGR_BY_MONTH decreased size by 22.31 percent. 
+      Compressed is 289 pages; un-compressed would require 372 pages.
+NOTE: DATA statement used (Total process time):
+      real time           0.06 seconds
+      cpu time            0.06 seconds
+      
+
+MLOGIC(AGGR_FULL_WEEK_TO_MONTH):  Ending execution.
+MPRINT(EXEC_WEEK_TO_MONTH_AGGR):  ;
+MLOGIC(EXEC_WEEK_TO_MONTH_AGGR):  Ending execution.
+

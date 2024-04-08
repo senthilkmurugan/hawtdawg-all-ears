@@ -1,0 +1,160 @@
+Data Set Name: rx.MODEL_DATA_v1   Observations: 5040 (210 DMA x 24 Months)
+Member Type: DATA                 Variables: 371
+
+  #    Variable              Type    Len    Format    Informat    Label
+  1    dma                   Char      3    $3.       $3.         DMA
+  2    YEARMO                Char      6
+  3    time_idx              Num       8
+  4    NASNRX                Num       8
+  5    MKTNRX                Num       8
+  6    NASTRX                Num       8
+  7    MKTTRX                Num       8
+  8    DET                   Num       8
+  9    SAM                   Num       8
+ 10    num_docs              Num       8
+ 11    POP_TOTAL             Num       8
+ 12    POP_21_54             Num       8
+ 13    HH_COUNT              Num       8
+ 14    HH_AVG_INCOME         Num       8
+ 15    mc_rp                 Num       8
+ 16    mc_nrp                Num       8
+ 17    mc_offp               Num       8
+ 18    vch_rdm               Num       8
+ 19    cou_rdm               Num       8
+ 20    vcr                   Num       8
+ 21    FLUNRX                Num       8
+ 22    VERNRX                Num       8
+ 23    OMNNRX                Num       8
+ 24    FLUTRX                Num       8
+ 25    VERTRX                Num       8
+ 26    OMNTRX                Num       8
+ 27    workdays              Num       8
+ 28    GRPADV                Num       8
+ 29    GRPALA                Num       8
+ 30    GRPALL                Num       8
+ 31    GRPBEN                Num       8
+ 32    GRPCLA                Num       8
+ 33    GRPNAS                Num       8
+ 34    GRPOMN                Num       8
+ 35    GRPZYR                Num       8
+ 36    MM_NPRTNAS            Num       8
+ 37    GRPADV_10             Num       8
+ 38    GRPALA_10             Num       8
+ 39    GRPALL_10             Num       8
+ 40    GRPBEN_10             Num       8
+ 41    GRPCLA_10             Num       8
+ 42    GRPNAS_10             Num       8
+ 43    GRPOMN_10             Num       8
+ 44    GRPZYR_10             Num       8
+ 45    MM_NPRTNAS_10         Num       8
+....................................................
+       20,30,40,50,60,70,75,80,85,90
+....................................................
+136    ONL_SCORE             Num       8
+137    ONL_SCORE_50          Num       8
+138    GRPOTC                Num       8
+139    PNASNRX               Num       8
+140    PMKTNRX               Num       8
+141    PFLUNRX               Num       8
+142    PVERNRX               Num       8
+143    POMNNRX               Num       8
+144    PNASTRX               Num       8
+145    PMKTTRX               Num       8
+146    PFLUTRX               Num       8
+147    PVERTRX               Num       8
+148    POMNTRX               Num       8
+149    detmd                 Num       8
+150    sammd                 Num       8
+151    vcrmd                 Num       8
+152    detmd_10              Num       8
+153    sammd_10              Num       8
+154    vcrmd_10              Num       8
+155    GRPOTC_10             Num       8
+....................................................
+       20,30,40,50,60,70,75,80,85,90
+....................................................
+196    logpnasnrx            Num       8
+197    logpmktnrx            Num       8
+198    logpflunrx            Num       8
+199    loghh_avg_income      Num       8
+200    logpop_21_54          Num       8
+201    logdetmd              Num       8
+202    logdetmd_10           Num       8
+....................................................
+       20,30,40,50,60,70,75,80,85,90
+....................................................
+213    logsammd              Num       8
+214    logsammd_10           Num       8
+....................................................
+       20,30,40,50,60,70,75,80,85,90
+....................................................
+225    logvcrmd              Num       8
+226    logvcrmd_10           Num       8
+....................................................
+       20,30,40,50,60,70,75,80,85,90
+....................................................
+237    loggrpnas             Num       8
+238    loggrpnas_10          Num       8
+....................................................
+       20,30,40,50,60,70,75,80,85,90
+....................................................
+249    loggrpomn             Num       8
+250    loggrpomn_10          Num       8
+....................................................
+       20,30,40,50,60,70,75,80,85,90
+....................................................
+261    loggrpotc             Num       8
+262    loggrpotc_10          Num       8
+....................................................
+       20,30,40,50,60,70,75,80,85,90
+....................................................
+273    loggrpadv             Num       8
+274    loggrpadv_10          Num       8
+....................................................
+       20,30,40,50,60,70,75,80,85,90
+....................................................
+285    J                     Num       8
+286    lag1sammd             Num       8
+287    lag2sammd             Num       8
+288    lag1sammd_10          Num       8
+....................................................
+       20,30,40,50,60,70,75,80,85,90
+....................................................
+310    lag1logsammd          Num       8
+311    lag2logsammd          Num       8
+312    lag1logsammd_10       Num       8
+313    lag2logsammd_10       Num       8
+....................................................
+       20,30,40,50,60,70,75,80,85,90
+....................................................
+334    lag_pnasnrx           Num       8
+335    lag_logpnasnrx        Num       8
+336    lagdma                Char      3
+337    lag2dma               Char      3
+338    grpnas_sq             Num       8
+339    grpnas_10_sq          Num       8
+....................................................
+       20,30,40,50,60,70,75,80,85,90
+....................................................
+350    time_idx_sq           Num       8
+351    time_idx_cu           Num       8
+352    q1                    Num       8
+353    q2                    Num       8
+354    q3                    Num       8
+355    q4                    Num       8
+356    SEMESTER              Char      7
+357    jan                   Num       8
+358    feb                   Num       8
+359    mar                   Num       8
+360    apr                   Num       8
+361    may                   Num       8
+362    jun                   Num       8
+363    jul                   Num       8
+364    aug                   Num       8
+365    sep                   Num       8
+366    oct                   Num       8
+367    nov                   Num       8
+368    dec                   Num       8
+369    flut_short_ind        Num       8
+370    gen_all_launch        Num       8
+371    prev_study_dma_ind    Num       8

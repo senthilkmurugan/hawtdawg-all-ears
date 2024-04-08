@@ -1,0 +1,1552 @@
+NOTE: PROCEDURE PRINTTO used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+MPRINT(CALL_MM_MODULE):   PROC SQL;
+MPRINT(CALL_MM_MODULE):   SELECT PREFIX INTO :MM_PRT_BRANDS SEPARATED BY " " FROM CONF_BRAND_PREFIX 
+WHERE INCLUDE_MM_PRINT = "YES";
+MPRINT(CALL_MM_MODULE):   SELECT PREFIX INTO :MM_RAD_BRANDS SEPARATED BY " " FROM CONF_BRAND_PREFIX 
+WHERE INCLUDE_MM_RADIO = "YES";
+MPRINT(CALL_MM_MODULE):   SELECT PREFIX INTO :MM_INT_BRANDS SEPARATED BY " " FROM CONF_BRAND_PREFIX 
+WHERE INCLUDE_MM_INTERNET = "YES";
+MPRINT(CALL_MM_MODULE):   SELECT PREFIX INTO :MM_OTH_BRANDS SEPARATED BY " " FROM CONF_BRAND_PREFIX 
+WHERE INCLUDE_MM_OTHER = "YES";
+MPRINT(CALL_MM_MODULE):   QUIT;
+NOTE: PROCEDURE SQL used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+      
+
+SYMBOLGEN:  Macro variable MM_PRT_BRANDS resolves to NAS
+SYMBOLGEN:  Macro variable MM_RAD_BRANDS resolves to NAS
+SYMBOLGEN:  Macro variable MM_INT_BRANDS resolves to NAS
+SYMBOLGEN:  Macro variable MM_OTH_BRANDS resolves to NAS
+NAS~~NAS~~NAS~~NASEND
+MPRINT(CALL_MM_MODULE):   DATA DSET_TV_GRP;
+MPRINT(CALL_MM_MODULE):   SET OUTPUT.WTD_GRP_BY_DMA_REPORT_WEEK;
+MPRINT(CALL_MM_MODULE):   RUN;
+
+NOTE: There were 32760 observations read from the data set OUTPUT.WTD_GRP_BY_DMA_REPORT_WEEK.
+NOTE: The data set WORK.DSET_TV_GRP has 32760 observations and 12 variables.
+NOTE: Compressing data set WORK.DSET_TV_GRP decreased size by 28.39 percent. 
+      Compressed is 280 pages; un-compressed would require 391 pages.
+NOTE: DATA statement used (Total process time):
+      real time           0.07 seconds
+      cpu time            0.06 seconds
+      
+
+MPRINT(CALL_MM_MODULE):   *PRINT NPRT ALL/NATL/LOCL;
+MLOGIC(EXEC_GET_MM_METRICS):  Beginning execution.
+SYMBOLGEN:  Macro variable MM_PRT_BRANDS resolves to NAS
+MLOGIC(EXEC_GET_MM_METRICS):  %IF condition &MM_PRT_BRANDS. ^= is TRUE
+MLOGIC(GET_SEL_MM_METRICS):  Beginning execution.
+MLOGIC(GET_SEL_MM_METRICS):  Parameter INDSET has value OUTPUT.SEL_RAW_NATL_MM
+MLOGIC(GET_SEL_MM_METRICS):  Parameter GEOGRAPHY has value NATL
+MLOGIC(GET_SEL_MM_METRICS):  Parameter MMTYPE has value PRINT
+MLOGIC(GET_SEL_MM_METRICS):  Parameter FLDPREFIX has value NPRT_
+MLOGIC(GET_SEL_MM_METRICS):  Parameter FLDSUFFIX has value _NATL
+MLOGIC(GET_SEL_MM_METRICS):  Parameter ADDL_BY_FLD has value 
+MPRINT(GET_SEL_MM_METRICS):   PROC SQL;
+SYMBOLGEN:  Macro variable INDSET resolves to OUTPUT.SEL_RAW_NATL_MM
+SYMBOLGEN:  Macro variable MMTYPE resolves to PRINT
+MPRINT(GET_SEL_MM_METRICS):   CREATE TABLE RUN_DSET AS SELECT A.*, B.BRAND_GROUP, C.PREFIX AS 
+BG_PREFIX FROM OUTPUT.SEL_RAW_NATL_MM A, CONF_BRANDS B, CONF_BRAND_PREFIX C WHERE B.BRAND_GROUP = 
+C.BRAND_GROUP AND A.BRAND = B.BRAND AND B.INCLUDE_FLAG = "YES" AND C.INCLUDE_MM_PRINT = "YES";
+NOTE: Compressing data set WORK.RUN_DSET decreased size by 50.00 percent. 
+      Compressed is 2 pages; un-compressed would require 4 pages.
+NOTE: Table WORK.RUN_DSET created, with 131 rows and 17 columns.
+
+MPRINT(GET_SEL_MM_METRICS):   QUIT;
+NOTE: PROCEDURE SQL used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.01 seconds
+      
+
+MPRINT(GET_SEL_MM_METRICS):   PROC FREQ DATA=RUN_DSET;
+MPRINT(GET_SEL_MM_METRICS):   TABLES BRAND_GROUP*BRAND BRAND_GROUP*BG_PREFIX / LIST MISSING;
+MPRINT(GET_SEL_MM_METRICS):   RUN;
+
+NOTE: There were 131 observations read from the data set WORK.RUN_DSET.
+NOTE: PROCEDURE FREQ used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.03 seconds
+      
+
+MPRINT(GET_SEL_MM_METRICS):   DATA RUN_DSET;
+MPRINT(GET_SEL_MM_METRICS):   SET RUN_DSET;
+SYMBOLGEN:  Macro variable ADDL_BY_FLD resolves to 
+SYMBOLGEN:  Macro variable GEOGRAPHY resolves to NATL
+SYMBOLGEN:  Macro variable MMTYPE resolves to PRINT
+SYMBOLGEN:  Macro variable MM_METRIC resolves to UNITS
+MPRINT(GET_SEL_MM_METRICS):   KEEP BRAND_GROUP BG_PREFIX REPORT_END NATL_PRINT_UNITS;
+MPRINT(GET_SEL_MM_METRICS):   array num _numeric_;
+MPRINT(GET_SEL_MM_METRICS):   do over num;
+MPRINT(GET_SEL_MM_METRICS):   if num=. then num=0;
+MPRINT(GET_SEL_MM_METRICS):   end;
+MPRINT(GET_SEL_MM_METRICS):   * SET ALL NULL NUMBERS TO 0;
+MPRINT(GET_SEL_MM_METRICS):   RUN;
+
+NOTE: There were 131 observations read from the data set WORK.RUN_DSET.
+NOTE: The data set WORK.RUN_DSET has 131 observations and 4 variables.
+NOTE: Compressing data set WORK.RUN_DSET increased size by 50.00 percent. 
+      Compressed is 3 pages; un-compressed would require 2 pages.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+      
+
+MPRINT(GET_SEL_MM_METRICS):   PROC MEANS DATA=RUN_DSET SUM NOPRINT NWAY;
+SYMBOLGEN:  Macro variable ADDL_BY_FLD resolves to 
+MPRINT(GET_SEL_MM_METRICS):   CLASS BRAND_GROUP BG_PREFIX REPORT_END ;
+SYMBOLGEN:  Macro variable GEOGRAPHY resolves to NATL
+SYMBOLGEN:  Macro variable MMTYPE resolves to PRINT
+SYMBOLGEN:  Macro variable MM_METRIC resolves to UNITS
+MPRINT(GET_SEL_MM_METRICS):   VAR NATL_PRINT_UNITS;
+SYMBOLGEN:  Macro variable GEOGRAPHY resolves to NATL
+SYMBOLGEN:  Macro variable MMTYPE resolves to PRINT
+SYMBOLGEN:  Macro variable MM_METRIC resolves to UNITS
+MPRINT(GET_SEL_MM_METRICS):   OUTPUT OUT=RUN_DSET_2(DROP=_TYPE_ _FREQ_ RENAME=(NATL_PRINT_UNITS = 
+MM_METRIC_VALUE)) SUM=;
+MPRINT(GET_SEL_MM_METRICS):   RUN;
+
+NOTE: There were 131 observations read from the data set WORK.RUN_DSET.
+NOTE: The data set WORK.RUN_DSET_2 has 131 observations and 4 variables.
+NOTE: Compressing data set WORK.RUN_DSET_2 increased size by 50.00 percent. 
+      Compressed is 3 pages; un-compressed would require 2 pages.
+NOTE: PROCEDURE MEANS used (Total process time):
+      real time           0.04 seconds
+      cpu time            0.03 seconds
+      
+
+MPRINT(GET_SEL_MM_METRICS):   * This PROC MEANS just makes sure there are no duplicates by 
+BRAND_GROUP BG_PREFIX REPORT_END (DMA);
+MPRINT(GET_SEL_MM_METRICS):   PROC SORT DATA=RUN_DSET_2;
+SYMBOLGEN:  Macro variable ADDL_BY_FLD resolves to 
+MPRINT(GET_SEL_MM_METRICS):   BY REPORT_END BG_PREFIX;
+MPRINT(GET_SEL_MM_METRICS):   RUN;
+
+NOTE: There were 131 observations read from the data set WORK.RUN_DSET_2.
+NOTE: The data set WORK.RUN_DSET_2 has 131 observations and 4 variables.
+NOTE: Compressing data set WORK.RUN_DSET_2 increased size by 50.00 percent. 
+      Compressed is 3 pages; un-compressed would require 2 pages.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.00 seconds
+      
+
+SYMBOLGEN:  Macro variable FLDPREFIX resolves to NPRT_
+SYMBOLGEN:  Macro variable FLDSUFFIX resolves to _NATL
+MPRINT(GET_SEL_MM_METRICS):   PROC TRANSPOSE DATA=RUN_DSET_2 OUT=TR_RUN_DSET(drop=_name_) 
+PREFIX=NPRT_ SUFFIX=_NATL;
+SYMBOLGEN:  Macro variable ADDL_BY_FLD resolves to 
+MPRINT(GET_SEL_MM_METRICS):   BY REPORT_END ;
+MPRINT(GET_SEL_MM_METRICS):   ID BG_PREFIX;
+MPRINT(GET_SEL_MM_METRICS):   VAR MM_METRIC_VALUE;
+MPRINT(GET_SEL_MM_METRICS):   RUN;
+
+NOTE: There were 131 observations read from the data set WORK.RUN_DSET_2.
+NOTE: The data set WORK.TR_RUN_DSET has 131 observations and 2 variables.
+NOTE: Compressing data set WORK.TR_RUN_DSET increased size by 100.00 percent. 
+      Compressed is 2 pages; un-compressed would require 1 pages.
+NOTE: PROCEDURE TRANSPOSE used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.00 seconds
+      
+
+MPRINT(GET_SEL_MM_METRICS):   *MERGE above dataset with completed TV GRP dataset;
+MPRINT(GET_SEL_MM_METRICS):   PROC SORT DATA=DSET_TV_GRP;
+SYMBOLGEN:  Macro variable ADDL_BY_FLD resolves to 
+MPRINT(GET_SEL_MM_METRICS):   BY REPORT_END ;
+MPRINT(GET_SEL_MM_METRICS):   RUN;
+
+NOTE: There were 32760 observations read from the data set WORK.DSET_TV_GRP.
+NOTE: The data set WORK.DSET_TV_GRP has 32760 observations and 12 variables.
+NOTE: Compressing data set WORK.DSET_TV_GRP decreased size by 28.39 percent. 
+      Compressed is 280 pages; un-compressed would require 391 pages.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.07 seconds
+      cpu time            0.07 seconds
+      
+
+MPRINT(GET_SEL_MM_METRICS):   PROC SORT DATA=TR_RUN_DSET;
+SYMBOLGEN:  Macro variable ADDL_BY_FLD resolves to 
+MPRINT(GET_SEL_MM_METRICS):   BY REPORT_END ;
+MPRINT(GET_SEL_MM_METRICS):   RUN;
+
+NOTE: There were 131 observations read from the data set WORK.TR_RUN_DSET.
+NOTE: The data set WORK.TR_RUN_DSET has 131 observations and 2 variables.
+NOTE: Compressing data set WORK.TR_RUN_DSET increased size by 100.00 percent. 
+      Compressed is 2 pages; un-compressed would require 1 pages.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+      
+
+MPRINT(GET_SEL_MM_METRICS):   DATA DSET_TV_GRP;
+MPRINT(GET_SEL_MM_METRICS):   MERGE DSET_TV_GRP(IN=A) TR_RUN_DSET(IN=B);
+SYMBOLGEN:  Macro variable ADDL_BY_FLD resolves to 
+MPRINT(GET_SEL_MM_METRICS):   BY REPORT_END ;
+MPRINT(GET_SEL_MM_METRICS):   IF A;
+MPRINT(GET_SEL_MM_METRICS):   INSET=10*A+B;
+MPRINT(GET_SEL_MM_METRICS):   array num _numeric_;
+MPRINT(GET_SEL_MM_METRICS):   do over num;
+MPRINT(GET_SEL_MM_METRICS):   if num=. then num=0;
+MPRINT(GET_SEL_MM_METRICS):   end;
+MPRINT(GET_SEL_MM_METRICS):   * SET ALL NULL NUMBERS TO 0;
+MPRINT(GET_SEL_MM_METRICS):   RUN;
+
+NOTE: There were 32760 observations read from the data set WORK.DSET_TV_GRP.
+NOTE: There were 131 observations read from the data set WORK.TR_RUN_DSET.
+NOTE: The data set WORK.DSET_TV_GRP has 32760 observations and 14 variables.
+NOTE: Compressing data set WORK.DSET_TV_GRP decreased size by 34.87 percent. 
+      Compressed is 297 pages; un-compressed would require 456 pages.
+NOTE: DATA statement used (Total process time):
+      real time           0.07 seconds
+      cpu time            0.06 seconds
+      
+
+MPRINT(GET_SEL_MM_METRICS):   proc freq data=DSET_TV_GRP;
+MPRINT(GET_SEL_MM_METRICS):   tables inset;
+MPRINT(GET_SEL_MM_METRICS):   run;
+
+NOTE: There were 32760 observations read from the data set WORK.DSET_TV_GRP.
+NOTE: PROCEDURE FREQ used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.01 seconds
+      
+
+MLOGIC(GET_SEL_MM_METRICS):  Ending execution.
+MPRINT(EXEC_GET_MM_METRICS):  ;
+MLOGIC(GET_SEL_MM_METRICS):  Beginning execution.
+MLOGIC(GET_SEL_MM_METRICS):  Parameter INDSET has value OUTPUT.SEL_RAW_LOCL_MM
+MLOGIC(GET_SEL_MM_METRICS):  Parameter GEOGRAPHY has value LOCL
+MLOGIC(GET_SEL_MM_METRICS):  Parameter MMTYPE has value PRINT
+MLOGIC(GET_SEL_MM_METRICS):  Parameter FLDPREFIX has value NPRT_
+MLOGIC(GET_SEL_MM_METRICS):  Parameter FLDSUFFIX has value _LOCL
+MLOGIC(GET_SEL_MM_METRICS):  Parameter ADDL_BY_FLD has value DMA
+MPRINT(GET_SEL_MM_METRICS):   PROC SQL;
+SYMBOLGEN:  Macro variable INDSET resolves to OUTPUT.SEL_RAW_LOCL_MM
+SYMBOLGEN:  Macro variable MMTYPE resolves to PRINT
+MPRINT(GET_SEL_MM_METRICS):   CREATE TABLE RUN_DSET AS SELECT A.*, B.BRAND_GROUP, C.PREFIX AS 
+BG_PREFIX FROM OUTPUT.SEL_RAW_LOCL_MM A, CONF_BRANDS B, CONF_BRAND_PREFIX C WHERE B.BRAND_GROUP = 
+C.BRAND_GROUP AND A.BRAND = B.BRAND AND B.INCLUDE_FLAG = "YES" AND C.INCLUDE_MM_PRINT = "YES";
+NOTE: Compressing data set WORK.RUN_DSET decreased size by 76.86 percent. 
+      Compressed is 28 pages; un-compressed would require 121 pages.
+NOTE: Table WORK.RUN_DSET created, with 4932 rows and 16 columns.
+
+MPRINT(GET_SEL_MM_METRICS):   QUIT;
+NOTE: PROCEDURE SQL used (Total process time):
+      real time           0.31 seconds
+      cpu time            0.04 seconds
+      
+
+MPRINT(GET_SEL_MM_METRICS):   PROC FREQ DATA=RUN_DSET;
+MPRINT(GET_SEL_MM_METRICS):   TABLES BRAND_GROUP*BRAND BRAND_GROUP*BG_PREFIX / LIST MISSING;
+MPRINT(GET_SEL_MM_METRICS):   RUN;
+
+NOTE: There were 4932 observations read from the data set WORK.RUN_DSET.
+NOTE: PROCEDURE FREQ used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.01 seconds
+      
+
+MPRINT(GET_SEL_MM_METRICS):   DATA RUN_DSET;
+MPRINT(GET_SEL_MM_METRICS):   SET RUN_DSET;
+SYMBOLGEN:  Macro variable ADDL_BY_FLD resolves to DMA
+SYMBOLGEN:  Macro variable GEOGRAPHY resolves to LOCL
+SYMBOLGEN:  Macro variable MMTYPE resolves to PRINT
+SYMBOLGEN:  Macro variable MM_METRIC resolves to UNITS
+MPRINT(GET_SEL_MM_METRICS):   KEEP BRAND_GROUP BG_PREFIX REPORT_END DMA LOCL_PRINT_UNITS;
+MPRINT(GET_SEL_MM_METRICS):   array num _numeric_;
+MPRINT(GET_SEL_MM_METRICS):   do over num;
+MPRINT(GET_SEL_MM_METRICS):   if num=. then num=0;
+MPRINT(GET_SEL_MM_METRICS):   end;
+MPRINT(GET_SEL_MM_METRICS):   * SET ALL NULL NUMBERS TO 0;
+MPRINT(GET_SEL_MM_METRICS):   RUN;
+
+NOTE: There were 4932 observations read from the data set WORK.RUN_DSET.
+NOTE: The data set WORK.RUN_DSET has 4932 observations and 5 variables.
+NOTE: Compressing data set WORK.RUN_DSET decreased size by 26.67 percent. 
+      Compressed is 44 pages; un-compressed would require 60 pages.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+      
+
+MPRINT(GET_SEL_MM_METRICS):   PROC MEANS DATA=RUN_DSET SUM NOPRINT NWAY;
+SYMBOLGEN:  Macro variable ADDL_BY_FLD resolves to DMA
+MPRINT(GET_SEL_MM_METRICS):   CLASS BRAND_GROUP BG_PREFIX REPORT_END DMA;
+SYMBOLGEN:  Macro variable GEOGRAPHY resolves to LOCL
+SYMBOLGEN:  Macro variable MMTYPE resolves to PRINT
+SYMBOLGEN:  Macro variable MM_METRIC resolves to UNITS
+MPRINT(GET_SEL_MM_METRICS):   VAR LOCL_PRINT_UNITS;
+SYMBOLGEN:  Macro variable GEOGRAPHY resolves to LOCL
+SYMBOLGEN:  Macro variable MMTYPE resolves to PRINT
+SYMBOLGEN:  Macro variable MM_METRIC resolves to UNITS
+MPRINT(GET_SEL_MM_METRICS):   OUTPUT OUT=RUN_DSET_2(DROP=_TYPE_ _FREQ_ RENAME=(LOCL_PRINT_UNITS = 
+MM_METRIC_VALUE)) SUM=;
+MPRINT(GET_SEL_MM_METRICS):   RUN;
+
+NOTE: There were 4932 observations read from the data set WORK.RUN_DSET.
+NOTE: The data set WORK.RUN_DSET_2 has 4932 observations and 5 variables.
+NOTE: Compressing data set WORK.RUN_DSET_2 decreased size by 26.67 percent. 
+      Compressed is 44 pages; un-compressed would require 60 pages.
+NOTE: PROCEDURE MEANS used (Total process time):
+      real time           0.06 seconds
+      cpu time            0.06 seconds
+      
+
+MPRINT(GET_SEL_MM_METRICS):   * This PROC MEANS just makes sure there are no duplicates by 
+BRAND_GROUP BG_PREFIX REPORT_END (DMA);
+MPRINT(GET_SEL_MM_METRICS):   PROC SORT DATA=RUN_DSET_2;
+SYMBOLGEN:  Macro variable ADDL_BY_FLD resolves to DMA
+MPRINT(GET_SEL_MM_METRICS):   BY REPORT_END DMA BG_PREFIX;
+MPRINT(GET_SEL_MM_METRICS):   RUN;
+
+NOTE: There were 4932 observations read from the data set WORK.RUN_DSET_2.
+NOTE: The data set WORK.RUN_DSET_2 has 4932 observations and 5 variables.
+NOTE: Compressing data set WORK.RUN_DSET_2 decreased size by 26.67 percent. 
+      Compressed is 44 pages; un-compressed would require 60 pages.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+      
+
+SYMBOLGEN:  Macro variable FLDPREFIX resolves to NPRT_
+SYMBOLGEN:  Macro variable FLDSUFFIX resolves to _LOCL
+MPRINT(GET_SEL_MM_METRICS):   PROC TRANSPOSE DATA=RUN_DSET_2 OUT=TR_RUN_DSET(drop=_name_) 
+PREFIX=NPRT_ SUFFIX=_LOCL;
+SYMBOLGEN:  Macro variable ADDL_BY_FLD resolves to DMA
+MPRINT(GET_SEL_MM_METRICS):   BY REPORT_END DMA;
+MPRINT(GET_SEL_MM_METRICS):   ID BG_PREFIX;
+MPRINT(GET_SEL_MM_METRICS):   VAR MM_METRIC_VALUE;
+MPRINT(GET_SEL_MM_METRICS):   RUN;
+
+NOTE: There were 4932 observations read from the data set WORK.RUN_DSET_2.
+NOTE: The data set WORK.TR_RUN_DSET has 4932 observations and 3 variables.
+NOTE: Compressing data set WORK.TR_RUN_DSET decreased size by 0.00 percent. 
+      Compressed is 30 pages; un-compressed would require 30 pages.
+NOTE: PROCEDURE TRANSPOSE used (Total process time):
+      real time           0.06 seconds
+      cpu time            0.04 seconds
+      
+
+MPRINT(GET_SEL_MM_METRICS):   *MERGE above dataset with completed TV GRP dataset;
+MPRINT(GET_SEL_MM_METRICS):   PROC SORT DATA=DSET_TV_GRP;
+SYMBOLGEN:  Macro variable ADDL_BY_FLD resolves to DMA
+MPRINT(GET_SEL_MM_METRICS):   BY REPORT_END DMA;
+MPRINT(GET_SEL_MM_METRICS):   RUN;
+
+NOTE: There were 32760 observations read from the data set WORK.DSET_TV_GRP.
+NOTE: The data set WORK.DSET_TV_GRP has 32760 observations and 14 variables.
+NOTE: Compressing data set WORK.DSET_TV_GRP decreased size by 34.87 percent. 
+      Compressed is 297 pages; un-compressed would require 456 pages.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.07 seconds
+      cpu time            0.07 seconds
+      
+
+MPRINT(GET_SEL_MM_METRICS):   PROC SORT DATA=TR_RUN_DSET;
+SYMBOLGEN:  Macro variable ADDL_BY_FLD resolves to DMA
+MPRINT(GET_SEL_MM_METRICS):   BY REPORT_END DMA;
+MPRINT(GET_SEL_MM_METRICS):   RUN;
+
+NOTE: There were 4932 observations read from the data set WORK.TR_RUN_DSET.
+NOTE: The data set WORK.TR_RUN_DSET has 4932 observations and 3 variables.
+NOTE: Compressing data set WORK.TR_RUN_DSET decreased size by 0.00 percent. 
+      Compressed is 30 pages; un-compressed would require 30 pages.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+      
+
+MPRINT(GET_SEL_MM_METRICS):   DATA DSET_TV_GRP;
+MPRINT(GET_SEL_MM_METRICS):   MERGE DSET_TV_GRP(IN=A) TR_RUN_DSET(IN=B);
+SYMBOLGEN:  Macro variable ADDL_BY_FLD resolves to DMA
+MPRINT(GET_SEL_MM_METRICS):   BY REPORT_END DMA;
+MPRINT(GET_SEL_MM_METRICS):   IF A;
+MPRINT(GET_SEL_MM_METRICS):   INSET=10*A+B;
+MPRINT(GET_SEL_MM_METRICS):   array num _numeric_;
+MPRINT(GET_SEL_MM_METRICS):   do over num;
+MPRINT(GET_SEL_MM_METRICS):   if num=. then num=0;
+MPRINT(GET_SEL_MM_METRICS):   end;
+MPRINT(GET_SEL_MM_METRICS):   * SET ALL NULL NUMBERS TO 0;
+MPRINT(GET_SEL_MM_METRICS):   RUN;
+
+NOTE: There were 32760 observations read from the data set WORK.DSET_TV_GRP.
+NOTE: There were 4932 observations read from the data set WORK.TR_RUN_DSET.
+NOTE: The data set WORK.DSET_TV_GRP has 32760 observations and 15 variables.
+NOTE: Compressing data set WORK.DSET_TV_GRP decreased size by 37.76 percent. 
+      Compressed is 305 pages; un-compressed would require 490 pages.
+NOTE: DATA statement used (Total process time):
+      real time           0.07 seconds
+      cpu time            0.07 seconds
+      
+
+MPRINT(GET_SEL_MM_METRICS):   proc freq data=DSET_TV_GRP;
+MPRINT(GET_SEL_MM_METRICS):   tables inset;
+MPRINT(GET_SEL_MM_METRICS):   run;
+
+NOTE: There were 32760 observations read from the data set WORK.DSET_TV_GRP.
+NOTE: PROCEDURE FREQ used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.03 seconds
+      
+
+MLOGIC(GET_SEL_MM_METRICS):  Ending execution.
+MPRINT(EXEC_GET_MM_METRICS):  ;
+MPRINT(EXEC_GET_MM_METRICS):   *Create total metric and drop natl and local metic;
+MLOGIC(GET_TOT_STR):  Beginning execution.
+MLOGIC(GET_TOT_STR):  Parameter MMTYPE has value PRINT
+MLOGIC(GET_TOT_STR):  Parameter FLDPREFIX has value NPRT
+MLOGIC(GET_TOT_STR):  Parameter ADDWHAT has value ALL
+MLOGIC(GET_TOT_STR):  %LET (variable name is MM_BRAND_COUNT)
+MPRINT(GET_TOT_STR):   PROC SQL;
+SYMBOLGEN:  Macro variable MMTYPE resolves to PRINT
+MPRINT(GET_TOT_STR):   SELECT COUNT(DISTINCT BRAND_GROUP) INTO :MM_BRAND_COUNT FROM 
+CONF_BRAND_PREFIX WHERE INCLUDE_MM_PRINT = "YES";
+MPRINT(GET_TOT_STR):   QUIT;
+NOTE: PROCEDURE SQL used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+MLOGIC(GET_TOT_STR):  %PUT &MM_BRAND_COUNT.END
+SYMBOLGEN:  Macro variable MM_BRAND_COUNT resolves to        1
+1END
+MPRINT(GET_TOT_STR):   DATA DSET_TV_GRP;
+MPRINT(GET_TOT_STR):   SET DSET_TV_GRP;
+SYMBOLGEN:  Macro variable MM_BRAND_COUNT resolves to        1
+MLOGIC(GET_TOT_STR):  %DO loop beginning; index variable TOKEN; start value is 1; stop value is 1; 
+      by value is 1.  
+MLOGIC(GET_TOT_STR):  %LET (variable name is P)
+SYMBOLGEN:  Macro variable MM_PRT_BRANDS resolves to NAS
+SYMBOLGEN:  Macro variable TOKEN resolves to 1
+SYMBOLGEN:  Macro variable ADDWHAT resolves to ALL
+MLOGIC(GET_TOT_STR):  %IF condition &ADDWHAT.=ALL is TRUE
+SYMBOLGEN:  Macro variable FLDPREFIX resolves to NPRT
+SYMBOLGEN:  Macro variable P resolves to NAS
+SYMBOLGEN:  Macro variable FLDPREFIX resolves to NPRT
+SYMBOLGEN:  Macro variable P resolves to NAS
+SYMBOLGEN:  Macro variable FLDPREFIX resolves to NPRT
+SYMBOLGEN:  Macro variable P resolves to NAS
+MPRINT(GET_TOT_STR):   MM_NPRTNAS=NPRT_NAS_NATL + NPRT_NAS_LOCL;
+MPRINT(GET_TOT_STR):  ;
+SYMBOLGEN:  Macro variable FLDPREFIX resolves to NPRT
+SYMBOLGEN:  Macro variable P resolves to NAS
+SYMBOLGEN:  Macro variable FLDPREFIX resolves to NPRT
+SYMBOLGEN:  Macro variable P resolves to NAS
+MPRINT(GET_TOT_STR):   DROP NPRT_NAS_NATL NPRT_NAS_LOCL;
+MPRINT(GET_TOT_STR):  ;
+SYMBOLGEN:  Macro variable ADDWHAT resolves to ALL
+MLOGIC(GET_TOT_STR):  %IF condition &ADDWHAT.=NATL is FALSE
+SYMBOLGEN:  Macro variable ADDWHAT resolves to ALL
+MLOGIC(GET_TOT_STR):  %IF condition &ADDWHAT.=LOCL is FALSE
+MLOGIC(GET_TOT_STR):  %DO loop index variable TOKEN is now 2; loop will not iterate again.
+MPRINT(GET_TOT_STR):   RUN;
+
+NOTE: There were 32760 observations read from the data set WORK.DSET_TV_GRP.
+NOTE: The data set WORK.DSET_TV_GRP has 32760 observations and 14 variables.
+NOTE: Compressing data set WORK.DSET_TV_GRP decreased size by 33.33 percent. 
+      Compressed is 304 pages; un-compressed would require 456 pages.
+NOTE: DATA statement used (Total process time):
+      real time           0.06 seconds
+      cpu time            0.06 seconds
+      
+
+MLOGIC(GET_TOT_STR):  Ending execution.
+MPRINT(EXEC_GET_MM_METRICS):  ;
+SYMBOLGEN:  Macro variable MM_RAD_BRANDS resolves to NAS
+MLOGIC(EXEC_GET_MM_METRICS):  %IF condition &MM_RAD_BRANDS. ^= is TRUE
+MLOGIC(GET_SEL_MM_METRICS):  Beginning execution.
+MLOGIC(GET_SEL_MM_METRICS):  Parameter INDSET has value OUTPUT.SEL_RAW_NATL_MM
+MLOGIC(GET_SEL_MM_METRICS):  Parameter GEOGRAPHY has value NATL
+MLOGIC(GET_SEL_MM_METRICS):  Parameter MMTYPE has value RADIO
+MLOGIC(GET_SEL_MM_METRICS):  Parameter FLDPREFIX has value NRAD_
+MLOGIC(GET_SEL_MM_METRICS):  Parameter FLDSUFFIX has value _NATL
+MLOGIC(GET_SEL_MM_METRICS):  Parameter ADDL_BY_FLD has value 
+MPRINT(GET_SEL_MM_METRICS):   PROC SQL;
+SYMBOLGEN:  Macro variable INDSET resolves to OUTPUT.SEL_RAW_NATL_MM
+SYMBOLGEN:  Macro variable MMTYPE resolves to RADIO
+MPRINT(GET_SEL_MM_METRICS):   CREATE TABLE RUN_DSET AS SELECT A.*, B.BRAND_GROUP, C.PREFIX AS 
+BG_PREFIX FROM OUTPUT.SEL_RAW_NATL_MM A, CONF_BRANDS B, CONF_BRAND_PREFIX C WHERE B.BRAND_GROUP = 
+C.BRAND_GROUP AND A.BRAND = B.BRAND AND B.INCLUDE_FLAG = "YES" AND C.INCLUDE_MM_RADIO = "YES";
+NOTE: Compressing data set WORK.RUN_DSET decreased size by 50.00 percent. 
+      Compressed is 2 pages; un-compressed would require 4 pages.
+NOTE: Table WORK.RUN_DSET created, with 131 rows and 17 columns.
+
+MPRINT(GET_SEL_MM_METRICS):   QUIT;
+NOTE: PROCEDURE SQL used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.01 seconds
+      
+
+MPRINT(GET_SEL_MM_METRICS):   PROC FREQ DATA=RUN_DSET;
+MPRINT(GET_SEL_MM_METRICS):   TABLES BRAND_GROUP*BRAND BRAND_GROUP*BG_PREFIX / LIST MISSING;
+MPRINT(GET_SEL_MM_METRICS):   RUN;
+
+NOTE: There were 131 observations read from the data set WORK.RUN_DSET.
+NOTE: PROCEDURE FREQ used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.03 seconds
+      
+
+MPRINT(GET_SEL_MM_METRICS):   DATA RUN_DSET;
+MPRINT(GET_SEL_MM_METRICS):   SET RUN_DSET;
+SYMBOLGEN:  Macro variable ADDL_BY_FLD resolves to 
+SYMBOLGEN:  Macro variable GEOGRAPHY resolves to NATL
+SYMBOLGEN:  Macro variable MMTYPE resolves to RADIO
+SYMBOLGEN:  Macro variable MM_METRIC resolves to UNITS
+MPRINT(GET_SEL_MM_METRICS):   KEEP BRAND_GROUP BG_PREFIX REPORT_END NATL_RADIO_UNITS;
+MPRINT(GET_SEL_MM_METRICS):   array num _numeric_;
+MPRINT(GET_SEL_MM_METRICS):   do over num;
+MPRINT(GET_SEL_MM_METRICS):   if num=. then num=0;
+MPRINT(GET_SEL_MM_METRICS):   end;
+MPRINT(GET_SEL_MM_METRICS):   * SET ALL NULL NUMBERS TO 0;
+MPRINT(GET_SEL_MM_METRICS):   RUN;
+
+NOTE: There were 131 observations read from the data set WORK.RUN_DSET.
+NOTE: The data set WORK.RUN_DSET has 131 observations and 4 variables.
+NOTE: Compressing data set WORK.RUN_DSET increased size by 50.00 percent. 
+      Compressed is 3 pages; un-compressed would require 2 pages.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.00 seconds
+      
+
+MPRINT(GET_SEL_MM_METRICS):   PROC MEANS DATA=RUN_DSET SUM NOPRINT NWAY;
+SYMBOLGEN:  Macro variable ADDL_BY_FLD resolves to 
+MPRINT(GET_SEL_MM_METRICS):   CLASS BRAND_GROUP BG_PREFIX REPORT_END ;
+SYMBOLGEN:  Macro variable GEOGRAPHY resolves to NATL
+SYMBOLGEN:  Macro variable MMTYPE resolves to RADIO
+SYMBOLGEN:  Macro variable MM_METRIC resolves to UNITS
+MPRINT(GET_SEL_MM_METRICS):   VAR NATL_RADIO_UNITS;
+SYMBOLGEN:  Macro variable GEOGRAPHY resolves to NATL
+SYMBOLGEN:  Macro variable MMTYPE resolves to RADIO
+SYMBOLGEN:  Macro variable MM_METRIC resolves to UNITS
+MPRINT(GET_SEL_MM_METRICS):   OUTPUT OUT=RUN_DSET_2(DROP=_TYPE_ _FREQ_ RENAME=(NATL_RADIO_UNITS = 
+MM_METRIC_VALUE)) SUM=;
+MPRINT(GET_SEL_MM_METRICS):   RUN;
+
+NOTE: There were 131 observations read from the data set WORK.RUN_DSET.
+NOTE: The data set WORK.RUN_DSET_2 has 131 observations and 4 variables.
+NOTE: Compressing data set WORK.RUN_DSET_2 increased size by 50.00 percent. 
+      Compressed is 3 pages; un-compressed would require 2 pages.
+NOTE: PROCEDURE MEANS used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.03 seconds
+      
+
+MPRINT(GET_SEL_MM_METRICS):   * This PROC MEANS just makes sure there are no duplicates by 
+BRAND_GROUP BG_PREFIX REPORT_END (DMA);
+MPRINT(GET_SEL_MM_METRICS):   PROC SORT DATA=RUN_DSET_2;
+SYMBOLGEN:  Macro variable ADDL_BY_FLD resolves to 
+MPRINT(GET_SEL_MM_METRICS):   BY REPORT_END BG_PREFIX;
+MPRINT(GET_SEL_MM_METRICS):   RUN;
+
+NOTE: There were 131 observations read from the data set WORK.RUN_DSET_2.
+NOTE: The data set WORK.RUN_DSET_2 has 131 observations and 4 variables.
+NOTE: Compressing data set WORK.RUN_DSET_2 increased size by 50.00 percent. 
+      Compressed is 3 pages; un-compressed would require 2 pages.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+      
+
+SYMBOLGEN:  Macro variable FLDPREFIX resolves to NRAD_
+SYMBOLGEN:  Macro variable FLDSUFFIX resolves to _NATL
+MPRINT(GET_SEL_MM_METRICS):   PROC TRANSPOSE DATA=RUN_DSET_2 OUT=TR_RUN_DSET(drop=_name_) 
+PREFIX=NRAD_ SUFFIX=_NATL;
+SYMBOLGEN:  Macro variable ADDL_BY_FLD resolves to 
+MPRINT(GET_SEL_MM_METRICS):   BY REPORT_END ;
+MPRINT(GET_SEL_MM_METRICS):   ID BG_PREFIX;
+MPRINT(GET_SEL_MM_METRICS):   VAR MM_METRIC_VALUE;
+MPRINT(GET_SEL_MM_METRICS):   RUN;
+
+NOTE: There were 131 observations read from the data set WORK.RUN_DSET_2.
+NOTE: The data set WORK.TR_RUN_DSET has 131 observations and 2 variables.
+NOTE: Compressing data set WORK.TR_RUN_DSET increased size by 100.00 percent. 
+      Compressed is 2 pages; un-compressed would require 1 pages.
+NOTE: PROCEDURE TRANSPOSE used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.01 seconds
+      
+
+MPRINT(GET_SEL_MM_METRICS):   *MERGE above dataset with completed TV GRP dataset;
+MPRINT(GET_SEL_MM_METRICS):   PROC SORT DATA=DSET_TV_GRP;
+SYMBOLGEN:  Macro variable ADDL_BY_FLD resolves to 
+MPRINT(GET_SEL_MM_METRICS):   BY REPORT_END ;
+MPRINT(GET_SEL_MM_METRICS):   RUN;
+
+NOTE: There were 32760 observations read from the data set WORK.DSET_TV_GRP.
+NOTE: The data set WORK.DSET_TV_GRP has 32760 observations and 14 variables.
+NOTE: Compressing data set WORK.DSET_TV_GRP decreased size by 33.33 percent. 
+      Compressed is 304 pages; un-compressed would require 456 pages.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.07 seconds
+      cpu time            0.06 seconds
+      
+
+MPRINT(GET_SEL_MM_METRICS):   PROC SORT DATA=TR_RUN_DSET;
+SYMBOLGEN:  Macro variable ADDL_BY_FLD resolves to 
+MPRINT(GET_SEL_MM_METRICS):   BY REPORT_END ;
+MPRINT(GET_SEL_MM_METRICS):   RUN;
+
+NOTE: There were 131 observations read from the data set WORK.TR_RUN_DSET.
+NOTE: The data set WORK.TR_RUN_DSET has 131 observations and 2 variables.
+NOTE: Compressing data set WORK.TR_RUN_DSET increased size by 100.00 percent. 
+      Compressed is 2 pages; un-compressed would require 1 pages.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+      
+
+MPRINT(GET_SEL_MM_METRICS):   DATA DSET_TV_GRP;
+MPRINT(GET_SEL_MM_METRICS):   MERGE DSET_TV_GRP(IN=A) TR_RUN_DSET(IN=B);
+SYMBOLGEN:  Macro variable ADDL_BY_FLD resolves to 
+MPRINT(GET_SEL_MM_METRICS):   BY REPORT_END ;
+MPRINT(GET_SEL_MM_METRICS):   IF A;
+MPRINT(GET_SEL_MM_METRICS):   INSET=10*A+B;
+MPRINT(GET_SEL_MM_METRICS):   array num _numeric_;
+MPRINT(GET_SEL_MM_METRICS):   do over num;
+MPRINT(GET_SEL_MM_METRICS):   if num=. then num=0;
+MPRINT(GET_SEL_MM_METRICS):   end;
+MPRINT(GET_SEL_MM_METRICS):   * SET ALL NULL NUMBERS TO 0;
+MPRINT(GET_SEL_MM_METRICS):   RUN;
+
+NOTE: There were 32760 observations read from the data set WORK.DSET_TV_GRP.
+NOTE: There were 131 observations read from the data set WORK.TR_RUN_DSET.
+NOTE: The data set WORK.DSET_TV_GRP has 32760 observations and 15 variables.
+NOTE: Compressing data set WORK.DSET_TV_GRP decreased size by 37.76 percent. 
+      Compressed is 305 pages; un-compressed would require 490 pages.
+NOTE: DATA statement used (Total process time):
+      real time           0.09 seconds
+      cpu time            0.09 seconds
+      
+
+MPRINT(GET_SEL_MM_METRICS):   proc freq data=DSET_TV_GRP;
+MPRINT(GET_SEL_MM_METRICS):   tables inset;
+MPRINT(GET_SEL_MM_METRICS):   run;
+
+NOTE: There were 32760 observations read from the data set WORK.DSET_TV_GRP.
+NOTE: PROCEDURE FREQ used (Total process time):
+      real time           0.04 seconds
+      cpu time            0.03 seconds
+      
+
+MLOGIC(GET_SEL_MM_METRICS):  Ending execution.
+MPRINT(EXEC_GET_MM_METRICS):  ;
+MLOGIC(GET_SEL_MM_METRICS):  Beginning execution.
+MLOGIC(GET_SEL_MM_METRICS):  Parameter INDSET has value OUTPUT.SEL_RAW_LOCL_MM
+MLOGIC(GET_SEL_MM_METRICS):  Parameter GEOGRAPHY has value LOCL
+MLOGIC(GET_SEL_MM_METRICS):  Parameter MMTYPE has value RADIO
+MLOGIC(GET_SEL_MM_METRICS):  Parameter FLDPREFIX has value NRAD_
+MLOGIC(GET_SEL_MM_METRICS):  Parameter FLDSUFFIX has value _LOCL
+MLOGIC(GET_SEL_MM_METRICS):  Parameter ADDL_BY_FLD has value DMA
+MPRINT(GET_SEL_MM_METRICS):   PROC SQL;
+SYMBOLGEN:  Macro variable INDSET resolves to OUTPUT.SEL_RAW_LOCL_MM
+SYMBOLGEN:  Macro variable MMTYPE resolves to RADIO
+MPRINT(GET_SEL_MM_METRICS):   CREATE TABLE RUN_DSET AS SELECT A.*, B.BRAND_GROUP, C.PREFIX AS 
+BG_PREFIX FROM OUTPUT.SEL_RAW_LOCL_MM A, CONF_BRANDS B, CONF_BRAND_PREFIX C WHERE B.BRAND_GROUP = 
+C.BRAND_GROUP AND A.BRAND = B.BRAND AND B.INCLUDE_FLAG = "YES" AND C.INCLUDE_MM_RADIO = "YES";
+NOTE: Compressing data set WORK.RUN_DSET decreased size by 76.86 percent. 
+      Compressed is 28 pages; un-compressed would require 121 pages.
+NOTE: Table WORK.RUN_DSET created, with 4932 rows and 16 columns.
+
+MPRINT(GET_SEL_MM_METRICS):   QUIT;
+NOTE: PROCEDURE SQL used (Total process time):
+      real time           0.07 seconds
+      cpu time            0.06 seconds
+      
+
+MPRINT(GET_SEL_MM_METRICS):   PROC FREQ DATA=RUN_DSET;
+MPRINT(GET_SEL_MM_METRICS):   TABLES BRAND_GROUP*BRAND BRAND_GROUP*BG_PREFIX / LIST MISSING;
+MPRINT(GET_SEL_MM_METRICS):   RUN;
+
+NOTE: There were 4932 observations read from the data set WORK.RUN_DSET.
+NOTE: PROCEDURE FREQ used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.01 seconds
+      
+
+MPRINT(GET_SEL_MM_METRICS):   DATA RUN_DSET;
+MPRINT(GET_SEL_MM_METRICS):   SET RUN_DSET;
+SYMBOLGEN:  Macro variable ADDL_BY_FLD resolves to DMA
+SYMBOLGEN:  Macro variable GEOGRAPHY resolves to LOCL
+SYMBOLGEN:  Macro variable MMTYPE resolves to RADIO
+SYMBOLGEN:  Macro variable MM_METRIC resolves to UNITS
+MPRINT(GET_SEL_MM_METRICS):   KEEP BRAND_GROUP BG_PREFIX REPORT_END DMA LOCL_RADIO_UNITS;
+MPRINT(GET_SEL_MM_METRICS):   array num _numeric_;
+MPRINT(GET_SEL_MM_METRICS):   do over num;
+MPRINT(GET_SEL_MM_METRICS):   if num=. then num=0;
+MPRINT(GET_SEL_MM_METRICS):   end;
+MPRINT(GET_SEL_MM_METRICS):   * SET ALL NULL NUMBERS TO 0;
+MPRINT(GET_SEL_MM_METRICS):   RUN;
+
+NOTE: There were 4932 observations read from the data set WORK.RUN_DSET.
+NOTE: The data set WORK.RUN_DSET has 4932 observations and 5 variables.
+NOTE: Compressing data set WORK.RUN_DSET decreased size by 26.67 percent. 
+      Compressed is 44 pages; un-compressed would require 60 pages.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+      
+
+MPRINT(GET_SEL_MM_METRICS):   PROC MEANS DATA=RUN_DSET SUM NOPRINT NWAY;
+SYMBOLGEN:  Macro variable ADDL_BY_FLD resolves to DMA
+MPRINT(GET_SEL_MM_METRICS):   CLASS BRAND_GROUP BG_PREFIX REPORT_END DMA;
+SYMBOLGEN:  Macro variable GEOGRAPHY resolves to LOCL
+SYMBOLGEN:  Macro variable MMTYPE resolves to RADIO
+SYMBOLGEN:  Macro variable MM_METRIC resolves to UNITS
+MPRINT(GET_SEL_MM_METRICS):   VAR LOCL_RADIO_UNITS;
+SYMBOLGEN:  Macro variable GEOGRAPHY resolves to LOCL
+SYMBOLGEN:  Macro variable MMTYPE resolves to RADIO
+SYMBOLGEN:  Macro variable MM_METRIC resolves to UNITS
+MPRINT(GET_SEL_MM_METRICS):   OUTPUT OUT=RUN_DSET_2(DROP=_TYPE_ _FREQ_ RENAME=(LOCL_RADIO_UNITS = 
+MM_METRIC_VALUE)) SUM=;
+MPRINT(GET_SEL_MM_METRICS):   RUN;
+
+NOTE: There were 4932 observations read from the data set WORK.RUN_DSET.
+NOTE: The data set WORK.RUN_DSET_2 has 4932 observations and 5 variables.
+NOTE: Compressing data set WORK.RUN_DSET_2 decreased size by 26.67 percent. 
+      Compressed is 44 pages; un-compressed would require 60 pages.
+NOTE: PROCEDURE MEANS used (Total process time):
+      real time           0.04 seconds
+      cpu time            0.04 seconds
+      
+
+MPRINT(GET_SEL_MM_METRICS):   * This PROC MEANS just makes sure there are no duplicates by 
+BRAND_GROUP BG_PREFIX REPORT_END (DMA);
+MPRINT(GET_SEL_MM_METRICS):   PROC SORT DATA=RUN_DSET_2;
+SYMBOLGEN:  Macro variable ADDL_BY_FLD resolves to DMA
+MPRINT(GET_SEL_MM_METRICS):   BY REPORT_END DMA BG_PREFIX;
+MPRINT(GET_SEL_MM_METRICS):   RUN;
+
+NOTE: There were 4932 observations read from the data set WORK.RUN_DSET_2.
+NOTE: The data set WORK.RUN_DSET_2 has 4932 observations and 5 variables.
+NOTE: Compressing data set WORK.RUN_DSET_2 decreased size by 26.67 percent. 
+      Compressed is 44 pages; un-compressed would require 60 pages.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.01 seconds
+      
+
+SYMBOLGEN:  Macro variable FLDPREFIX resolves to NRAD_
+SYMBOLGEN:  Macro variable FLDSUFFIX resolves to _LOCL
+MPRINT(GET_SEL_MM_METRICS):   PROC TRANSPOSE DATA=RUN_DSET_2 OUT=TR_RUN_DSET(drop=_name_) 
+PREFIX=NRAD_ SUFFIX=_LOCL;
+SYMBOLGEN:  Macro variable ADDL_BY_FLD resolves to DMA
+MPRINT(GET_SEL_MM_METRICS):   BY REPORT_END DMA;
+MPRINT(GET_SEL_MM_METRICS):   ID BG_PREFIX;
+MPRINT(GET_SEL_MM_METRICS):   VAR MM_METRIC_VALUE;
+MPRINT(GET_SEL_MM_METRICS):   RUN;
+
+NOTE: There were 4932 observations read from the data set WORK.RUN_DSET_2.
+NOTE: The data set WORK.TR_RUN_DSET has 4932 observations and 3 variables.
+NOTE: Compressing data set WORK.TR_RUN_DSET decreased size by 0.00 percent. 
+      Compressed is 30 pages; un-compressed would require 30 pages.
+NOTE: PROCEDURE TRANSPOSE used (Total process time):
+      real time           0.04 seconds
+      cpu time            0.04 seconds
+      
+
+MPRINT(GET_SEL_MM_METRICS):   *MERGE above dataset with completed TV GRP dataset;
+MPRINT(GET_SEL_MM_METRICS):   PROC SORT DATA=DSET_TV_GRP;
+SYMBOLGEN:  Macro variable ADDL_BY_FLD resolves to DMA
+MPRINT(GET_SEL_MM_METRICS):   BY REPORT_END DMA;
+MPRINT(GET_SEL_MM_METRICS):   RUN;
+
+NOTE: There were 32760 observations read from the data set WORK.DSET_TV_GRP.
+NOTE: The data set WORK.DSET_TV_GRP has 32760 observations and 15 variables.
+NOTE: Compressing data set WORK.DSET_TV_GRP decreased size by 37.76 percent. 
+      Compressed is 305 pages; un-compressed would require 490 pages.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.07 seconds
+      cpu time            0.06 seconds
+      
+
+MPRINT(GET_SEL_MM_METRICS):   PROC SORT DATA=TR_RUN_DSET;
+SYMBOLGEN:  Macro variable ADDL_BY_FLD resolves to DMA
+MPRINT(GET_SEL_MM_METRICS):   BY REPORT_END DMA;
+MPRINT(GET_SEL_MM_METRICS):   RUN;
+
+NOTE: There were 4932 observations read from the data set WORK.TR_RUN_DSET.
+NOTE: The data set WORK.TR_RUN_DSET has 4932 observations and 3 variables.
+NOTE: Compressing data set WORK.TR_RUN_DSET decreased size by 0.00 percent. 
+      Compressed is 30 pages; un-compressed would require 30 pages.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+      
+
+MPRINT(GET_SEL_MM_METRICS):   DATA DSET_TV_GRP;
+MPRINT(GET_SEL_MM_METRICS):   MERGE DSET_TV_GRP(IN=A) TR_RUN_DSET(IN=B);
+SYMBOLGEN:  Macro variable ADDL_BY_FLD resolves to DMA
+MPRINT(GET_SEL_MM_METRICS):   BY REPORT_END DMA;
+MPRINT(GET_SEL_MM_METRICS):   IF A;
+MPRINT(GET_SEL_MM_METRICS):   INSET=10*A+B;
+MPRINT(GET_SEL_MM_METRICS):   array num _numeric_;
+MPRINT(GET_SEL_MM_METRICS):   do over num;
+MPRINT(GET_SEL_MM_METRICS):   if num=. then num=0;
+MPRINT(GET_SEL_MM_METRICS):   end;
+MPRINT(GET_SEL_MM_METRICS):   * SET ALL NULL NUMBERS TO 0;
+MPRINT(GET_SEL_MM_METRICS):   RUN;
+
+NOTE: There were 32760 observations read from the data set WORK.DSET_TV_GRP.
+NOTE: There were 4932 observations read from the data set WORK.TR_RUN_DSET.
+NOTE: The data set WORK.DSET_TV_GRP has 32760 observations and 16 variables.
+NOTE: Compressing data set WORK.DSET_TV_GRP decreased size by 40.69 percent. 
+      Compressed is 309 pages; un-compressed would require 521 pages.
+NOTE: DATA statement used (Total process time):
+      real time           0.10 seconds
+      cpu time            0.09 seconds
+      
+
+MPRINT(GET_SEL_MM_METRICS):   proc freq data=DSET_TV_GRP;
+MPRINT(GET_SEL_MM_METRICS):   tables inset;
+MPRINT(GET_SEL_MM_METRICS):   run;
+
+NOTE: There were 32760 observations read from the data set WORK.DSET_TV_GRP.
+NOTE: PROCEDURE FREQ used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.01 seconds
+      
+
+MLOGIC(GET_SEL_MM_METRICS):  Ending execution.
+MPRINT(EXEC_GET_MM_METRICS):  ;
+MPRINT(EXEC_GET_MM_METRICS):   *Create total metric and drop natl and local metic;
+MLOGIC(GET_TOT_STR):  Beginning execution.
+MLOGIC(GET_TOT_STR):  Parameter MMTYPE has value RADIO
+MLOGIC(GET_TOT_STR):  Parameter FLDPREFIX has value NRAD
+MLOGIC(GET_TOT_STR):  Parameter ADDWHAT has value ALL
+MLOGIC(GET_TOT_STR):  %LET (variable name is MM_BRAND_COUNT)
+MPRINT(GET_TOT_STR):   PROC SQL;
+SYMBOLGEN:  Macro variable MMTYPE resolves to RADIO
+MPRINT(GET_TOT_STR):   SELECT COUNT(DISTINCT BRAND_GROUP) INTO :MM_BRAND_COUNT FROM 
+CONF_BRAND_PREFIX WHERE INCLUDE_MM_RADIO = "YES";
+MPRINT(GET_TOT_STR):   QUIT;
+NOTE: PROCEDURE SQL used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.00 seconds
+      
+
+MLOGIC(GET_TOT_STR):  %PUT &MM_BRAND_COUNT.END
+SYMBOLGEN:  Macro variable MM_BRAND_COUNT resolves to        1
+1END
+MPRINT(GET_TOT_STR):   DATA DSET_TV_GRP;
+MPRINT(GET_TOT_STR):   SET DSET_TV_GRP;
+SYMBOLGEN:  Macro variable MM_BRAND_COUNT resolves to        1
+MLOGIC(GET_TOT_STR):  %DO loop beginning; index variable TOKEN; start value is 1; stop value is 1; 
+      by value is 1.  
+MLOGIC(GET_TOT_STR):  %LET (variable name is P)
+SYMBOLGEN:  Macro variable MM_PRT_BRANDS resolves to NAS
+SYMBOLGEN:  Macro variable TOKEN resolves to 1
+SYMBOLGEN:  Macro variable ADDWHAT resolves to ALL
+MLOGIC(GET_TOT_STR):  %IF condition &ADDWHAT.=ALL is TRUE
+SYMBOLGEN:  Macro variable FLDPREFIX resolves to NRAD
+SYMBOLGEN:  Macro variable P resolves to NAS
+SYMBOLGEN:  Macro variable FLDPREFIX resolves to NRAD
+SYMBOLGEN:  Macro variable P resolves to NAS
+SYMBOLGEN:  Macro variable FLDPREFIX resolves to NRAD
+SYMBOLGEN:  Macro variable P resolves to NAS
+MPRINT(GET_TOT_STR):   MM_NRADNAS=NRAD_NAS_NATL + NRAD_NAS_LOCL;
+MPRINT(GET_TOT_STR):  ;
+SYMBOLGEN:  Macro variable FLDPREFIX resolves to NRAD
+SYMBOLGEN:  Macro variable P resolves to NAS
+SYMBOLGEN:  Macro variable FLDPREFIX resolves to NRAD
+SYMBOLGEN:  Macro variable P resolves to NAS
+MPRINT(GET_TOT_STR):   DROP NRAD_NAS_NATL NRAD_NAS_LOCL;
+MPRINT(GET_TOT_STR):  ;
+SYMBOLGEN:  Macro variable ADDWHAT resolves to ALL
+MLOGIC(GET_TOT_STR):  %IF condition &ADDWHAT.=NATL is FALSE
+SYMBOLGEN:  Macro variable ADDWHAT resolves to ALL
+MLOGIC(GET_TOT_STR):  %IF condition &ADDWHAT.=LOCL is FALSE
+MLOGIC(GET_TOT_STR):  %DO loop index variable TOKEN is now 2; loop will not iterate again.
+MPRINT(GET_TOT_STR):   RUN;
+
+NOTE: There were 32760 observations read from the data set WORK.DSET_TV_GRP.
+NOTE: The data set WORK.DSET_TV_GRP has 32760 observations and 15 variables.
+NOTE: Compressing data set WORK.DSET_TV_GRP decreased size by 37.76 percent. 
+      Compressed is 305 pages; un-compressed would require 490 pages.
+NOTE: DATA statement used (Total process time):
+      real time           0.06 seconds
+      cpu time            0.06 seconds
+      
+
+MLOGIC(GET_TOT_STR):  Ending execution.
+MPRINT(EXEC_GET_MM_METRICS):  ;
+SYMBOLGEN:  Macro variable MM_INT_BRANDS resolves to NAS
+MLOGIC(EXEC_GET_MM_METRICS):  %IF condition &MM_INT_BRANDS. ^= is TRUE
+MLOGIC(GET_SEL_MM_METRICS):  Beginning execution.
+MLOGIC(GET_SEL_MM_METRICS):  Parameter INDSET has value OUTPUT.SEL_RAW_NATL_MM
+MLOGIC(GET_SEL_MM_METRICS):  Parameter GEOGRAPHY has value NATL
+MLOGIC(GET_SEL_MM_METRICS):  Parameter MMTYPE has value INTERNET
+MLOGIC(GET_SEL_MM_METRICS):  Parameter FLDPREFIX has value NINT_
+MLOGIC(GET_SEL_MM_METRICS):  Parameter FLDSUFFIX has value _NATL
+MLOGIC(GET_SEL_MM_METRICS):  Parameter ADDL_BY_FLD has value 
+MPRINT(GET_SEL_MM_METRICS):   PROC SQL;
+SYMBOLGEN:  Macro variable INDSET resolves to OUTPUT.SEL_RAW_NATL_MM
+SYMBOLGEN:  Macro variable MMTYPE resolves to INTERNET
+MPRINT(GET_SEL_MM_METRICS):   CREATE TABLE RUN_DSET AS SELECT A.*, B.BRAND_GROUP, C.PREFIX AS 
+BG_PREFIX FROM OUTPUT.SEL_RAW_NATL_MM A, CONF_BRANDS B, CONF_BRAND_PREFIX C WHERE B.BRAND_GROUP = 
+C.BRAND_GROUP AND A.BRAND = B.BRAND AND B.INCLUDE_FLAG = "YES" AND C.INCLUDE_MM_INTERNET = "YES";
+NOTE: Compressing data set WORK.RUN_DSET decreased size by 50.00 percent. 
+      Compressed is 2 pages; un-compressed would require 4 pages.
+NOTE: Table WORK.RUN_DSET created, with 131 rows and 17 columns.
+
+MPRINT(GET_SEL_MM_METRICS):   QUIT;
+NOTE: PROCEDURE SQL used (Total process time):
+      real time           0.04 seconds
+      cpu time            0.03 seconds
+      
+
+MPRINT(GET_SEL_MM_METRICS):   PROC FREQ DATA=RUN_DSET;
+MPRINT(GET_SEL_MM_METRICS):   TABLES BRAND_GROUP*BRAND BRAND_GROUP*BG_PREFIX / LIST MISSING;
+MPRINT(GET_SEL_MM_METRICS):   RUN;
+
+NOTE: There were 131 observations read from the data set WORK.RUN_DSET.
+NOTE: PROCEDURE FREQ used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.00 seconds
+      
+
+MPRINT(GET_SEL_MM_METRICS):   DATA RUN_DSET;
+MPRINT(GET_SEL_MM_METRICS):   SET RUN_DSET;
+SYMBOLGEN:  Macro variable ADDL_BY_FLD resolves to 
+SYMBOLGEN:  Macro variable GEOGRAPHY resolves to NATL
+SYMBOLGEN:  Macro variable MMTYPE resolves to INTERNET
+SYMBOLGEN:  Macro variable MM_METRIC resolves to UNITS
+MPRINT(GET_SEL_MM_METRICS):   KEEP BRAND_GROUP BG_PREFIX REPORT_END NATL_INTERNET_UNITS;
+MPRINT(GET_SEL_MM_METRICS):   array num _numeric_;
+MPRINT(GET_SEL_MM_METRICS):   do over num;
+MPRINT(GET_SEL_MM_METRICS):   if num=. then num=0;
+MPRINT(GET_SEL_MM_METRICS):   end;
+MPRINT(GET_SEL_MM_METRICS):   * SET ALL NULL NUMBERS TO 0;
+MPRINT(GET_SEL_MM_METRICS):   RUN;
+
+NOTE: There were 131 observations read from the data set WORK.RUN_DSET.
+NOTE: The data set WORK.RUN_DSET has 131 observations and 4 variables.
+NOTE: Compressing data set WORK.RUN_DSET increased size by 50.00 percent. 
+      Compressed is 3 pages; un-compressed would require 2 pages.
+NOTE: DATA statement used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.03 seconds
+      
+
+MPRINT(GET_SEL_MM_METRICS):   PROC MEANS DATA=RUN_DSET SUM NOPRINT NWAY;
+SYMBOLGEN:  Macro variable ADDL_BY_FLD resolves to 
+MPRINT(GET_SEL_MM_METRICS):   CLASS BRAND_GROUP BG_PREFIX REPORT_END ;
+SYMBOLGEN:  Macro variable GEOGRAPHY resolves to NATL
+SYMBOLGEN:  Macro variable MMTYPE resolves to INTERNET
+SYMBOLGEN:  Macro variable MM_METRIC resolves to UNITS
+MPRINT(GET_SEL_MM_METRICS):   VAR NATL_INTERNET_UNITS;
+SYMBOLGEN:  Macro variable GEOGRAPHY resolves to NATL
+SYMBOLGEN:  Macro variable MMTYPE resolves to INTERNET
+SYMBOLGEN:  Macro variable MM_METRIC resolves to UNITS
+MPRINT(GET_SEL_MM_METRICS):   OUTPUT OUT=RUN_DSET_2(DROP=_TYPE_ _FREQ_ RENAME=(NATL_INTERNET_UNITS 
+= MM_METRIC_VALUE)) SUM=;
+MPRINT(GET_SEL_MM_METRICS):   RUN;
+
+NOTE: There were 131 observations read from the data set WORK.RUN_DSET.
+NOTE: The data set WORK.RUN_DSET_2 has 131 observations and 4 variables.
+NOTE: Compressing data set WORK.RUN_DSET_2 increased size by 50.00 percent. 
+      Compressed is 3 pages; un-compressed would require 2 pages.
+NOTE: PROCEDURE MEANS used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.03 seconds
+      
+
+MPRINT(GET_SEL_MM_METRICS):   * This PROC MEANS just makes sure there are no duplicates by 
+BRAND_GROUP BG_PREFIX REPORT_END (DMA);
+MPRINT(GET_SEL_MM_METRICS):   PROC SORT DATA=RUN_DSET_2;
+SYMBOLGEN:  Macro variable ADDL_BY_FLD resolves to 
+MPRINT(GET_SEL_MM_METRICS):   BY REPORT_END BG_PREFIX;
+MPRINT(GET_SEL_MM_METRICS):   RUN;
+
+NOTE: There were 131 observations read from the data set WORK.RUN_DSET_2.
+NOTE: The data set WORK.RUN_DSET_2 has 131 observations and 4 variables.
+NOTE: Compressing data set WORK.RUN_DSET_2 increased size by 50.00 percent. 
+      Compressed is 3 pages; un-compressed would require 2 pages.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+      
+
+SYMBOLGEN:  Macro variable FLDPREFIX resolves to NINT_
+SYMBOLGEN:  Macro variable FLDSUFFIX resolves to _NATL
+MPRINT(GET_SEL_MM_METRICS):   PROC TRANSPOSE DATA=RUN_DSET_2 OUT=TR_RUN_DSET(drop=_name_) 
+PREFIX=NINT_ SUFFIX=_NATL;
+SYMBOLGEN:  Macro variable ADDL_BY_FLD resolves to 
+MPRINT(GET_SEL_MM_METRICS):   BY REPORT_END ;
+MPRINT(GET_SEL_MM_METRICS):   ID BG_PREFIX;
+MPRINT(GET_SEL_MM_METRICS):   VAR MM_METRIC_VALUE;
+MPRINT(GET_SEL_MM_METRICS):   RUN;
+
+NOTE: There were 131 observations read from the data set WORK.RUN_DSET_2.
+NOTE: The data set WORK.TR_RUN_DSET has 131 observations and 2 variables.
+NOTE: Compressing data set WORK.TR_RUN_DSET increased size by 100.00 percent. 
+      Compressed is 2 pages; un-compressed would require 1 pages.
+NOTE: PROCEDURE TRANSPOSE used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.01 seconds
+      
+
+MPRINT(GET_SEL_MM_METRICS):   *MERGE above dataset with completed TV GRP dataset;
+MPRINT(GET_SEL_MM_METRICS):   PROC SORT DATA=DSET_TV_GRP;
+SYMBOLGEN:  Macro variable ADDL_BY_FLD resolves to 
+MPRINT(GET_SEL_MM_METRICS):   BY REPORT_END ;
+MPRINT(GET_SEL_MM_METRICS):   RUN;
+
+NOTE: There were 32760 observations read from the data set WORK.DSET_TV_GRP.
+NOTE: The data set WORK.DSET_TV_GRP has 32760 observations and 15 variables.
+NOTE: Compressing data set WORK.DSET_TV_GRP decreased size by 37.76 percent. 
+      Compressed is 305 pages; un-compressed would require 490 pages.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.07 seconds
+      cpu time            0.06 seconds
+      
+
+MPRINT(GET_SEL_MM_METRICS):   PROC SORT DATA=TR_RUN_DSET;
+SYMBOLGEN:  Macro variable ADDL_BY_FLD resolves to 
+MPRINT(GET_SEL_MM_METRICS):   BY REPORT_END ;
+MPRINT(GET_SEL_MM_METRICS):   RUN;
+
+NOTE: There were 131 observations read from the data set WORK.TR_RUN_DSET.
+NOTE: The data set WORK.TR_RUN_DSET has 131 observations and 2 variables.
+NOTE: Compressing data set WORK.TR_RUN_DSET increased size by 100.00 percent. 
+      Compressed is 2 pages; un-compressed would require 1 pages.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+      
+
+MPRINT(GET_SEL_MM_METRICS):   DATA DSET_TV_GRP;
+MPRINT(GET_SEL_MM_METRICS):   MERGE DSET_TV_GRP(IN=A) TR_RUN_DSET(IN=B);
+SYMBOLGEN:  Macro variable ADDL_BY_FLD resolves to 
+MPRINT(GET_SEL_MM_METRICS):   BY REPORT_END ;
+MPRINT(GET_SEL_MM_METRICS):   IF A;
+MPRINT(GET_SEL_MM_METRICS):   INSET=10*A+B;
+MPRINT(GET_SEL_MM_METRICS):   array num _numeric_;
+MPRINT(GET_SEL_MM_METRICS):   do over num;
+MPRINT(GET_SEL_MM_METRICS):   if num=. then num=0;
+MPRINT(GET_SEL_MM_METRICS):   end;
+MPRINT(GET_SEL_MM_METRICS):   * SET ALL NULL NUMBERS TO 0;
+MPRINT(GET_SEL_MM_METRICS):   RUN;
+
+NOTE: There were 32760 observations read from the data set WORK.DSET_TV_GRP.
+NOTE: There were 131 observations read from the data set WORK.TR_RUN_DSET.
+NOTE: The data set WORK.DSET_TV_GRP has 32760 observations and 16 variables.
+NOTE: Compressing data set WORK.DSET_TV_GRP decreased size by 40.69 percent. 
+      Compressed is 309 pages; un-compressed would require 521 pages.
+NOTE: DATA statement used (Total process time):
+      real time           0.09 seconds
+      cpu time            0.07 seconds
+      
+
+MPRINT(GET_SEL_MM_METRICS):   proc freq data=DSET_TV_GRP;
+MPRINT(GET_SEL_MM_METRICS):   tables inset;
+MPRINT(GET_SEL_MM_METRICS):   run;
+
+NOTE: There were 32760 observations read from the data set WORK.DSET_TV_GRP.
+NOTE: PROCEDURE FREQ used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.03 seconds
+      
+
+MLOGIC(GET_SEL_MM_METRICS):  Ending execution.
+MPRINT(EXEC_GET_MM_METRICS):  ;
+MPRINT(EXEC_GET_MM_METRICS):   *Create total metric and drop natl metic;
+MLOGIC(GET_TOT_STR):  Beginning execution.
+MLOGIC(GET_TOT_STR):  Parameter MMTYPE has value INTERNET
+MLOGIC(GET_TOT_STR):  Parameter FLDPREFIX has value NINT
+MLOGIC(GET_TOT_STR):  Parameter ADDWHAT has value NATL
+MLOGIC(GET_TOT_STR):  %LET (variable name is MM_BRAND_COUNT)
+MPRINT(GET_TOT_STR):   PROC SQL;
+SYMBOLGEN:  Macro variable MMTYPE resolves to INTERNET
+MPRINT(GET_TOT_STR):   SELECT COUNT(DISTINCT BRAND_GROUP) INTO :MM_BRAND_COUNT FROM 
+CONF_BRAND_PREFIX WHERE INCLUDE_MM_INTERNET = "YES";
+MPRINT(GET_TOT_STR):   QUIT;
+NOTE: PROCEDURE SQL used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.00 seconds
+      
+
+MLOGIC(GET_TOT_STR):  %PUT &MM_BRAND_COUNT.END
+SYMBOLGEN:  Macro variable MM_BRAND_COUNT resolves to        1
+1END
+MPRINT(GET_TOT_STR):   DATA DSET_TV_GRP;
+MPRINT(GET_TOT_STR):   SET DSET_TV_GRP;
+SYMBOLGEN:  Macro variable MM_BRAND_COUNT resolves to        1
+MLOGIC(GET_TOT_STR):  %DO loop beginning; index variable TOKEN; start value is 1; stop value is 1; 
+      by value is 1.  
+MLOGIC(GET_TOT_STR):  %LET (variable name is P)
+SYMBOLGEN:  Macro variable MM_PRT_BRANDS resolves to NAS
+SYMBOLGEN:  Macro variable TOKEN resolves to 1
+SYMBOLGEN:  Macro variable ADDWHAT resolves to NATL
+MLOGIC(GET_TOT_STR):  %IF condition &ADDWHAT.=ALL is FALSE
+SYMBOLGEN:  Macro variable ADDWHAT resolves to NATL
+MLOGIC(GET_TOT_STR):  %IF condition &ADDWHAT.=NATL is TRUE
+SYMBOLGEN:  Macro variable FLDPREFIX resolves to NINT
+SYMBOLGEN:  Macro variable P resolves to NAS
+SYMBOLGEN:  Macro variable FLDPREFIX resolves to NINT
+SYMBOLGEN:  Macro variable P resolves to NAS
+MPRINT(GET_TOT_STR):   MM_NINTNAS=NINT_NAS_NATL;
+MPRINT(GET_TOT_STR):  ;
+SYMBOLGEN:  Macro variable FLDPREFIX resolves to NINT
+SYMBOLGEN:  Macro variable P resolves to NAS
+MPRINT(GET_TOT_STR):   DROP NINT_NAS_NATL;
+MPRINT(GET_TOT_STR):  ;
+SYMBOLGEN:  Macro variable ADDWHAT resolves to NATL
+MLOGIC(GET_TOT_STR):  %IF condition &ADDWHAT.=LOCL is FALSE
+MLOGIC(GET_TOT_STR):  %DO loop index variable TOKEN is now 2; loop will not iterate again.
+MPRINT(GET_TOT_STR):   RUN;
+
+NOTE: There were 32760 observations read from the data set WORK.DSET_TV_GRP.
+NOTE: The data set WORK.DSET_TV_GRP has 32760 observations and 16 variables.
+NOTE: Compressing data set WORK.DSET_TV_GRP decreased size by 40.69 percent. 
+      Compressed is 309 pages; un-compressed would require 521 pages.
+NOTE: DATA statement used (Total process time):
+      real time           0.07 seconds
+      cpu time            0.06 seconds
+      
+
+MLOGIC(GET_TOT_STR):  Ending execution.
+MPRINT(EXEC_GET_MM_METRICS):  ;
+SYMBOLGEN:  Macro variable MM_OTH_BRANDS resolves to NAS
+MLOGIC(EXEC_GET_MM_METRICS):  %IF condition &MM_OTH_BRANDS. ^= is TRUE
+MLOGIC(GET_SEL_MM_METRICS):  Beginning execution.
+MLOGIC(GET_SEL_MM_METRICS):  Parameter INDSET has value OUTPUT.SEL_RAW_NATL_MM
+MLOGIC(GET_SEL_MM_METRICS):  Parameter GEOGRAPHY has value NATL
+MLOGIC(GET_SEL_MM_METRICS):  Parameter MMTYPE has value OTHER
+MLOGIC(GET_SEL_MM_METRICS):  Parameter FLDPREFIX has value NOTH_
+MLOGIC(GET_SEL_MM_METRICS):  Parameter FLDSUFFIX has value _NATL
+MLOGIC(GET_SEL_MM_METRICS):  Parameter ADDL_BY_FLD has value 
+MPRINT(GET_SEL_MM_METRICS):   PROC SQL;
+SYMBOLGEN:  Macro variable INDSET resolves to OUTPUT.SEL_RAW_NATL_MM
+SYMBOLGEN:  Macro variable MMTYPE resolves to OTHER
+MPRINT(GET_SEL_MM_METRICS):   CREATE TABLE RUN_DSET AS SELECT A.*, B.BRAND_GROUP, C.PREFIX AS 
+BG_PREFIX FROM OUTPUT.SEL_RAW_NATL_MM A, CONF_BRANDS B, CONF_BRAND_PREFIX C WHERE B.BRAND_GROUP = 
+C.BRAND_GROUP AND A.BRAND = B.BRAND AND B.INCLUDE_FLAG = "YES" AND C.INCLUDE_MM_OTHER = "YES";
+NOTE: Compressing data set WORK.RUN_DSET decreased size by 50.00 percent. 
+      Compressed is 2 pages; un-compressed would require 4 pages.
+NOTE: Table WORK.RUN_DSET created, with 131 rows and 17 columns.
+
+MPRINT(GET_SEL_MM_METRICS):   QUIT;
+NOTE: PROCEDURE SQL used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.00 seconds
+      
+
+MPRINT(GET_SEL_MM_METRICS):   PROC FREQ DATA=RUN_DSET;
+MPRINT(GET_SEL_MM_METRICS):   TABLES BRAND_GROUP*BRAND BRAND_GROUP*BG_PREFIX / LIST MISSING;
+MPRINT(GET_SEL_MM_METRICS):   RUN;
+
+NOTE: There were 131 observations read from the data set WORK.RUN_DSET.
+NOTE: PROCEDURE FREQ used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.00 seconds
+      
+
+MPRINT(GET_SEL_MM_METRICS):   DATA RUN_DSET;
+MPRINT(GET_SEL_MM_METRICS):   SET RUN_DSET;
+SYMBOLGEN:  Macro variable ADDL_BY_FLD resolves to 
+SYMBOLGEN:  Macro variable GEOGRAPHY resolves to NATL
+SYMBOLGEN:  Macro variable MMTYPE resolves to OTHER
+SYMBOLGEN:  Macro variable MM_METRIC resolves to UNITS
+MPRINT(GET_SEL_MM_METRICS):   KEEP BRAND_GROUP BG_PREFIX REPORT_END NATL_OTHER_UNITS;
+MPRINT(GET_SEL_MM_METRICS):   array num _numeric_;
+MPRINT(GET_SEL_MM_METRICS):   do over num;
+MPRINT(GET_SEL_MM_METRICS):   if num=. then num=0;
+MPRINT(GET_SEL_MM_METRICS):   end;
+MPRINT(GET_SEL_MM_METRICS):   * SET ALL NULL NUMBERS TO 0;
+MPRINT(GET_SEL_MM_METRICS):   RUN;
+
+NOTE: There were 131 observations read from the data set WORK.RUN_DSET.
+NOTE: The data set WORK.RUN_DSET has 131 observations and 4 variables.
+NOTE: Compressing data set WORK.RUN_DSET increased size by 50.00 percent. 
+      Compressed is 3 pages; un-compressed would require 2 pages.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.00 seconds
+      
+
+MPRINT(GET_SEL_MM_METRICS):   PROC MEANS DATA=RUN_DSET SUM NOPRINT NWAY;
+SYMBOLGEN:  Macro variable ADDL_BY_FLD resolves to 
+MPRINT(GET_SEL_MM_METRICS):   CLASS BRAND_GROUP BG_PREFIX REPORT_END ;
+SYMBOLGEN:  Macro variable GEOGRAPHY resolves to NATL
+SYMBOLGEN:  Macro variable MMTYPE resolves to OTHER
+SYMBOLGEN:  Macro variable MM_METRIC resolves to UNITS
+MPRINT(GET_SEL_MM_METRICS):   VAR NATL_OTHER_UNITS;
+SYMBOLGEN:  Macro variable GEOGRAPHY resolves to NATL
+SYMBOLGEN:  Macro variable MMTYPE resolves to OTHER
+SYMBOLGEN:  Macro variable MM_METRIC resolves to UNITS
+MPRINT(GET_SEL_MM_METRICS):   OUTPUT OUT=RUN_DSET_2(DROP=_TYPE_ _FREQ_ RENAME=(NATL_OTHER_UNITS = 
+MM_METRIC_VALUE)) SUM=;
+MPRINT(GET_SEL_MM_METRICS):   RUN;
+
+NOTE: There were 131 observations read from the data set WORK.RUN_DSET.
+NOTE: The data set WORK.RUN_DSET_2 has 131 observations and 4 variables.
+NOTE: Compressing data set WORK.RUN_DSET_2 increased size by 50.00 percent. 
+      Compressed is 3 pages; un-compressed would require 2 pages.
+NOTE: PROCEDURE MEANS used (Total process time):
+      real time           0.04 seconds
+      cpu time            0.03 seconds
+      
+
+MPRINT(GET_SEL_MM_METRICS):   * This PROC MEANS just makes sure there are no duplicates by 
+BRAND_GROUP BG_PREFIX REPORT_END (DMA);
+MPRINT(GET_SEL_MM_METRICS):   PROC SORT DATA=RUN_DSET_2;
+SYMBOLGEN:  Macro variable ADDL_BY_FLD resolves to 
+MPRINT(GET_SEL_MM_METRICS):   BY REPORT_END BG_PREFIX;
+MPRINT(GET_SEL_MM_METRICS):   RUN;
+
+NOTE: There were 131 observations read from the data set WORK.RUN_DSET_2.
+NOTE: The data set WORK.RUN_DSET_2 has 131 observations and 4 variables.
+NOTE: Compressing data set WORK.RUN_DSET_2 increased size by 50.00 percent. 
+      Compressed is 3 pages; un-compressed would require 2 pages.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.00 seconds
+      
+
+SYMBOLGEN:  Macro variable FLDPREFIX resolves to NOTH_
+SYMBOLGEN:  Macro variable FLDSUFFIX resolves to _NATL
+MPRINT(GET_SEL_MM_METRICS):   PROC TRANSPOSE DATA=RUN_DSET_2 OUT=TR_RUN_DSET(drop=_name_) 
+PREFIX=NOTH_ SUFFIX=_NATL;
+SYMBOLGEN:  Macro variable ADDL_BY_FLD resolves to 
+MPRINT(GET_SEL_MM_METRICS):   BY REPORT_END ;
+MPRINT(GET_SEL_MM_METRICS):   ID BG_PREFIX;
+MPRINT(GET_SEL_MM_METRICS):   VAR MM_METRIC_VALUE;
+MPRINT(GET_SEL_MM_METRICS):   RUN;
+
+NOTE: There were 131 observations read from the data set WORK.RUN_DSET_2.
+NOTE: The data set WORK.TR_RUN_DSET has 131 observations and 2 variables.
+NOTE: Compressing data set WORK.TR_RUN_DSET increased size by 100.00 percent. 
+      Compressed is 2 pages; un-compressed would require 1 pages.
+NOTE: PROCEDURE TRANSPOSE used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.01 seconds
+      
+
+MPRINT(GET_SEL_MM_METRICS):   *MERGE above dataset with completed TV GRP dataset;
+MPRINT(GET_SEL_MM_METRICS):   PROC SORT DATA=DSET_TV_GRP;
+SYMBOLGEN:  Macro variable ADDL_BY_FLD resolves to 
+MPRINT(GET_SEL_MM_METRICS):   BY REPORT_END ;
+MPRINT(GET_SEL_MM_METRICS):   RUN;
+
+NOTE: There were 32760 observations read from the data set WORK.DSET_TV_GRP.
+NOTE: The data set WORK.DSET_TV_GRP has 32760 observations and 16 variables.
+NOTE: Compressing data set WORK.DSET_TV_GRP decreased size by 40.69 percent. 
+      Compressed is 309 pages; un-compressed would require 521 pages.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.07 seconds
+      cpu time            0.06 seconds
+      
+
+MPRINT(GET_SEL_MM_METRICS):   PROC SORT DATA=TR_RUN_DSET;
+SYMBOLGEN:  Macro variable ADDL_BY_FLD resolves to 
+MPRINT(GET_SEL_MM_METRICS):   BY REPORT_END ;
+MPRINT(GET_SEL_MM_METRICS):   RUN;
+
+NOTE: There were 131 observations read from the data set WORK.TR_RUN_DSET.
+NOTE: The data set WORK.TR_RUN_DSET has 131 observations and 2 variables.
+NOTE: Compressing data set WORK.TR_RUN_DSET increased size by 100.00 percent. 
+      Compressed is 2 pages; un-compressed would require 1 pages.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.00 seconds
+      
+
+MPRINT(GET_SEL_MM_METRICS):   DATA DSET_TV_GRP;
+MPRINT(GET_SEL_MM_METRICS):   MERGE DSET_TV_GRP(IN=A) TR_RUN_DSET(IN=B);
+SYMBOLGEN:  Macro variable ADDL_BY_FLD resolves to 
+MPRINT(GET_SEL_MM_METRICS):   BY REPORT_END ;
+MPRINT(GET_SEL_MM_METRICS):   IF A;
+MPRINT(GET_SEL_MM_METRICS):   INSET=10*A+B;
+MPRINT(GET_SEL_MM_METRICS):   array num _numeric_;
+MPRINT(GET_SEL_MM_METRICS):   do over num;
+MPRINT(GET_SEL_MM_METRICS):   if num=. then num=0;
+MPRINT(GET_SEL_MM_METRICS):   end;
+MPRINT(GET_SEL_MM_METRICS):   * SET ALL NULL NUMBERS TO 0;
+MPRINT(GET_SEL_MM_METRICS):   RUN;
+
+NOTE: There were 32760 observations read from the data set WORK.DSET_TV_GRP.
+NOTE: There were 131 observations read from the data set WORK.TR_RUN_DSET.
+NOTE: The data set WORK.DSET_TV_GRP has 32760 observations and 17 variables.
+NOTE: Compressing data set WORK.DSET_TV_GRP decreased size by 43.51 percent. 
+      Compressed is 309 pages; un-compressed would require 547 pages.
+NOTE: DATA statement used (Total process time):
+      real time           0.09 seconds
+      cpu time            0.09 seconds
+      
+
+MPRINT(GET_SEL_MM_METRICS):   proc freq data=DSET_TV_GRP;
+MPRINT(GET_SEL_MM_METRICS):   tables inset;
+MPRINT(GET_SEL_MM_METRICS):   run;
+
+NOTE: There were 32760 observations read from the data set WORK.DSET_TV_GRP.
+NOTE: PROCEDURE FREQ used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.03 seconds
+      
+
+MLOGIC(GET_SEL_MM_METRICS):  Ending execution.
+MPRINT(EXEC_GET_MM_METRICS):  ;
+MLOGIC(GET_SEL_MM_METRICS):  Beginning execution.
+MLOGIC(GET_SEL_MM_METRICS):  Parameter INDSET has value OUTPUT.SEL_RAW_LOCL_MM
+MLOGIC(GET_SEL_MM_METRICS):  Parameter GEOGRAPHY has value LOCL
+MLOGIC(GET_SEL_MM_METRICS):  Parameter MMTYPE has value OTHER
+MLOGIC(GET_SEL_MM_METRICS):  Parameter FLDPREFIX has value NOTH_
+MLOGIC(GET_SEL_MM_METRICS):  Parameter FLDSUFFIX has value _LOCL
+MLOGIC(GET_SEL_MM_METRICS):  Parameter ADDL_BY_FLD has value DMA
+MPRINT(GET_SEL_MM_METRICS):   PROC SQL;
+SYMBOLGEN:  Macro variable INDSET resolves to OUTPUT.SEL_RAW_LOCL_MM
+SYMBOLGEN:  Macro variable MMTYPE resolves to OTHER
+MPRINT(GET_SEL_MM_METRICS):   CREATE TABLE RUN_DSET AS SELECT A.*, B.BRAND_GROUP, C.PREFIX AS 
+BG_PREFIX FROM OUTPUT.SEL_RAW_LOCL_MM A, CONF_BRANDS B, CONF_BRAND_PREFIX C WHERE B.BRAND_GROUP = 
+C.BRAND_GROUP AND A.BRAND = B.BRAND AND B.INCLUDE_FLAG = "YES" AND C.INCLUDE_MM_OTHER = "YES";
+NOTE: Compressing data set WORK.RUN_DSET decreased size by 76.86 percent. 
+      Compressed is 28 pages; un-compressed would require 121 pages.
+NOTE: Table WORK.RUN_DSET created, with 4932 rows and 16 columns.
+
+MPRINT(GET_SEL_MM_METRICS):   QUIT;
+NOTE: PROCEDURE SQL used (Total process time):
+      real time           0.06 seconds
+      cpu time            0.06 seconds
+      
+
+MPRINT(GET_SEL_MM_METRICS):   PROC FREQ DATA=RUN_DSET;
+MPRINT(GET_SEL_MM_METRICS):   TABLES BRAND_GROUP*BRAND BRAND_GROUP*BG_PREFIX / LIST MISSING;
+MPRINT(GET_SEL_MM_METRICS):   RUN;
+
+NOTE: There were 4932 observations read from the data set WORK.RUN_DSET.
+NOTE: PROCEDURE FREQ used (Total process time):
+      real time           0.04 seconds
+      cpu time            0.04 seconds
+      
+
+MPRINT(GET_SEL_MM_METRICS):   DATA RUN_DSET;
+MPRINT(GET_SEL_MM_METRICS):   SET RUN_DSET;
+SYMBOLGEN:  Macro variable ADDL_BY_FLD resolves to DMA
+SYMBOLGEN:  Macro variable GEOGRAPHY resolves to LOCL
+SYMBOLGEN:  Macro variable MMTYPE resolves to OTHER
+SYMBOLGEN:  Macro variable MM_METRIC resolves to UNITS
+MPRINT(GET_SEL_MM_METRICS):   KEEP BRAND_GROUP BG_PREFIX REPORT_END DMA LOCL_OTHER_UNITS;
+MPRINT(GET_SEL_MM_METRICS):   array num _numeric_;
+MPRINT(GET_SEL_MM_METRICS):   do over num;
+MPRINT(GET_SEL_MM_METRICS):   if num=. then num=0;
+MPRINT(GET_SEL_MM_METRICS):   end;
+MPRINT(GET_SEL_MM_METRICS):   * SET ALL NULL NUMBERS TO 0;
+MPRINT(GET_SEL_MM_METRICS):   RUN;
+
+NOTE: There were 4932 observations read from the data set WORK.RUN_DSET.
+NOTE: The data set WORK.RUN_DSET has 4932 observations and 5 variables.
+NOTE: Compressing data set WORK.RUN_DSET decreased size by 26.67 percent. 
+      Compressed is 44 pages; un-compressed would require 60 pages.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+      
+
+MPRINT(GET_SEL_MM_METRICS):   PROC MEANS DATA=RUN_DSET SUM NOPRINT NWAY;
+SYMBOLGEN:  Macro variable ADDL_BY_FLD resolves to DMA
+MPRINT(GET_SEL_MM_METRICS):   CLASS BRAND_GROUP BG_PREFIX REPORT_END DMA;
+SYMBOLGEN:  Macro variable GEOGRAPHY resolves to LOCL
+SYMBOLGEN:  Macro variable MMTYPE resolves to OTHER
+SYMBOLGEN:  Macro variable MM_METRIC resolves to UNITS
+MPRINT(GET_SEL_MM_METRICS):   VAR LOCL_OTHER_UNITS;
+SYMBOLGEN:  Macro variable GEOGRAPHY resolves to LOCL
+SYMBOLGEN:  Macro variable MMTYPE resolves to OTHER
+SYMBOLGEN:  Macro variable MM_METRIC resolves to UNITS
+MPRINT(GET_SEL_MM_METRICS):   OUTPUT OUT=RUN_DSET_2(DROP=_TYPE_ _FREQ_ RENAME=(LOCL_OTHER_UNITS = 
+MM_METRIC_VALUE)) SUM=;
+MPRINT(GET_SEL_MM_METRICS):   RUN;
+
+NOTE: There were 4932 observations read from the data set WORK.RUN_DSET.
+NOTE: The data set WORK.RUN_DSET_2 has 4932 observations and 5 variables.
+NOTE: Compressing data set WORK.RUN_DSET_2 decreased size by 26.67 percent. 
+      Compressed is 44 pages; un-compressed would require 60 pages.
+NOTE: PROCEDURE MEANS used (Total process time):
+      real time           0.04 seconds
+      cpu time            0.04 seconds
+      
+
+MPRINT(GET_SEL_MM_METRICS):   * This PROC MEANS just makes sure there are no duplicates by 
+BRAND_GROUP BG_PREFIX REPORT_END (DMA);
+MPRINT(GET_SEL_MM_METRICS):   PROC SORT DATA=RUN_DSET_2;
+SYMBOLGEN:  Macro variable ADDL_BY_FLD resolves to DMA
+MPRINT(GET_SEL_MM_METRICS):   BY REPORT_END DMA BG_PREFIX;
+MPRINT(GET_SEL_MM_METRICS):   RUN;
+
+NOTE: There were 4932 observations read from the data set WORK.RUN_DSET_2.
+NOTE: The data set WORK.RUN_DSET_2 has 4932 observations and 5 variables.
+NOTE: Compressing data set WORK.RUN_DSET_2 decreased size by 26.67 percent. 
+      Compressed is 44 pages; un-compressed would require 60 pages.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.00 seconds
+      
+
+SYMBOLGEN:  Macro variable FLDPREFIX resolves to NOTH_
+SYMBOLGEN:  Macro variable FLDSUFFIX resolves to _LOCL
+MPRINT(GET_SEL_MM_METRICS):   PROC TRANSPOSE DATA=RUN_DSET_2 OUT=TR_RUN_DSET(drop=_name_) 
+PREFIX=NOTH_ SUFFIX=_LOCL;
+SYMBOLGEN:  Macro variable ADDL_BY_FLD resolves to DMA
+MPRINT(GET_SEL_MM_METRICS):   BY REPORT_END DMA;
+MPRINT(GET_SEL_MM_METRICS):   ID BG_PREFIX;
+MPRINT(GET_SEL_MM_METRICS):   VAR MM_METRIC_VALUE;
+MPRINT(GET_SEL_MM_METRICS):   RUN;
+
+NOTE: There were 4932 observations read from the data set WORK.RUN_DSET_2.
+NOTE: The data set WORK.TR_RUN_DSET has 4932 observations and 3 variables.
+NOTE: Compressing data set WORK.TR_RUN_DSET decreased size by 0.00 percent. 
+      Compressed is 30 pages; un-compressed would require 30 pages.
+NOTE: PROCEDURE TRANSPOSE used (Total process time):
+      real time           0.06 seconds
+      cpu time            0.04 seconds
+      
+
+MPRINT(GET_SEL_MM_METRICS):   *MERGE above dataset with completed TV GRP dataset;
+MPRINT(GET_SEL_MM_METRICS):   PROC SORT DATA=DSET_TV_GRP;
+SYMBOLGEN:  Macro variable ADDL_BY_FLD resolves to DMA
+MPRINT(GET_SEL_MM_METRICS):   BY REPORT_END DMA;
+MPRINT(GET_SEL_MM_METRICS):   RUN;
+
+NOTE: There were 32760 observations read from the data set WORK.DSET_TV_GRP.
+NOTE: The data set WORK.DSET_TV_GRP has 32760 observations and 17 variables.
+NOTE: Compressing data set WORK.DSET_TV_GRP decreased size by 43.51 percent. 
+      Compressed is 309 pages; un-compressed would require 547 pages.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.07 seconds
+      cpu time            0.06 seconds
+      
+
+MPRINT(GET_SEL_MM_METRICS):   PROC SORT DATA=TR_RUN_DSET;
+SYMBOLGEN:  Macro variable ADDL_BY_FLD resolves to DMA
+MPRINT(GET_SEL_MM_METRICS):   BY REPORT_END DMA;
+MPRINT(GET_SEL_MM_METRICS):   RUN;
+
+NOTE: There were 4932 observations read from the data set WORK.TR_RUN_DSET.
+NOTE: The data set WORK.TR_RUN_DSET has 4932 observations and 3 variables.
+NOTE: Compressing data set WORK.TR_RUN_DSET decreased size by 0.00 percent. 
+      Compressed is 30 pages; un-compressed would require 30 pages.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.00 seconds
+      
+
+MPRINT(GET_SEL_MM_METRICS):   DATA DSET_TV_GRP;
+MPRINT(GET_SEL_MM_METRICS):   MERGE DSET_TV_GRP(IN=A) TR_RUN_DSET(IN=B);
+SYMBOLGEN:  Macro variable ADDL_BY_FLD resolves to DMA
+MPRINT(GET_SEL_MM_METRICS):   BY REPORT_END DMA;
+MPRINT(GET_SEL_MM_METRICS):   IF A;
+MPRINT(GET_SEL_MM_METRICS):   INSET=10*A+B;
+MPRINT(GET_SEL_MM_METRICS):   array num _numeric_;
+MPRINT(GET_SEL_MM_METRICS):   do over num;
+MPRINT(GET_SEL_MM_METRICS):   if num=. then num=0;
+MPRINT(GET_SEL_MM_METRICS):   end;
+MPRINT(GET_SEL_MM_METRICS):   * SET ALL NULL NUMBERS TO 0;
+MPRINT(GET_SEL_MM_METRICS):   RUN;
+
+NOTE: There were 32760 observations read from the data set WORK.DSET_TV_GRP.
+NOTE: There were 4932 observations read from the data set WORK.TR_RUN_DSET.
+NOTE: The data set WORK.DSET_TV_GRP has 32760 observations and 18 variables.
+NOTE: Compressing data set WORK.DSET_TV_GRP decreased size by 47.27 percent. 
+      Compressed is 309 pages; un-compressed would require 586 pages.
+NOTE: DATA statement used (Total process time):
+      real time           0.11 seconds
+      cpu time            0.09 seconds
+      
+
+MPRINT(GET_SEL_MM_METRICS):   proc freq data=DSET_TV_GRP;
+MPRINT(GET_SEL_MM_METRICS):   tables inset;
+MPRINT(GET_SEL_MM_METRICS):   run;
+
+NOTE: There were 32760 observations read from the data set WORK.DSET_TV_GRP.
+NOTE: PROCEDURE FREQ used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.01 seconds
+      
+
+MLOGIC(GET_SEL_MM_METRICS):  Ending execution.
+MPRINT(EXEC_GET_MM_METRICS):  ;
+MPRINT(EXEC_GET_MM_METRICS):   *Create total metric and drop natl and local metic;
+MLOGIC(GET_TOT_STR):  Beginning execution.
+MLOGIC(GET_TOT_STR):  Parameter MMTYPE has value OTHER
+MLOGIC(GET_TOT_STR):  Parameter FLDPREFIX has value NOTH
+MLOGIC(GET_TOT_STR):  Parameter ADDWHAT has value ALL
+MLOGIC(GET_TOT_STR):  %LET (variable name is MM_BRAND_COUNT)
+MPRINT(GET_TOT_STR):   PROC SQL;
+SYMBOLGEN:  Macro variable MMTYPE resolves to OTHER
+MPRINT(GET_TOT_STR):   SELECT COUNT(DISTINCT BRAND_GROUP) INTO :MM_BRAND_COUNT FROM 
+CONF_BRAND_PREFIX WHERE INCLUDE_MM_OTHER = "YES";
+MPRINT(GET_TOT_STR):   QUIT;
+NOTE: PROCEDURE SQL used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+      
+
+MLOGIC(GET_TOT_STR):  %PUT &MM_BRAND_COUNT.END
+SYMBOLGEN:  Macro variable MM_BRAND_COUNT resolves to        1
+1END
+MPRINT(GET_TOT_STR):   DATA DSET_TV_GRP;
+MPRINT(GET_TOT_STR):   SET DSET_TV_GRP;
+SYMBOLGEN:  Macro variable MM_BRAND_COUNT resolves to        1
+MLOGIC(GET_TOT_STR):  %DO loop beginning; index variable TOKEN; start value is 1; stop value is 1; 
+      by value is 1.  
+MLOGIC(GET_TOT_STR):  %LET (variable name is P)
+SYMBOLGEN:  Macro variable MM_PRT_BRANDS resolves to NAS
+SYMBOLGEN:  Macro variable TOKEN resolves to 1
+SYMBOLGEN:  Macro variable ADDWHAT resolves to ALL
+MLOGIC(GET_TOT_STR):  %IF condition &ADDWHAT.=ALL is TRUE
+SYMBOLGEN:  Macro variable FLDPREFIX resolves to NOTH
+SYMBOLGEN:  Macro variable P resolves to NAS
+SYMBOLGEN:  Macro variable FLDPREFIX resolves to NOTH
+SYMBOLGEN:  Macro variable P resolves to NAS
+SYMBOLGEN:  Macro variable FLDPREFIX resolves to NOTH
+SYMBOLGEN:  Macro variable P resolves to NAS
+MPRINT(GET_TOT_STR):   MM_NOTHNAS=NOTH_NAS_NATL + NOTH_NAS_LOCL;
+MPRINT(GET_TOT_STR):  ;
+SYMBOLGEN:  Macro variable FLDPREFIX resolves to NOTH
+SYMBOLGEN:  Macro variable P resolves to NAS
+SYMBOLGEN:  Macro variable FLDPREFIX resolves to NOTH
+SYMBOLGEN:  Macro variable P resolves to NAS
+MPRINT(GET_TOT_STR):   DROP NOTH_NAS_NATL NOTH_NAS_LOCL;
+MPRINT(GET_TOT_STR):  ;
+SYMBOLGEN:  Macro variable ADDWHAT resolves to ALL
+MLOGIC(GET_TOT_STR):  %IF condition &ADDWHAT.=NATL is FALSE
+SYMBOLGEN:  Macro variable ADDWHAT resolves to ALL
+MLOGIC(GET_TOT_STR):  %IF condition &ADDWHAT.=LOCL is FALSE
+MLOGIC(GET_TOT_STR):  %DO loop index variable TOKEN is now 2; loop will not iterate again.
+MPRINT(GET_TOT_STR):   RUN;
+
+NOTE: There were 32760 observations read from the data set WORK.DSET_TV_GRP.
+NOTE: The data set WORK.DSET_TV_GRP has 32760 observations and 17 variables.
+NOTE: Compressing data set WORK.DSET_TV_GRP decreased size by 43.51 percent. 
+      Compressed is 309 pages; un-compressed would require 547 pages.
+NOTE: DATA statement used (Total process time):
+      real time           0.09 seconds
+      cpu time            0.09 seconds
+      
+
+MLOGIC(GET_TOT_STR):  Ending execution.
+MPRINT(EXEC_GET_MM_METRICS):  ;
+MLOGIC(EXEC_GET_MM_METRICS):  Ending execution.
+MPRINT(CALL_MM_MODULE):  ;
+MPRINT(CALL_MM_MODULE):   DATA OUTPUT.TV_MM_GRP_BY_DMA_REPORT_WEEK;
+MPRINT(CALL_MM_MODULE):   SET DSET_TV_GRP(DROP=INSET);
+MPRINT(CALL_MM_MODULE):   RUN;
+
+NOTE: There were 32760 observations read from the data set WORK.DSET_TV_GRP.
+NOTE: The data set OUTPUT.TV_MM_GRP_BY_DMA_REPORT_WEEK has 32760 observations and 16 variables.
+NOTE: Compressing data set OUTPUT.TV_MM_GRP_BY_DMA_REPORT_WEEK decreased size by 43.95 percent. 
+      Compressed is 292 pages; un-compressed would require 521 pages.
+NOTE: DATA statement used (Total process time):
+      real time           0.07 seconds
+      cpu time            0.07 seconds
+      
+
+MPRINT(CALL_MM_MODULE):   PROC PRINTTO;
+MPRINT(CALL_MM_MODULE):   QUIT;
+

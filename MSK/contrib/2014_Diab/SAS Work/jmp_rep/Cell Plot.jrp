@@ -1,0 +1,457 @@
+﻿New Table( "sem_combo_v1",
+	Add Rows( 10 ),
+	New Script(
+		"Source",
+		Data Table( "combo_v1" ) << Summary(
+			Group( :Semester ),
+			Sum( :C_2_COMM_PROGRAMS_AND_CAMPAIGNS ),
+			Sum( :C_1_CUSTOMER_RESOURCES ),
+			Sum( :C_3_MEDICAL_EDUCATION ),
+			Sum( :C_4_OUTCOMES_RESEARCH_PRICING ),
+			Sum( :C_7_SALES_TEAM_SUPPORT ),
+			Sum( :C_6_SAMPLES_COUPONS_VOUCHERS ),
+			Sum( :C_5_STRATEGIC_INPUT ),
+			Sum( :C_8_GRANTS_CONTRIBUTIONS ),
+			Sum( :SC_2_ADVERTISING_PROGRAMS ),
+			Sum( :SC_2_MCM_CAMPAIGN_EXECUTION ),
+			Sum( :SC_1_DISEASE_TREATMENT_RSCRS ),
+			Sum( :SC_1_PRODUCT_PROMO_RESOURCES ),
+			Sum( :SC_3_LECTURE_PROGRAMS ),
+			Sum( :SC_3_MMFS ),
+			Sum( :SC_6_COUPONS_VOUCHERS ),
+			Sum( :SC_6_PRODUCT_SAMPLES ),
+			Sum( :SC_6_SAMPLES_DIST_FULFILLMENT ),
+			Sum( :SC_2_PUBLIC_AFFAIRS_EXT_RLTNS ),
+			Sum( :SC_1_PAYER_POLICY_RESOURCES ),
+			Sum( :SC_3_CONGRESSES_EXHIBITS ),
+			Sum( :SC_3_HCC_PROGRAMS ),
+			Sum( :SC_3_SPEAKER_PREP_FORUMS ),
+			Sum( :SC_4_OUTCOMES_RESEARCH ),
+			Sum( :SC_4_PRICING_AND_REIMB_SUPPORT ),
+			Sum( :SC_7_LAUNCH_MEETINGS ),
+			Sum( :SC_7_SALES_TEAM_SUPPORT ),
+			Sum( :SC_5_AD_BOARDS ),
+			Sum( :SC_5_COMPETITIVE_INTELLIGENCE ),
+			Sum( :SC_5_EXPERT_INPUT_FORUMS ),
+			Sum( :SC_5_MARKET_RESEARCH ),
+			Sum( :SC_5_COP ),
+			Sum( :SC_1_PROMO_MATERIALS_DEPREC ),
+			Sum( :SC_8_CHARITABLE_CONTRIBUTIONS ),
+			Sum( :SC_8_GRANTS ),
+			Sum( :TOTAL_C ),
+			Sum( :TOTAL_SC ),
+			Sum( :DIRECT_SC ),
+			Sum( :OTHER_SC ),
+			Sum( :TOTAL_PROMO ),
+			Sum( :DETAILS ),
+			Sum( :SAMPLES ),
+			Sum( :NRX_GRL ),
+			Sum( :TRX_GRL ),
+			Sum( :NRX_NPA ),
+			Sum( :TRX_NPA ),
+			Sum( :MTCVAR ),
+			Sum( :Total_Spend ),
+			Link to original data table( 0 ),
+			output table name( "sem_combo_v1" )
+		)
+	),
+	New Column( "Semester",
+		Character,
+		Nominal,
+		Set Values(
+			{"2009_S1", "2009_S2", "2010_S1", "2010_S2", "2011_S1", "2011_S2",
+			"2012_S1", "2012_S2", "2013_S1", "2013_S2"}
+		)
+	),
+	New Column( "N Rows",
+		Numeric,
+		Continuous,
+		Format( "Fixed Dec", 12, 0 ),
+		Set Values( [6, 6, 6, 6, 6, 6, 6, 6, 6, 6] )
+	),
+	New Column( "C_2_COMM_PROGRAMS_AND_CAMPAIGNS",
+		Numeric,
+		Continuous,
+		Format( "Best", 12 ),
+		Set Values(
+			[., ., ., ., 21278338, 22370344, 23905112, 19558016, 20884894, 16235600]
+		)
+	),
+	New Column( "C_1_CUSTOMER_RESOURCES",
+		Numeric,
+		Continuous,
+		Format( "Best", 12 ),
+		Set Values(
+			[., ., ., ., 20592217, 25819568, 20793582, 23024684, 25805548, 23364423]
+		)
+	),
+	New Column( "C_3_MEDICAL_EDUCATION",
+		Numeric,
+		Continuous,
+		Format( "Best", 12 ),
+		Set Values(
+			[., ., ., ., 3886625, 4855704, 4726212, 3944338, 3285000, 3150000]
+		)
+	),
+	New Column( "C_4_OUTCOMES_RESEARCH_PRICING",
+		Numeric,
+		Continuous,
+		Format( "Best", 12 ),
+		Set Values( [., ., ., ., 60000, 157645, 50000, 76164, 400000, 400000] )
+	),
+	New Column( "C_7_SALES_TEAM_SUPPORT",
+		Numeric,
+		Continuous,
+		Format( "Best", 12 ),
+		Set Values( [., ., ., ., 1059845, 5015489, 29719, 33420, 0, 0] )
+	),
+	New Column( "C_6_SAMPLES_COUPONS_VOUCHERS",
+		Numeric,
+		Continuous,
+		Format( "Best", 12 ),
+		Set Values(
+			[., ., ., ., 9323510, 9717338, 17431896, 12885747, 14610433, 14068501]
+		)
+	),
+	New Column( "C_5_STRATEGIC_INPUT",
+		Numeric,
+		Continuous,
+		Format( "Best", 12 ),
+		Set Values(
+			[., ., ., ., 2580253, 2964905, 1997735, 2463054, 3219911, 1475689]
+		)
+	),
+	New Column( "C_8_GRANTS_CONTRIBUTIONS",
+		Numeric,
+		Continuous,
+		Format( "Best", 12 ),
+		Set Values( [., ., ., ., 3207752, 1081901, 0, 0, 0, 0] )
+	),
+	New Column( "SC_2_ADVERTISING_PROGRAMS",
+		Numeric,
+		Continuous,
+		Format( "Best", 12 ),
+		Set Values(
+			[., ., ., ., 16359902, 18405848, 19037117, 14807283, 15826498, 9401502]
+		)
+	),
+	New Column( "SC_2_MCM_CAMPAIGN_EXECUTION",
+		Numeric,
+		Continuous,
+		Format( "Best", 12 ),
+		Set Values(
+			[., ., ., ., 3630604, 2247994, 1765772, 1494285, 3044396, 4198098]
+		)
+	),
+	New Column( "SC_1_DISEASE_TREATMENT_RSCRS",
+		Numeric,
+		Continuous,
+		Format( "Best", 12 ),
+		Set Values(
+			[., ., ., ., 3176546, 3501577, 3032897, 2066246, 2502928, 2609000]
+		)
+	),
+	New Column( "SC_1_PRODUCT_PROMO_RESOURCES",
+		Numeric,
+		Continuous,
+		Format( "Best", 12 ),
+		Set Values(
+			[., ., ., ., 13671405, 18052530, 15927934, 19315887, 21341314, 18716730]
+		)
+	),
+	New Column( "SC_3_LECTURE_PROGRAMS",
+		Numeric,
+		Continuous,
+		Format( "Best", 12 ),
+		Set Values( [., ., ., ., 10995, 0, ., ., ., .] )
+	),
+	New Column( "SC_3_MMFS",
+		Numeric,
+		Continuous,
+		Format( "Best", 12 ),
+		Set Values(
+			[., ., ., ., 2994821, 3630286, 3849171, 3447942, 2570000, 2585000]
+		)
+	),
+	New Column( "SC_6_COUPONS_VOUCHERS",
+		Numeric,
+		Continuous,
+		Format( "Best", 12 ),
+		Set Values(
+			[., ., ., ., 1825520, 2397883, 2586897, 2667895, 3550500, 3526500]
+		)
+	),
+	New Column( "SC_6_PRODUCT_SAMPLES",
+		Numeric,
+		Continuous,
+		Format( "Best", 12 ),
+		Set Values(
+			[., ., ., ., 7497989, 5291870, 14619197, 10124988, 11059933, 10542001]
+		)
+	),
+	New Column( "SC_6_SAMPLES_DIST_FULFILLMENT",
+		Numeric,
+		Continuous,
+		Format( "Best", 12 ),
+		Set Values( [., ., ., ., 0, 2027584, 225802, 92864, 0, 0] )
+	),
+	New Column( "SC_2_PUBLIC_AFFAIRS_EXT_RLTNS",
+		Numeric,
+		Continuous,
+		Format( "Best", 12 ),
+		Set Values(
+			[., ., ., ., 1287831, 1716498, 3102223, 3256448, 2014000, 2636000]
+		)
+	),
+	New Column( "SC_1_PAYER_POLICY_RESOURCES",
+		Numeric,
+		Continuous,
+		Format( "Best", 12 ),
+		Set Values(
+			[., ., ., ., 3744267, 4261916, 1832751, 1642551, 1961304, 2038692]
+		)
+	),
+	New Column( "SC_3_CONGRESSES_EXHIBITS",
+		Numeric,
+		Continuous,
+		Format( "Best", 12 ),
+		Set Values( [., ., ., ., 162778, 590248, 84054, 496358, 415000, 265000] )
+	),
+	New Column( "SC_3_HCC_PROGRAMS",
+		Numeric,
+		Continuous,
+		Format( "Best", 12 ),
+		Set Values( [., ., ., ., 718031, 635169, 0, 0, 300000, 300000] )
+	),
+	New Column( "SC_3_SPEAKER_PREP_FORUMS",
+		Numeric,
+		Continuous,
+		Format( "Best", 12 ),
+		Set Values( [., ., ., ., 0, 0, 792987, 38, 0, 0] )
+	),
+	New Column( "SC_4_OUTCOMES_RESEARCH",
+		Numeric,
+		Continuous,
+		Format( "Best", 12 ),
+		Set Values( [., ., ., ., 60000, 157645, 50000, 75900, 400000, 400000] )
+	),
+	New Column( "SC_4_PRICING_AND_REIMB_SUPPORT",
+		Numeric,
+		Continuous,
+		Format( "Best", 12 ),
+		Set Values( [., ., ., ., 0, 0, 0, 264, 0, 0] )
+	),
+	New Column( "SC_7_LAUNCH_MEETINGS",
+		Numeric,
+		Continuous,
+		Format( "Best", 12 ),
+		Set Values( [., ., ., ., 1059845, 5004152, 29719, 33420, 0, 0] )
+	),
+	New Column( "SC_7_SALES_TEAM_SUPPORT",
+		Numeric,
+		Continuous,
+		Format( "Best", 12 ),
+		Set Values( [., ., ., ., 0, 11337, 0, 0, 0, 0] )
+	),
+	New Column( "SC_5_AD_BOARDS",
+		Numeric,
+		Continuous,
+		Format( "Best", 12 ),
+		Set Values( [., ., ., ., 173498, 149420, 139705, 140939, 190000, 190000] )
+	),
+	New Column( "SC_5_COMPETITIVE_INTELLIGENCE",
+		Numeric,
+		Continuous,
+		Format( "Best", 12 ),
+		Set Values( [., ., ., ., 0, 0, 112500, 52500, 210000, 50600] )
+	),
+	New Column( "SC_5_EXPERT_INPUT_FORUMS",
+		Numeric,
+		Continuous,
+		Format( "Best", 12 ),
+		Set Values( [., ., ., ., 0, 0, 0, 0, 200000, 55000] )
+	),
+	New Column( "SC_5_MARKET_RESEARCH",
+		Numeric,
+		Continuous,
+		Format( "Best", 12 ),
+		Set Values(
+			[., ., ., ., 2406754, 2815485, 1745530, 2269615, 2619911, 1180089]
+		)
+	),
+	New Column( "SC_5_COP",
+		Numeric,
+		Continuous,
+		Format( "Best", 12 ),
+		Set Values( [., ., ., ., 0, 0, 0, 0, 0, 0] )
+	),
+	New Column( "SC_1_PROMO_MATERIALS_DEPREC",
+		Numeric,
+		Continuous,
+		Format( "Best", 12 ),
+		Set Values( [., ., ., ., 0, 3548, ., ., ., .] )
+	),
+	New Column( "SC_8_CHARITABLE_CONTRIBUTIONS",
+		Numeric,
+		Continuous,
+		Format( "Best", 12 ),
+		Set Values( [., ., ., ., 0, 401, ., ., ., .] )
+	),
+	New Column( "SC_8_GRANTS",
+		Numeric,
+		Continuous,
+		Format( "Best", 12 ),
+		Set Values( [., ., ., ., 3207752, 1081500, ., ., ., .] )
+	),
+	New Column( "TOTAL_C",
+		Numeric,
+		Continuous,
+		Format( "Best", 12 ),
+		Set Values(
+			[68975000, 79760000, 53112197.9595, 77503698.21, 0, 0, 0, 0, 0, 0]
+		)
+	),
+	New Column( "TOTAL_SC",
+		Numeric,
+		Continuous,
+		Format( "Best", 12 ),
+		Set Values(
+			[68975000, 79760000, 53112197.9595, 77503698.21, 0, 0, 0, 0, 0, 0]
+		)
+	),
+	New Column( "DIRECT_SC",
+		Numeric,
+		Continuous,
+		Format( "Best", 12 ),
+		Set Values(
+			[., ., ., ., 49167782, 55555572, 61044787, 54017390, 59895569, 51578831]
+		)
+	),
+	New Column( "OTHER_SC",
+		Numeric,
+		Continuous,
+		Format( "Best", 12 ),
+		Set Values(
+			[0, 0, 0, 0, 12831751, 16427319, 7889469, 7968033, 8310215, 7115381]
+		)
+	),
+	New Column( "TOTAL_PROMO",
+		Numeric,
+		Continuous,
+		Format( "Best", 12 ),
+		Set Values(
+			[68975000, 79760000, 53112197.9595, 77503698.21, 61999533, 71982891,
+			68934256, 61985423, 68205784, 58694212]
+		)
+	),
+	New Column( "DETAILS",
+		Numeric,
+		Continuous,
+		Format( "Best", 12 ),
+		Set Values(
+			[757172, 746912, 637411, 652711, 710603, 751476, 1096134, 877413, ., .]
+		)
+	),
+	New Column( "SAMPLES",
+		Numeric,
+		Continuous,
+		Format( "Best", 12 ),
+		Set Values(
+			[5226646.57145, 5356404, 5193216.85714, 5285202.85714, 5432404.85713,
+			4559672.28572, 5417404.28572, 3828941.71428, ., .]
+		)
+	),
+	New Column( "NRX_GRL",
+		Numeric,
+		Continuous,
+		Format( "Best", 12 ),
+		Set Values(
+			[1288693.696, 1325523.759, 1392523.354, 1433978.642, 1549499.811,
+			1654787.051, 1833811.045, 1506142.581, ., .]
+		)
+	),
+	New Column( "TRX_GRL",
+		Numeric,
+		Continuous,
+		Format( "Best", 12 ),
+		Set Values(
+			[., ., ., ., 4510516.965, 4826181.957, 5244347.761, 4443402.066, ., .]
+		)
+	),
+	New Column( "NRX_NPA",
+		Numeric,
+		Continuous,
+		Format( "Best", 12 ),
+		Set Values(
+			[1880405, 1887774, 2029873, 2069480, 2265211, 2366065, 2603625, 2456428,
+			0, 0]
+		)
+	),
+	New Column( "TRX_NPA",
+		Numeric,
+		Continuous,
+		Format( "Best", 12 ),
+		Set Values(
+			[5304038, 5631464, 5823070, 6137673, 6414989, 6773140, 7258840, 7200525,
+			0, 0]
+		)
+	),
+	New Column( "MTCVAR",
+		Numeric,
+		Continuous,
+		Format( "Best", 12 ),
+		Set Values( [6, 6, 6, 6, 0, 0, 0, 0, 0, 0] )
+	),
+	New Column( "Total_Spend",
+		Numeric,
+		Continuous,
+		Format( "Best", 12 ),
+		Set Values(
+			[68975000, 79760000, 53112197.9595, 77503698.21, 61999533, 71982891,
+			68934256, 61985423, 68205784, 58694212]
+		)
+	),
+	Set Row States( [29, 0, 0, 0, 0, 0, 0, 0, 0, 0] )
+);
+Cell Plot(
+	Scale Uniformly( 0 ),
+	Center at zero( 0 ),
+	Y(
+		:NRX_NPA,
+		:Total_Spend,
+		:DIRECT_SC,
+		:OTHER_SC,
+		:C_1_CUSTOMER_RESOURCES,
+		:C_2_COMM_PROGRAMS_AND_CAMPAIGNS,
+		:C_3_MEDICAL_EDUCATION,
+		:C_4_OUTCOMES_RESEARCH_PRICING,
+		:C_5_STRATEGIC_INPUT,
+		:C_6_SAMPLES_COUPONS_VOUCHERS,
+		:C_7_SALES_TEAM_SUPPORT,
+		:C_8_GRANTS_CONTRIBUTIONS,
+		:TOTAL_PROMO,
+		:DETAILS,
+		:SAMPLES
+	),
+	Label( :Semester ),
+	SendToReport(
+		Dispatch(
+			{"Cell Plot"},
+			"Cell Plot Report",
+			FrameBox,
+			{Frame Size( 64, 253 )}
+		),
+		Dispatch(
+			{"Cell Plot"},
+			"Cell Plot Report",
+			FrameBox( 2 ),
+			{Frame Size( 64, 326 )}
+		),
+		Dispatch(
+			{"Cell Plot"},
+			"",
+			CellPlotBox,
+			{Frame Size( 423, 326 ), Color Theme( "White to Blue" )}
+		)
+	)
+);

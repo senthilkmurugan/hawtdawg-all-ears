@@ -1,0 +1,141 @@
+PROC PRINTTO LOG="C:\Documents and Settings\smuruga2\PROJECTS\DTC\Nasonex\2011\Nielsen_Data_Processing\LOGS\3 Include MM Metrics by Week.LOG" NEW
+			PRINT="C:\Documents and Settings\smuruga2\PROJECTS\DTC\Nasonex\2011\Nielsen_Data_Processing\LOGS\3 Include MM Metrics by Week.LST" NEW;
+
+***************************************************************************;
+* PGM 3: GET SELECTED METRICS (UNITS OR SPEND) BY WEEK FOR NATL AND LOCL MM CAMPAIGN;
+*         MERGE WITH TV GRPS.                                              ;
+***************************************************************************;
+
+%LET MM_METRIC = UNITS; * Define MM metric to capture: UNITS or SPEND;
+
+/*
+1. Get product names for each of the MM type.
+*/
+%LET MM_PRT_BRANDS = ; %LET MM_RAD_BRANDS = ; %LET MM_INT_BRANDS = ; %LET MM_OTH_BRANDS = ;
+PROC SQL;
+SELECT PREFIX INTO :MM_PRT_BRANDS SEPARATED BY " " FROM CONF_BRAND_PREFIX WHERE INCLUDE_MM_PRINT = "YES";
+SELECT PREFIX INTO :MM_RAD_BRANDS SEPARATED BY " " FROM CONF_BRAND_PREFIX WHERE INCLUDE_MM_RADIO = "YES";
+SELECT PREFIX INTO :MM_INT_BRANDS SEPARATED BY " " FROM CONF_BRAND_PREFIX WHERE INCLUDE_MM_INTERNET = "YES";
+SELECT PREFIX INTO :MM_OTH_BRANDS SEPARATED BY " " FROM CONF_BRAND_PREFIX WHERE INCLUDE_MM_OTHER = "YES";
+QUIT;
+%PUT &MM_PRT_BRANDS.~~&MM_RAD_BRANDS.~~&MM_INT_BRANDS.~~&MM_OTH_BRANDS.END;
+
+/*
+1. Compute MM METRICS for RELEVANT MM media types.
+*/
+DATA DSET_TV_GRP; SET OUTPUT.WTD_GRP_BY_DMA_REPORT_WEEK; RUN;
+
+%MACRO GET_SEL_MM_METRICS(INDSET, GEOGRAPHY, MMTYPE, FLDPREFIX, FLDSUFFIX, ADDL_BY_FLD);  
+  /* Get eligible brand groups and prefix. It could be N to N match if multiple brands are repeated in multiple brand groups */
+  PROC SQL;
+  CREATE TABLE RUN_DSET AS
+    SELECT A.*, B.BRAND_GROUP, C.PREFIX AS BG_PREFIX
+    FROM &INDSET. A, CONF_BRANDS B, CONF_BRAND_PREFIX C
+    WHERE B.BRAND_GROUP = C.BRAND_GROUP
+      AND A.BRAND = B.BRAND
+	  AND B.INCLUDE_FLAG = "YES"
+      AND C.INCLUDE_MM_&MMTYPE. = "YES";
+  QUIT;
+  PROC FREQ DATA=RUN_DSET; TABLES BRAND_GROUP*BRAND BRAND_GROUP*BG_PREFIX / LIST MISSING; RUN;
+
+  /* Compute relevant MM metric by brand_group, prefix, report_end */
+  DATA RUN_DSET;
+    SET RUN_DSET;
+    KEEP BRAND_GROUP BG_PREFIX REPORT_END &ADDL_BY_FLD. &GEOGRAPHY._&MMTYPE._&MM_METRIC.;
+    array num _numeric_; do over num;  if num=. then num=0;  end; * SET ALL NULL NUMBERS TO 0;
+  RUN;
+  PROC MEANS DATA=RUN_DSET SUM NOPRINT NWAY;
+    CLASS BRAND_GROUP BG_PREFIX REPORT_END &ADDL_BY_FLD.;
+    VAR &GEOGRAPHY._&MMTYPE._&MM_METRIC.;
+    OUTPUT OUT=RUN_DSET_2(DROP=_TYPE_ _FREQ_ RENAME=(&GEOGRAPHY._&MMTYPE._&MM_METRIC. = MM_METRIC_VALUE)) SUM=; 
+  RUN;
+  * This PROC MEANS just makes sure there are no duplicates by BRAND_GROUP BG_PREFIX REPORT_END (DMA); 
+
+  PROC SORT DATA=RUN_DSET_2; BY REPORT_END &ADDL_BY_FLD. BG_PREFIX; RUN;
+  PROC TRANSPOSE DATA=RUN_DSET_2 OUT=TR_RUN_DSET(drop=_name_) 
+        PREFIX=&FLDPREFIX. SUFFIX=&FLDSUFFIX.;
+    BY REPORT_END &ADDL_BY_FLD.;
+    ID BG_PREFIX;
+    VAR MM_METRIC_VALUE;
+  RUN;
+
+  *MERGE above dataset with completed TV GRP dataset;
+  /* 5.2 Merge reference table with national and local GRPs */
+  PROC SORT DATA=DSET_TV_GRP; BY REPORT_END &ADDL_BY_FLD.; RUN;
+  PROC SORT DATA=TR_RUN_DSET; BY REPORT_END &ADDL_BY_FLD.; RUN;
+  DATA DSET_TV_GRP;
+    MERGE DSET_TV_GRP(IN=A) TR_RUN_DSET(IN=B);
+    BY REPORT_END &ADDL_BY_FLD.;
+    IF A;
+    INSET=10*A+B;
+    array num _numeric_; do over num;  if num=. then num=0;  end; * SET ALL NULL NUMBERS TO 0;
+  RUN;
+  proc freq data=DSET_TV_GRP; tables inset; run;
+
+%MEND GET_SEL_MM_METRICS;  
+
+*PRINT NPRT ALL/NATL/LOCL;
+%MACRO GET_TOT_STR(MMTYPE, FLDPREFIX, ADDWHAT);
+  %LET MM_BRAND_COUNT = ;
+  PROC SQL;
+    SELECT COUNT(DISTINCT BRAND_GROUP) INTO :MM_BRAND_COUNT 
+    FROM CONF_BRAND_PREFIX WHERE INCLUDE_MM_&MMTYPE. = "YES";
+  QUIT;
+  %PUT &MM_BRAND_COUNT.END;
+
+  DATA DSET_TV_GRP;
+    SET DSET_TV_GRP;
+    %DO token=1 %to &MM_BRAND_COUNT.;
+      %LET p=%SCAN(&MM_PRT_BRANDS., &token.);
+      %IF &ADDWHAT.=ALL %THEN %DO;
+        MM_&FLDPREFIX.&p.=&FLDPREFIX._&p._NATL + &FLDPREFIX._&p._LOCL;;
+		DROP &FLDPREFIX._&p._NATL &FLDPREFIX._&p._LOCL;;
+	  %END;
+      %IF &ADDWHAT.=NATL %THEN %DO;
+        MM_&FLDPREFIX.&p.=&FLDPREFIX._&p._NATL;;
+		DROP &FLDPREFIX._&p._NATL;;
+	  %END;
+      %IF &ADDWHAT.=LOCL %THEN %DO;
+        MM_&FLDPREFIX.&p.=&FLDPREFIX._&p._LOCL;;
+		DROP &FLDPREFIX._&p._LOCL;;
+      %END;
+    %END;
+  RUN;
+%MEND GET_TOT_STR;
+
+%MACRO EXEC_GET_MM_METRICS();
+  %IF &MM_PRT_BRANDS. ^=  %THEN %DO;
+    %GET_SEL_MM_METRICS(OUTPUT.SEL_RAW_NATL_MM,NATL,PRINT,NPRT_,_NATL,); 
+    %GET_SEL_MM_METRICS(OUTPUT.SEL_RAW_LOCL_MM,LOCL,PRINT,NPRT_,_LOCL,DMA); 
+	*Create total metric and drop natl and local metic;
+    %GET_TOT_STR(PRINT,NPRT,ALL);
+  %END;
+  %IF &MM_RAD_BRANDS. ^=  %THEN %DO;
+    %GET_SEL_MM_METRICS(OUTPUT.SEL_RAW_NATL_MM,NATL,RADIO,NRAD_,_NATL,); 
+    %GET_SEL_MM_METRICS(OUTPUT.SEL_RAW_LOCL_MM,LOCL,RADIO,NRAD_,_LOCL,DMA); 
+	*Create total metric and drop natl and local metic;
+    %GET_TOT_STR(RADIO,NRAD,ALL);
+  %END;
+  %IF &MM_INT_BRANDS. ^=  %THEN %DO;
+    %GET_SEL_MM_METRICS(OUTPUT.SEL_RAW_NATL_MM,NATL,INTERNET,NINT_,_NATL,); 
+	*Create total metric and drop natl metic;
+    %GET_TOT_STR(INTERNET,NINT,NATL);
+  %END;
+  %IF &MM_OTH_BRANDS. ^=  %THEN %DO;
+    %GET_SEL_MM_METRICS(OUTPUT.SEL_RAW_NATL_MM,NATL,OTHER,NOTH_,_NATL,); 
+    %GET_SEL_MM_METRICS(OUTPUT.SEL_RAW_LOCL_MM,LOCL,OTHER,NOTH_,_LOCL,DMA); 
+	*Create total metric and drop natl and local metic;
+    %GET_TOT_STR(OTHER,NOTH,ALL);
+  %END;
+%MEND EXEC_GET_MM_METRICS;
+%EXEC_GET_MM_METRICS();
+
+/*
+2. Store the data with both TV and MM metrics.
+*/
+DATA OUTPUT.TV_MM_GRP_BY_DMA_REPORT_WEEK; SET DSET_TV_GRP(DROP=INSET); RUN;
+
+
+PROC PRINTTO;
+QUIT;
+

@@ -1,0 +1,5 @@
+A brand’s sales is impacted by multiple factors.  The internal controllable factors include HCP and Consumer Targets and corresponding Promotions   Formulary Positions etc. . The external non controllable factors include Brand Efficacy & Prescribing Information   Competition etc. 
+Currently, we study and model the impacts of such factors on resulting sales independently by respective teams of experts.  The interactions are not completely captured. 
+In reality, these factors depend on each other and a complex interaction among them defines the market environment and the resulting sales. 
+A clear opportunity exists in estimating sales impact by these factors and, more importantly, the interactions between them.  This will help in developing effective marketing strategies. 
+
